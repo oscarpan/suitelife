@@ -5,8 +5,9 @@
 </head>
 
 <body>
+  {{> loginButtons}}
 </body>
 
 <template name="layout">
-  {{> yield}}
+  {{> yield}} <!-- Iron Router replaces this with a template from routes.coffee see http://www.manuel-schoebel.com/blog/iron-router-tutorial-->
 </template>

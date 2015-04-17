@@ -1,0 +1,15 @@
+<template name="ExampleComponentWrapper"> <!-- why is this necessary? -->
+	{{> ExampleComponent}}
+</template>
+
+<template name="ExampleComponent">
+	{{> Nav}}
+  <button class="increment">Click me</button>
+  {{> subTemplate}}
+</template>
+
+<!--We use camelCase to distinguish it from the component's template. -->
+<template name="subTemplate">
+  <p>Counter: {{counter.get}}</p>
+  <p>Message: {{customHelper}}</p>  
+</template>
