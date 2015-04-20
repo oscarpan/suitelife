@@ -1,0 +1,8 @@
+standard-app-packages
+iron:router
+twbs:bootstrap
+accounts-ui
+accounts-password
+coffeescript
+peerlibrary:blaze-components
+reactive-var

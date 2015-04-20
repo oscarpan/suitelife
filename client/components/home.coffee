@@ -14,3 +14,6 @@ class Nav extends BlazeComponent
   @register 'Nav'
   template: -> 'Nav'
 
+class Splash extends BlazeComponent
+  @register 'Splash'
+  template: -> 'Splash'
