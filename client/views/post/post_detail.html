@@ -1,0 +1,58 @@
+<!-- Generated on 2015-04-20 by meteor-stock. Edit me! -->
+<template name="postDetail">
+  {{> Nav}}
+  <div class="container">
+
+{{#with post}}
+
+    <h2>Post Details</h2>
+    <table class="table-bordered table-striped">
+      <tbody>
+        <tr>
+          {{!-- you can use a handlebars helper here to format the date field --}}
+          <th class="col-md-3">Created</th>
+          <td class="col-md-9">{{created}}</td>
+        </tr>
+        {{#if updated }}
+        <tr>
+          <th class="col-md-3">Updated</th>
+          <td class="col-md-9">{{updated}}</td>
+        </tr>
+        {{/if}}
+        
+          <tr>
+            <th class="col-md-3">Field A</th>
+            <td class="col-md-9">{{fieldA}}</td>
+          </tr>
+        
+          <tr>
+            <th class="col-md-3">Field B</th>
+            <td class="col-md-9">{{ fieldB}}</td>
+          </tr>
+        
+          <tr>
+            <th class="col-md-3">Field C</th>
+            <td class="col-md-9">{{ fieldC}}</td>
+          </tr>
+        
+          <tr>
+            <th class="col-md-3">Field D</th>
+            <td class="col-md-9">{{ fieldD}}</td>
+          </tr>
+        
+          <tr>
+            <th class="col-md-3">Field E</th>
+            <td class="col-md-9">{{ fieldE}}</td>
+          </tr>
+        
+
+      </tbody>
+    </table>
+    <hr>
+    <button type="button" class="btn btn-default edit-post">Edit this Post</button>
+    <button type="button" class="btn btn-default list-post">Posts List</button>
+    {{else}}
+      <h3>There was no post found for that ID.</h3>
+    {{/with}}
+  </div>
+</template>

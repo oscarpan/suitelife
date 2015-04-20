@@ -1,0 +1,48 @@
+<!-- Generated on 2015-04-20 by meteor-stock. Edit me! -->
+<template name="postsList">
+  {{> Nav}}
+  <div class="container">
+    <h2>Posts List</h2>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          
+            <th>Field A</th>
+          
+            <th>Field B</th>
+          
+            <th>Field C</th>
+          
+            <th>Field D</th>
+          
+            <th>Field E</th>
+          
+          <th>Detail</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each posts}}
+          {{> postItem}}
+        {{/each}}
+      </tbody>
+    </table>
+    <button class="btn btn-default new">New Post</button>
+  </div>
+</template>
+
+<template name="postItem">
+  <tr>
+    
+      <td>{{fieldA}}</td>
+    
+      <td>{{ fieldB}}</td>
+    
+      <td>{{ fieldC}}</td>
+    
+      <td>{{ fieldD}}</td>
+    
+      <td>{{ fieldE}}</td>
+    
+    <td><a href="{{pathFor "postDetail"}}">detail</a></td>
+  </tr>
+</template>
