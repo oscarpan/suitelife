@@ -1,0 +1,50 @@
+<template name="choreDetail">
+  {{> Nav}}
+  <div class="container">
+
+{{#with chore}}
+
+    <h2>Chore Details</h2>
+    <table class="table-bordered table-striped">
+      <tbody>
+        <tr>
+          {{!-- you can use a handlebars helper here to format the date field --}}
+          <th class="col-md-3">Created</th>
+          <td class="col-md-9">{{created}}</td>
+        </tr>
+        {{#if updated }}
+        <tr>
+          <th class="col-md-3">Updated</th>
+          <td class="col-md-9">{{updated}}</td>
+        </tr>
+        {{/if}}
+        
+          <tr>
+            <th class="col-md-3">Chore Name</th>
+            <td class="col-md-9">{{choreName}}</td>
+          </tr>
+        
+          <tr>
+            <th class="col-md-3">When</th>
+            <td class="col-md-9">{{choreDays}}</td>
+          </tr>
+        
+          <tr>
+            <th class="col-md-3">Repeat</th>
+            <td class="col-md-9">{{choreRepeat}}</td>
+          </tr>
+        
+          <tr>
+            <th class="col-md-3">Who</th>
+            <td class="col-md-9">{{choreAssign}}</td>
+          </tr>
+      </tbody>
+    </table>
+    <hr>
+    <button type="button" class="btn btn-default edit-chore">Edit this Chore</button>
+    <button type="button" class="btn btn-default list-chore">Chores List</button>
+    {{else}}
+      <h3>There was no chore found for that ID.</h3>
+    {{/with}}
+  </div>
+</template>

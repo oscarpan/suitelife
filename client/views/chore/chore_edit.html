@@ -1,0 +1,94 @@
+<template name="choreEdit">
+  {{> Nav}}
+
+  <div class="container">
+    {{#with chore}}
+    <form class="form-horizontal">
+    <fieldset>
+
+    <!-- Form Name -->
+    <legend>Create a New Chore</legend>
+
+    <!-- Text input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="choreName">Chore Name</label>  
+      <div class="col-md-4">
+        <input id="choreName" name="choreName" type="text" placeholder="Name Your Chore" class="form-control input-md" required="" value="{{choreName}}">
+      </div>
+    </div>
+
+    <!-- Multiple Checkboxes (inline) -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="choreDays">When:</label>
+      <div class="col-md-4">
+        <label class="checkbox-inline" for="choreDays-0">
+          <input type="checkbox" name="choreDays" id="choreDays-0" value="Sunday">
+          Su
+        </label>
+        <label class="checkbox-inline" for="choreDays-1">
+          <input type="checkbox" name="choreDays" id="choreDays-1" value="Monday">
+          M
+        </label>
+        <label class="checkbox-inline" for="choreDays-2">
+          <input type="checkbox" name="choreDays" id="choreDays-2" value="Tuesday">
+          Tu
+        </label>
+        <label class="checkbox-inline" for="choreDays-3">
+          <input type="checkbox" name="choreDays" id="choreDays-3" value="Wednesday">
+          W
+        </label>
+        <label class="checkbox-inline" for="choreDays-4">
+          <input type="checkbox" name="choreDays" id="choreDays-4" value="Thursday">
+          Th
+        </label>
+        <label class="checkbox-inline" for="choreDays-5">
+          <input type="checkbox" name="choreDays" id="choreDays-5" value="Friday">
+          F
+        </label>
+        <label class="checkbox-inline" for="choreDays-6">
+          <input type="checkbox" name="choreDays" id="choreDays-6" value="Saturday">
+          Sa
+        </label>
+      </div>
+    </div>
+
+    <!-- Multiple Checkboxes -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="choreRepeat"></label>
+      <div class="col-md-4">
+        <div class="checkbox">
+          <label for="choreRepeat-0">
+            <input type="checkbox" name="choreRepeat" id="choreRepeat-0" value="Once">
+            Repeat Weekly
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Select Basic -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="choreAssign">Assign to roommate:</label>
+      <div class="col-md-4">
+        <select id="choreAssign" name="choreAssign" class="form-control">
+          <option value="Tai">Tai</option>
+          <option value="John">John</option>
+          <option value="Peter">Peter</option>
+          <option value="Andrei">Andrei</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit" class="btn btn-default">Save Chore</button>
+        <button class="btn btn-default delete">Delete Chore</button>
+          <button class="btn btn-default cancel">Cancel</button>
+      </div>
+    </div>
+
+    </fieldset>
+    </form>
+    {{/with}}
+
+  </div>
+</template>

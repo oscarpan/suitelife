@@ -1,0 +1,51 @@
+<template name="choresList">
+	{{> Nav}}
+
+	<div class="container">
+		<h2>Chores List</h2>
+		
+    	<table class="table table-striped">
+      		<thead>
+        		<tr>
+          
+           			<th>Chore Name</th>
+          
+            		<th>When</th>
+          
+            		<th>Repeat</th>
+          	
+            		<th>Assigned to</th>
+          
+          			<th>Detail</th>
+        		</tr>
+      		</thead>
+      		<tbody>
+        		{{#each chores}}
+          			{{> choreItem}}
+        		{{/each}}
+      		</tbody>
+    	</table>
+    	<button class="btn btn-default new">New Chore</button>
+  	</div>
+
+  	{{> choreCalendar}}
+  </template>
+
+<template name="choreItem">
+  <tr>
+    
+      <td>{{choreName}}</td>
+    
+      <td>{{choreDays}}</td>
+    
+      <td>{{choreRepeat}}</td>
+    
+      <td>{{choreAssign}}</td>
+    
+    <td><a href="{{pathFor "choreDetail"}}">detail</a></td>
+  </tr>
+</template>
+
+<template name="choreCalendar">
+    {{>fullcalendar options}}
+</template>
