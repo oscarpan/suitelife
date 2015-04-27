@@ -1,0 +1,32 @@
+<template name="suite">
+	<h1>Pretty suite bro</h1>
+	<h3>you are not currently in a suite</h3>
+	<h3>pick a suite here:</h3>
+	{{> dropdown text="Pick a suite" list=suites }}
+	{{> suiteNew}}
+</template>
+
+<template name="suiteNew">
+	<div class="container">
+    <h2>Create a New Suite</h2>
+    <form class="" role="form">
+      
+      <div class="">
+        <label for="inputfieldA" class="control-label">Suite Name</label>
+        <div class="">
+          <input type="text" class="" name="suiteName" id="inputSuite" placeholder="My Suite">
+        </div>
+      </div>
+		
+			<div class="form-group">
+    		<div class="">
+      		<button type="submit" class="btn btn-default">New Suite</button>
+    		</div>
+  		</div>
+
+    </form>
+   </div>
+</template>
+
+
+

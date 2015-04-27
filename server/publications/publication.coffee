@@ -3,3 +3,9 @@ Meteor.publish 'posts', ->
 
 Meteor.publish 'chores', ->
   Chores.find {}
+
+Meteor.publish 'suites', ->
+  Suites.find {}
+
+Meteor.publish 'users', ->
+  Meteor.users.find {}

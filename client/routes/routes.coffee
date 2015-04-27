@@ -21,6 +21,8 @@ Router.route '/exampleComponent', ->
 Router.onBeforeAction ->
   if !Meteor.userId()
     @render 'splash'
+  else if !(Meteor.user().suite)
+    @render 'suite'
   else
     @next()
   return
