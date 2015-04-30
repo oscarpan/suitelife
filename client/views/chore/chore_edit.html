@@ -1,7 +1,10 @@
+<!-- view for editting chores -->
 <template name="choreEdit">
   {{> Nav}}
 
   <div class="container">
+    
+    <!-- form with values previously entered -->
     {{#with chore}}
     <form class="form-horizontal">
     <fieldset>
@@ -9,7 +12,7 @@
     <!-- Form Name -->
     <legend>Edit Chore</legend>
 
-    <!-- Text input-->
+    <!-- Chore name -->
     <div class="form-group">
       <label class="col-md-4 control-label" for="choreName">Chore Name</label>  
       <div class="col-md-4">
@@ -17,7 +20,7 @@
       </div>
     </div>
 
-    <!-- Multiple Checkboxes (inline) -->
+    <!-- days of the week -->
     <div class="form-group">
       <label class="col-md-4 control-label" for="choreDays">When:</label>
       <div class="col-md-4">
@@ -52,7 +55,7 @@
       </div>
     </div>
 
-    <!-- Multiple Checkboxes -->
+    <!-- frequency -->
     <div class="form-group">
       <label class="col-md-4 control-label" for="choreRepeat"></label>
       <div class="col-md-4">
@@ -65,7 +68,7 @@
       </div>
     </div>
 
-    <!-- Select Basic -->
+    <!-- assign select -->
     <div class="form-group">
       <label class="col-md-4 control-label" for="choreAssign">Assign to roommate:</label>
       <div class="col-md-4">

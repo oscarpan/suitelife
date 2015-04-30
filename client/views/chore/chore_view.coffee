@@ -1,5 +1,7 @@
+## For template toggling
 Session.setDefault 'showCreateChore', false
 
+## for going to different pages
 Template.choresView.events 
   'click .new': (e) ->
 	  e.preventDefault()
@@ -42,9 +44,10 @@ Template.choreCalendar.helpers
         callback events
         return
     }
+   ## getter for creating state
   showCreateChore: ->
     Session.get 'showCreateChore'
  
 createChoreEvent = (date) ->
-  ## move submit function here?
+  ## move submit function form new/edit here?
   return

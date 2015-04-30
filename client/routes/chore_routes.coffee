@@ -1,3 +1,4 @@
+## routes for chore views 
 Router.map ->
   @route 'choresView',
     path: '/chores/view'

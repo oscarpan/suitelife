@@ -1,12 +1,20 @@
+<!-- View for the calendar -->
+
+<!-- overall view template -->
 <template name="choresView">
 
   {{> Nav}}
+
+  <!-- Travel to List view -->
   <button class="btn btn-default list">List View</button>
   <span class="glyphicon glyphicon-plus-sign new" aria-hidden="true"></span>
   {{> choreCalendar}}
-  </template>
+</template>
 
+<!-- template for the calendar -->
 <template name="choreCalendar">
+  
+  <!-- only show modal template if true -->
   {{#if showCreateChore}}
     {{>createChore}}
   {{/if}}
@@ -16,6 +24,7 @@
   </div>
 </template>
 
+<!-- template for the create modal -->
 <template name="createChore">
   <div class="modal fade" id="createChoreModal">
     <div class="modal-dialog">

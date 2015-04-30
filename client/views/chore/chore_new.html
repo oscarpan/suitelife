@@ -1,3 +1,6 @@
+<!-- create a chore view - remove for modal? -->
+
+<!-- overall chore view -->
 <template name="choreNew">
   {{> Nav}}
 
@@ -9,7 +12,7 @@
     <!-- Form Name -->
     <legend>Create a New Chore</legend>
 
-    <!-- Text input-->
+    <!-- Chore name -->
     <div class="form-group">
       <label class="col-md-4 control-label" for="choreName">Chore Name</label>  
       <div class="col-md-4">
@@ -17,7 +20,7 @@
       </div>
     </div>
 
-    <!-- Multiple Checkboxes (inline) -->
+    <!-- Day of the week checkboxes -->
     <div class="form-group">
       <label class="col-md-4 control-label" for="choreDays">When:</label>
       <div class="col-md-4">
@@ -52,7 +55,7 @@
       </div>
     </div>
 
-    <!-- Multiple Checkboxes -->
+    <!-- Frequency -->
     <div class="form-group">
       <label class="col-md-4 control-label" for="choreRepeat"></label>
       <div class="col-md-4">
@@ -65,7 +68,7 @@
       </div>
     </div>
 
-    <!-- Select Basic -->
+    <!-- List for assign -->
     <div class="form-group">
       <label class="col-md-4 control-label" for="choreAssign">Assign to roommate:</label>
       <div class="col-md-4">
