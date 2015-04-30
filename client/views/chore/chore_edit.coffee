@@ -9,10 +9,12 @@ Template.choreEdit.events
       return
     repeat = if $('#choreRepeat-0').prop('checked') then 'Weekly' else 'Once'
     choreEdits = 
-      choreName: $(e.target).find('[name=choreName]').val()
+      title: $(e.target).find('[name=choreName]').val()
       choreDays: choredays
       choreRepeat: repeat
       choreAssign: $(e.target).find('[name=choreAssign]').val()
+      allDay: true
+      start: new Date()
     Meteor.call 'editChore', choreEdits, currentId, (error, id) ->
       if error
         return alert(error.reason)
@@ -26,7 +28,7 @@ Template.choreEdit.events
       Meteor.call 'deleteChore', currentId, (error, id) ->
         if error
           return alert(error.reason)
-        Router.go 'choresList'
+        Router.go 'choresView'
         return
     return
   'click .cancel': (e) ->

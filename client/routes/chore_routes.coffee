@@ -1,5 +1,8 @@
 Router.map ->
-  @route 'choresList', path: '/chores/list'
+  @route 'choresView',
+    path: '/chores/view'
+  @route 'choresList',
+    path: '/chores/list'
   @route 'choreNew',
     path: '/chore/new'
     template: 'choreNew'

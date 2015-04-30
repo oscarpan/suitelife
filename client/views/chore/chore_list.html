@@ -1,5 +1,6 @@
 <template name="choresList">
-	{{> Nav}}
+
+  {{> Nav}}
 
 	<div class="container">
 		<h2>Chores List</h2>
@@ -25,16 +26,16 @@
         		{{/each}}
       		</tbody>
     	</table>
-    	<button class="btn btn-default new">New Chore</button>
-  	</div>
 
-  	{{> choreCalendar}}
+      <button class="btn btn-default new">New Chore</button>
+      
+  	</div>
   </template>
 
 <template name="choreItem">
   <tr>
     
-      <td>{{choreName}}</td>
+      <td>{{title}}</td>
     
       <td>{{choreDays}}</td>
     
@@ -44,8 +45,4 @@
     
     <td><a href="{{pathFor "choreDetail"}}">detail</a></td>
   </tr>
-</template>
-
-<template name="choreCalendar">
-    {{>fullcalendar options}}
 </template>

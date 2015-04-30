@@ -5,6 +5,4 @@ Template.choresList.events 'click .new': (e) ->
 	e.preventDefault()
 	Router.go 'choreNew'
 	return
-
-Template.choreCalendar.helpers options: ->
-  { defaultView: 'basicWeek' }
+ 
