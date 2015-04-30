@@ -26,4 +26,4 @@ Meteor.methods
       Suites.update suite_id, $set: {users: [user_id]}
     else
       Suites.update suite_id, $push: {users: user_id}
-    Meteor.users.update { _id: user_id }, $set: suite: suite_id #add the apt id to the user
+    # Meteor.users.update { _id: user_id }, $set: suite: suite_id #add the apt id to the user
