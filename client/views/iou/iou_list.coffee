@@ -1,5 +1,5 @@
 Template.iousList.helpers ious: ->
-  Ious.find {}, sort: createdAt: -1
+  Suites.findOne( { users: Meteor.userId() } ).ious
 
 Template.iousList.events 'click .new' : (e) ->
   e.preventDefault()

@@ -1,0 +1,51 @@
+<template name="iousList">
+  {{> Nav}}
+
+	<div class="container">
+		<h2>IOU List</h2>
+	
+  	<table class="table table-striped">
+    		<thead>
+      		<tr>
+        
+          		<th>Payer</th>
+        
+          		<th>Payee</th>
+        	
+         			<th>IOU Reason</th>
+
+          		<th>Amount</th>
+        
+        			<th>date</th>
+
+        			<th>detail</th>
+      		</tr>
+    		</thead>
+    		<tbody>
+      		{{#each ious}}
+        			{{> iouItem}}
+      		{{/each}}
+    		</tbody>
+  	</table>
+
+    <button class="btn btn-default new">New IOU</button>
+    
+	</div>
+</template>
+
+<template name="iouItem">
+  <tr>
+    
+      <td>{{payerId}}</td>
+    
+      <td>{{payeeId}}</td>
+    
+      <td>{{reason}}</td>
+    
+      <td>{{amount}}</td>
+    
+    	<td>{{date}}</td>
+
+    	<td><a href="{{pathFor "iousDetail"}}">detail</a></td>
+  </tr>
+</template>
