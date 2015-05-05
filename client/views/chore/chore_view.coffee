@@ -1,5 +1,5 @@
-## For template toggling
-Session.setDefault 'showCreateChore', false
+## For template toggling - maybe not needed?
+##Session.setDefault 'showCreateChore', false
 
 ## for going to different pages
 Template.choresView.events 
@@ -20,7 +20,7 @@ Template.choreCalendar.helpers
       defaultView: 'basicWeek'
       ## Opens up modal with infomation on the date clicked
       dayClick: (date, jsEvent, view) ->
-        Session.set 'showCreateChore', true
+        ##Session.set 'showCreateChore', true
         $('#createChoreModal').modal 'show'
         createChoreEvent date
       ## Let's get the chores!
@@ -44,9 +44,9 @@ Template.choreCalendar.helpers
         callback events
         return
     }
-   ## getter for creating state
-  showCreateChore: ->
-    Session.get 'showCreateChore'
+   ## getter for creating state - maybe not needed?
+  ##showCreateChore: ->
+    ##Session.get 'showCreateChore'
  
 createChoreEvent = (date) ->
   ## move submit function form new/edit here?

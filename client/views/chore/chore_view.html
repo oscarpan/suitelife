@@ -14,10 +14,10 @@
 <!-- template for the calendar -->
 <template name="choreCalendar">
   
-  <!-- only show modal template if true -->
-  {{#if showCreateChore}}
+  <!-- only show modal template if true - maybe not needed? -->
+  <!--{{#if showCreateChore}}-->
     {{>createChore}}
-  {{/if}}
+  <!--{{/if}}-->
 
   <div id="choreCal">
     {{>fullcalendar options}}
