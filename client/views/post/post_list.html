@@ -3,46 +3,30 @@
   {{> Nav}}
   <div class="container">
     <h2>Posts List</h2>
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          
-            <th>Field A</th>
-          
-            <th>Field B</th>
-          
-            <th>Field C</th>
-          
-            <th>Field D</th>
-          
-            <th>Field E</th>
-          
-          <th>Detail</th>
-        </tr>
-      </thead>
-      <tbody>
-        {{#each posts}}
-          {{> postItem}}
-        {{/each}}
-      </tbody>
-    </table>
-    <button class="btn btn-default new">New Post</button>
+      {{#each posts}}
+        {{> Post}}
+      {{/each}}
+      {{> newPost}}
   </div>
 </template>
 
-<template name="postItem">
-  <tr>
-    
-      <td>{{fieldA}}</td>
-    
-      <td>{{ fieldB}}</td>
-    
-      <td>{{ fieldC}}</td>
-    
-      <td>{{ fieldD}}</td>
-    
-      <td>{{ fieldE}}</td>
-    
-    <td><a href="{{pathFor "postDetail"}}">detail</a></td>
-  </tr>
+<template name="Post">
+  <h4 style="border: 1px solid orange">
+    <span class="editable-text-trigger">  
+      {{> editableText collection="posts" field="message" placeholder="Post message" removeEmpty=true wysiwyg=true substitute='<i class="fa fa-pencil"></i>'}}
+    </span>
+    <div class="row" style="font-size: 10px">
+      <div class="col-md-3"> author: {{getEmail authorId}} </div>
+      <div class="col-md-4"> last edited: {{lastEdited}} </div>
+      <div class="col-md-3"> last editor: {{getEmail authorId}} </div>
+      <div class="col-md-1"> pinned: {{pinned}} </div>
+      <div class="col-md-1"> image: {{imagePath}} </div>
+    </div>
+  </h4>
+</template>
+
+<template name="newPost">
+  <span class="btn btn-info editable-text-trigger">
+    <i class="fa fa-plus"></i> New post{{> editableText context=newPosts collection="posts" field="message" autoInsert=true}}
+  </span>
 </template>

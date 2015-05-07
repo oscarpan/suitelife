@@ -1,9 +1,16 @@
 standard-app-packages
 iron:router
-twbs:bootstrap
 accounts-ui
 accounts-password
 coffeescript
 peerlibrary:blaze-components
 reactive-var
 rzymek:fullcalendar
+babrahams:editable-text
+babrahams:editable-text-wysiwyg
+babrahams:editable-text-wysiwyg-bootstrap-3
+babrahams:editable-list
+fortawesome:fontawesome
+twbs:bootstrap
+tomi:upload-server
+tomi:upload-jquery
