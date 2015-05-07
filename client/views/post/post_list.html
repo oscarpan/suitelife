@@ -1,32 +1,48 @@
 <!-- Generated on 2015-04-20 by meteor-stock. Edit me! -->
 <template name="postsList">
-  {{> Nav}}
-  <div class="container">
-    <h2>Posts List</h2>
-      {{#each posts}}
-        {{> Post}}
-      {{/each}}
-      {{> newPost}}
-  </div>
+	{{> Nav}}
+	<div class="container">
+		<h2>Posts List</h2>
+			{{#each posts}}
+				{{> Post}}
+			{{/each}}
+			{{> newPost}}
+	</div>
 </template>
 
 <template name="Post">
-  <h4 style="border: 1px solid orange">
-    <span class="editable-text-trigger">  
-      {{> editableText collection="posts" field="message" placeholder="Post message" removeEmpty=true wysiwyg=true substitute='<i class="fa fa-pencil"></i>'}}
-    </span>
-    <div class="row" style="font-size: 10px">
-      <div class="col-md-3"> author: {{getEmail authorId}} </div>
-      <div class="col-md-4"> last edited: {{lastEdited}} </div>
-      <div class="col-md-3"> last editor: {{getEmail authorId}} </div>
-      <div class="col-md-1"> pinned: {{pinned}} </div>
-      <div class="col-md-1"> image: {{imagePath}} </div>
-    </div>
-  </h4>
+	<h4 style="border: 1px solid orange">
+		<span class="editable-text-trigger">	
+			{{> editableText collection="posts" field="message" placeholder="Post message" removeEmpty=true wysiwyg=true substitute='<i class="fa fa-pencil"></i>'}}
+		</span>
+		{{#if imagePath.url}}
+			<img class="bulletin-image" src={{imagePath.url}}>
+		{{/if}}
+		{{> uploader}}	<!-- TODO: conditional on editing text-->
+		<div class="row" style="font-size: 10px">
+			<div class="col-md-2"> author: {{getEmail authorId}} </div>
+			<div class="col-md-4"> last edited: {{lastEdited}} </div>
+			<div class="col-md-2"> last editor: {{getEmail authorId}} </div>
+			<div class="col-md-1"> pinned: {{pinned}} </div>
+			<div class="col-md-3"> image: {{imagePath.url}} </div>
+		</div>
+	</h4>
+</template>
+
+<template name="uploader">
+	<div class="row">
+		<div class="col-md-8">	{{> upload_bootstrap fileTypes='.jpg' multiple=false callbacks=myCallbacks}}
+		</div>
+		{{#if imagePath.url}}
+			<div class="col-md-4">
+					<span class="btn btn-warning clear" post="{{_id}}">Remove Image</span>
+			</div>
+		{{/if}}
+	</div>
 </template>
 
 <template name="newPost">
-  <span class="btn btn-info editable-text-trigger">
-    <i class="fa fa-plus"></i> New post{{> editableText context=newPosts collection="posts" field="message" autoInsert=true}}
-  </span>
+	<span class="btn btn-info editable-text-trigger">
+		<i class="fa fa-plus"></i> New post{{> editableText context=newPosts collection="posts" field="message" autoInsert=true}}
+	</span>
 </template>

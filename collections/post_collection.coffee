@@ -13,3 +13,11 @@ Meteor.methods
     post.updatedAt = (new Date).getTime()
     Posts.update id, $set: post
     id
+  setImagePath: (post, id) ->
+    post.updatedAt = (new Date).getTime()
+    Posts.update id, $set: {
+      imagePath: post.imagePath
+      lastEditor: post.lastEditor
+      lastEdited: post.lastEdited
+    }
+    id

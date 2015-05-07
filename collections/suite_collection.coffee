@@ -26,3 +26,9 @@ Meteor.methods
       Suites.update suite_id, $set: {users: [user_id]}
     else
       Suites.update suite_id, $push: {users: user_id}
+  uploadToSuite: (file_info, suite_id) ->
+    suite = Suites.findOne(suite_id)
+    if !suite.uploads  
+      Suites.update suite_id, $set: {uploads: [file_info]}
+    else
+      Suites.update suite_id, $push: {uploads: file_info}
