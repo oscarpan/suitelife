@@ -7,3 +7,7 @@ Template.choreDetail.events
     e.preventDefault()
     Router.go 'choresList'
     return
+
+Template.choreDetail.helpers
+  choreEvent: ->
+    choreEvent = Session.get('choreData')    

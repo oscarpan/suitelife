@@ -1,11 +1,8 @@
 <!-- view for editting chores -->
-<template name="choreEdit">
-  {{> Nav}}
-
-  <div class="container">
+<template name="editChoreForm">
     
     <!-- form with values previously entered -->
-    {{#with chore}}
+    {{#with choreEvent}}
     <form class="form-horizontal">
     <fieldset>
 
@@ -85,13 +82,10 @@
       <div class="col-sm-offset-2 col-sm-10">
         <button type="submit" class="btn btn-default">Save Chore</button>
         <button class="btn btn-default delete">Delete Chore</button>
-          <button class="btn btn-default cancel">Cancel</button>
       </div>
     </div>
 
     </fieldset>
     </form>
     {{/with}}
-
-  </div>
 </template>

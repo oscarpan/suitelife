@@ -1,12 +1,12 @@
-## For template toggling - maybe not needed?
-##Session.setDefault 'showCreateChore', false
+Session.setDefault 'activeModal', 'newChoreForm'
 
 ## for going to different pages
 Template.choresView.events 
   'click .new': (e) ->
-	  e.preventDefault()
-	  Router.go 'choreNew'
-	  return
+    e.preventDefault()
+    Session.set 'activeModal', 'newChoreForm'
+    $('#createChoreModal').modal 'show'
+    return
   'click .list': (e) ->
     e.preventDefault()
     Router.go 'choresList'
@@ -20,9 +20,15 @@ Template.choreCalendar.helpers
       defaultView: 'basicWeek'
       ## Opens up modal with infomation on the date clicked
       dayClick: (date, jsEvent, view) ->
-        ##Session.set 'showCreateChore', true
+        Session.set 'activeModal', 'newChoreForm'
         $('#createChoreModal').modal 'show'
-        createChoreEvent date
+      eventClick: (calEvent, jsEvent, view) ->
+        ## Get the clicked event and set the data context for edit
+        choreEvent = Chores.findOne(calEvent._id)
+        Session.set 'activeModal', 'editChoreForm'
+        Session.set 'choreData', choreEvent
+        $('#createChoreModal').modal 'show'
+
       ## Let's get the chores!
       events: (start, end, timezone, callback) ->
         ## Create empty array to store events
@@ -44,10 +50,20 @@ Template.choreCalendar.helpers
         callback events
         return
     }
-   ## getter for creating state - maybe not needed?
-  ##showCreateChore: ->
-    ##Session.get 'showCreateChore'
- 
-createChoreEvent = (date) ->
-  ## move submit function form new/edit here?
+    
+# Reactive calendar updates -- oooh aaaah
+Template.choreCalendar.rendered = ->
+  fc = @$('.fc')
+  @autorun ->
+    #1) trigger event re-rendering when the collection is changed in any way
+    #2) find all, because we've already subscribed to a specific range
+    Chores.find()
+    fc.fullCalendar 'refetchEvents'
+    return
   return
+
+Template.createChore.helpers 
+  # getter for creating state
+  activeModal: ->
+    Session.get 'activeModal'
+

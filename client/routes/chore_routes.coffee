@@ -4,9 +4,6 @@ Router.map ->
     path: '/chores/view'
   @route 'choresList',
     path: '/chores/list'
-  @route 'choreNew',
-    path: '/chore/new'
-    template: 'choreNew'
   @route 'choreEdit',
     path: '/chore/:_id/edit'
     template: 'choreEdit'

@@ -1,4 +1,4 @@
-Template.choreNew.events
+Template.newChoreForm.events
   # new chore submission
   'submit form': (e) ->
     e.preventDefault()
@@ -25,6 +25,8 @@ Template.choreNew.events
     Meteor.call 'newChore', chore, (error, id) ->
       if error
         return alert(error.reason)
-      Router.go 'choreDetail', _id: id
+      Session.set 'activeModal', 'choreDetail'
+      $('#createChoreModal').modal 'hide'
+      $('#detailChoreModal').modal 'show'
       return
     return

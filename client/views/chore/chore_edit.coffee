@@ -1,4 +1,4 @@
-Template.choreEdit.events
+Template.editChoreForm.events
   ## edit form submission
   'submit form': (e) ->
     e.preventDefault()
@@ -25,7 +25,7 @@ Template.choreEdit.events
     Meteor.call 'editChore', choreEdits, currentId, (error, id) ->
       if error
         return alert(error.reason)
-      Router.go 'choreDetail', _id: id
+      $('#createChoreModal').modal 'hide'
       return
     return
 
@@ -34,15 +34,18 @@ Template.choreEdit.events
     e.preventDefault()
     if confirm('Delete this Chore?')
       currentId = @_id
+      console.log currentId
       Meteor.call 'deleteChore', currentId, (error, id) ->
         if error
           return alert(error.reason)
-        Router.go 'choresView'
+        $('#createChoreModal').modal 'hide'
         return
     return
 
-  ## return back to the list view
-  'click .cancel': (e) ->
-    e.preventDefault()
-    Router.go 'choresList'
-    return
+Template.editChoreForm.helpers
+  choreEvent: ->
+    # Get the data context for the edit
+    choreEvent = Session.get('choreData')
+
+
+
