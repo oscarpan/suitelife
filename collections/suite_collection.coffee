@@ -2,6 +2,7 @@ root = exports ? this
 root.Suites = new (Meteor.Collection)('suites')
 # Note: this will allow ALL users to insert, update, and delete Chores
 # https://www.discovermeteor.com/blog/meteor-methods-client-side-operations/
+#http://stackoverflow.com/questions/4214731/coffeescript-global-variables
 
 Meteor.methods
   deleteSuite: (id) ->
@@ -9,23 +10,21 @@ Meteor.methods
     return
   newSuite: (suite) ->
     suite.createdAt = (new Date).getTime()
-    id = Suites.insert(suite)
-    user = Meteor.user()
-    Meteor.call 'addUserToSuite', user._id, id, (error, id) ->    #add the user to the new suite
+    suite_id = Suites.insert(suite)
+    Meteor.call 'addUserToSuite', suite_id, (error) ->    #add the user to the new suite
       if error
         return alert(error.reason)    
-      return
-    id
   editSuite: (suite, id) ->
     suite.updatedAt = (new Date).getTime()
     Suite.update id, $set: suite
     id
-  addUserToSuite: (user_id, suite_id) ->
-    suite = Suites.findOne(suite_id)
-    if !suite.users                                             #add user to apt user array. no upsert on arrays
-      Suites.update suite_id, $set: {users: [user_id]}
+  addUserToSuite: (suite_id) ->
+    console.log suite_id
+    suite = Suites.findOne suite_id
+    if !suite.users?                                            #add user to apt user array. no upsert on arrays
+      Suites.update suite_id, $set: {users: [Meteor.userId()]}
     else
-      Suites.update suite_id, $push: {users: user_id}
+      Suites.update suite_id, $push: {users: Meteor.userId()}
   uploadToSuite: (file_info, suite_id) ->
     suite = Suites.findOne(suite_id)
     if !suite.uploads  
