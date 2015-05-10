@@ -1,4 +1,4 @@
-Template.iouNew.helpers 
+Template.iouNew.helpers
   users: ->
     Suites.findOne({ users: Meteor.userId() }).users
 
