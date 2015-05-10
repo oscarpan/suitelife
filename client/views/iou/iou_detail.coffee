@@ -1,6 +1,6 @@
 Template.iouDetail.helpers
   date: (date) ->
-    moment(date).format('MM/DD/YYYY')
+    moment(date).format('MMMM Do YYYY, h:mm:ss a')
 
 Template.iouDetail.events
   'click .edit-iou': (e) ->
