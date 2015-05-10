@@ -1,3 +1,12 @@
+Template.iouNew.helpers 
+  users: ->
+    Suites.findOne({ users: Meteor.userId() }).users
+
+  getUserName: (id) ->
+    usr = Meteor.users.findOne id
+    userName = usr.profile.first_name + " " + usr.profile.last_name
+
+
 Template.iouNew.events 'submit form': (e) ->
   e.preventDefault()
   payer = $(e.target).find('[name=payer]').val()
