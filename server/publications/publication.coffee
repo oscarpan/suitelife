@@ -7,5 +7,8 @@ Meteor.publish 'chores', ->
 Meteor.publish 'suites', ->
   Suites.find {}
 
+Meteor.publish 'ious', ->
+  Ious.find {}
+
 Meteor.publish 'users', ->
   Meteor.users.find {}

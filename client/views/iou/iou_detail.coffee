@@ -1,3 +1,7 @@
+Template.iouDetail.helpers
+  date: (date) ->
+    moment(date).format('MMMM Do YYYY, h:mm:ss a')
+
 Template.iouDetail.events
   'click .edit-iou': (e) ->
     e.preventDefault()
