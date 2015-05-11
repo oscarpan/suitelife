@@ -6,8 +6,6 @@ Meteor.methods
     Ious.remove id
     return
   newIou: (iou) ->
-    console.log "iou: " + iou.payerId + " " + iou.reason
-
     iou.createdAt = (new Date).getTime()
     id = Ious.insert(iou)
     id
