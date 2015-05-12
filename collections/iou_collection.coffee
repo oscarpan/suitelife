@@ -4,7 +4,6 @@ root.Ious = new (Meteor.Collection)('ious')
 Meteor.methods
   deleteIou: (id) ->
     Ious.remove id
-    return
   newIou: (iou) ->
     iou.createdAt = (new Date).getTime()
     id = Ious.insert(iou)
