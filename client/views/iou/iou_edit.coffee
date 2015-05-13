@@ -31,7 +31,7 @@ Template.iouEdit.events
     Meteor.call 'deleteIou', currentId, (error, id) ->
       if error
         return alert(error.reason)
-      Router.go 'iouDetal', _id: id
+      Router.go 'iousList'
       return
 
     return

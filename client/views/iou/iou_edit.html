@@ -50,7 +50,8 @@
     <div class="form-group">
       <div class="col-sm-offset-2 col-sm-10">
         <button type="submit" class="btn btn-default">Save IOU</button>
-        <button class="btn btn-default delete">Delete IOU</button>
+        <!-- Delete button must be type button or the 'submit form' helper is called -->
+        <button type="button" class="btn btn-default delete">Delete IOU</button>
         <a href="/iou/{{_id}}/detail" class="btn btn-default cancel">Cancel</a>
       </div>
     </div>
