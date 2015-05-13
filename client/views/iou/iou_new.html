@@ -1,6 +1,4 @@
 <template name="iouNew">
-  {{> Nav}}
-
   <div class="container">
 
     <form class="form-horizontal">
@@ -30,10 +28,9 @@
       <label class="col-md-4 control-label" for="payer">Assign a payer:</label>
       <div class="col-md-4">
         <select id="payer" name="payer" class="form-control">
-          <option value="Tai">Tai</option>
-          <option value="John">John</option>
-          <option value="Peter">Peter</option>
-          <option value="Andrei">Andrei</option>
+          {{#each users}}
+            <option value="{{this}}">{{getUserName this}}</option>
+          {{/each}}
         </select>
       </div>
     </div>
@@ -43,10 +40,9 @@
       <label class="col-md-4 control-label" for="payee">Assign a payee:</label>
       <div class="col-md-4">
         <select id="payee" name="payee" class="form-control">
-          <option value="Tai">Tai</option>
-          <option value="John">John</option>
-          <option value="Peter">Peter</option>
-          <option value="Andrei">Andrei</option>
+          {{#each users}}
+            <option value="{{this}}">{{getUserName this}}</option>
+          {{/each}}
         </select>
       </div>
     </div>
@@ -62,3 +58,4 @@
 
   </div>
 </template>
+

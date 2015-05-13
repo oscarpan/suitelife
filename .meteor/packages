@@ -1,6 +1,5 @@
 standard-app-packages
 iron:router
-accounts-ui
 accounts-password
 coffeescript
 peerlibrary:blaze-components
@@ -12,3 +11,7 @@ fortawesome:fontawesome
 twbs:bootstrap
 tomi:upload-server
 tomi:upload-jquery
+ian:accounts-ui-bootstrap-3
+email
+msavin:mongol
+momentjs:moment

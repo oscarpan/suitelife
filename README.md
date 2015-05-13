@@ -11,6 +11,7 @@
 	    |   |   |-- defaultLayout.html 		# All other html is routed into {{> yield}}
 	    |   |-- routes 						# route methods using iron_router
 	    |   |   |-- chore_routes.coffee
+	    |   |   |-- iou_routes.coffee
 	    |   |   |-- post_routes.coffee
 	    |   |   |-- routes.coffee
 	    |   |-- styles						# css
@@ -32,6 +33,15 @@
 	    |       |   |-- loading.html
 	    |       |-- home
 	    |       |   |-- home.html
+	    |       |-- iou
+	    |       |   |-- iou_detail.coffee
+	    |       |   |-- iou_detail.html
+	    |       |   |-- iou_edit.coffee
+	    |       |   |-- iou_edit.html
+	    |       |   |-- iou_list.coffee
+	    |       |   |-- iou_list.html
+	    |       |   |-- iou_new.coffee
+	    |       |   |-- iou_new.html
 	    |       |-- nav
 	    |       |   |-- nav.html
 	    |       |-- post
@@ -51,6 +61,7 @@
 	    |           |-- suite_new.coffee
 	    |-- collections						# database methods
 	    |   |-- chore_collection.coffee
+	    |   |-- iou_collection.coffee
 	    |   |-- post_collection.coffee
 	    |   |-- suite_collection.coffee
 	    |-- lib								# loads before other folders

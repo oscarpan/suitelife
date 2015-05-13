@@ -1,6 +1,4 @@
 <template name="iousList">
-  {{> Nav}}
-
 	<div class="container">
 		<h2>IOU List</h2>
 	
@@ -28,7 +26,11 @@
     		</tbody>
   	</table>
 
-    <button class="btn btn-default new">New IOU</button>
+    <button class="btn btn-default new">
+      <span title="Create a new IOU">
+        New IOU
+      </span>
+    </button>
     
 	</div>
 </template>
@@ -36,16 +38,16 @@
 <template name="iouItem">
   <tr>
     
-      <td>{{payerId}}</td>
+      <td>{{userName payerId}}</td>
     
-      <td>{{payeeId}}</td>
+      <td>{{userName payeeId}}</td>
     
       <td>{{reason}}</td>
     
-      <td>{{amount}}</td>
+      <td>${{amount}}</td>
     
     	<td>{{date}}</td>
 
-    	<td><a href="{{pathFor "iousDetail"}}">detail</a></td>
+    	<td><a href="/iou/{{_id}}/detail">detail</a></td>
   </tr>
 </template>

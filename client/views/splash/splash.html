@@ -1,4 +1,38 @@
 <template name="splash">
-	<h1>Meteor used SPLASH!</h1>
-	<h3>you are currently logged out</h3>
+  {{#if currentUser}}
+  	<h1>Oh dear! You shouldn't be here.</h1>
+  	<img style="height: 200px" src="https://styleseat-media.s3.amazonaws.com/apache_files/dog_in_wig_web.jpg">
+  {{else}}
+		<h1>Meteor used SPLASH!</h1>
+		<h3>you are currently logged out</h3>
+	{{> signup}}
+	{{/if}}
+</template>
+
+<template name="signup">
+  <form class="login-form">
+    <div class="form-group">
+      <input type="text" class="form-control" name="firstName"
+          placeholder="first name">
+    </div>
+    <div class="form-group">
+      <input type="text" class="form-control" name="lastName"
+          placeholder="last name">
+    </div>
+    <div class="form-group">
+      <input type="text" class="form-control" name="email"
+          placeholder="Email">
+    </div>
+    <div class="form-group">
+      <input type="password" class="form-control" name="password"
+          placeholder="password">
+    </div>
+    <div class="form-group">
+      <input type="text" class="form-control" name="suiteName" id="inputSuite" placeholder="Name your suite">
+    </div>
+    <button type="submit" class="btn btn-default"
+        data-loading-text="Signing up...">
+      <i class="fa fa-lg fa-fw fa-check"></i> Sign up
+    </button>
+  </form>
 </template>
