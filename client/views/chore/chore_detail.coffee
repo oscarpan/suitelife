@@ -1,10 +1,10 @@
 Template.choreDetail.events
   'click .edit-chore': (e) ->
     e.preventDefault()
-    Router.go 'choreEdit', _id: @_id
+    Session.set 'activeModal', 'editChoreForm'
     return
   'click .list-chore': (e) ->
-    e.preventDefault()
+    $('#createChoreModal').modal 'hide'
     Router.go 'choresList'
     return
 

@@ -25,7 +25,7 @@ Template.choreCalendar.helpers
       eventClick: (calEvent, jsEvent, view) ->
         ## Get the clicked event and set the data context for edit
         choreEvent = Chores.findOne(calEvent._id)
-        Session.set 'activeModal', 'editChoreForm'
+        Session.set 'activeModal', 'choreDetail'
         Session.set 'choreData', choreEvent
         $('#createChoreModal').modal 'show'
 
