@@ -3,6 +3,7 @@ Template.choreDetail.events
     e.preventDefault()
     Session.set 'activeModal', 'editChoreForm'
     return
+
   'click .list-chore': (e) ->
     $('#createChoreModal').modal 'hide'
     Router.go 'choresList'
@@ -10,4 +11,4 @@ Template.choreDetail.events
 
 Template.choreDetail.helpers
   choreEvent: ->
-    choreEvent = Session.get('choreData')    
+    Session.get 'choreData'
