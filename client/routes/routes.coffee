@@ -1,6 +1,6 @@
 Router.route '/', ->
   # render the Home template with a custom data context
-  @render 'Home', data: title: 'My Title'
+  @render 'Home'
   return
 
 Router.route '/splash'

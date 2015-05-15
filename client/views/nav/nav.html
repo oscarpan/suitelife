@@ -11,34 +11,55 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="/">
-                    <img data-toggle="tooltip" title="Maybe we should make a 'home' button, the logo doesnt
-                     seem like a 'home' button" href= "$"
-                         src="/images/logo.png" alt="SuiteLife" class="img-responsive" />
-				</a>
+    				<img src="/images/logo.png" alt="SuiteLife" class="img-responsive" />
+                </a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li data-toggle="tooltip" title="empty tip" href= "$">
-                        <a href="/posts/list">Posts</a>
-                    </li>
-                    <li data-toggle="tooltip" title="empty tip" href= "$">
-                        <a href="/chores/view">Chores</a>
-                    </li>
-                    <li data-toggle="tooltip" title="empty tip" href= "$">
-                        <a href="/ious/list">IOUs</a>
-                    </li>
-                </ul>
-
+                    <ul class="nav navbar-nav">
+                        <li><a href="/posts/list">Posts</a></li>
+                        <li><a href="/chores/view">Chores</a></li>
+                        <li><a href="/ious/list">IOUs</a></li>
+                    </ul>
                 <ul class="nav navbar-nav navbar-right">
-										{{> loginButtons}}
+					{{> loginButtons}}
                 </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
     </nav>
+    {{> invite}}
 </template>
 
 <template name="_loginButtonsAdditionalLoggedInDropdownActions">
-    <button  class="btn btn-default btn-block" id="login-buttons-edit-profile">Edit profile</button>
+    <button class="btn btn-default btn-block" id="login-buttons-leave-suite">Leave Suite</button>
+    <button class="btn btn-default btn-block" id="login-buttons-send-invite">Send Invite</button>
+</template>
+
+<!-- template for the invite modal -->
+<template name="invite">
+    <div class="modal fade" id="inviteModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <!--<h4 class="modal-title">Create a New Chore</h4>-->
+                </div>
+                <div class="modal-body">
+                    <form class="invite-form">
+                        <div class="form-group">
+                          <input id="invite-emails" type="text" class="form-control" name="email"
+                              placeholder="Invite Emails (separate multiple emails by ';')">
+                        </div>
+                        <br>
+                        <button type="button" class="btn btn-warning btn-default" data-dismiss="modal">Close</button>
+                        <button id="invite-submit" type="submit" data-dismiss="modal" class="btn btn-success btn-default"
+                            data-loading-text="Sending...">
+                          <i class="fa fa-lg fa-fw fa-check"></i> Invite Suitemates
+                        </button>
+                    </form>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 </template>

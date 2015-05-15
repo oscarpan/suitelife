@@ -11,9 +11,8 @@
 
 <template name="Post">
 	<h4 style="border: 1px solid orange">
-		<span data-toggle="tooltip" title="empty tip" href="$" class="editable-text-trigger">
-			{{> editableText collection="posts" field="message" placeholder="Post message"
-			removeEmpty=true wysiwyg=true substitute='<i class="fa fa-pencil"></i>'}}
+		<span class="editable-text-trigger">	
+			{{> editableText collection="posts" field="message" placeholder="Post message" removeEmpty=true wysiwyg=true beforeUpdate="whoDunnitPosts" substitute='<i class="fa fa-pencil"></i>'}}
 		</span>
 		{{#if imagePath.url}}
 			<img class="bulletin-image" src={{imagePath.url}}>
