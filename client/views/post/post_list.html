@@ -11,8 +11,9 @@
 
 <template name="Post">
 	<h4 style="border: 1px solid orange">
-		<span class="editable-text-trigger">	
-			{{> editableText collection="posts" field="message" placeholder="Post message" removeEmpty=true wysiwyg=true substitute='<i class="fa fa-pencil"></i>'}}
+		<span data-toggle="tooltip" title="empty tip" href="$" class="editable-text-trigger">
+			{{> editableText collection="posts" field="message" placeholder="Post message"
+			removeEmpty=true wysiwyg=true substitute='<i class="fa fa-pencil"></i>'}}
 		</span>
 		{{#if imagePath.url}}
 			<img class="bulletin-image" src={{imagePath.url}}>
@@ -30,7 +31,8 @@
 
 <template name="uploader">
 	<div class="row">
-		<div class="col-md-8">	{{> upload_bootstrap fileTypes='.jpg' multiple=false callbacks=myCallbacks}}
+		<div class="col-md-8">	{{> upload_bootstrap fileTypes='.jpg'
+		multiple=false callbacks=myCallbacks}}
 		</div>
 		{{#if imagePath.url}}
 			<div class="col-md-4">
@@ -41,7 +43,9 @@
 </template>
 
 <template name="newPost">
-	<span class="btn btn-info editable-text-trigger">
-		<i class="fa fa-plus"></i> New post{{> editableText context=newPosts collection="posts" field="message" autoInsert=true}}
+	<span data-toggle="tooltip" title="empty tip" href= "$" class="btn btn-info
+	 													editable-text-trigger">
+		<i class="fa fa-plus"></i> New post{{> editableText context=newPosts
+		collection="posts" field="message" autoInsert=true}}
 	</span>
 </template>

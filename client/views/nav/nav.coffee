@@ -2,6 +2,9 @@ Template._loginButtonsLoggedInDropdown.events 'click #login-buttons-edit-profile
   Router.go 'profileEdit'
   return
 
+Template.Nav.rendered = ->
+  $('[data-toggle="tooltip"]').tooltip placement:'bottom'
+  return
 
 Accounts.ui.config
   requestPermissions: {}
