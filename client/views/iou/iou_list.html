@@ -1,30 +1,16 @@
 <template name="iousList">
 	<div class="container">
-		<h2>IOU List</h2>
-	
-  	<table class="table table-striped">
-    		<thead>
-      		<tr>
-        
-          		<th>Payer</th>
-        
-          		<th>Payee</th>
-        	
-         			<th>IOU Reason</th>
 
-          		<th>Amount</th>
-        
-        			<th>date</th>
-
-        			<th>detail</th>
-      		</tr>
-    		</thead>
-    		<tbody>
-      		{{#each ious}}
-        			{{> iouItem}}
-      		{{/each}}
-    		</tbody>
-  	</table>
+  	<div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">IOU List</h3>
+      </div>
+      <ul class="list-group">
+        {{#each ious}}
+          {{> iouItem}}
+        {{/each}}
+      </ul>
+    </div>
 
     <button class="btn btn-default new">
       <span title="Create a new IOU">
@@ -36,18 +22,32 @@
 </template>
 
 <template name="iouItem">
-  <tr>
-    
-      <td>{{userName payerId}}</td>
-    
-      <td>{{userName payeeId}}</td>
-    
-      <td>{{reason}}</td>
-    
-      <td>${{amount}}</td>
-    
-    	<td>{{date}}</td>
 
-    	<td><a href="/iou/{{_id}}/detail">detail</a></td>
-  </tr>
+  <li class="list-group-item {{paidColor paid}}">
+
+    <div class="row">
+      <div class="col-md-2 date">
+        <!--
+        <a href="#" class="datePopover" data-toggle="popover" data-html="true"
+          data-trigger="focus" data-content="<input class='datetimepicker' type='text'>">
+        </a>
+          -->
+          {{dateFormat date}}
+      </div>
+      <div class="col-md-6 reason">
+        {{> editableText collection="ious" field="reason"}}
+      </div>
+      <div class="col-md-3">
+        {{{amountFormat amount payerId payeeId}}} 
+        <span class="money">
+          ${{> editableText collection="ious" field="amount"}}
+        </span>
+      </div>
+      <div class="col-md-1 text-right">
+        <a href="#" class="text-right text-success paid"><i class="fa fa-check"></i></a>&nbsp;
+        <a href="#" class="text-right text-danger delete"><i class="fa fa-times"></i></a>
+      </div>
+    </div>
+
+  </li>
 </template>
