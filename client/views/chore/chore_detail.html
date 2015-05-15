@@ -2,7 +2,7 @@
 
   <div class="container">
 
-  {{#with chore}}
+  {{#with choreEvent}}
 
     <h2>Chore Details</h2>
     <table class="table-bordered table-striped">
@@ -24,15 +24,15 @@
             <td class="col-md-9">{{title}}</td>
           </tr>
         
-          <tr>
+          <!--<tr>
             <th class="col-md-3">When</th>
-            <td class="col-md-9">{{choreDays}}</td>
+            <td class="col-md-9">{{start}}</td>
           </tr>
         
           <tr>
             <th class="col-md-3">Repeat</th>
             <td class="col-md-9">{{choreRepeat}}</td>
-          </tr>
+          </tr>-->
         
           <tr>
             <th class="col-md-3">Who</th>
@@ -41,7 +41,7 @@
       </tbody>
     </table>
     <hr>
-    <button type="button" class="btn btn-default edit-chore">Edit this Chore - I DON'T WORK</button>
+    <button type="button" class="btn btn-default edit-chore">Edit this Chore</button>
     <button type="button" class="btn btn-default list-chore">Chores List</button>
     {{else}}
       <h3>There was no chore found for that ID.</h3>

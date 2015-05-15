@@ -5,8 +5,10 @@ Template.choresView.events
   'click .new': (e) ->
     e.preventDefault()
     Session.set 'activeModal', 'newChoreForm'
+    Session.set 'choreData', new Date()
     $('#createChoreModal').modal 'show'
     return
+
   'click .list': (e) ->
     e.preventDefault()
     Router.go 'choresList'
@@ -20,12 +22,16 @@ Template.choreCalendar.helpers
       defaultView: 'basicWeek'
       ## Opens up modal with infomation on the date clicked
       dayClick: (date, jsEvent, view) ->
+        startDay = moment(date).toJSON()
         Session.set 'activeModal', 'newChoreForm'
+        Session.set 'choreData', startDay
+        console.log startDay
         $('#createChoreModal').modal 'show'
+        
       eventClick: (calEvent, jsEvent, view) ->
         ## Get the clicked event and set the data context for edit
         choreEvent = Chores.findOne(calEvent._id)
-        Session.set 'activeModal', 'editChoreForm'
+        Session.set 'activeModal', 'choreDetail'
         Session.set 'choreData', choreEvent
         $('#createChoreModal').modal 'show'
 
@@ -49,10 +55,11 @@ Template.choreCalendar.helpers
         ## Callback to pass events to the calendar
         callback events
         return
+      editable: true
     }
     
 # Reactive calendar updates -- oooh aaaah
-Template.choreCalendar.rendered = ->
+Template.choreCalendar.onRendered ->
   fc = @$('.fc')
   @autorun ->
     #1) trigger event re-rendering when the collection is changed in any way
@@ -66,4 +73,6 @@ Template.createChore.helpers
   # getter for creating state
   activeModal: ->
     Session.get 'activeModal'
+  choreData: ->
+    Session.get 'choreData'
 

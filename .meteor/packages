@@ -2,7 +2,6 @@ standard-app-packages
 iron:router
 accounts-password
 coffeescript
-peerlibrary:blaze-components
 reactive-var
 rzymek:fullcalendar
 babrahams:editable-text
@@ -15,3 +14,4 @@ ian:accounts-ui-bootstrap-3
 email
 msavin:mongol
 momentjs:moment
+ryanswapp:datetime-picker

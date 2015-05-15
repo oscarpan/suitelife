@@ -26,4 +26,12 @@ Template.iouEdit.events
     return
 
   'click .delete': (e) ->
-    alert('Delete Button')
+    currentId = @_id
+
+    Meteor.call 'deleteIou', currentId, (error, id) ->
+      if error
+        return alert(error.reason)
+      Router.go 'iousList'
+      return
+
+    return

@@ -13,4 +13,9 @@ Template.choreItem.events
         Router.go 'choresList'
         return
     return
- 
+
+Template.choresList.events
+  'click .new': (e) ->
+    e.preventDefault()
+    Session.set 'activeModal', 'newChoreForm'
+    $('#createChoreModal').modal 'show'
