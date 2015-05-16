@@ -10,14 +10,16 @@
 </template>
 
 <template name="Post">
-	<h4 style="border: 1px solid orange">
-		<span class="editable-text-trigger">	
-			{{> editableText collection="posts" field="message" placeholder="Post message" removeEmpty=true wysiwyg=true beforeUpdate="whoDunnitPosts" substitute='<i class="fa fa-pencil"></i>'}}
-		</span>
-		{{#if imagePath.url}}
+	<div style="border: 1px solid orange">
+		<h4 class="editable-text-trigger">	
+			{{> editableText collection="posts" field="message" placeholder="Post message" removeEmpty=true wysiwyg=true beforeUpdate="whoDunnitPosts" beforeInsert="whoDunnitPosts" substitute='<i class="fa fa-pencil"></i>'}}
+		</h4>
+		<!--{{#if imagePath.url}}
 			<img class="bulletin-image" src={{imagePath.url}}>
+		{{#else}}
+			{{> uploader}}	 TODO: conditional on editing text
 		{{/if}}
-		{{> uploader}}	<!-- TODO: conditional on editing text-->
+		-->
 		<div class="row" style="font-size: 10px">
 			<div class="col-md-2"> author: {{getEmail authorId}} </div>
 			<div class="col-md-4"> last edited: {{lastEdited}} </div>
@@ -25,7 +27,7 @@
 			<div class="col-md-1"> pinned: {{pinned}} </div>
 			<div class="col-md-3"> image: {{imagePath.url}} </div>
 		</div>
-	</h4>
+	</div>
 </template>
 
 <template name="uploader">
