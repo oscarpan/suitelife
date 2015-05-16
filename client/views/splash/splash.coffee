@@ -1,3 +1,7 @@
+Template.splash.helpers
+  inviteRoute: ->
+    Router.current().route.getName() == 'invite'
+
 Template.signup.helpers
   suites: ->
     Suites.find {}, sort: createdAt: -1

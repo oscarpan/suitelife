@@ -10,7 +10,9 @@ Template.invite.events 'submit form': (e) ->
   usr = Meteor.user()
   suite = Suites.findOne users: usr._id
   emails = $(e.target).find('[name=email]').val()
-  #TODO: send email
+  Meteor.call 'sendEmail', emails, 'SuiteLife <suitelife@suitelife.com>', '[SuiteLife] Invitation', usr.profile['first_name']+' '+usr.profile['last_name']+' invited you to join '+suite.name+' on SuiteLife.'+"\n\r"+'Please click on the following link to signup: '+Meteor.absoluteUrl()+'invite/'+suite._id
+
+  $('#inviteModal').modal 'hide'
   return
 
 Accounts.ui.config
