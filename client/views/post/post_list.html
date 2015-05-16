@@ -1,7 +1,14 @@
 <!-- Generated on 2015-04-20 by meteor-stock. Edit me! -->
 <template name="postsList">
 	<div class="container">
-		<h2>Posts List</h2>
+
+            <h2>Posts List <button type="button" class="btn btn-sm btn-info" data-toggle="popover" title="Popover title"
+                                  data-content="And here's some amazing content. It's very engaging. Right?">Click to toggle popover</button>
+            </h2>
+
+
+
+
 			{{#each posts}}
 				{{> Post}}
 			{{/each}}
@@ -45,10 +52,9 @@
 
 <template name="newPost">
 
-	<span data-toggle="tooltip" title="empty tip" href= "$" class="btn btn-info
-	 													editable-text-trigger">
+	<span class="btn btn-info editable-text-trigger">
 		<i class="fa fa-plus"></i> New post{{> editableText context=newPosts
 		collection="posts" field="message" autoInsert=true}}
 	</span>
-    <button type="button" class="btn btn-lg btn-danger" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?">Click to toggle popover</button>
+
 </template>
