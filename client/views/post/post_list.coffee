@@ -2,10 +2,6 @@ Template.postsList.helpers
 	posts: ->
 		Posts.find {}, sort: lastEdited: -1
 
-	Template.Post.rendered = ->
-		$('[data-toggle="popover"]').popover()
-		return
-
 Template.postsList.events 'click .new': (e) ->
 	e.preventDefault()
 	post = newPosts()
