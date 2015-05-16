@@ -12,3 +12,6 @@ Meteor.methods
     iou.updatedAt = (new Date).getTime()
     Ious.update id, $set: iou
     id
+  payIou: (id) ->
+    Ious.update id, $set: {paid: true}
+    id

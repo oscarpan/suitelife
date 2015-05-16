@@ -14,30 +14,49 @@
   </div>
 
 
-  <input id="datetimepicker" type="text">
+  <!--<input type="text" class="form-control" id="datepicker">-->
+  <div class="col-md-6">
+    {{> dates}}
+  </div>
+
+
 
   <!-- Multiple Radios (inline) -->
-<div class="control-group">
-  <label class="col-md-4 control-label" for="repeat-freqs">Repeat Every:</label>
-  <div class="controls">
-    <label class="radio-inline" for="repeat-freqs-0">
-      <input type="radio" name="repeat-freqs" id="repeat-freqs-0" value="Day" checked="checked">
-      Day
-    </label>
-    <label class="radio-inline" for="repeat-freqs-1">
-      <input type="radio" name="repeat-freqs" id="repeat-freqs-1" value="Week">
-      Week
-    </label>
-    <label class="radio-inline" for="repeat-freqs-2">
-      <input type="radio" name="repeat-freqs" id="repeat-freqs-2" value="Two Weeks">
-      Two Weeks
-    </label>
-    <label class="radio-inline" for="repeat-freqs-3">
-      <input type="radio" name="repeat-freqs" id="repeat-freqs-3" value="Month">
-      Month
-    </label>
+  <div class="form-group">
+    <label class="col-md-4 control-label" for="repeat-freqs">Repeat Every:</label>
+    <div class="col-md-4">
+      <label class="radio-inline" for="repeat-freqs-0">
+        <input type="radio" name="repeat-freqs" id="repeat-freqs-0" value="0" checked="checked">
+        Once
+      </label>
+      <label class="radio-inline" for="repeat-freqs-1">
+        <input type="radio" name="repeat-freqs" id="repeat-freqs-1" value="1">
+        Daily
+      </label>
+      <label class="radio-inline" for="repeat-freqs-2">
+        <input type="radio" name="repeat-freqs" id="repeat-freqs-2" value="7">
+        Weekly
+      </label>
+      <label class="radio-inline" for="repeat-freqs-3">
+        <input type="radio" name="repeat-freqs" id="repeat-freqs-3" value="14">
+        Bi-weekly
+      </label>
+      <label class="radio-inline" for="repeat-freqs-4">
+        <input type="radio" name="repeat-freqs" id="repeat-freqs-4" value="30">
+        Monthly
+      </label>
+    </div>
   </div>
-</div>
+
+  <div class="form-group">
+    <label class="col-md-4 control-label" for="freqNum">for</label>
+    <div class="col-md-5">
+      <div class="input-group">
+        <input id="freqNum" name="freqNum" class="form-control" placeholder="1" type="text">
+        <span class="input-group-addon" id="freqString">day</span>
+      </div>
+    </div>
+  </div>
 
   <!-- Frequency -->
   <!--<div class="form-group">
@@ -54,13 +73,12 @@
 
   <!-- List for assign -->
   <div class="form-group">
-    <label class="col-md-4 control-label" for="choreAssign">Assign to roommate:</label>
+    <label class="col-md-4 control-label" for="assignee">Assign to roommate:</label>
     <div class="col-md-4">
-      <select id="choreAssign" name="choreAssign" class="form-control">
-        <option value="Tai">Tai</option>
-        <option value="John">John</option>
-        <option value="Peter">Peter</option>
-        <option value="Andrei">Andrei</option>
+      <select id="assignee" name="assignee" class="form-control">
+        {{#each users}}
+            <option value="{{this}}">{{getUserName this}}</option>
+        {{/each}}
       </select>
     </div>
   </div>
@@ -75,4 +93,6 @@
   </form>
 </template>
 
-<!-- Possibly modal here -->
+<template name="dates">
+  <div id="datepicker"></div>
+</template>

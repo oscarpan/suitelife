@@ -16,6 +16,7 @@ Template.iouNew.events 'submit form': (e) ->
     payeeId:    payee
     reason:     $(e.target).find('[name=reason]').val()
     amount:     $(e.target).find('[name=amount]').val()
+    paid:       false
 
   Meteor.call 'newIou', iou, (error, id) ->
     if error

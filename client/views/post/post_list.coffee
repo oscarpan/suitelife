@@ -3,8 +3,8 @@ Template.postsList.helpers
 		Posts.find {}, sort: lastEdited: -1
 
 Template.Post.rendered = ->
-	$('[data-toggle="tooltip"]').tooltip placement:'top'
-	return
+  $('[data-toggle="tooltip"]').tooltip placement: 'top'
+  return
 
 	Template.Post.rendered = ->
 		$('[data-toggle="popover"]').popover()
@@ -25,9 +25,6 @@ Template.Post.helpers
 		if (usr)
 			return usr.emails[0].address
 		return
-	editing: () ->
-		console.log $(".wysiwyg")[0] 
-		$(".wysiwyg")[0]
 
 Template.Post.events 'click .clear': (e) ->
 	e.preventDefault()

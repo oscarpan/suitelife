@@ -14,4 +14,6 @@ ian:accounts-ui-bootstrap-3
 email
 msavin:mongol
 momentjs:moment
-ryanswapp:datetime-picker
+rajit:bootstrap3-datepicker
+u2622:persistent-session
+benjaminrh:event-hooks

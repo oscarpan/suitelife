@@ -3,10 +3,13 @@
 <!-- overall view template -->
 <template name="choresView">
 
-  <!-- Travel to List view -->
-  <button class="btn btn-default list">List View</button>
   <span class="glyphicon glyphicon-plus-sign new" aria-hidden="true"></span>
-  {{> choreCalendar}}
+  <div>
+    {{> choreCalendar}}
+  </div>
+  <div>
+    {{> choresList}}
+  </div>
 </template>
 
 <!-- template for the calendar -->

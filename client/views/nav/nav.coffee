@@ -1,9 +1,16 @@
-Template._loginButtonsLoggedInDropdown.events 'click #login-buttons-edit-profile': (event) ->
-  Router.go 'profileEdit'
-  return
+Template._loginButtonsAdditionalLoggedInDropdownActions.events 'click #login-buttons-send-invite': (e) ->
+  e.preventDefault()
+  $('#inviteModal').modal 'show'
 
 Template.Nav.rendered = ->
   $('[data-toggle="tooltip"]').tooltip placement:'bottom'
+
+Template.invite.events 'submit form': (e) ->
+  e.preventDefault()
+  usr = Meteor.user()
+  suite = Suites.findOne users: usr._id
+  emails = $(e.target).find('[name=email]').val()
+  #TODO: send email
   return
 
 Accounts.ui.config

@@ -4,11 +4,12 @@ Template.choreDetail.events
     Session.set 'activeModal', 'editChoreForm'
     return
 
-  'click .list-chore': (e) ->
-    $('#createChoreModal').modal 'hide'
-    Router.go 'choresList'
-    return
-
 Template.choreDetail.helpers
   choreEvent: ->
-    Session.get 'choreData'
+    Session.get 'choreEvent'
+  date: (date) ->
+    moment(date).format('MMMM Do YYYY, h:mm:ss a')
+
+Template.choreDetail.onRendered ->
+  $('#datepicker').datepicker
+    format: 'yyyy/mm/dd'

@@ -10,39 +10,31 @@
         <tr>
           {{!-- you can use a handlebars helper here to format the date field --}}
           <th class="col-md-3">Created</th>
-          <td class="col-md-9">{{created}}</td>
+          <td class="col-md-9">{{date createdAt}}</td>
         </tr>
-        {{#if updated }}
+        
         <tr>
-          <th class="col-md-3">Updated</th>
-          <td class="col-md-9">{{updated}}</td>
+          <th class="col-md-3">Chore Name</th>
+          <td class="col-md-9">{{title}}</td>
         </tr>
-        {{/if}}
         
-          <tr>
-            <th class="col-md-3">Chore Name</th>
-            <td class="col-md-9">{{title}}</td>
-          </tr>
+        <tr>
+          {{> dates}}
+        </tr>
         
-          <!--<tr>
-            <th class="col-md-3">When</th>
-            <td class="col-md-9">{{start}}</td>
-          </tr>
+        <tr>
+          <th class="col-md-3">How often</th>
+          <td class="col-md-9">{{frequency}}</td>
+        </tr>
         
-          <tr>
-            <th class="col-md-3">Repeat</th>
-            <td class="col-md-9">{{choreRepeat}}</td>
-          </tr>-->
-        
-          <tr>
-            <th class="col-md-3">Who</th>
-            <td class="col-md-9">{{choreAssign}}</td>
-          </tr>
+        <tr>
+          <th class="col-md-3">Assigned by</th>
+          <td class="col-md-9">{{assignee}}</td>
+        </tr>
       </tbody>
     </table>
     <hr>
     <button type="button" class="btn btn-default edit-chore">Edit this Chore</button>
-    <button type="button" class="btn btn-default list-chore">Chores List</button>
     {{else}}
       <h3>There was no chore found for that ID.</h3>
     {{/with}}

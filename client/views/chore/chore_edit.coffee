@@ -3,23 +3,14 @@ Template.editChoreForm.events
   'submit form': (e) ->
     e.preventDefault()
     currentId = @_id
-
-    ## array for days of the week
-    choredays = []
-    $('input[name=choreDays]:checked').each ->
-      choredays.push $(this).val()
-      return
-    ## find frequency value
-    repeat = if $('#choreRepeat-0').prop('checked') then 'Weekly' else 'Once'
     
     ## edit object
     choreEdits = 
+      assignee: $(e.target).find('[name=assignee]').val()
       title: $(e.target).find('[name=choreName]').val()
-      choreDays: choredays
-      choreRepeat: repeat
-      choreAssign: $(e.target).find('[name=choreAssign]').val()
-      allDay: true
-      start: new Date()
+      frequency: $(e.target).find('[name=repeat-freqs]:checked').val()
+      
+      
 
     ## edit function for collection managing
     Meteor.call 'editChore', choreEdits, currentId, (error, id) ->
@@ -45,7 +36,13 @@ Template.editChoreForm.events
 Template.editChoreForm.helpers
   choreEvent: ->
     # Get the data context for the edit
-    choreEvent = Session.get('choreData')
+    choreEvent = Session.get 'choreEvent'
+  users: ->
+    Suites.findOne({ users: Meteor.userId() }).users
+
+  getUserName: (id) ->
+    usr = Meteor.users.findOne id
+    userName = usr.profile.first_name + " " + usr.profile.last_name
 
 
 

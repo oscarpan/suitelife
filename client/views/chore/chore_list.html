@@ -14,9 +14,11 @@
           
            			<th>Chore Name</th>
           
-            		<th>When</th>
+            		<th>Date</th>
           
-            		<th>Repeat</th>
+            		<th>How often</th>
+
+                <th>How long</th>
           	
             		<th>Assigned to</th>
           
@@ -28,10 +30,7 @@
           			{{> choreItem}}
         		{{/each}}
       		</tbody>
-    	</table>
-
-      <button class="btn btn-default new">New Chore</button>
-      
+    	</table>      
   	</div>
   </template>
 
@@ -41,13 +40,15 @@
     
       <td>{{title}}</td>
     
-      <td>{{choreDays}}</td>
+      <td>{{dateFormat startDate}}</td>
     
-      <td>{{choreRepeat}}</td>
+      <td>{{freqString frequency}}</td>
+
+      <td>{{freqNum}}</td>
     
-      <td>{{choreAssign}}</td>
+      <td>{{assignee}}</td>
     
-    <td><a href="{{pathFor "choreDetail"}}">detail</a></td>
+    <td><button class="btn btn-default listDetail">Detail</button></td>
     <td><button class="btn btn-default listDelete">Delete Chore</button></td>
   </tr>
 </template>

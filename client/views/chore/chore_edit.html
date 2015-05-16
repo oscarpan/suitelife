@@ -17,63 +17,39 @@
       </div>
     </div>
 
-    <!-- days of the week -->
-    <div class="form-group">
-      <label class="col-md-4 control-label" for="choreDays">When:</label>
-      <div class="col-md-4">
-        <label class="checkbox-inline" for="choreDays-0">
-          <input type="checkbox" name="choreDays" id="choreDays-0" value="Sunday">
-          Su
-        </label>
-        <label class="checkbox-inline" for="choreDays-1">
-          <input type="checkbox" name="choreDays" id="choreDays-1" value="Monday">
-          M
-        </label>
-        <label class="checkbox-inline" for="choreDays-2">
-          <input type="checkbox" name="choreDays" id="choreDays-2" value="Tuesday">
-          Tu
-        </label>
-        <label class="checkbox-inline" for="choreDays-3">
-          <input type="checkbox" name="choreDays" id="choreDays-3" value="Wednesday">
-          W
-        </label>
-        <label class="checkbox-inline" for="choreDays-4">
-          <input type="checkbox" name="choreDays" id="choreDays-4" value="Thursday">
-          Th
-        </label>
-        <label class="checkbox-inline" for="choreDays-5">
-          <input type="checkbox" name="choreDays" id="choreDays-5" value="Friday">
-          F
-        </label>
-        <label class="checkbox-inline" for="choreDays-6">
-          <input type="checkbox" name="choreDays" id="choreDays-6" value="Saturday">
-          Sa
-        </label>
-      </div>
-    </div>
+    <div id="datepicker"></div>
 
-    <!-- frequency -->
-    <div class="form-group">
-      <label class="col-md-4 control-label" for="choreRepeat"></label>
-      <div class="col-md-4">
-        <div class="checkbox">
-          <label for="choreRepeat-0">
-            <input type="checkbox" name="choreRepeat" id="choreRepeat-0" value="Once">
-            Repeat Weekly
-          </label>
-        </div>
+    <!-- Multiple Radios (inline) -->
+    <div class="control-group">
+      <label class="col-md-4 control-label" for="repeat-freqs">Repeat Every:</label>
+      <div class="controls">
+        <label class="radio-inline" for="repeat-freqs-0">
+          <input type="radio" name="repeat-freqs" id="repeat-freqs-0" value="Daily" checked="checked">
+          Daily
+        </label>
+        <label class="radio-inline" for="repeat-freqs-1">
+          <input type="radio" name="repeat-freqs" id="repeat-freqs-1" value="Weekly">
+          Weekly
+        </label>
+        <label class="radio-inline" for="repeat-freqs-2">
+          <input type="radio" name="repeat-freqs" id="repeat-freqs-2" value="Bi-weekly">
+          Bi-weekly
+        </label>
+        <label class="radio-inline" for="repeat-freqs-3">
+          <input type="radio" name="repeat-freqs" id="repeat-freqs-3" value="Monthly">
+          Monthly
+        </label>
       </div>
     </div>
 
     <!-- assign select -->
     <div class="form-group">
-      <label class="col-md-4 control-label" for="choreAssign">Assign to roommate:</label>
+      <label class="col-md-4 control-label" for="assignee">Assign to roommate:</label>
       <div class="col-md-4">
-        <select id="choreAssign" name="choreAssign" class="form-control">
-          <option value="Tai">Tai</option>
-          <option value="John">John</option>
-          <option value="Peter">Peter</option>
-          <option value="Andrei">Andrei</option>
+        <select id="assignee" name="assignee" class="form-control">
+          {{#each users}}
+            <option value="{{this}}">{{getUserName this}}</option>
+          {{/each}}
         </select>
       </div>
     </div>
