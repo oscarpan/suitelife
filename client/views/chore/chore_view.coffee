@@ -5,7 +5,7 @@ Template.choresView.events
   'click .new': (e) ->
     e.preventDefault()
     Session.set 'activeModal', 'newChoreForm'
-    Session.set 'choreData', new Date()
+    $('#datepicker').datepicker 'setDate', 'today'
     $('#createChoreModal').modal 'show'
     return
 
@@ -14,25 +14,31 @@ Template.choresView.events
     Router.go 'choresList'
     return
 
+  # needed to reset the modal - the datepicker doesn't like setting the session at the same time
+  'hidden.bs.modal #createChoreModal': (e) ->
+    e.preventDefault()
+    Session.set 'activeModal', 'newChoreForm'
+
 Template.choreCalendar.helpers 
 	## Fullcalendar options and event handling
   options: ->
   	{
       height: 300
       defaultView: 'basicWeek'
+      header:
+        center: 'basicWeek, month'
       ## Opens up modal with infomation on the date clicked
       dayClick: (date, jsEvent, view) ->
-        startDay = moment(date).toJSON()
         Session.set 'activeModal', 'newChoreForm'
-        Session.set 'choreData', startDay
-        console.log startDay
+        startDay = moment(date).format('YYYY/MM/DD')
+        $('#datepicker').datepicker 'setDate', startDay
         $('#createChoreModal').modal 'show'
         
       eventClick: (calEvent, jsEvent, view) ->
         ## Get the clicked event and set the data context for edit
         choreEvent = Chores.findOne(calEvent._id)
         Session.set 'activeModal', 'choreDetail'
-        Session.set 'choreData', choreEvent
+        Session.set 'choreEvent', choreEvent
         $('#createChoreModal').modal 'show'
 
       ## Let's get the chores!
@@ -44,18 +50,31 @@ Template.choreCalendar.helpers
         ## For loop to pass each chore to events array
         choreEvents.forEach (evt) ->
           ## console.log evt
-          events.push
-            id: evt._id
-            title: evt.title
-            start: evt.start
-            end: evt.end
-            allDay: evt.allDay
-          return
+          freq = freqToString evt.frequency
+          if evt.frequency > 0
+            i = 0
+            j = 0
+            while i < evt.freqNum
+              events.push
+                id: evt._id
+                title: evt.title
+                start: moment(evt.startDate).add j, freq
+                allDay: true
+              if evt.frequency == '14'
+                j++
+              i++
+              j++
+            return
+          else
+            events.push
+                id: evt._id
+                title: evt.title
+                start: evt.startDate
+                allDay: true
 
         ## Callback to pass events to the calendar
         callback events
         return
-      editable: true
     }
     
 # Reactive calendar updates -- oooh aaaah
@@ -73,6 +92,13 @@ Template.createChore.helpers
   # getter for creating state
   activeModal: ->
     Session.get 'activeModal'
-  choreData: ->
-    Session.get 'choreData'
+
+freqToString = (freq) ->
+  console.log freq
+  if freq <= '1'
+    'd'
+  else if freq == '7' or freq == '14'
+    'w'
+  else if freq == '30'
+    'M'
 
