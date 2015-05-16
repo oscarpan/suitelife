@@ -6,6 +6,10 @@ Template.Post.rendered = ->
 	$('[data-toggle="tooltip"]').tooltip placement:'top'
 	return
 
+	Template.Post.rendered = ->
+		$('[data-toggle="popover"]').popover()
+		return
+
 Template.postsList.events 'click .new': (e) ->
 	e.preventDefault()
 	post = newPosts()
