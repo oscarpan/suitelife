@@ -22,6 +22,8 @@ Template.iouNew.events
     Meteor.call 'newIou', iou, (error, id) ->
       if error
         return alert(error.reason)
+      $('#newIouModal').modal('toggle')
+      $('#newIouModal').find('input:text').val('')
       Router.go '/'
       return
 

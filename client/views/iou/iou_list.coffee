@@ -4,12 +4,6 @@ Template.iousList.helpers
     $or: [ { payerId: Meteor.userId() }, { payeeId: Meteor.userId() } ]
     })
 
-Template.iousList.events
-  'click .new' : (e) ->
-    e.preventdefault()
-    router.go 'iounew'
-    return
-
 Template.iouItem.helpers
   users: ->
     Suites.findOne({ users: Meteor.userId() }).users
@@ -46,7 +40,6 @@ Template.iouItem.events
     Meteor.call 'deleteIou', currentId, (error, id) ->
       if error
         return alert(error.reason)
-      Router.go 'iousList'
       return
 
     return
