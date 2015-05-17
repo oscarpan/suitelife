@@ -19,10 +19,18 @@ Template.iouNew.events
       amount:     $(e.target).find('[name=amount]').val()
       paid:       false
 
+<<<<<<< HEAD
     Meteor.call 'newIou', iou, (error, id) ->
       if error
         return alert(error.reason)
       Router.go 'iouDetail', _id: id
       return
+=======
+  Meteor.call 'newIou', iou, (error, id) ->
+    if error
+      return alert(error.reason)
+    Router.go '/'
+    return
+>>>>>>> 24764043269110c7c63342ff1e2b79ec99465944
 
     return
