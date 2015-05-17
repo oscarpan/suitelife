@@ -4,21 +4,63 @@
   	<div class="panel panel-default">
       <div class="panel-heading">
 
-        <h3 class="panel-title">IOU List  
-            {{> tooltips title="IOUs" content="And here's some amazing content. It's very engaging. Right?" }}
-        </h3>
+        <div class="row">
+          <div class="col-md-8">
+            <h3 class="panel-title">IOUs
+                {{> tooltips title="IOUs" content="And here's some amazing content. It's very engaging. Right?" }}
+            </h3>
+          </div>
+          
+          <div class="col-md-4">
+            <div class="text-right">
+              <a class="btn btn-xs btn-info collapsed" data-toggle="collapse" data-parent="#iouLog" href=".collapse-log" aria-expanded="false" aria-controls="collapse-log">
+                <i class="fa fa-list-alt"></i> Log
+              </a>
+
+              <button class="btn btn-xs btn-info" data-toggle="modal" data-target="#newIouModal">
+                <i class="fa fa-plus"></i> New
+              </button>
+            </div>
+          </div>
+
+        </div>
 
       </div>
+
       <ul class="list-group">
         {{#each ious}}
           {{> iouItem}}
         {{/each}}
-        <li class="list-group-item">
-          <button class="btn btn-xs btn-info" data-toggle="modal" data-target="#newIouModal">
-            <i class="fa fa-plus"></i>
-          </button>
-        </li>
       </ul>
+
+    </div>
+
+    <div class="panel panel-default">
+    <div class="panel-heading collapse collapse-log" role="tabpanel" aria-labelledby="iou-log-heading">
+        <h4 class="panel-title">
+          History
+        </h4>
+      </div>
+      <div class="panel-collapse collapse collapse-log" role="tabpanel" aria-labelledby="iou-log-heading">
+        <ul class="list-group">
+          <li class="list-group-item">
+            ASDF
+          </li>
+        </ul>
+      </div>
+
+      <div class="panel-heading collapse collapse-log" role="tabpanel" aria-labelledby="iou-log-heading">
+        <h4 class="panel-title">
+          Changes
+        </h4>
+      </div>
+      <div class="panel-collapse collapse collapse-log" role="tabpanel" aria-labelledby="iou-log-heading">
+        <ul class="list-group">
+          <li class="list-group-item">
+            ASDF
+          </li>
+        </ul>
+      </div>
     </div>
 
     <div class="modal fade" id="newIouModal" tabindex="-1" role="dialog" aria-labelledby="New IOU" aria-hidden="true">
@@ -51,15 +93,19 @@
       <div class="col-md-6 reason">
         {{> editableText collection="ious" field="reason"}}
       </div>
-      <div class="col-md-3">
+      <div class="col-md-2">
         {{{amountFormat amount payerId payeeId}}} 
         <span class="money">
           ${{> editableText collection="ious" field="amount"}}
         </span>
       </div>
-      <div class="col-md-1 text-right">
-        <a href="#" class="text-right text-success paid"><i class="fa fa-check"></i></a>&nbsp;
-        <a href="#" class="text-right text-danger delete"><i class="fa fa-times"></i></a>
+      <div class="col-md-2 text-right">
+        <button class="btn btn-xs btn-success paid">
+          <i class="fa fa-check"></i> Paid
+        </button>
+        <button class="btn btn-xs btn-danger delete">
+          <i class="fa fa-times"></i> Delete
+        </button>
       </div>
     </div>
 

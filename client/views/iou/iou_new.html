@@ -1,59 +1,57 @@
 <template name="iouNew">
+  <div class="container-fluid">
 
-  <form class="form-horizontal">
-  <fieldset>
+    <form class="form-horizontal">
 
-  <!-- Form Name -->
-  <legend>Create a New IOU</legend>
-
-  <!-- Text input-->
-  <div class="form-group">
-    <label class="col-md-4 control-label" for="reason">IOU Reason</label>  
-    <div class="col-md-4">
-      <input id="reason" name="reason" type="text" placeholder="Give a Reason for this IOU" class="form-control input-md" required="">
+    <!-- Text input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="reason">IOU Reason</label>  
+      <div class="col-md-7">
+        <input id="reason" name="reason" type="text" placeholder="Give a Reason for this IOU" class="form-control" required="">
+      </div>
     </div>
-  </div>
 
-  <!-- Text input-->
-  <div class="form-group">
-    <label class="col-md-4 control-label" for="amount">IOU Amount</label>  
-    <div class="col-md-4">
-      <input id="amount" name="amount" type="text" placeholder="0.00" class="form-control input-md" required="" value="{{amount}}">
+    <!-- Text input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="amount">IOU Amount</label>  
+      <div class="col-md-7">
+        <input id="amount" name="amount" type="text" placeholder="0.00" class="form-control input-md" required="" value="{{amount}}">
+      </div>
     </div>
-  </div>
 
-  <!-- Select Basic -->
-  <div class="form-group">
-    <label class="col-md-4 control-label" for="payer">Assign a payer:</label>
-    <div class="col-md-4">
-      <select id="payer" name="payer" class="form-control">
-        {{#each users}}
-          <option value="{{this}}">{{getUserName this}}</option>
-        {{/each}}
-      </select>
+    <!-- Select Basic -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="payer">Assign a payer:</label>
+      <div class="col-md-7">
+        <select id="payer" name="payer" class="form-control">
+          {{#each users}}
+            <option value="{{this}}">{{getUserName this}}</option>
+          {{/each}}
+        </select>
+      </div>
     </div>
-  </div>
 
-  <!-- Select Basic -->
-  <div class="form-group">
-    <label class="col-md-4 control-label" for="payee">Assign a payee:</label>
-    <div class="col-md-4">
-      <select id="payee" name="payee" class="form-control">
-        {{#each users}}
-          <option value="{{this}}">{{getUserName this}}</option>
-        {{/each}}
-      </select>
+    <!-- Select Basic -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="payee">Assign a payee:</label>
+      <div class="col-md-7">
+        <select id="payee" name="payee" class="form-control">
+          {{#each users}}
+            <option value="{{this}}">{{getUserName this}}</option>
+          {{/each}}
+        </select>
+      </div>
     </div>
-  </div>
 
-  <div class="form-group">
-    <div class="text-right">
-      <button type="submit" class="btn btn-default">Create</button>
+    <div class="form-group">
+      <div class="text-right">
+        <button type="submit" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <button type="submit" class="btn btn-primary">Create</button>
+      </div>
     </div>
+
+    </form>
+
   </div>
-
-  </fieldset>
-  </form>
-
 </template>
 

@@ -11,7 +11,7 @@ Template.iouItem.helpers
     usr = Meteor.users.findOne id
     userName = usr.profile.first_name + " " + usr.profile.last_name
   dateFormat: (date) ->
-    moment(date).format('MMMM Do')
+    moment(date).format('MMM Do')
   amountFormat: (amount, payerId, payeeId) ->
     if payerId == Meteor.userId()
       payee = Meteor.users.findOne payeeId
