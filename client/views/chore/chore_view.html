@@ -5,7 +5,9 @@
 
   <span class="glyphicon glyphicon-plus-sign new" aria-hidden="true"></span>
   <div>
+
     {{> choreCalendar}}
+    {{> syncCal}}
   </div>
   <div>
     {{> choresList}}
@@ -14,11 +16,33 @@
 
 <!-- template for the calendar -->
 <template name="choreCalendar">  
-  {{>createChore}}
-  
-  <div id="choreCal">
-    {{>fullcalendar options}}
+
+  <div class="container">
+    <h2>Chores Calendar
+      {{> tooltips title="Chores" content="And here's some amazing content. It's very engaging. Right?" }}
+    </h2>
+    {{>createChore}}
+    
+    <div id="choreCal">
+      {{>fullcalendar options}}
+    </div>
+
   </div>
+</template>
+
+
+<!-- Sync Calendar button -->
+<template name="syncCal">
+<div class="dropdown">
+  <button class="btn btn-default dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+    <span class="glyphicon glyphicon-cog"></span>
+  </button>
+  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Sync</a></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
+  </ul>
+  {{> tooltips title="Sync Calendar" content="This button syncs the calendar"}}
+</div>
 </template>
 
 <!-- template for the create modal -->
