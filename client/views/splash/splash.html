@@ -3,39 +3,107 @@
   	<h1>Oh dear! You shouldn't be here.</h1>
   	<img style="height: 200px" src="https://styleseat-media.s3.amazonaws.com/apache_files/dog_in_wig_web.jpg">
   {{else}}
-		<h1>Meteor used SPLASH!</h1>
-		<h3>you are currently logged out</h3>
-        {{#if inviteRoute }}
-            <h3>you are here on an invite</h3>
-        {{/if}}
-	{{> signup}}
+
+      {{#if inviteRoute }}
+          <h3>you are here on an invite</h3>
+      {{/if}}
+	{{> jumbotron}}
+  {{> mission}}
+  {{> features}}
+  {{> signup}}
+
 	{{/if}}
 </template>
 
 <template name="signup">
-  <form class="login-form">
-    <div class="form-group">
-      <input type="text" class="form-control" name="firstName"
-          placeholder="first name">
+  <div class="signup">
+    <div class="container">
+      <h1>Sign Up Today!</h1>
+      <form class="login-form">
+        <div class="form-group">
+          <input type="text" class="form-control" name="firstName"
+              placeholder="first name">
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" name="lastName"
+              placeholder="last name">
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" name="email"
+              placeholder="Email">
+        </div>
+        <div class="form-group">
+          <input type="password" class="form-control" name="password"
+              placeholder="password">
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" name="suiteName" id="inputSuite" placeholder="Name your suite">
+        </div>
+        <button type="submit" class="btn btn-default"
+            data-loading-text="Signing up...">
+          <i class="fa fa-lg fa-fw fa-check"></i> Sign up
+        </button>
+      </form>
     </div>
-    <div class="form-group">
-      <input type="text" class="form-control" name="lastName"
-          placeholder="last name">
-    </div>
-    <div class="form-group">
-      <input type="text" class="form-control" name="email"
-          placeholder="Email">
-    </div>
-    <div class="form-group">
-      <input type="password" class="form-control" name="password"
-          placeholder="password">
-    </div>
-    <div class="form-group">
-      <input type="text" class="form-control" name="suiteName" id="inputSuite" placeholder="Name your suite">
-    </div>
-    <button type="submit" class="btn btn-default"
-        data-loading-text="Signing up...">
-      <i class="fa fa-lg fa-fw fa-check"></i> Sign up
-    </button>
-  </form>
+  </div>  
 </template>
+
+<template name="jumbotron">
+  <div class="jumbotron">
+    <div class="container">
+      <h1>SuiteLife</h1>
+      <h2>Living together... done better</h2>
+      <div class="wrapper">
+        <button type="button" class="btn btn-primary">Sign Up</button>
+        <button type="button" class="btn btn-success">Login</button>
+      </div>
+    </div>
+  </div>
+</template>
+
+<template name="mission">
+  <div class="container">
+    <div class="mission">
+      <h1>Welcome!</h1>
+      <p>Suite life is a set of software tools designed to streamline the proccess of living with people. At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.</p>
+    </div>
+  </div>
+</template>
+
+<template name="features">
+  <div class="features">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="icons">
+            <i class="fa fa-calendar fa-3"></i>
+          </div>
+          <h1>Chore Splitter</h1>
+          <p>An intuiative tool for dividing and planning chores among a group of people.
+            Keep track of your upcoming chores with our built in calendar.</p>
+        </div>
+        <div class="col-md-4">
+          <div class="icons">
+            <i class="fa fa-usd fa-3"></i>
+          </div>
+          <h1>Cost Splitting/IOU</h1>
+          <p>Tracking debt amoungst roommates has never been easier with our IOU tool.
+          Can't remember who bought the toliet paper last? It doesn't matter if the cost
+          is split evening amongst everyone. Repay debts how you .</p> 
+        </div>
+        <div class="col-md-4">
+          <div class="icons">
+            <i class="fa fa-comments fa-3"></i>
+          </div>
+          <h1>Bulletin Board</h1>
+          <p>Save the trees! Instead of posting passive agressive post-its above the sink,
+            do so on your bulletin board. Share text or photoes with suite mates.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+
+
+
