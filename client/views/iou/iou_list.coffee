@@ -4,10 +4,11 @@ Template.iousList.helpers
     $or: [ { payerId: Meteor.userId() }, { payeeId: Meteor.userId() } ]
     })
 
-Template.iousList.events 'click .new' : (e) ->
-  e.preventDefault()
-  Router.go 'iouNew'
-  return
+Template.iousList.events
+  'click .new' : (e) ->
+    e.preventdefault()
+    router.go 'iounew'
+    return
 
 Template.iouItem.helpers
   users: ->
