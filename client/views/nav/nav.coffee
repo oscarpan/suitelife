@@ -15,6 +15,9 @@ Template.invite.events 'submit form': (e) ->
   $('#inviteModal').modal 'hide'
   return
 
+Accounts.config
+  forbidClientAccountCreation : true
+
 Accounts.ui.config
   requestPermissions: {}
   extraSignupFields: [
@@ -29,7 +32,6 @@ Accounts.ui.config
           false
         else
           true
-
     }
     {
       fieldName: 'last-name'
@@ -39,6 +41,19 @@ Accounts.ui.config
       validate: (value, errorFunction) ->
         if !value
           errorFunction 'Please write your last name'
+          false
+        else
+          true
+    }
+    {
+      fieldName: 'suite'
+      fieldLabel: 'Suite Name'
+      inputType: 'text'
+      visibile: true
+      saveToProfile: false
+      validate: (value, errorFunction) ->
+        if !value
+          errorFunction 'Please enter the name of your new suite'
           false
         else
           true

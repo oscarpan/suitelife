@@ -1,16 +1,3 @@
-.editable {
-  color: #9987CA;
-  border: 1px solid #9987CA;
-  border-radius: 3px;
-  padding: 2px 2px 2px 2px;
-}
-
-.editable:hover {
-  background-color: #9987CA;
-  color: #FFF;
-  cursor: pointer;
-}
-
 .date {
   color: gray;
   font-weight: bold;
@@ -40,18 +27,3 @@
   border-bottom-style: dashed;
 }
 
-.amountPopover:hover {
-  text-decoration: none;
-}
-
-.amountPopover:visited {
-  text-decoration: none;
-}
-
-.amountPopover:active {
-  text-decoration: none;
-}
-
-.amountPopover:link {
-  text-decoration: none;
-}
