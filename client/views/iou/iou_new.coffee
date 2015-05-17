@@ -21,7 +21,7 @@ Template.iouNew.events 'submit form': (e) ->
   Meteor.call 'newIou', iou, (error, id) ->
     if error
       return alert(error.reason)
-    Router.go 'iouDetail', _id: id
+    Router.go '/'
     return
 
   return
