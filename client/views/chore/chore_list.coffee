@@ -35,3 +35,6 @@ Template.choreItem.helpers
       'Bi-Weekly'
     else if freq == '30'
       'Monthly'
+  assignFormat: (assigneeId) ->
+    assignee = Meteor.users.findOne assigneeId
+    assignee.profile.first_name + " " + assignee.profile.last_name
