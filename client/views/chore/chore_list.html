@@ -19,6 +19,7 @@
 
     <div class="panel-body container-fluid">
     	<table class="table table-striped">
+    		{{#if chores.count}}
     		<thead>
       		<tr>
        			<th>Name</th>
@@ -30,10 +31,15 @@
       		</tr>
     		</thead>
     		<tbody>
-      		{{#each chores}}
-        			{{> choreItem}}
+          {{#each chores}}
+       			{{> choreItem}}
       		{{/each}}
-    		</tbody>
+      	</tbody>
+      	{{else}}
+      		<tr>
+      			<td class="empty-note text-center"> No Chores</td>
+      		</tr>
+      	{{/if}}
     	</table>
     </div>
   </div>
