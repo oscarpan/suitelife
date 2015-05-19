@@ -15,6 +15,11 @@
   font-weight: bold;
 }
 
+.empty-note {
+  font-style: italic;
+  color: gray;
+}
+
 .money {
   border-bottom-color: gray;
   border-bottom-width: 1px;

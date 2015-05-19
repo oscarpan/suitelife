@@ -27,20 +27,18 @@
 
     </div>
 
-    {{#if ious}}
-      <div class="panel-body">
-        You currently have Ious.
-      </div>
-    {{else}}
-      <div class="panel-body">
-        You currently have no Ious.
-      </div>
-    {{/if}}
+    
 
     <ul class="list-group">
-      {{#each ious}}
-        {{> iouItem}}
-      {{/each}}
+      {{#if ious.count}}
+        {{#each ious}}
+          {{> iouItem}}
+        {{/each}}
+      {{else}}
+        <li class="list-group-item empty-note text-center disabled">
+          No IOUs
+        </li>
+      {{/if}}
     </ul>
 
   </div>
