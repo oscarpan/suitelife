@@ -1,3 +1,3 @@
 Template.tooltips.rendered = ->
-  $('[data-toggle="popover"]').popover()
+  $('[data-toggle="popover"]').popover 'placement': 'bottom'
   return

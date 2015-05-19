@@ -3,43 +3,56 @@
 <!-- overall view template -->
 <template name="choresView">
 
-  <span class="glyphicon glyphicon-plus-sign new" aria-hidden="true"></span>
-  <div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <div class="row">
+        <div class="col-md-6">
+          <h3 class="panel-title">
+            Chores Calendar
+          </h3>
+        </div>
+        <div class="col-md-6 text-right">
+          {{> tooltips title="Chores Calendar" content="Easily keep track of your assigned chores with Chores Calendar" }}
+          {{> syncCal}}
+          <span class="btn btn-xs btn-primary editable-text-trigger new">
+            <i class="fa fa-plus"></i> New
+          </span>
+        </div>
+      </div>
+    </div>
 
-    {{> choreCalendar}}
-    {{> syncCal}}
+    <div class="panel-body container-fluid">
+      {{> choreCalendar}}
+    </div>
   </div>
+
 </template>
 
 <!-- template for the calendar -->
 <template name="choreCalendar">  
 
-  <div class="container-fluid">
-    <h2>Chores Calendar
-      {{> tooltips title="Chores Calendar" content="Easily keep track of your assigned chores with Chores Calendar" }}
-    </h2>
-    {{>createChore}}
-    
-    <div id="choreCal">
-      {{>fullcalendar options}}
-    </div>
-
+  {{>createChore}}
+  <div id="choreCal">
+    {{>fullcalendar options}}
   </div>
+
 </template>
 
 
 <!-- Sync Calendar button -->
 <template name="syncCal">
-<div class="dropdown">
-  <button class="btn btn-default dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
-    <span class="glyphicon glyphicon-cog"></span>
+<span class="dropdown">
+  <button class="btn btn-xs btn-warning dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+    <i class="fa fa-cog"></i> Sync
   </button>
   <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
     <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Sync</a></li>
     <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
   </ul>
-  {{> tooltips title="Sync Calendar" content="This button syncs the calendar"}}
-</div>
+  <!-- Can we just have a tooltip on the button? This ruins the look of the panel.
+    {{> tooltips title="Sync Calendar" content="This button syncs the calendar"}}
+  -->
+</span>
 </template>
 
 <!-- template for the create modal -->

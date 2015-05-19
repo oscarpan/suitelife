@@ -1,18 +1,22 @@
 <template name="Home">
-	<div class="row">
-		<div class ="col-md-7">
-			  {{> postsList}}
+	<div class="container">
+		<div class="row">
+			<div class ="col-md-7">
+				{{> postsList}}
+			</div>
+			<div class ="col-md-5">
+				{{> iousList}}
+			</div>
 		</div>
-		<div class ="col-md-5">
-			  {{> iousList}}
+		<div class="row">
+			<div class ="col-md-12">
+				{{> choresView}}
+			</div>
 		</div>
-	</div>
-	<div class="row">
-		<div class ="col-md-7">
-			  {{> choresView}}
-		</div>
-		<div class ="col-md-5">
-			  {{> choresList}}
+		<div class="row">
+			<div class ="col-md-12">
+				{{> choresList}}
+			</div>
 		</div>
 	</div>
 </template>

@@ -1,90 +1,66 @@
 <template name="iousList">
-  <div class="container-fluid">
-    <div class="col-md-5">
-      <h2>IOU List  
-      </h2>
-    </div>
 
-  	<div class="panel panel-default">
-      <div class="panel-heading">
+	<div class="panel panel-default">
+    <div class="panel-heading">
 
-        <div class="row">
-          <div class="col-md-8">
-            <h3 class="panel-title">
-              IOUs 
-              {{> tooltips title="IOUs" content="Keep track of money owed to your Suitemates with IOUs." }}
-            </h3>
-          </div>
-          
-          <div class="col-md-4">
-            <div class="text-right">
-              <a class="btn btn-xs btn-info collapsed" data-toggle="collapse" data-parent="#iouLog" href=".collapse-log" aria-expanded="false" aria-controls="collapse-log">
-                <i class="fa fa-list-alt"></i> Log
-              </a>
-
-              <button class="btn btn-xs btn-info" data-toggle="modal" data-target="#newIouModal">
-                <i class="fa fa-plus"></i> New
-              </button>
-            </div>
-          </div>
-
+      <div class="row">
+        <div class="col-md-6">
+          <h3 class="panel-title">
+            IOUs
+          </h3>
         </div>
-
-      </div>
-
-      <ul class="list-group">
-        {{#each ious}}
-          {{> iouItem}}
-        {{/each}}
-      </ul>
-
-    </div>
-
-    <div class="panel panel-default">
-      <div class="panel-heading collapse collapse-log" role="tabpanel" aria-labelledby="iou-log-heading">
-        <h4 class="panel-title">
-          History
-        </h4>
-      </div>
-      <div class="panel-collapse collapse collapse-log" role="tabpanel" aria-labelledby="iou-log-heading">
-        <ul class="list-group">
-          <li class="list-group-item">
-            ASDF
-          </li>
-        </ul>
-      </div>
-
-      <div class="panel-heading collapse collapse-log" role="tabpanel" aria-labelledby="iou-log-heading">
-        <h4 class="panel-title">
-          Changes
-        </h4>
-      </div>
-      <div class="panel-collapse collapse collapse-log" role="tabpanel" aria-labelledby="iou-log-heading">
-        <ul class="list-group">
-          <li class="list-group-item">
-            ASDF
-          </li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="modal fade" id="newIouModal" tabindex="-1" role="dialog" aria-labelledby="New IOU" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
+        
+        <div class="col-md-6">
+          <div class="text-right">
+            {{> tooltips title="IOUs" content="Keep track of money owed to your Suitemates with IOUs." }}
+            <button class="btn btn-xs btn-info" data-toggle="modal" data-target="#newIouModal">
+              <i class="fa fa-list-alt"></i> Log
             </button>
-            <h4 class="modal-title" id="newIouModalLabel">New IOU</h4>
+
+            <button class="btn btn-xs btn-primary" data-toggle="modal" data-target="#newIouModal">
+              <i class="fa fa-plus"></i> New
+            </button>
           </div>
-          <div class="modal-body">
-            {{> iouNew }}
-          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    {{#if ious}}
+      <div class="panel-body">
+        You currently have Ious.
+      </div>
+    {{else}}
+      <div class="panel-body">
+        You currently have no Ious.
+      </div>
+    {{/if}}
+
+    <ul class="list-group">
+      {{#each ious}}
+        {{> iouItem}}
+      {{/each}}
+    </ul>
+
+  </div>
+
+  <div class="modal fade" id="newIouModal" tabindex="-1" role="dialog" aria-labelledby="New IOU" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title" id="newIouModalLabel">New IOU</h4>
+        </div>
+        <div class="modal-body">
+          {{> iouNew }}
         </div>
       </div>
     </div>
+  </div>
 
-	</div>
 </template>
 
 <template name="iouItem">
