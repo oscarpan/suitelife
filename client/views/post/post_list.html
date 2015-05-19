@@ -9,8 +9,6 @@
 			<div class="col-md-1">
 				{{> newPost}}
 			</div>
-
-
 			{{#each posts}}
 			<div class="col-md-7">	
 				{{> Post}}
@@ -55,9 +53,8 @@
 
 <template name="newPost">
 
-	<span class="btn btn-info editable-text-trigger">
-		<i class="fa fa-plus"></i> New post{{> editableText context=newPosts
-		collection="posts" field="message" autoInsert=true}}
+	<span class="btn btn-info editable-text-trigger new">
+		<i class="fa fa-plus"></i> New post
 	</span>
 
 </template>

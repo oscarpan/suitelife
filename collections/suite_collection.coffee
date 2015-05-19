@@ -13,13 +13,15 @@ Meteor.methods
     suite_id = Suites.insert(suite)
     Meteor.call 'addUserToSuite', suite_id, (error) ->    #add the user to the new suite
       if error
-        return alert(error.reason)    
+        return alert(error.reason)   
+    Meteor.call 'initializePosts', suite_id, (error) ->
+      if error
+        return alert(error.reason)
   editSuite: (suite, id) ->
     suite.updatedAt = (new Date).getTime()
     Suite.update id, $set: suite
     id
   addUserToSuite: (suite_id) ->
-    console.log suite_id
     suite = Suites.findOne suite_id
     if !suite.users?                                            #add user to apt user array. no upsert on arrays
       Suites.update suite_id, $set: {users: [Meteor.userId()]}

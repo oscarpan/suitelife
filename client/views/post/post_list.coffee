@@ -1,22 +1,36 @@
-Template.postsList.helpers 
-	posts: ->
-		Posts.find {}, sort: lastEdited: -1
+##### POSTS #####
 
 Template.postsList.events 'click .new': (e) ->
 	e.preventDefault()
-	post = newPosts()
-	Meteor.call 'newPost', post, (error, id) ->
+	post = 														
+		authorId: Meteor.userId()
+		lastEditor: Meteor.userId()
+		lastEdited: moment().format 'MMMM Do YYYY, h:mm:ss a'
+		pinned: false
+		imagePath: null
+		message: null
+	Meteor.call 'newPost', post, Session.get('suite')._id, (error, id) ->
 		if error
 			return alert(error.reason)
 	#todo: editing on create
 	return
 
+Template.postsList.helpers 
+	posts: ->
+		if Session.get('suite')?
+			suite = Suites.findOne Session.get('suite')._id
+			posts = (Posts.find _id: $in: suite.post_ids).fetch()
+			posts
+		
 Template.Post.helpers
 	getEmail: (id) ->
 		usr = Meteor.users.findOne id
-		if (usr)
+		if usr?
 			return usr.emails[0].address
-		return
+		else
+			return id
+
+##### UPLOADER #####
 
 Template.Post.events 'click .clear': (e) ->
 	e.preventDefault()
@@ -24,27 +38,10 @@ Template.Post.events 'click .clear': (e) ->
 	post = Posts.findOne post_id					#get the current post calling the upload
 	post.imagePath = null
 	post.lastEditor = Meteor.userId()
-	post.lastEdited = new Date()
+	post.lastEdited = moment().format 'MMMM Do YYYY, h:mm:ss a'
 	Meteor.call 'setImagePath', post, post._id, (error) ->					#update the post's image path
 		if error
 			return alert(error.reason)
-
-EditableText.registerCallbacks																				#TODO fix registration
-	whodunnit: (doc, collection) ->
-		doc = _.extend doc, lastEdited: new Date()
-		doc = _.extend doc, lastEditor: Meteor.userId()
-		doc
-
-Template.newPost.helpers 	
-	newPosts: ->	#initialize a new post for 'context=newPosts'
-		{
-			authorId: Meteor.userId()
-			lastEditor: Meteor.userId()
-			lastEdited: new Date()
-			pinned: false
-			imagePath: null
-			message: null
-		}
 
 Template.uploader.helpers
 	myCallbacks: ->

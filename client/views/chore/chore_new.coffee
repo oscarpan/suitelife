@@ -43,8 +43,10 @@ Template.dates.onRendered ->
 
 Template.newChoreForm.helpers
   users: ->
-    Suites.findOne({ users: Meteor.userId() }).users
+    if Session.get('suite')?
+      Suites.findOne(Session.get('suite')._id).users
   getUserName: (id) ->
     usr = Meteor.users.findOne id
-    userName = usr.profile.first_name + " " + usr.profile.last_name
+    if usr.profile?
+      userName = usr.profile.first_name + " " + usr.profile.last_name
 
