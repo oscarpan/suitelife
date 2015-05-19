@@ -1,17 +1,18 @@
 <template name="iousList">
-    <div class="container">
-      <div class="col-md-5">
-        <h2>IOU List  
-          {{> tooltips title="IOUs" content="Keep track of money owed to your Suitemates with IOUs." }}
-        </h2>
+  <div class="container-fluid">
+    <div class="col-md-5">
+      <h2>IOU List  
+      </h2>
+    </div>
 
   	<div class="panel panel-default">
       <div class="panel-heading">
 
         <div class="row">
           <div class="col-md-8">
-            <h3 class="panel-title">IOUs
-
+            <h3 class="panel-title">
+              IOUs 
+              {{> tooltips title="IOUs" content="Keep track of money owed to your Suitemates with IOUs." }}
             </h3>
           </div>
           
@@ -40,7 +41,7 @@
     </div>
 
     <div class="panel panel-default">
-    <div class="panel-heading collapse collapse-log" role="tabpanel" aria-labelledby="iou-log-heading">
+      <div class="panel-heading collapse collapse-log" role="tabpanel" aria-labelledby="iou-log-heading">
         <h4 class="panel-title">
           History
         </h4>
@@ -84,33 +85,38 @@
     </div>
 
 	</div>
-</div>
 </template>
 
 <template name="iouItem">
 
   <li class="list-group-item {{paidColor paid}}">
 
-    <div class="row">
-      <div class="col-md-2 date">
-          {{dateFormat date}}
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-3 date">
+            {{dateFormat date}}
+        </div>
+        <div class="col-md-8 reason">
+          {{> editableText collection="ious" field="reason"}}
+        </div>
       </div>
-      <div class="col-md-6 reason">
-        {{> editableText collection="ious" field="reason"}}
+      <div class="row">
+        <div class="col-md-8 col-md-offset-3">
+          {{{amountFormat amount payerId payeeId}}} 
+          <span class="money">
+            ${{> editableText collection="ious" field="amount"}}
+          </span>
+        </div>
       </div>
-      <div class="col-md-2">
-        {{{amountFormat amount payerId payeeId}}} 
-        <span class="money">
-          ${{> editableText collection="ious" field="amount"}}
-        </span>
-      </div>
-      <div class="col-md-2 text-right">
-        <button class="btn btn-xs btn-success paid">
-          <i class="fa fa-check"></i> Paid
-        </button>
-        <button class="btn btn-xs btn-danger delete">
-          <i class="fa fa-times"></i> Delete
-        </button>
+      <div class="row">
+        <div class="col-md-12 text-right">
+          <button class="btn btn-xs btn-success paid">
+            <i class="fa fa-check"></i>
+          </button>
+          <button class="btn btn-xs btn-danger delete">
+            <i class="fa fa-times"></i>
+          </button>
+        </div>
       </div>
     </div>
 
