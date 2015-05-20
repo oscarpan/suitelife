@@ -6,7 +6,7 @@ Template.choresView.events
     e.preventDefault()
     Session.set 'activeModal', 'newChoreForm'
     $('#datepicker').datepicker 'setDate', 'today'
-    $('#createChoreModal').modal 'show'
+    $('#createChoreModal').modal('show').find('.modal-title').html('New Chore')
     return
 
   'click .list': (e) ->
@@ -32,14 +32,14 @@ Template.choreCalendar.helpers
         Session.set 'activeModal', 'newChoreForm'
         startDay = moment(date).format('YYYY/MM/DD')
         $('#datepicker').datepicker 'setDate', startDay
-        $('#createChoreModal').modal 'show'
+        $('#createChoreModal').modal('show').find('.modal-title').html('New Chore')
         
       eventClick: (calEvent, jsEvent, view) ->
         ## Get the clicked event and set the data context for edit
         choreEvent = Chores.findOne(calEvent._id)
         Session.set 'activeModal', 'choreDetail'
         Session.set 'choreEvent', choreEvent
-        $('#createChoreModal').modal 'show'
+        $('#createChoreModal').modal('show').find('.modal-title').html('Chore Detail')
 
       ## Let's get the chores!
       events: (start, end, timezone, callback) ->

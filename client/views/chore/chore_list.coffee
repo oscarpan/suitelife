@@ -9,7 +9,7 @@ Template.choreItem.events
     choreEvent = Chores.findOne(@_id)
     Session.set 'activeModal', 'choreDetail'
     Session.set 'choreEvent', choreEvent
-    $('#createChoreModal').modal 'show'
+    $('#createChoreModal').modal('show').find('.modal-title').html('Chore Detail')
 
   'click .listDelete': (e) ->
     e.preventDefault()
