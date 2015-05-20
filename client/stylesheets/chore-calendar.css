@@ -1,11 +1,5 @@
-#choreCal{
-	/*
-	width: 50em;
-	padding: 1em 5em;
-	*/
-}
 
-span.glyphicon-plus-sign {
-	font-size: 3em;
-	color: green;
+
+.table-striped tbody tr:nth-child(odd) {
+	background-color: #F0F0F0;
 }
