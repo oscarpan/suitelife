@@ -6,3 +6,14 @@
     max-height: 350px;
     overflow-y: scroll;
 }
+
+.my-btn{
+    background: #9987ca;
+    color: #ffffff;
+}
+
+.my-btn:hover{
+  border-color: #ffffff; 
+  background-color: #7a6ca1; 
+  color: #ffffff;
+}
