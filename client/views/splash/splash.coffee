@@ -6,9 +6,13 @@ Template.signup.helpers
   suites: ->
     Suites.find {}, sort: createdAt: -1
 
-Template.jumbotron.events 'click .signupButton': (e) ->
-  e.preventDefault()
-  $.scrollTo $('#signup'), duration: 500
+Template.jumbotron.events 
+  'click .signupButton': (e) ->
+    e.preventDefault()
+    $.scrollTo $('#signup'), duration: 500
+  'click .loginButton': (e) ->
+    e.stopPropagation();
+    Template._loginButtons.toggleDropdown();
 
 #if the url has the string "invite/", then fill in the suite
 Tracker.autorun ->
