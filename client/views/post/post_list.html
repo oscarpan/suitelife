@@ -32,7 +32,7 @@
 </template>
 
 <template name="Post">
-	<div style="border: 1px solid orange">
+	<div style="border: 1px solid gray">
 		<h4 class="editable-text-trigger">	
 			{{> editableText collection="posts" field="message" placeholder="Post message" removeEmpty=true wysiwyg=true beforeUpdate="whoDunnitPosts" beforeInsert="whoDunnitPosts" substitute='<i class="fa fa-pencil"></i>'}}
 		</h4>
@@ -67,7 +67,7 @@
 
 <template name="newPost">
 
-	<span class="btn btn-xs btn-primary editable-text-trigger new">
+	<span class="btn btn-xs btn-primary my-btn editable-text-trigger new">
 		<i class="fa fa-plus"></i> New
 	</span>
 
