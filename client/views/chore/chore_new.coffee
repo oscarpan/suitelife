@@ -10,7 +10,7 @@ Template.newChoreForm.events
       assignee: $(e.target).find('[name=assignee]').val()
       title: $(e.target).find('[name=choreName]').val()
       startDate: startDay
-      frequency: $(e.target).find('[name=repeat-freqs]:checked').val()
+      frequency: $(e.target).find('[name=repeat-freqs]').val()
       freqNum: $(e.target).find('[name=freqNum]').val()
       
     ## to store the new chore in collection  
@@ -19,20 +19,6 @@ Template.newChoreForm.events
         return alert(error.reason)
       $('#createChoreModal').modal 'hide'
       return
-    return
-
-  'click input[type=radio]': (e) ->
-    freq = $(e.target).val()
-    if freq == '0'
-      $('#freqString').text 'day'
-    else if freq == '1'
-      $('#freqString').text 'days'
-    else if freq == '7'
-      $('#freqString').text 'weeks'
-    else if freq == '14'
-      $('#freqString').text 'every other weeks'
-    else if freq == '30'
-      $('#freqString').text 'months'
     return
 
 Template.dates.onRendered ->

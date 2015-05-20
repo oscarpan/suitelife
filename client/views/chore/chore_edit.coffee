@@ -26,7 +26,6 @@ Template.editChoreForm.events
     e.preventDefault()
     if confirm('Delete this Chore?')
       currentId = @_id
-      console.log currentId
       Meteor.call 'deleteChore', currentId, (error, id) ->
         if error
           return alert(error.reason)

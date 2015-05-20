@@ -61,7 +61,7 @@ Template.choreCalendar.helpers
             while i < evt.freqNum
               events.push
                 id: evt._id
-                title: evt.title + evt._id
+                title: evt.title
                 start: moment(evt.startDate).add j, freq
                 allDay: true
               if evt.frequency == '14'
@@ -110,4 +110,8 @@ freqToString = (freq) ->
     'w'
   else if freq == '30'
     'M'
+
+$('#createChoreModal').on 'shown.bs.modal', ->
+  $('#choreName').focus()
+  return
 

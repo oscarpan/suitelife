@@ -3,67 +3,63 @@
     <form class="form-horizontal">
     <fieldset>
 
-    <!-- Chore name -->
-    <div class="form-group">
-      <label class="col-md-4 control-label" for="choreName">Chore Name</label>  
-      <div class="col-md-4">
-        <input id="choreName" name="choreName" type="text" placeholder="Name Your Chore" class="form-control input-md" required="">
+      <!--<input type="text" class="form-control" id="datepicker">-->
+    <div class="row" align="center">
+    	<div class="col-md-6">
+      	{{> dates}}
       </div>
-    </div>
+    
+      <div class="col-md-6">
+      	<!-- Chore name -->
+    		<div class="form-group" align="left">
+      		<label class="row control-label" for="choreName">Chore Name</label>  
+      		<div class="row">
+						<div class="col-md-10">
+        			<input id="choreName" name="choreName" type="text" placeholder="Name Your Chore" class="form-control input-md" required="">
+      			</div>
+      		</div>
+    		</div>
 
+    		<div class="form-group" align="left">
+      		<label class="row control-label" for="freqNum">Repeat this chore:</label>
+      		<div class="row">
+      			<div class="col-md-10">    		
+        			<select id="repeat-freqs" name="repeat-freqs" class="form-control">
+           			<option value="0">Once</option>
+           			<option value="1">Daily</option>
+           			<option value="7">Weekly</option>
+           			<option value="14">Bi-weekly</option>
+           			<option value="30">Monthly</option>        
+        			</select>
+        		</div>
+        	</div>
+    		</div>
 
-    <!--<input type="text" class="form-control" id="datepicker">-->
-    <div class="col-md-6">
-      {{> dates}}
-    </div>
-
-    <!-- Multiple Radios (inline) -->
-    <div class="form-group">
-      <label class="col-md-4 control-label" for="repeat-freqs">Repeat Every:</label>
-      <div class="col-md-4">
-        <label class="radio-inline" for="repeat-freqs-0">
-          <input type="radio" name="repeat-freqs" id="repeat-freqs-0" value="0" checked="checked">
-          Once
-        </label>
-        <label class="radio-inline" for="repeat-freqs-1">
-          <input type="radio" name="repeat-freqs" id="repeat-freqs-1" value="1">
-          Daily
-        </label>
-        <label class="radio-inline" for="repeat-freqs-2">
-          <input type="radio" name="repeat-freqs" id="repeat-freqs-2" value="7">
-          Weekly
-        </label>
-        <label class="radio-inline" for="repeat-freqs-3">
-          <input type="radio" name="repeat-freqs" id="repeat-freqs-3" value="14">
-          Bi-weekly
-        </label>
-        <label class="radio-inline" for="repeat-freqs-4">
-          <input type="radio" name="repeat-freqs" id="repeat-freqs-4" value="30">
-          Monthly
-        </label>
-      </div>
-    </div>
-
-    <div class="form-group">
-      <label class="col-md-4 control-label" for="freqNum">for</label>
-      <div class="col-md-5">
-        <div class="input-group">
-          <input id="freqNum" name="freqNum" class="form-control" placeholder="1" onfocus="this.placeholder = ''" onblur="this.placeholder = '1'" type="text">
-          <span class="input-group-addon" id="freqString">day</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- List for assign -->
-    <div class="form-group">
-      <label class="col-md-4 control-label" for="assignee">Assign to roommate:</label>
-      <div class="col-md-4">
-        <select id="assignee" name="assignee" class="form-control">
-          {{#each users}}
-              <option value="{{this}}">{{getUserName this}}</option>
-          {{/each}}
-        </select>
-      </div>
+      	<div class="form-group">  
+      		<div class="row">
+      			<div class="col-md-10">
+        			<div class="input-group">
+          			<input id="freqNum" name="freqNum" class="form-control" placeholder="1" onfocus="this.placeholder = ''" onblur="this.placeholder = '1'" type="text">
+          			<span class="input-group-addon">times</span>
+        			</div>
+      			</div>
+      		</div>
+      	</div>
+      
+      <!-- List for assign -->
+    		<div class="form-group" align="left">
+      		<label class="row control-label" for="assignee">Assign to roommate:</label>
+      			<div class="row">
+      				<div class="col-md-10">
+        				<select id="assignee" name="assignee" class="form-control">
+          				{{#each users}}
+              			<option value="{{this}}">{{getUserName this}}</option>
+          				{{/each}}
+        				</select>
+        			</div>
+        		</div>
+      	</div>
+    	</div>
     </div>
 
     <div class="form-group">
@@ -79,5 +75,5 @@
 </template>
 
 <template name="dates">
-  <input type="text" class="form-control" id="datepicker">
+  <div id="datepicker"></div>
 </template>
