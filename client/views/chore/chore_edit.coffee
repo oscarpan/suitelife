@@ -4,13 +4,14 @@ Template.editChoreForm.events
     e.preventDefault()
     currentId = @_id
     
+    startDay = $('#datepicker').datepicker 'getDate'
     ## edit object
-    choreEdits = 
+    choreEdits =
       assignee: $(e.target).find('[name=assignee]').val()
       title: $(e.target).find('[name=choreName]').val()
+      startDate: startDay
       frequency: $(e.target).find('[name=repeat-freqs]:checked').val()
-      
-      
+      freqNum: $(e.target).find('[name=freqNum]').val()   
 
     ## edit function for collection managing
     Meteor.call 'editChore', choreEdits, currentId, (error, id) ->
@@ -38,11 +39,12 @@ Template.editChoreForm.helpers
     # Get the data context for the edit
     choreEvent = Session.get 'choreEvent'
   users: ->
-    Suites.findOne({ users: Meteor.userId() }).users
-
+    if Session.get('suite')?
+      Suites.findOne(Session.get('suite')._id).users
   getUserName: (id) ->
     usr = Meteor.users.findOne id
-    userName = usr.profile.first_name + " " + usr.profile.last_name
+    if usr.profile?
+      userName = usr.profile.first_name + " " + usr.profile.last_name
 
 
 

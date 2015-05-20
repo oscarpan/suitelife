@@ -27,7 +27,6 @@
         		<th>How Often</th>
             <th>Length</th>
         		<th>Assigned</th>
-      			<th>Detail</th>
       		</tr>
     		</thead>
     		<tbody>
@@ -48,18 +47,11 @@
 <!-- chore details in a row, each part in a different column -->
 <template name="choreItem">
   <tr>
-    
-      <td>{{title}}</td>
-    
-      <td>{{dateFormat startDate}}</td>
-    
-      <td>{{freqString frequency}}</td>
-
-      <td>{{freqNum}}</td>
-    
-      <td>{{assignFormat assignee}}</td>
-    
-    <td><button class="btn btn-default listDetail">Detail</button></td>
+    <td>{{title}}</td>    
+    <td>{{dateFormat startDate}}</td>
+    <td>{{freqString frequency}}</td>
+    <td>{{freqNum}}</td>
+    <td>{{assignFormat assignee}}</td>
     <td><button class="btn btn-default listDelete">Delete Chore</button></td>
   </tr>
 </template>

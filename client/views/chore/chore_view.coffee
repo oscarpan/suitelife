@@ -6,7 +6,7 @@ Template.choresView.events
     e.preventDefault()
     Session.set 'activeModal', 'newChoreForm'
     $('#datepicker').datepicker 'setDate', 'today'
-    $('#createChoreModal').modal('show').find('.modal-title').html('New Chore')
+    $('#createChoreModal').modal('show')
     return
 
   'click .list': (e) ->
@@ -24,6 +24,7 @@ Template.choreCalendar.helpers
   options: ->
   	{
       height: 300
+      eventColor: '#9987ca'
       defaultView: 'basicWeek'
       header:
         center: 'basicWeek, month'
@@ -32,14 +33,17 @@ Template.choreCalendar.helpers
         Session.set 'activeModal', 'newChoreForm'
         startDay = moment(date).format('YYYY/MM/DD')
         $('#datepicker').datepicker 'setDate', startDay
-        $('#createChoreModal').modal('show').find('.modal-title').html('New Chore')
+        $('#createChoreModal').modal('show')
         
       eventClick: (calEvent, jsEvent, view) ->
         ## Get the clicked event and set the data context for edit
         choreEvent = Chores.findOne(calEvent._id)
-        Session.set 'activeModal', 'choreDetail'
         Session.set 'choreEvent', choreEvent
-        $('#createChoreModal').modal('show').find('.modal-title').html('Chore Detail')
+
+        eventDate = moment(choreEvent.startDate).format('YYYY/MM/DD')
+        $('#datepicker').datepicker 'setDate', eventDate
+        $('#createChoreModal').modal('show')
+        Session.set 'activeModal', 'editChoreForm'
 
       ## Let's get the chores!
       events: (start, end, timezone, callback) ->
@@ -57,7 +61,7 @@ Template.choreCalendar.helpers
             while i < evt.freqNum
               events.push
                 id: evt._id
-                title: evt.title
+                title: evt.title + evt._id
                 start: moment(evt.startDate).add j, freq
                 allDay: true
               if evt.frequency == '14'
@@ -92,9 +96,14 @@ Template.createChore.helpers
   # getter for creating state
   activeModal: ->
     Session.get 'activeModal'
+  modalTitle: ->
+    active = Session.get 'activeModal'
+    if active == 'newChoreForm'
+      'Create a New Chore'
+    else if active == 'editChoreForm'
+      'Edit a Chore'
 
 freqToString = (freq) ->
-  console.log freq
   if freq <= '1'
     'd'
   else if freq == '7' or freq == '14'

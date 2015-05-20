@@ -1,46 +1,97 @@
 <template name="choreDetail">
-
   <div class="container-fluid">
+    {{#with choreEvent}}
+    <form class="form-horizontal">
+    <fieldset>
 
-  {{#with choreEvent}}
-
-    <!--<h2>Chore Details</h2>-->
-    <table class="table-bordered table-striped">
-      <tbody>
-        <tr>
-          {{!-- you can use a handlebars helper here to format the date field --}}
-          <th class="col-md-3">Created</th>
-          <td class="col-md-9">{{date createdAt}}</td>
-        </tr>
-        
-        <tr>
-          <th class="col-md-3">Chore Name</th>
-          <td class="col-md-9">{{title}}</td>
-        </tr>
-        
-        <tr>
-          {{> dates}}
-        </tr>
-        
-        <tr>
-          <th class="col-md-3">How often</th>
-          <td class="col-md-9">{{frequency}}</td>
-        </tr>
-        
-        <tr>
-          <th class="col-md-3">Assigned by</th>
-          <td class="col-md-9">{{assignFormat assignee}}</td>
-        </tr>
-      </tbody>
-    </table>
-    <hr>
-
+    <!-- Chore name -->
     <div class="form-group">
-      <div class="text-left">
-        <button type="submit" class="btn btn-default" data-dismiss="modal">Cancel</button>
-        <button type="button" class="btn btn-primary edit-chore">Edit this Chore</button>
+      <label class="col-md-4 control-label" for="choreName">Chore Name</label>  
+      <div class="col-md-4">
+        {{> editableText collection="chores" field="title"}}
+        <!--<input id="choreName" name="choreName" type="text" placeholder="Name Your Chore" class="form-control input-md" required="">-->
       </div>
     </div>
+
+    <!--<input type="text" class="form-control" id="datepicker">-->
+    <div class="col-md-6">
+      {{> dates}}
+    </div>
+
+    <!-- Multiple Radios (inline) -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="repeat-freqs">Repeat Every:</label>
+      <div class="col-md-4">
+        <label class="radio-inline" for="repeat-freqs-0">
+          <input type="radio" name="repeat-freqs" id="repeat-freqs-0" value="0" checked="checked">
+          Once
+        </label>
+        <label class="radio-inline" for="repeat-freqs-1">
+          <input type="radio" name="repeat-freqs" id="repeat-freqs-1" value="1">
+          Daily
+        </label>
+        <label class="radio-inline" for="repeat-freqs-2">
+          <input type="radio" name="repeat-freqs" id="repeat-freqs-2" value="7">
+          Weekly
+        </label>
+        <label class="radio-inline" for="repeat-freqs-3">
+          <input type="radio" name="repeat-freqs" id="repeat-freqs-3" value="14">
+          Bi-weekly
+        </label>
+        <label class="radio-inline" for="repeat-freqs-4">
+          <input type="radio" name="repeat-freqs" id="repeat-freqs-4" value="30">
+          Monthly
+        </label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="freqNum">for</label>
+      <div class="col-md-5">
+        <div class="input-group">
+          {{> editableText collection="chores" field="freqNum"}}
+          <span class="input-group-addon" id="freqString">day</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- List for assign -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="assignee">Assign to roommate:</label>
+      <div class="col-md-4">
+        <select id="assignee" name="assignee" class="form-control">
+          {{#each users}}
+              <option value="{{this}}">{{getUserName this}}</option>
+          {{/each}}
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+        <div class="text-right">
+          <button type="submit" class="btn btn-default" data-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Changes</button>
+        </div>
+    </div>
+
+
+    </fieldset>
+    </form>
+
+  <!--{{#with choreEvent}}
+    <div>Created: {{date createdAt}}</div>
+    <div>Chore Name: {{> editableText collection="chores" field="title"}}</div>
+    <div>{{> dates}}</div>
+    <div>How often: {{freqString frequency}}</div>
+    <div>Repeating: {{> editableText collection="chores" field="freqNum"}}</div>
+    <div>Assigned by: {{assignFormat assignee}}</div>
+    
+    <div class="form-group">
+      <div class="text-right">
+        <button type="submit" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <button type="submit" class="btn btn-primary edit-chore">Finish Changes</button>
+      </div>
+    </div>-->
     {{else}}
       <h3>There was no chore found for that ID.</h3>
     {{/with}}

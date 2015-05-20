@@ -1,13 +1,10 @@
 <!-- view for editting chores -->
 <template name="editChoreForm">
-    
+    <div class="container-fluid">
     <!-- form with values previously entered -->
     {{#with choreEvent}}
     <form class="form-horizontal">
     <fieldset>
-
-    <!-- Form Name -->
-    <legend>Edit Chore</legend>
 
     <!-- Chore name -->
     <div class="form-group">
@@ -17,26 +14,32 @@
       </div>
     </div>
 
-    <div id="datepicker"></div>
+    <div class="col-md-6">
+      {{> dates}}
+    </div>
 
     <!-- Multiple Radios (inline) -->
-    <div class="control-group">
+    <div class="form-group">
       <label class="col-md-4 control-label" for="repeat-freqs">Repeat Every:</label>
-      <div class="controls">
+      <div class="col-md-4">
         <label class="radio-inline" for="repeat-freqs-0">
-          <input type="radio" name="repeat-freqs" id="repeat-freqs-0" value="Daily" checked="checked">
-          Daily
+          <input type="radio" name="repeat-freqs" id="repeat-freqs-0" value="0" checked="checked">
+          Once
         </label>
         <label class="radio-inline" for="repeat-freqs-1">
-          <input type="radio" name="repeat-freqs" id="repeat-freqs-1" value="Weekly">
-          Weekly
+          <input type="radio" name="repeat-freqs" id="repeat-freqs-1" value="1">
+          Daily
         </label>
         <label class="radio-inline" for="repeat-freqs-2">
-          <input type="radio" name="repeat-freqs" id="repeat-freqs-2" value="Bi-weekly">
-          Bi-weekly
+          <input type="radio" name="repeat-freqs" id="repeat-freqs-2" value="7">
+          Weekly
         </label>
         <label class="radio-inline" for="repeat-freqs-3">
-          <input type="radio" name="repeat-freqs" id="repeat-freqs-3" value="Monthly">
+          <input type="radio" name="repeat-freqs" id="repeat-freqs-3" value="14">
+          Bi-weekly
+        </label>
+        <label class="radio-inline" for="repeat-freqs-4">
+          <input type="radio" name="repeat-freqs" id="repeat-freqs-4" value="30">
           Monthly
         </label>
       </div>
@@ -55,13 +58,15 @@
     </div>
 
     <div class="form-group">
-      <div class="col-sm-offset-2 col-sm-10">
-        <button type="submit" class="btn btn-default">Save Chore</button>
-        <button class="btn btn-default delete">Delete Chore</button>
-      </div>
+        <div class="text-right">
+          <button type="submit" class="btn btn-default" data-dismiss="modal">Cancel</button>
+          <button class="btn btn-danger delete">Delete Chore</button>
+          <button type="submit" class="btn btn-primary">Save Changes</button>
+        </div>
     </div>
 
     </fieldset>
     </form>
     {{/with}}
+  </div>
 </template>
