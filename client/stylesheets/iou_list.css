@@ -31,3 +31,7 @@
   border-bottom-width: 1px;
   border-bottom-style: dashed;
 }
+
+.money input{
+    width: 50px;
+}
