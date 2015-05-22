@@ -19,6 +19,9 @@ Template.choresView.events
     e.preventDefault()
     Session.set 'activeModal', 'newChoreForm'
 
+  'shown.bs.modal #createChoreModal': (e) ->
+    $('#choreName').focus()
+
 Template.choreCalendar.helpers 
 	## Fullcalendar options and event handling
   options: ->
@@ -111,7 +114,4 @@ freqToString = (freq) ->
   else if freq == '30'
     'M'
 
-$('#createChoreModal').on 'shown.bs.modal', ->
-  $('#choreName').focus()
-  return
 
