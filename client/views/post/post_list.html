@@ -20,34 +20,36 @@
 			Need to change so 'each post' generates a list-group-item,
 			see iou_list for an example. This is just a placeholder.
 		-->
-		<div class="panel-body homeOverflow">
-			{{#each posts}}
-			<div>
-				{{> Post}}
+		<div class="panel-body homeOverflow" id="post-container">
+			<div id="container">
+				{{#each posts}}
+				<div class="post-item" style="border: 1px solid gray">
+					{{> Post}}
+				</div>
+				{{/each}}
 			</div>
-			{{/each}}
 		</div>
 
 	</div>		
 </template>
 
 <template name="Post">
-	<div style="border: 1px solid gray">
+	<div class="post-container">
+    <button type="button" class="btn btn-primary deleteButton">Delete</button>
 		<h4 class="editable-text-trigger">	
 			{{> editableText collection="posts" field="message" placeholder="Post message" removeEmpty=true wysiwyg=true beforeUpdate="whoDunnitPosts" beforeInsert="whoDunnitPosts" substitute='<i class="fa fa-pencil"></i>'}}
 		</h4>
-		<!--{{#if imagePath.url}}
-			<img class="bulletin-image" src={{imagePath.url}}>
-		{{#else}}
-			{{> uploader}}	 TODO: conditional on editing text
-		{{/if}}
-		-->
+			<!--{{#if imagePath.url}}
+				<img class="bulletin-image" src={{imagePath.url}}>
+			{{#else}}
+				{{> uploader}}	 #TODO: conditional on editing text
+			{{/if}}
+			-->
+
 		<div class="row" style="font-size: 10px">
-			<div class="col-md-2"> author: {{getEmail authorId}} </div>
+			<div class="col-md-4"> author: {{getEmail authorId}} </div>
 			<div class="col-md-4"> last edited: {{lastEdited}} </div>
-			<div class="col-md-2"> last editor: {{getEmail authorId}} </div>
-			<div class="col-md-1"> pinned: {{pinned}} </div>
-			<div class="col-md-3"> image: {{imagePath.url}} </div>
+			<div class="col-md-4"> last editor: {{getEmail authorId}} </div>
 		</div>
 	</div>
 </template>

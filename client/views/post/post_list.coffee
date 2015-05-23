@@ -12,7 +12,6 @@ Template.postsList.events 'click .new': (e) ->
 	Meteor.call 'newPost', post, Session.get('suite')._id, (error, id) ->
 		if error
 			return alert(error.reason)
-	#todo: editing on create
 	return
 
 Template.postsList.helpers 
@@ -21,7 +20,19 @@ Template.postsList.helpers
 			suite = Suites.findOne Session.get('suite')._id
 			posts = (Posts.find _id: $in: suite.post_ids).fetch()
 			posts
-		
+
+#WIP
+# Template.postsList.onRendered ->
+# 	$container = $('#post-container').packery(
+# 	  columnWidth: 80
+# 	  rowHeight: 80)
+# 	# get item elements, jQuery-ify them
+# 	$itemElems = $container.find('.post-item')
+# 	# make item elements draggable
+# 	$itemElems.draggable()
+# 	# bind Draggable events to Packery
+# 	$container.packery 'bindUIDraggableEvents', $itemElems
+
 Template.Post.helpers
 	getEmail: (id) ->
 		usr = Meteor.users.findOne id
@@ -46,9 +57,9 @@ Template.Post.events 'click .clear': (e) ->
 Template.uploader.helpers
 	myCallbacks: ->
 		finished: (index, fileInfo, context) ->
-			suite = Suites.findOne(users: Meteor.userId())									#TODO move to session variable
+			suite = Suites.findOne(users: Meteor.userId())		#TODO move to session variable
 			post = Posts.findOne context.parent().parent().data._id					#get the current post calling the upload
-																																			#TODO remove old images
+																												#TODO remove old images
 			Meteor.call 'uploadToSuite', fileInfo, suite._id, (error) ->		#upload the new image from the suite
 				if error
 					return alert(error.reason)

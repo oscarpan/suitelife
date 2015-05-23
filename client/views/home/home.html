@@ -1,22 +1,18 @@
 <template name="Home">
-	<div class="container" id="home">
+	<div style="margin: 0 30px" id="home">
 		<div class="row">
-			<div class ="col-md-7">
+			<div class="col-md-8 module" id="postModule">
 				{{> postsList}}
 			</div>
-			<div class ="col-md-5">
+			<div class="col-md-4 module" id="listModule">
 				{{> iousList}}
 			</div>
-		</div>
-		<div class="row">
-			<div class ="col-md-12">
+			<div class="col-md-8 module" id="calModule">
 				{{> choresView}}
 			</div>
-		</div>
-		<div class="row">
-			<div class ="col-md-12">
+			<div class="col-md-4 module" id="choresModule">
 				{{> choresList}}
 			</div>
-		</div>
+		</div>		
 	</div>
 </template>
