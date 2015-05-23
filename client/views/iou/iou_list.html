@@ -69,14 +69,14 @@
             {{dateFormat date}}
         </div>
         <div class="col-md-8 reason">
-          {{> editableText collection="ious" field="reason"}}
+          {{> editableText collection="ious" field="reason" }}
         </div>
       </div>
       <div class="row">
         <div class="col-md-8 col-md-offset-3">
           {{{amountFormat amount payerId payeeId}}} 
-          <span class="money">
-            ${{> editableText collection="ious" field="amount"}}
+          <span class="money editable-text-trigger">
+            ${{> editableText collection="ious" field="amount" beforeUpdate="validateIOUAmount" }}
           </span>
         </div>
       </div>
