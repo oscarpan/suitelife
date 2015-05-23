@@ -3,7 +3,7 @@ Template.choresView.events
   'click .new': (e) ->
     e.preventDefault()
     Session.set 'activeModal', 'newChoreForm'
-    $('#datepicker').datepicker 'setDate', 'today'
+    Session.set 'startDay', 'today'
     $('#createChoreModal').modal('show')
     return
 
@@ -15,6 +15,7 @@ Template.choresView.events
   'hidden.bs.modal #createChoreModal': (e) ->
     $('#choreName').val('')
     $('#choreDesc').val('') 
+    Session.set 'activeModal', ''
 
   'shown.bs.modal #createChoreModal': (e) ->
     $('#choreName').focus()
@@ -31,7 +32,7 @@ Template.choreCalendar.helpers
       dayClick: (date, jsEvent, view) ->
         Session.set 'activeModal', 'newChoreForm'
         startDay = moment(date).format('YYYY/MM/DD')
-        $('#datepicker').datepicker 'setDate', startDay
+        Session.set 'startDay', startDay
         $('#createChoreModal').modal('show')
         
       eventClick: (calEvent, jsEvent, view) ->
@@ -41,7 +42,7 @@ Template.choreCalendar.helpers
         Session.set 'choreEvent', choreEvent
 
         eventDate = moment(choreEvent.startDate).format('YYYY/MM/DD')
-        $('#datepicker').datepicker 'setDate', eventDate
+        Session.set 'startDay', eventDate
         $('#createChoreModal').modal('show')
         
 
@@ -55,6 +56,7 @@ Template.choreCalendar.helpers
         choreEvents.forEach (evt) ->
           ## console.log evt
           freq = freqToString evt.frequency
+          console.log freq
           eventColor = getColor evt
           if evt.frequency > 0
             repeating = 0
@@ -66,7 +68,7 @@ Template.choreCalendar.helpers
                 start: moment(evt.startDate).add incDay, freq
                 color: eventColor
                 allDay: true
-              if evt.frequency == '14'
+              if evt.frequency == 14
                 incDay++
               repeating++
               incDay++
@@ -95,9 +97,6 @@ Template.choreCalendar.onRendered ->
     return
   return
 
-Template.choresView.onRendered ->
-  Session.setDefault 'activeModal', 'newChoreForm'
-
 Template.createChore.helpers 
   # getter for creating state
   activeModal: ->
@@ -110,11 +109,11 @@ Template.createChore.helpers
       'Edit a Chore'
 
 freqToString = (freq) ->
-  if freq <= '1'
+  if freq <= 1
     'd'
-  else if freq == '7' or freq == '14'
+  else if freq == 7 or freq == 14
     'w'
-  else if freq == '30'
+  else if freq == 30
     'M'
 
 getColor = (evt) ->

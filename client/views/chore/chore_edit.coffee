@@ -7,7 +7,8 @@ Template.editChoreForm.events
     startDay = $('#datepicker').datepicker 'getDate'
     frequencyInput = $(e.target).find('[name=repeat-freqs]').val()
     freqNumInput = $(e.target).find('[name=freqNum]').val()
-    if frequencyInput == '0'
+    frequencyInput = parseInt(frequencyInput)
+    if frequencyInput == 0
       freqNumInput = null
 
     ## edit object
@@ -42,10 +43,14 @@ Template.editChoreForm.events
   'change #repeat-freqs': (e) ->
     e.preventDefault()
     frequency = $('#repeat-freqs').val()
-    if frequency == '0'
+    if frequency == 0
       $('#freqNum').prop 'disabled', true
     else
       $('#freqNum').prop 'disabled', false  
+
+Template.editChoreForm.onRendered ->
+  startDay = Session.get 'startDay'
+  $('#datepicker').datepicker 'setDate', startDay
 
 Template.editChoreForm.helpers
   choreEvent: ->

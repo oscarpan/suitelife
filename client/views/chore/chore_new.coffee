@@ -7,7 +7,8 @@ Template.newChoreForm.events
     startDay = $('#datepicker').datepicker 'getDate'
     frequencyInput = $(e.target).find('[name=repeat-freqs]').val()
     freqNumInput = $(e.target).find('[name=freqNum]').val()
-    if frequencyInput == '0'
+    frequencyInput = parseInt(frequencyInput)
+    if frequencyInput == 0
       freqNumInput = null
 
     ## object to send to new chore func
@@ -32,7 +33,7 @@ Template.newChoreForm.events
   'change #repeat-freqs': (e) ->
     e.preventDefault()
     frequency = $('#repeat-freqs').val()
-    if frequency == '0'
+    if frequency == 0
       $('#freqNum').prop 'disabled', true
     else
       $('#freqNum').prop 'disabled', false    
@@ -46,6 +47,9 @@ Template.newChoreForm.helpers
     if usr.profile?
       userName = usr.profile.first_name + " " + usr.profile.last_name
 
+Template.newChoreForm.onRendered ->
+  startDay = Session.get 'startDay'
+  $('#datepicker').datepicker 'setDate', startDay
 
 Template.dates.onRendered ->
   ## Loading options for the datepicker

@@ -49,12 +49,18 @@
 
 <!-- chore details in a row, each part in a different column -->
 <template name="choreItem">
-  <tr class="{{completeColor completed}}">
+  <tr class="{{completeColor completed startDate}}">
   	<td>{{dateFormat startDate}}</td>
-    <td>{{title}}</td>    
-    <td>{{freqString frequency}}</td>
-    <td>{{freqFormat freqNum}}</td>
-    <td>{{isEmpty description}}</td>
+    <td><span id="editTitle">{{> editableText collection="chores" field="title"}}</span></td>
+    <td id="editFreq">{{freqString frequency}}</td>
+
+    {{#if frequency}}
+    	<td><span id="editFreqNum">{{> editableText collection="chores" field="freqNum" type="number" substitute="N/A"}}</span></td>
+    {{else}}
+    	<td><span>No Description</span></td>
+    {{/if}}
+
+    <td><span id="editDesc">{{> editableText collection="chores" field="description" acceptEmpty="true" substitute="N/A"}}</span></td>
     <td>{{assignFormat assignee}}</td>
     <td>
       {{#if completed}}

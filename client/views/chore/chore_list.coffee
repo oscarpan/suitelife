@@ -33,15 +33,15 @@ Template.choreItem.helpers
   dateFormat: (date) ->
     moment(date).format('MM/DD/YY')
   freqString: (freq) ->
-    if freq == '0'
+    if freq == 0
       'Once'
-    else if freq == '1'
+    else if freq == 1
       'Daily'
-    else if freq == '7'
+    else if freq == 7
       'Weekly'
-    else if freq == '14'
+    else if freq == 14
       'Bi-Weekly'
-    else if freq == '30'
+    else if freq == 30
       'Monthly'
   assignFormat: (assigneeId) ->
     assignee = Meteor.users.findOne assigneeId
@@ -51,10 +51,12 @@ Template.choreItem.helpers
       'N/A'
     else
       freqNum
-  completeColor: (completed) ->
-    "success" if completed
-  isEmpty: (desc) ->
-    if desc == ''
-      'No description'
+  completeColor: (completed, startDate) ->
+    if completed
+      "success"
     else
-      desc
+      date = new Date
+      date.setDate date.getDate() - 1
+
+      if startDate < date and not completed
+        "danger"

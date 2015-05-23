@@ -27,6 +27,27 @@
     margin-left: -1px;
 }
 
+#editTitle:hover{
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin: -7px;    
+    padding: 6px;
+}
+
+#editDesc:hover{
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin: -7px;    
+    padding: 6px;
+}
+
+#editFreqNum:hover{
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin: -7px;    
+    padding: 6px;
+}
+
 .table-striped tbody tr:nth-child(odd) {
 	background-color: #F0F0F0;
 }
