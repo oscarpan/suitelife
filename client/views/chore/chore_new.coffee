@@ -19,7 +19,8 @@ Template.newChoreForm.events
       freqNum: freqNumInput
       description: $(e.target).find('[name=choreDesc]').val()
       completed: false
-      
+
+
     ## to store the new chore in collection  
     Meteor.call 'newChore', chore, (error, id) ->
       if error

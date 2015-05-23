@@ -12,6 +12,10 @@ Template.choresView.events
     Router.go 'choresList'
     return
 
+  'hidden.bs.modal #createChoreModal': (e) ->
+    $('#choreName').val('')
+    $('#choreDesc').val('') 
+
   'shown.bs.modal #createChoreModal': (e) ->
     $('#choreName').focus()
 
@@ -20,7 +24,6 @@ Template.choreCalendar.helpers
   options: ->
   	{
       height: 300
-      eventColor: '#9987ca'
       defaultView: 'basicWeek'
       header:
         center: 'basicWeek, month'
@@ -52,6 +55,7 @@ Template.choreCalendar.helpers
         choreEvents.forEach (evt) ->
           ## console.log evt
           freq = freqToString evt.frequency
+          eventColor = getColor evt
           if evt.frequency > 0
             repeating = 0
             incDay = 0
@@ -60,6 +64,7 @@ Template.choreCalendar.helpers
                 id: evt._id
                 title: evt.title
                 start: moment(evt.startDate).add incDay, freq
+                color: eventColor
                 allDay: true
               if evt.frequency == '14'
                 incDay++
@@ -71,6 +76,7 @@ Template.choreCalendar.helpers
                 id: evt._id
                 title: evt.title
                 start: evt.startDate
+                color: eventColor
                 allDay: true
 
         ## Callback to pass events to the calendar
@@ -111,4 +117,14 @@ freqToString = (freq) ->
   else if freq == '30'
     'M'
 
+getColor = (evt) ->
+  date = new Date
+  date.setDate date.getDate() - 1
+
+  color = '#9987ca'
+  if evt.startDate < date and not evt.completed
+    color = '#d9534f'
+  else if evt.completed
+    color = '#5cb85c'
+  color
 

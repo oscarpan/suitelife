@@ -1,7 +1,9 @@
 Template.choresList.helpers 
   chores: ->
     ## display chores in descending order
-    Chores.find {}, sort: startDate: 1
+    Chores.find {}, sort: 
+      startDate: 1
+      createdAt: 1
 
 Template.choreItem.events
   'click .listDetail': (e) ->
