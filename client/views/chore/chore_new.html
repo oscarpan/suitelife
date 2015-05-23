@@ -39,7 +39,7 @@
       		<div class="row">
       			<div class="col-md-10">
         			<div class="input-group">
-          			<input id="freqNum" name="freqNum" class="form-control" placeholder="1" onfocus="this.placeholder = ''" onblur="this.placeholder = '1'" type="text">
+          			<input id="freqNum" name="freqNum" class="form-control" placeholder="1" onfocus="this.placeholder = ''" onblur="this.placeholder = '1'" type="text" disabled required>
           			<span class="input-group-addon">times</span>
         			</div>
       			</div>
@@ -61,6 +61,14 @@
       	</div>
     	</div>
     </div>
+
+    <div class="form-group">
+      <label class="control-label" for="choreDesc">Chore Description</label>
+      <div class="controls col-md-12">                     
+        <textarea id="choreDesc" name="choreDesc" placeholder="Give your chore a description!" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Give your chore a description!'"  maxlength="500" rows="4"></textarea>
+      </div>
+    </div>
+    
 
     <div class="form-group">
         <div class="text-right">

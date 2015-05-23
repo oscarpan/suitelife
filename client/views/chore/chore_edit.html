@@ -17,7 +17,7 @@
       		<label class="row control-label" for="choreName">Chore Name</label>  
       		<div class="row">
 						<div class="col-md-10">
-        			<input id="choreName" name="choreName" type="text" placeholder="Name Your Chore" class="form-control input-md" required="" value="{{title}}">
+        			<input id="choreEditName" name="choreName" type="text" placeholder="Name Your Chore" class="form-control input-md" required="" value="{{title}}">
       			</div>
       		</div>
     		</div>
@@ -41,7 +41,7 @@
       		<div class="row">
       			<div class="col-md-10">
         			<div class="input-group">
-          			<input id="freqNum" name="freqNum" class="form-control" placeholder="1" onfocus="this.placeholder = ''" onblur="this.placeholder = '1'" type="text">
+          			<input id="freqNum" name="freqNum" class="form-control" placeholder="1" onfocus="this.placeholder = ''" onblur="this.placeholder = '1'" type="text" disabled required>
           			<span class="input-group-addon">times</span>
         			</div>
       			</div>
@@ -62,6 +62,13 @@
         		</div>
       	</div>
     	</div>
+    </div>
+
+    <div class="form-group">
+      <label class="control-label" for="choreDesc">Chore Description</label>
+      <div class="controls col-md-12">                     
+        <textarea id="choreDesc" name="choreDesc" placeholder="Give your chore a description!" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Give your chore a description!'" maxlength="500" rows="4">{{description}}</textarea>
+      </div>
     </div>
 
     <div class="form-group">

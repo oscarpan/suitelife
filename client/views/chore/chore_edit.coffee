@@ -5,13 +5,19 @@ Template.editChoreForm.events
     currentId = @_id
     
     startDay = $('#datepicker').datepicker 'getDate'
+    frequencyInput = $(e.target).find('[name=repeat-freqs]').val()
+    freqNumInput = $(e.target).find('[name=freqNum]').val()
+    if frequencyInput == '0'
+      freqNumInput = null
+
     ## edit object
     choreEdits =
       assignee: $(e.target).find('[name=assignee]').val()
       title: $(e.target).find('[name=choreName]').val()
       startDate: startDay
-      frequency: $(e.target).find('[name=repeat-freqs]:checked').val()
-      freqNum: $(e.target).find('[name=freqNum]').val()   
+      frequency: frequencyInput
+      freqNum: freqNumInput
+      description: $(e.target).find('[name=choreDesc]').val()
 
     ## edit function for collection managing
     Meteor.call 'editChore', choreEdits, currentId, (error, id) ->
@@ -33,6 +39,14 @@ Template.editChoreForm.events
         return
     return
 
+  'change #repeat-freqs': (e) ->
+    e.preventDefault()
+    frequency = $('#repeat-freqs').val()
+    if frequency == '0'
+      $('#freqNum').prop 'disabled', true
+    else
+      $('#freqNum').prop 'disabled', false  
+
 Template.editChoreForm.helpers
   choreEvent: ->
     # Get the data context for the edit
@@ -44,6 +58,4 @@ Template.editChoreForm.helpers
     usr = Meteor.users.findOne id
     if usr.profile?
       userName = usr.profile.first_name + " " + usr.profile.last_name
-
-
 

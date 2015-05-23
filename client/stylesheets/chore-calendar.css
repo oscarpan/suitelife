@@ -1,5 +1,36 @@
+#choreDesc {
+    resize: none;
+    width: 100%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box; 
+    border-style: none; 
+    border-color: Transparent; 
+    overflow: auto;       
+}
 
+#choreDesc:hover{
+	border: 1px solid #ccc;
+  	border-radius: 4px;
+  	margin: -1px;
+}
+
+#choreEditName {
+    border-style: none; 
+    border-color: Transparent; 
+    overflow: auto;       
+}
+
+#choreEditName:hover{
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-left: -1px;
+}
 
 .table-striped tbody tr:nth-child(odd) {
 	background-color: #F0F0F0;
 }
+
+/*#listTable{    
+    table-layout:fixed;
+}*/

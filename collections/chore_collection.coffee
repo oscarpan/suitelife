@@ -13,3 +13,14 @@ Meteor.methods
     chore.updatedAt = (new Date).getTime()
     Chores.update id, $set: chore
     id
+  completeChore: (id) ->
+    chore = Chores.findOne id
+    isCompleted = chore.completed
+    if isCompleted
+      Chores.update id, $set:
+        completed: false
+    else
+      Chores.update id, $set:
+        completed: true
+        completedOn: new Date()
+    id

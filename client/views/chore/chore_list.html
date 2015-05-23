@@ -18,15 +18,18 @@
     </div>
 
     <div class="panel-body container-fluid">
-    	<table class="table table-striped">
+    	<table class="table table-striped" id="listTable">
     		{{#if chores.count}}
     		<thead>
       		<tr>
-       			<th>Name</th>
-        		<th>Date</th>
+      			<th>Date</th>
+       			<th>Name</th>       		
         		<th>How Often</th>
             <th>How Long</th>
+            <th>Description</th>
         		<th>Assigned</th>
+            <th>Completed On</th>
+            <th></th>
       		</tr>
     		</thead>
     		<tbody>
@@ -46,12 +49,25 @@
 
 <!-- chore details in a row, each part in a different column -->
 <template name="choreItem">
-  <tr>
+  <tr class="{{completeColor completed}}">
+  	<td>{{dateFormat startDate}}</td>
     <td>{{title}}</td>    
-    <td>{{dateFormat startDate}}</td>
     <td>{{freqString frequency}}</td>
-    <td>{{freqNum}}</td>
+    <td>{{freqFormat freqNum}}</td>
+    <td>{{isEmpty description}}</td>
     <td>{{assignFormat assignee}}</td>
-    <td><button class="btn btn-default listDelete">Delete Chore</button></td>
+    <td>
+      {{#if completed}}
+        <span class="text-success">{{dateFormat completedOn}}</span>
+      {{/if}}
+    </td>
+    <td align="right">
+      <button class="btn btn-xs btn-success completed">
+        <i class="fa fa-check"></i>
+      </button>
+      <button class="btn btn-xs btn-danger listDelete">
+        <i class="fa fa-times"></i>
+      </button>
+    </td>
   </tr>
 </template>

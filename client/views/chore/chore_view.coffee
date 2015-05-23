@@ -1,5 +1,3 @@
-Session.setDefault 'activeModal', 'newChoreForm'
-
 ## for going to different pages
 Template.choresView.events 
   'click .new': (e) ->
@@ -13,11 +11,6 @@ Template.choresView.events
     e.preventDefault()
     Router.go 'choresList'
     return
-
-  # needed to reset the modal - the datepicker doesn't like setting the session at the same time
-  'hidden.bs.modal #createChoreModal': (e) ->
-    e.preventDefault()
-    Session.set 'activeModal', 'newChoreForm'
 
   'shown.bs.modal #createChoreModal': (e) ->
     $('#choreName').focus()
@@ -40,13 +33,14 @@ Template.choreCalendar.helpers
         
       eventClick: (calEvent, jsEvent, view) ->
         ## Get the clicked event and set the data context for edit
+        Session.set 'activeModal', 'editChoreForm'
         choreEvent = Chores.findOne(calEvent._id)
         Session.set 'choreEvent', choreEvent
 
         eventDate = moment(choreEvent.startDate).format('YYYY/MM/DD')
         $('#datepicker').datepicker 'setDate', eventDate
         $('#createChoreModal').modal('show')
-        Session.set 'activeModal', 'editChoreForm'
+        
 
       ## Let's get the chores!
       events: (start, end, timezone, callback) ->
@@ -59,18 +53,18 @@ Template.choreCalendar.helpers
           ## console.log evt
           freq = freqToString evt.frequency
           if evt.frequency > 0
-            i = 0
-            j = 0
-            while i < evt.freqNum
+            repeating = 0
+            incDay = 0
+            while repeating < evt.freqNum
               events.push
                 id: evt._id
                 title: evt.title
-                start: moment(evt.startDate).add j, freq
+                start: moment(evt.startDate).add incDay, freq
                 allDay: true
               if evt.frequency == '14'
-                j++
-              i++
-              j++
+                incDay++
+              repeating++
+              incDay++
             return
           else
             events.push
@@ -94,6 +88,9 @@ Template.choreCalendar.onRendered ->
     fc.fullCalendar 'refetchEvents'
     return
   return
+
+Template.choresView.onRendered ->
+  Session.setDefault 'activeModal', 'newChoreForm'
 
 Template.createChore.helpers 
   # getter for creating state

@@ -1,7 +1,7 @@
 Template.choresList.helpers 
   chores: ->
     ## display chores in descending order
-    Chores.find {}, sort: createdAt: -1
+    Chores.find {}, sort: startDate: 1
 
 Template.choreItem.events
   'click .listDetail': (e) ->
@@ -21,9 +21,15 @@ Template.choreItem.events
         return
     return
 
+  'click .completed': (e) ->
+    currentId = @_id
+    Meteor.call 'completeChore', currentId, (error, id) ->
+      if error
+        return alert(error.reason)
+
 Template.choreItem.helpers
   dateFormat: (date) ->
-    moment(date).format('MMMM Do')
+    moment(date).format('MM/DD/YY')
   freqString: (freq) ->
     if freq == '0'
       'Once'
@@ -38,3 +44,15 @@ Template.choreItem.helpers
   assignFormat: (assigneeId) ->
     assignee = Meteor.users.findOne assigneeId
     assignee.profile.first_name + " " + assignee.profile.last_name
+  freqFormat: (freqNum) ->
+    if freqNum == null
+      'N/A'
+    else
+      freqNum
+  completeColor: (completed) ->
+    "success" if completed
+  isEmpty: (desc) ->
+    if desc == ''
+      'No description'
+    else
+      desc
