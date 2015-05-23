@@ -35,3 +35,7 @@
 .money input{
     width: 50px;
 }
+
+.modal-body strong {
+  margin-left: 3em;
+}

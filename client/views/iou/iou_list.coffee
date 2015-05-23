@@ -40,6 +40,9 @@ Template.iouItem.events
     Meteor.call 'deleteIou', currentId, (error, id) ->
       if error
         return alert(error.reason)
+      $('#delete' + currentId + 'Modal').modal('hide')
+      $('body').removeClass('modal-open')
+      $('.modal-backdrop').remove()
       return
 
     return
