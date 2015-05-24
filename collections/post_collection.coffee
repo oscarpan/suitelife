@@ -3,7 +3,6 @@ root.Posts = new (Meteor.Collection)('posts')
 # Note: this will allow ALL users to insert, update, and delete Posts
 Meteor.methods
   deletePost: (id) ->
-    console.log id
     Posts.remove id
   newPost: (post, suite_id) ->
     post.createdAt = moment().format 'MMMM Do YYYY, h:mm:ss a'

@@ -1,18 +1,24 @@
 ##### POSTS #####
 
-Template.postsList.events 'click .new': (e) ->
-	e.preventDefault()
-	post = 														
-		authorId: Meteor.userId()
-		lastEditor: Meteor.userId()
-		lastEdited: moment().format 'MMMM Do YYYY, h:mm:ss a'
-		pinned: false
-		imagePath: null
-		message: null
-	Meteor.call 'newPost', post, Session.get('suite')._id, (error, id) ->
-		if error
-			return alert(error.reason)
-	return
+Template.postsList.events 
+	'click .new': (e) ->
+		e.preventDefault()
+		post = 														
+			authorId: Meteor.userId()
+			lastEditor: Meteor.userId()
+			lastEdited: moment().format 'MMMM Do YYYY, h:mm:ss a'
+			pinned: false
+			imagePath: null
+			message: null
+		Meteor.call 'newPost', post, Session.get('suite')._id, (error, id) ->
+			if error
+				return alert(error.reason)
+		return
+	'click .delete' : (e) ->
+		id = e.target.attributes.postId.value
+		Meteor.call 'deletePost', id, (error) ->
+			if error
+				return alert(error.reason)
 
 Template.postsList.helpers 
 	posts: ->

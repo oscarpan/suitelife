@@ -4,6 +4,7 @@ Template.choresView.events
     e.preventDefault()
     Session.set 'activeModal', 'newChoreForm'
     Session.set 'startDay', 'today'
+    $('#choresModule').draggable(disabled:true)
     $('#createChoreModal').modal('show')
     return
 
@@ -15,6 +16,7 @@ Template.choresView.events
   'hidden.bs.modal #createChoreModal': (e) ->
     $('#choreName').val('')
     $('#choreDesc').val('') 
+    $('#choresModule').draggable(disabled:false)    
     Session.set 'activeModal', ''
 
   'shown.bs.modal #createChoreModal': (e) ->
@@ -54,9 +56,7 @@ Template.choreCalendar.helpers
         choreEvents = Chores.find()
         ## For loop to pass each chore to events array
         choreEvents.forEach (evt) ->
-          ## console.log evt
           freq = freqToString evt.frequency
-          console.log freq
           eventColor = getColor evt
           if evt.frequency > 0
             repeating = 0

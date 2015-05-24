@@ -35,7 +35,9 @@
 
 <template name="Post">
 	<div class="post-container">
-    <button type="button" class="btn btn-primary deleteButton">Delete</button>
+    <button type="button" class="btn btn-xs btn-danger" style="position: absolute; right: 20px; margin-top: -5px" postId="{{_id}}">
+    	<i class="fa fa-times"></i>
+    </button>
 		<h4 class="editable-text-trigger">	
 			{{> editableText collection="posts" field="message" placeholder="Post message" removeEmpty=true wysiwyg=true beforeUpdate="whoDunnitPosts" beforeInsert="whoDunnitPosts" substitute='<i class="fa fa-pencil"></i>'}}
 		</h4>

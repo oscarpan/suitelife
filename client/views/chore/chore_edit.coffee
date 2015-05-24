@@ -3,7 +3,6 @@ Template.editChoreForm.events
   'submit form': (e) ->
     e.preventDefault()
     currentId = @_id
-    
     startDay = $('#datepicker').datepicker 'getDate'
     frequencyInput = $(e.target).find('[name=repeat-freqs]').val()
     freqNumInput = $(e.target).find('[name=freqNum]').val()

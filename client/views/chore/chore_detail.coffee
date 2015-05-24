@@ -26,7 +26,7 @@ Template.choreDetail.helpers
       Suites.findOne(Session.get('suite')._id).users
   getUserName: (id) ->
     usr = Meteor.users.findOne id
-    if usr.profile?
+    if usr?.profile?.first_name?
       userName = usr.profile.first_name + " " + usr.profile.last_name
   choreEvent: ->
     Session.get 'choreEvent'

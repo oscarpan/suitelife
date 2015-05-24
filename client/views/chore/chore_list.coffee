@@ -45,7 +45,8 @@ Template.choreItem.helpers
       'Monthly'
   assignFormat: (assigneeId) ->
     assignee = Meteor.users.findOne assigneeId
-    assignee.profile.first_name + " " + assignee.profile.last_name
+    if assignee?.profile?.first_name?
+      assignee.profile.first_name + " " + assignee.profile.last_name
   freqFormat: (freqNum) ->
     if freqNum == null
       'N/A'
