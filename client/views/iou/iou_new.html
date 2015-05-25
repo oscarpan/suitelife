@@ -5,21 +5,22 @@
 
     <!-- Text input-->
     <div class="form-group">
-      <label class="col-md-4 control-label" for="reason">IOU Reason</label>  
-      <div class="col-md-7">
+      <label class="col-md-4 control-label" for="reason">Reason</label>  
+      <div class="col-md-8">
         <input id="reason" name="reason" type="text" placeholder="Give a Reason for this IOU" class="form-control" required="">
       </div>
     </div>
 
     <!-- Text input-->
     <div class="form-group">
-      <label class="col-md-4 control-label" for="amount">IOU Amount</label>  
-      <div class="col-md-7">
+      <label class="col-md-4 control-label" for="amount">Amount</label>
+      <div class="col-md-8">
         <input id="amount" name="amount" type="text" placeholder="0.00" class="form-control input-md" required="" value="{{amount}}">
       </div>
     </div>
 
     <!-- Select Basic -->
+    <!--
     <div class="form-group">
       <label class="col-md-4 control-label" for="payer">Assign a payer:</label>
       <div class="col-md-7">
@@ -30,11 +31,12 @@
         </select>
       </div>
     </div>
+    -->
 
     <!-- Select Basic -->
     <div class="form-group">
-      <label class="col-md-4 control-label" for="payee">Assign a payee:</label>
-      <div class="col-md-7">
+      <label class="col-md-4 control-label" for="payee">Who do you owe?</label>
+      <div class="col-md-8">
         <select id="payee" name="payee" class="form-control">
           {{#each users}}
             <option value="{{this}}">{{getUserName this}}</option>

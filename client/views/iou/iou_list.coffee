@@ -6,7 +6,7 @@ Template.iousList.helpers
 
 Template.iousList.events
   'hidden.bs.modal #newIouModal': (e) ->
-    $('#iousModule').draggable(disabled:false)    
+    $('#iousModule').draggable(disabled:false)
 
   'shown.bs.modal #newIouModal': (e) ->
     $('#iousModule').draggable(disabled:true)
@@ -20,12 +20,12 @@ Template.iouItem.helpers
   dateFormat: (date) ->
     moment(date).format('MMM Do')
   amountFormat: (amount, payerId, payeeId) ->
-    if payerId == Meteor.userId() 
+    if payerId == Meteor.userId()
       payee = Meteor.users.findOne payeeId
       if payee?.profile?.first_name?
         "<span class='text-success'>" +
-          "You owe " + payee.profile.first_name + " " + payee.profile.last_name +
-          #" $" + #amount +
+          "You owe " + payee.profile.first_name + " " +
+          payee.profile.last_name +
           "</span>"
     else if payeeId == Meteor.userId()
       payer = Meteor.users.findOne payerId

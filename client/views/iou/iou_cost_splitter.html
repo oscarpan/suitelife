@@ -1,0 +1,46 @@
+<template name="costSplitter">
+
+	<div class="container-fluid">
+
+	    <form class="form-horizontal">
+
+		    <!-- Text input-->
+		    <div class="form-group">
+		      <label class="col-md-3 control-label" for="reason">Reason</label>  
+		      <div class="col-md-8">
+		        <input id="reason" name="reason" type="text" placeholder="Give a Reason for this IOU" class="form-control" required="">
+		      </div>
+		    </div>
+
+		    <!-- Text input-->
+		    <div class="form-group">
+		      <label class="col-md-3 control-label" for="amount">Amount</label>
+		      <div class="col-md-8">
+		        <input id="amount" name="amount" type="text" placeholder="0.00" class="form-control input-md" required="" value="{{amount}}">
+		      </div>
+		    </div>
+
+			<hr>
+
+		    <div class="form-group">
+			    <div class="row">
+				    <label class="col-md-3 control-label" for="cost-splitter">Cost Splitter</label>
+				    <div class="col-md-8 control-label checkbox text-right">
+					    <input type="checkbox">
+				    	Split Evenly
+				    </div>
+			    </div>
+			    <div class="row">
+				    <div class="col-md-offset-2 col-md-4 checkbox">
+					    <input type="checkbox">
+					    Peter Yao
+				    </div>
+
+			    </div>
+		    </div>
+
+		</form>
+
+	</div>
+
+</template>

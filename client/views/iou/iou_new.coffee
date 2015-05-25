@@ -11,12 +11,10 @@ Template.iouNew.helpers
 Template.iouNew.events
   'submit form': (e) ->
     e.preventDefault()
-    payer = $(e.target).find('[name=payer]').val()
-    payee = $(e.target).find('[name=payee]').val()
 
     iou =
-      payerId:    payer
-      payeeId:    payee
+      payerId:    Meteor.user()._id
+      payeeId:    $(e.target).find('[name=payee]').val()
       reason:     $(e.target).find('[name=reason]').val()
       amount:     $(e.target).find('[name=amount]').val()
       paid:       false
