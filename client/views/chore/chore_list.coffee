@@ -45,19 +45,13 @@ Template.choreItem.helpers
       'Monthly'
   assignFormat: (assigneeId) ->
     assignee = Meteor.users.findOne assigneeId
-    if assignee?.profile?.first_name?
-      assignee.profile.first_name + " " + assignee.profile.last_name
-  freqFormat: (freqNum) ->
-    if freqNum == null
-      'N/A'
-    else
-      freqNum
+    (assignee.profile.first_name.charAt 0) + (assignee.profile.last_name.charAt 0)
   completeColor: (completed, startDate) ->
     if completed
-      "success"
+      "list-group-item-success"
     else
       date = new Date
       date.setDate date.getDate() - 1
 
       if startDate < date and not completed
-        "danger"
+        "list-group-item-danger"

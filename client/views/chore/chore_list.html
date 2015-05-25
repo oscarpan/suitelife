@@ -1,8 +1,6 @@
 <!-- view chores in a list -->
 
 <template name="choresList">
-
-  {{> createChore}}
   <div class="panel panel-default">
     <div class="panel-heading">
       <div class="row">
@@ -17,15 +15,25 @@
       </div>
     </div>
 
-    <div class="panel-body container-fluid">
-    	<table class="table table-striped" id="listTable">
+    <div class="panel-body container-fluid homeOverflow" id="choreList">
+      <ul class="list-group">
+        {{#if chores.count}}
+          {{#each chores}}
+            {{> choreItem}}
+          {{/each}}
+        {{else}}
+          <li class="list-group-item empty-note text-center disabled">
+            There are no chores! Add a chore by clicking a specific date or the New button on the calendar.
+          </li>
+      {{/if}}
+      </ul>
+
+      <!--<table class="table table-striped" id="listTable">
     		{{#if chores.count}}
     		<thead>
       		<tr>
       			<th>Date</th>
-       			<th>Name</th>       		
-        		<th>How Often</th>
-            <th>How Long</th>
+       			<th>Name</th>
             <th>Description</th>
         		<th>Assigned</th>
             <th>Completed On</th>
@@ -42,38 +50,50 @@
       			<td class="empty-note text-center"> No Chores</td>
       		</tr>
       	{{/if}}
-    	</table>
+    	</table>-->
     </div>
   </div>
 </template>
 
 <!-- chore details in a row, each part in a different column -->
 <template name="choreItem">
-  <tr class="{{completeColor completed startDate}}">
-  	<td>{{dateFormat startDate}}</td>
-    <td><span id="editTitle">{{> editableText collection="chores" field="title"}}</span></td>
-    <td id="editFreq">{{freqString frequency}}</td>
+  <li class="list-group-item {{completeColor completed startDate}}">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12" id="dateHeader">
+          {{dateFormat startDate}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-1" id ="initials" align="left">
+          {{assignFormat assignee}}
+        </div>
+        <div class="col-md-9" id="editTitle">
+          {{> editableText collection="chores" field="title"}}
+        </div>
+        <div class="col-md-2">
+          <i class="fa fa-comment"></i>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-8">
+          {{#if completed}}
+            <span class="text-success">{{dateFormat completedOn}}</span>
+          {{/if}}
+        </div>
+        <div class="col-md-4" align="right">
+          <button class="btn btn-xs btn-success completed">
+            <i class="fa fa-check"></i>
+          </button>
+          <button class="btn btn-xs btn-danger listDelete">
+            <i class="fa fa-times"></i>
+          </button>
+        </div>
+      </div>
 
-    {{#if frequency}}
-    	<td><span id="editFreqNum">{{> editableText collection="chores" field="freqNum" type="number" substitute="N/A"}}</span></td>
-    {{else}}
-    	<td><span>No Description</span></td>
-    {{/if}}
 
-    <td><span id="editDesc">{{> editableText collection="chores" field="description" acceptEmpty="true" substitute="N/A"}}</span></td>
-    <td>{{assignFormat assignee}}</td>
-    <td>
-      {{#if completed}}
-        <span class="text-success">{{dateFormat completedOn}}</span>
-      {{/if}}
-    </td>
-    <td align="right">
-      <button class="btn btn-xs btn-success completed">
-        <i class="fa fa-check"></i>
-      </button>
-      <button class="btn btn-xs btn-danger listDelete">
-        <i class="fa fa-times"></i>
-      </button>
-    </td>
-  </tr>
+    </div>
+  </li>
+    <!--<td><span id="editDesc">{{> editableText collection="chores" field="description" acceptEmpty="true" substitute="N/A"}}</span></td>-->
+      
 </template>

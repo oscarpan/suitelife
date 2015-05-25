@@ -5,25 +5,25 @@ Template.newChoreForm.events
 
     ## Find which reptition value is checked
     startDay = $('#datepicker').datepicker 'getDate'
-    frequencyInput = $(e.target).find('[name=repeat-freqs]').val()
-    freqNumInput = $(e.target).find('[name=freqNum]').val()
-    frequencyInput = parseInt(frequencyInput)
-    if frequencyInput == 0
-      freqNumInput = null
+    frequency = $(e.target).find('[name=repeat-freqs]').val()
+    frequency = parseInt(frequency)
+    
+    freqNum = $(e.target).find('[name=freqNum]').val()
+    if frequency == 0
+      freqNum = null
 
     ## object to send to new chore func
     chore =
       assignee: $(e.target).find('[name=assignee]').val()
       title: $(e.target).find('[name=choreName]').val()
       startDate: startDay
-      frequency: frequencyInput
-      freqNum: freqNumInput
       description: $(e.target).find('[name=choreDesc]').val()
       completed: false
 
+    freqString = freqToString frequency
 
     ## to store the new chore in collection  
-    Meteor.call 'newChore', chore, (error, id) ->
+    Meteor.call 'newChore', chore, frequency, freqString, freqNum, (error, id) ->
       if error
         return alert(error.reason)
       $('#createChoreModal').modal 'hide'
@@ -49,6 +49,7 @@ Template.newChoreForm.helpers
 
 Template.newChoreForm.onRendered ->
   startDay = Session.get 'startDay'
+  console.log startDay
   $('#datepicker').datepicker 'setDate', startDay
 
 Template.dates.onRendered ->
@@ -57,3 +58,10 @@ Template.dates.onRendered ->
     startDate: 'today'
     format: 'yyyy/mm/dd'
 
+freqToString = (freq) ->
+  if freq <= 1
+    'd'
+  else if freq == 7 or freq == 14
+    'w'
+  else if freq == 30
+    'M'
