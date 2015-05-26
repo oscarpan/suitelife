@@ -9,6 +9,14 @@ Template.newChoreForm.events
     frequency = parseInt(frequency)
     
     freqNum = $(e.target).find('[name=freqNum]').val()
+     ## Ensure frequency is a number
+    if isNaN freqNum
+      alert "Chore frequency must be an integer value."
+      return false
+    ## Ensure input is a positve integer
+    else if ( Number freqNum < 0 ) || ( Number freqNum % 1 != 0 )
+      alert "Chore frequency must be a positive integer."
+      return false
     if frequency == 0
       freqNum = null
 
