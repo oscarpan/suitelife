@@ -4,12 +4,14 @@ Template.iousList.helpers
     $or: [ { payerId: Meteor.userId() }, { payeeId: Meteor.userId() } ]
     })
 
+###
 Template.iousList.events
   'hidden.bs.modal #newIouModal': (e) ->
     $('#iousModule').draggable(disabled:false)
 
   'shown.bs.modal #newIouModal': (e) ->
     $('#iousModule').draggable(disabled:true)
+    ###
 
 Template.iouItem.helpers
   users: ->
