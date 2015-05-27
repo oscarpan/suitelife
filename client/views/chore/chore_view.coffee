@@ -4,7 +4,6 @@ Template.choresView.events
     e.preventDefault()
     Session.set 'activeModal', 'newChoreForm'
     Session.set 'startDay', 'today'
-    $('#choresModule').draggable(disabled:true)
     $('#createChoreModal').modal('show')
     return
 
@@ -20,6 +19,8 @@ Template.choresView.events
     Session.set 'activeModal', ''
 
   'shown.bs.modal #createChoreModal': (e) ->
+    console.log $('#choresModule')
+    $('#choresModule').draggable(disabled:true)
     $('#choreName').focus()
 
 Template.choreCalendar.helpers 

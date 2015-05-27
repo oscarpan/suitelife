@@ -1,16 +1,16 @@
 <template name="Home">
-	<div style="margin: 0 30px" id="home" class="packery">
-		<div class="packery-item" id="postModule">
+	<div id="home" class="packery" style="margin-left:20px">
+		<div class="packery-item" id="postsModule">
 			{{> postsList}}
+		</div>
+		<div class="packery-item" id="calModule">
+			{{> choresView}}
 		</div>
 		<div class="packery-item" id="iousModule">
 			{{> iousList}}
 		</div>
 		<div class="packery-item" id="choresModule">
 			{{> choresList}}
-		</div>
-		<div class="packery-item" id="calModule">
-			{{> choresView}}
 		</div>
 	</div>
 </template>

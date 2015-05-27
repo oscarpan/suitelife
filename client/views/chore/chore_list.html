@@ -15,7 +15,7 @@
       </div>
     </div>
 
-    <div class="panel-body container-fluid homeOverflow" id="choreList">
+    <div class="panel-body container-fluid" id="choresList">
       <ul class="list-group">
         {{#if chores.count}}
           {{#each chores}}
@@ -82,10 +82,10 @@
           {{/if}}
         </div>
         <div class="col-md-4" align="right">
-          <button class="btn btn-xs btn-success completed">
+          <button class="btn btn-md btn-success completed">
             <i class="fa fa-check"></i>
           </button>
-          <button class="btn btn-xs btn-danger listDelete">
+          <button class="btn btn-md btn-danger listDelete">
             <i class="fa fa-times"></i>
           </button>
         </div>

@@ -29,7 +29,7 @@ Template.postsList.helpers
 
 #WIP
 # Template.postsList.onRendered ->
-# 	$container = $('#post-container').packery(
+# 	$container = $('#postList').packery(
 # 	  columnWidth: 80
 # 	  rowHeight: 80)
 # 	# get item elements, jQuery-ify them

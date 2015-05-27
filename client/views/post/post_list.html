@@ -20,10 +20,10 @@
 			Need to change so 'each post' generates a list-group-item,
 			see iou_list for an example. This is just a placeholder.
 		-->
-		<div class="panel-body homeOverflow" id="post-container">
+		<div class="panel-body" id="postsList">
 			<div id="container">
 				{{#each posts}}
-				<div class="post-item" style="border: 1px solid gray">
+				<div class="post-item" >
 					{{> Post}}
 				</div>
 				{{/each}}
@@ -34,20 +34,25 @@
 </template>
 
 <template name="Post">
-	<div class="post-container">
-    <button type="button" class="btn btn-xs btn-danger delete" style="position: absolute; right: 20px; margin-top: -5px" postId="{{_id}}">
-    	<i class="fa fa-times"></i>
-    </button>
-		<h4 class="editable-text-trigger">	
-			{{> editableText collection="posts" field="message" placeholder="Post message" removeEmpty=true wysiwyg=true beforeUpdate="whoDunnitPosts" beforeInsert="whoDunnitPosts" substitute='<i class="fa fa-pencil"></i>'}}
-		</h4>
-			<!--{{#if imagePath.url}}
-				<img class="bulletin-image" src={{imagePath.url}}>
-			{{#else}}
-				{{> uploader}}	 #TODO: conditional on editing text
-			{{/if}}
-			-->
-
+	<div class="post-container" style="border: 1px solid gray">
+		<div class="row">
+		  <div class="col-md-11">
+				<h4 class="editable-text-trigger">	
+					{{> editableText collection="posts" field="message" placeholder="Post message" removeEmpty=true wysiwyg=true beforeUpdate="whoDunnitPosts" beforeInsert="whoDunnitPosts" substitute='<i class="fa fa-pencil"></i>'}}
+				</h4>
+			</div>
+	    <div class="col-md-1" style="text-align:right">
+		    <span type="button" class="btn btn-xs btn-danger delete" postId="{{_id}}">
+		    	<i class="fa fa-times"></i>
+		    </span>
+		  </div>
+				<!--{{#if imagePath.url}}
+					<img class="bulletin-image" src={{imagePath.url}}>
+				{{#else}}
+					{{> uploader}}	 #TODO: conditional on editing text
+				{{/if}}
+				-->
+		</div>
 		<div class="row" style="font-size: 10px">
 			<div class="col-md-4"> author: {{getEmail authorId}} </div>
 			<div class="col-md-4"> last edited: {{lastEdited}} </div>
@@ -71,7 +76,7 @@
 
 <template name="newPost">
 
-	<span class="btn btn-xs btn-primary my-btn editable-text-trigger new">
+	<span class="btn btn-md btn-primary my-btn editable-text-trigger new">
 		<i class="fa fa-plus"></i> New
 	</span>
 

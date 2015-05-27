@@ -57,5 +57,4 @@ Template.iouItem.events
       return
 
     return
-
-Template.iouItem.rendered = ->
+  
