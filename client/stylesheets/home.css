@@ -1,0 +1,45 @@
+body {
+	background: lavender;
+}
+
+.panel-title{
+	font-size: 32px;
+}
+
+.home {
+	margin: 0 30px;
+}
+
+.panel-body {
+	overflow-y: scroll;
+}
+
+#postsModule > .panel {
+	min-width: 640px;
+	min-height: 300px;	
+	width: 1200px;
+	height: 300px;
+}
+
+#iousModule > .panel {
+	min-width: 525px;
+	min-height: 175px;
+	width: 525px;
+	height: 175px;
+}
+
+#choresModule > .panel {
+	min-width: 525px;
+	min-height: 175px;
+	width: 525px;
+	height: 175px;
+}
+
+#calModule > .panel {
+	min-width: 640px;
+	min-height: 300px;
+	width: 640px;
+	height: 300px;
+}
+
+
