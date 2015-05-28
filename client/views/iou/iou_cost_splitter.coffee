@@ -5,5 +5,9 @@ Template.costSplitter.helpers
     usr = Meteor.users.findOne id
     userName = usr.profile.first_name + " " + usr.profile.last_name
 
-Template.costSplitter.rendered = ->
-  ###$(".slider").no
+Template.costSplitter.events
+  'keypress #amount': (e) ->
+    usersList = Suites.findOne({ users: Meteor.userId() }).users
+    #usersList : rsEQZAcSkSRcoKyZv,iEGn8MtLz4vgQ6doF
+    alert(usersList)
+    return

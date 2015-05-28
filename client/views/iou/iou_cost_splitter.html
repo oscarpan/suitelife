@@ -8,7 +8,7 @@
 		    <div class="form-group">
 		      <label class="col-md-3 control-label" for="reason">Reason</label>  
 		      <div class="col-md-8">
-		        <input id="reason" name="reason" type="text" placeholder="Give a Reason for this IOU" class="form-control" required="">
+		        <input id="reason" name="reason" type="text" placeholder="What cost are you splitting?" class="form-control" required="">
 		      </div>
 		    </div>
 
@@ -16,7 +16,10 @@
 		    <div class="form-group">
 		      <label class="col-md-3 control-label" for="amount">Amount</label>
 		      <div class="col-md-8">
-		        <input id="amount" name="amount" type="text" placeholder="0.00" class="form-control input-md" required="" value="{{amount}}">
+				<div class="input-group">
+			      <div class="input-group-addon">$</div>
+			      <input type="text" class="form-control input-md" id="amount" name="amount" placeholder="0.00" value="{{amount}}">
+			    </div>
 		      </div>
 		    </div>
 
@@ -26,22 +29,28 @@
 			    <div class="row">
 				    <label class="col-md-3 control-label" for="cost-splitter">Cost Splitter</label>
 				    <div class="col-md-8 control-label checkbox text-right">
-					    <input type="checkbox">
+					    <input type="checkbox" checked>
 				    	Split Evenly
 				    </div>
 			    </div>
 	    		{{#each users}}
+	    		<br>
 			    <div class="row">
-				    <div class="col-md-offset-2 col-md-4 checkbox">
+				    <div class="col-md-2 col-md-offset-2 checkbox">
 					    <input type="checkbox">
 					    {{userName this}}
 				    </div>
-					<div class="col-md-3">
-						<div class="slider" id ="slider-{{this}}">
-						</div>
+					<div class="col-md-3 col-md-offset-1 text-right">
+						<div class="input-group">
+					      <div class="input-group-addon">%</div>
+					      <input type="text" class="form-control splitPercent" placeholder="50" value="">
+					    </div>
 					</div>
-					<div class="col-md-2 text-right">
-						$1.00
+					<div class="col-md-3 text-right">
+						<div class="input-group">
+					      <div class="input-group-addon">$</div>
+					      <input type="text" class="form-control splitCost" placeholder="1.00" value="">
+					    </div>
 					</div>
 			    </div>
 				{{/each}}

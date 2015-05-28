@@ -15,7 +15,10 @@
     <div class="form-group">
       <label class="col-md-4 control-label" for="amount">Amount</label>
       <div class="col-md-8">
-        <input id="amount" name="amount" type="text" placeholder="0.00" class="form-control input-md" required="" value="{{amount}}">
+        <div class="input-group">
+            <div class="input-group-addon">$</div>
+            <input type="text" class="form-control input-md" id="amount" name="amount" placeholder="0.00" value="{{amount}}">
+          </div>
       </div>
     </div>
 
