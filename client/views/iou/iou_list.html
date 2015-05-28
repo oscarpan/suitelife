@@ -13,7 +13,7 @@
         <div class="col-md-9">
           <div class="text-right">
             {{> tooltips title="IOUs" content="Keep track of money owed to your Suitemates with IOUs." }}
-            <button class="btn btn-xs btn-info log" data-toggle="modal" data-target="#newIouModal">
+            <button class="btn btn-xs btn-info log" data-toggle="modal" data-target="#iouLogModal">
               <i class="fa fa-list-alt"></i> Log
             </button>
             <button class="btn btn-xs btn-warning cost-splitter" data-toggle="modal" data-target="#costSplitterModal">
@@ -54,6 +54,22 @@
         </div>
         <div class="modal-body">
           {{> iouNew }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="iouLogModal" tabindex="-1" role="dialog" aria-labelledby="IOU Log" aria-hidden="true">
+    <div class="modal-dialog modal-large">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title" id="iouLogModalLabel">IOU Log</h4>
+        </div>
+        <div class="modal-body">
+          {{> iouLog }}
         </div>
       </div>
     </div>

@@ -39,3 +39,5 @@
 .modal-body strong {
   margin-left: 3em;
 }
+
+.modal-large { width: 800px; }
