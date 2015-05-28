@@ -37,11 +37,13 @@
         </div><!-- /.container-fluid -->
     </nav>
     {{> invite}}
+    {{> settings}}
 </template>
 
 <template name="_loginButtonsAdditionalLoggedInDropdownActions">
     <button class="btn btn-default btn-block" id="login-buttons-leave-suite">Leave Suite</button>
     <button class="btn btn-default btn-block" id="login-buttons-send-invite">Send Invite</button>
+    <button class="btn btn-default btn-block" id="login-buttons-settings">Notifications Settings</button>
 </template>
 
 <!-- template for the invite modal -->
@@ -71,4 +73,38 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
+</template>
+
+
+<!-- template for the settings modal -->
+<template name="settings">
+  <div class="modal fade" id="settingsModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Notification Settings
+              {{> tooltips title="How to setup notifications" content="Use the switches to turn on/off different types of notifications." }}</h4>
+        </div>
+        <div class="modal-body">
+          <form class="settings-form">
+            <div class="form-group">
+              <label for="new-message">New Message:</label>
+              <input type="checkbox" name="new-message" class="switch" checked>
+            </div>
+            <div class="form-group">
+              <label for="new-message">New IOU:</label>
+              <input type="checkbox" name="new-message" class="switch">
+            </div>
+            <br>
+            <button type="button" class="btn btn-warning btn-default" data-dismiss="modal">Close</button>
+            <button id="settings-submit" type="submit" class="btn btn-success btn-default"
+                    data-loading-text="Saving...">
+              <i class="fa fa-lg fa-fw fa-check"></i> Save
+            </button>
+          </form>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
 </template>
