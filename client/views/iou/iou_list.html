@@ -16,10 +16,10 @@
             <button class="btn btn-xs btn-info log" data-toggle="modal" data-target="#iouLogModal">
               <i class="fa fa-list-alt"></i> Log
             </button>
-            <button class="btn btn-xs btn-warning cost-splitter" data-toggle="modal" data-target="#costSplitterModal">
+            <button class="btn btn-md btn-warning cost-splitter" data-toggle="modal" data-target="#costSplitterModal">
               <i class="fa fa-money"></i> Cost Splitter
             </button>
-            <button class="btn btn-xs btn-primary my-btn new" data-toggle="modal" data-target="#newIouModal">
+            <button class="btn btn-md btn-primary my-btn new" data-toggle="modal" data-target="#newIouModal">
               <i class="fa fa-plus"></i> New
             </button>
           </div>
@@ -29,7 +29,7 @@
 
     </div>
 
-    <ul class="list-group homeOverflow">
+    <ul class="list-group panel-body" id="iousList">
       {{#if ious.count}}
         {{#each ious}}
           {{> iouItem}}
@@ -116,10 +116,10 @@
       </div>
       <div class="row">
         <div class="col-md-12 text-right">
-          <button class="btn btn-xs btn-success paid">
+          <button class="btn btn-md btn-success paid">
             <i class="fa fa-check"></i>
           </button>
-          <button class="btn btn-xs btn-danger" data-toggle="modal" data-target="#delete{{ _id }}Modal">
+          <button class="btn btn-md btn-danger" data-toggle="modal" data-target="#delete{{ _id }}Modal">
             <i class="fa fa-times"></i>
           </button>
         </div>

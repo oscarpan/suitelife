@@ -1,3 +1,4 @@
+#DEPRECATED#
 Template.choreDetail.events
   'submit form': (e) ->
     e.preventDefault()

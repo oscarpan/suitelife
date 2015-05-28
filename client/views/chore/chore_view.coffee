@@ -4,7 +4,6 @@ Template.choresView.events
     e.preventDefault()
     Session.set 'activeModal', 'newChoreForm'
     Session.set 'startDay', 'today'
-    $('#choresModule').draggable(disabled:true)
     $('#createChoreModal').modal('show')
     return
 
@@ -20,6 +19,8 @@ Template.choresView.events
     Session.set 'activeModal', ''
 
   'shown.bs.modal #createChoreModal': (e) ->
+    console.log $('#choresModule')
+    $('#choresModule').draggable(disabled:true)
     $('#choreName').focus()
 
 Template.choreCalendar.helpers 
@@ -33,8 +34,15 @@ Template.choreCalendar.helpers
       ## Opens up modal with infomation on the date clicked
       dayClick: (date, jsEvent, view) ->
         Session.set 'activeModal', 'newChoreForm'
-        startDay = moment(date).format('YYYY/MM/DD')
-        Session.set 'startDay', startDay
+
+        clickDate = new Date
+        clickDate.setDate clickDate.getDate() - 1
+        
+        if moment(date).toDate() < clickDate
+          Session.set 'startDay', 'today'
+        else
+          startDay = moment(date).format('YYYY/MM/DD')
+          Session.set 'startDay', startDay
         $('#createChoreModal').modal('show')
         
       eventClick: (calEvent, jsEvent, view) ->
@@ -56,30 +64,29 @@ Template.choreCalendar.helpers
         choreEvents = Chores.find()
         ## For loop to pass each chore to events array
         choreEvents.forEach (evt) ->
-          freq = freqToString evt.frequency
           eventColor = getColor evt
-          if evt.frequency > 0
-            repeating = 0
-            incDay = 0
-            while repeating < evt.freqNum
-              events.push
-                id: evt._id
-                title: evt.title
-                start: moment(evt.startDate).add incDay, freq
-                color: eventColor
-                allDay: true
-              if evt.frequency == 14
-                incDay++
-              repeating++
-              incDay++
-            return
-          else
-            events.push
-                id: evt._id
-                title: evt.title
-                start: evt.startDate
-                color: eventColor
-                allDay: true
+          #if evt.frequency > 0
+           # repeating = 0
+            #incDay = 0
+            #while repeating < evt.freqNum
+             # events.push
+              #  id: evt._id
+               # title: evt.title
+                #start: moment(evt.startDate).add incDay, freq
+                #color: eventColor
+                #allDay: true
+              #if evt.frequency == 14
+               # incDay++
+              #repeating++
+              #incDay++
+            #return
+          #else
+          events.push
+            id: evt._id
+            title: evt.title
+            start: evt.startDate
+            color: eventColor
+            allDay: true
 
         ## Callback to pass events to the calendar
         callback events
@@ -107,14 +114,6 @@ Template.createChore.helpers
       'Create a New Chore'
     else if active == 'editChoreForm'
       'Edit a Chore'
-
-freqToString = (freq) ->
-  if freq <= 1
-    'd'
-  else if freq == 7 or freq == 14
-    'w'
-  else if freq == 30
-    'M'
 
 getColor = (evt) ->
   date = new Date

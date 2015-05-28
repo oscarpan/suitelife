@@ -1,15 +1,9 @@
 Template.Home.rendered = ->
-	modules = ['postModule', 'iousModule', 'calModule', 'choresModule']
+	modules = ['postsModule', 'iousModule', 'calModule', 'choresModule']
+	bodies = ['postsList', 'iousList', 'choreCal', 'choresList']	
 
 	$( ".panel").resizable(
 		grid: [ 40, 20 ]
-		minHeight: 150
-		minWidth: 300
-	)
-	$( ".chores-panel").resizable(
-		grid: [ 40, 20 ]
-		minHeight: 360
-		minWidth: 600
 	)
 
 	$container = $('.packery').packery(
@@ -19,33 +13,45 @@ Template.Home.rendered = ->
 	# get item elements, jQuery-ify them
 	$itemElems = $container.find('.packery-item')
 	# make item elements draggable
-	$itemElems.draggable()
+	$itemElems.draggable(
+			handle: "h3"
+		)
 	# bind Draggable events to Packery
 	$container.packery 'bindUIDraggableEvents', $itemElems
 
 
 	#save the window size to the user
-	for moduleName in modules
-		do (moduleName) ->
+	for i in [0...modules.length]
+		do (i) ->
+
+			moduleName = modules[i]
+			bodyName = bodies[i]
+			padding = 86
 
 			targetContainer = $('#' + moduleName)
 			target = $('#' + moduleName + ' > .panel')
+			targetBody = $('#' + bodyName)
 
 			#run update when targets move
 			$container.packery 'on', 'layoutComplete', (laidOutItems) ->
 				Meteor.call 'updateModuleLocation', moduleName, null, $('#' + moduleName).position(), (error) ->
 					if error
 						return alert(error.reason)
+				targetBody.height(target.height() - padding)
 					
 			#run update on resize
 			target.resizable 
 				stop: (event, ui) ->
-					#move all objects to fit
-					$container.packery()	
 					#update sizes	
 					Meteor.call 'updateModuleLocation', moduleName, ui.size, null, (error) ->
 						if error
 							return alert(error.reason)
+				resize: (event, ui) ->
+					targetBody.height(target.height() - padding)
+					#move all objects to fit
+					$container.packery()	
+
+			$container.packery()	
 
 			#set the window size
 			Tracker.autorun ->
@@ -56,3 +62,4 @@ Template.Home.rendered = ->
 					if location.top?
 						targetContainer.css('top', location.top)
 						targetContainer.css('left', location.left)					
+			
