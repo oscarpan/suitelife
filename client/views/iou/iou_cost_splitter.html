@@ -30,15 +30,21 @@
 				    	Split Evenly
 				    </div>
 			    </div>
+	    		{{#each users}}
 			    <div class="row">
 				    <div class="col-md-offset-2 col-md-4 checkbox">
 					    <input type="checkbox">
-					    Peter Yao
+					    {{userName this}}
 				    </div>
-					<div class="col-md-4">
-						
+					<div class="col-md-3">
+						<div class="slider" id ="slider-{{this}}">
+						</div>
+					</div>
+					<div class="col-md-2 text-right">
+						$1.00
 					</div>
 			    </div>
+				{{/each}}
 		    </div>
 
 		</form>
