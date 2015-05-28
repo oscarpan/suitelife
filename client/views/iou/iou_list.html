@@ -151,3 +151,33 @@
   </div>
 
 </template>
+
+<template name="iouLog">
+
+  <div class="container-fluid">
+
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Log Message</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#if logMessages}}
+          {{#each logMessages}}
+            <tr>
+            <td>{{this.date}}</td><td>{{this.message}}</td>
+            </tr>
+          {{/each}}
+        {{else}}
+          <li class="list-group-item empty-note text-center disabled">
+            No IOU log messages.
+          </li>
+        {{/if}}
+      </tbody>
+    </table>
+
+  </div>
+
+</template>
