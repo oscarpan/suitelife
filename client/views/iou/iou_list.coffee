@@ -57,4 +57,26 @@ Template.iouItem.events
       return
 
     return
+
+Template.iouLog.helpers
+  logMessages: ->
+    ious = Ious.find({
+    $or: [ { payerId: Meteor.userId() }, { payeeId: Meteor.userId() } ]
+    }).fetch( )
+
+    recentLogs = [ ]
+    maxHeap = new MaxHeap (a, b) -> return a - b
+
+    for iou in ious
+      logMessage = iou.editLog[ iou.editLog.length - 1 ]
+
+      maxHeap.set iou.lastEdited, logMessage 
+
+    for i in [0... 4] by 1
+      if !maxHeap.empty( )
+        recentLogs.push { "date": ( new Date maxHeap.maxElementId( ) ).toLocaleString( ), "message": maxHeap.get maxHeap.maxElementId( ) }
+
+        maxHeap.remove maxHeap.maxElementId( ) 
+
+    recentLogs
   

@@ -11,7 +11,11 @@ EditableText.registerCallbacks
 		else if isNaN this.newValue
 			alert "New amount must be a valid monetary value."
 		else
-			Ious.update doc._id, $set: { amount: this.newValue }
-
+			Meteor.call 'editIou', doc, { fieldName: "amount", newValue: this.newValue }, (error, id) ->
+		    	if error 
+		    		return alert(error.reason)
+		    	else
+		    		return
+			## Ious.update doc._id, $set: { amount: this.newValue }
 
 Meteor.methods {eventsOnHooksInit: ->}
