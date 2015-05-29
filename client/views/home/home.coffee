@@ -6,7 +6,7 @@ Template.Home.rendered = ->
 		grid: [ 40, 20 ]
 	)
 
-	$container = $('.packery').packery(
+	$container = $('#home').packery(
 		columnWidth: 40
 		rowHeight: 20
 		gutter: 20)
@@ -50,6 +50,8 @@ Template.Home.rendered = ->
 					targetBody.height(target.height() - padding)
 					#move all objects to fit
 					$container.packery()	
+					if moduleName is 'postsModule'
+						$('.postsPackery').data().packery.layout()
 
 			$container.packery()	
 
@@ -62,4 +64,3 @@ Template.Home.rendered = ->
 					if location.top?
 						targetContainer.css('top', location.top)
 						targetContainer.css('left', location.left)					
-			

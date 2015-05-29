@@ -1,6 +1,6 @@
 Meteor.methods
 	updateModuleLocation: (module, size, position) ->
-		moduleSet = if Meteor.user().modules then Meteor.user().modules else {}	#cannot set var as key w/o building it then updating
+		moduleSet = if Meteor.user()?.modules then Meteor.user().modules else {}	#cannot set var as key w/o building it then updating
 		if !moduleSet[module]?
 			moduleSet[module] = {}
 		if size?
