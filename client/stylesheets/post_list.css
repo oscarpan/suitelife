@@ -1,0 +1,37 @@
+#postsList{
+	background-image: url(cork.jpg);
+	box-shadow: 0px -2px 2px #888888;
+}
+
+#postsModule > .panel > .panel-heading{
+	border-color: #AEA341;
+}
+
+.post-item{
+	width:400px; 
+	border: 1px solid #AEA341;
+	background: #FFF7B2;
+	padding: 0 10px 5px;
+	box-shadow: 1px 1px 2px #888888;
+}
+
+.post-item > .editable-text > .wysiwyg-container {
+	border: 1px dashed #AEA341;
+	background: #FFFDED;
+}
+.post-item > .editable-text > .wysiwyg-container > .wysiwyg {
+	background: #FFFAD3;
+}
+
+.last-edited{
+	font-size: 10px;
+	color: #AEA341;
+	text-align:center;
+}
+
+.delete-button{
+	position: absolute;
+  left: 50%;
+  top: -10px;
+  box-shadow: 1px 1px 2px #888888;
+}

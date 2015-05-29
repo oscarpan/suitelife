@@ -13,12 +13,14 @@ Template.postsList.events
 		Meteor.call 'newPost', post, Session.get('suite')._id, (error, id) ->
 			if error
 				return alert(error.reason)
-		return
+			#add the element to packery
+			packery = $('.postsPackery').data().packery
+			packery.appended($('.postsPackery').children().last())
 	'click .delete' : (e) ->
-		id = e.target.attributes.postId.value
-		Meteor.call 'deletePost', id, (error) ->
+		idNode = e.target.attributes.postId || e.target.parentNode.attributes.postId #might click on the icon vs the button
+		Meteor.call 'deletePost', idNode.value, (error) ->
 			if error
-				return alert(error.reason)
+				return alert(error.reason)	
 
 Template.postsList.helpers 
 	posts: ->
@@ -27,17 +29,18 @@ Template.postsList.helpers
 			posts = (Posts.find _id: $in: suite.post_ids).fetch()
 			posts
 
-#WIP
-# Template.postsList.onRendered ->
-# 	$container = $('#postList').packery(
-# 	  columnWidth: 80
-# 	  rowHeight: 80)
-# 	# get item elements, jQuery-ify them
-# 	$itemElems = $container.find('.post-item')
-# 	# make item elements draggable
-# 	$itemElems.draggable()
-# 	# bind Draggable events to Packery
-# 	$container.packery 'bindUIDraggableEvents', $itemElems
+Template.postsList.onRendered ->
+	window.setInterval (->
+		#set up packery for posts
+		$postsContainer = $('.postsPackery').packery(
+			columnWidth: 49
+			rowHeight: 15
+			gutter: 10)
+		# get item elements, jQuery-ify them
+		$postsItemElems = $postsContainer.find('.post-item')
+		# bind Draggable events to Packery
+		$postsContainer.packery 'bindUIDraggableEvents', $postsItemElems
+	), 250
 
 Template.Post.helpers
 	getEmail: (id) ->
