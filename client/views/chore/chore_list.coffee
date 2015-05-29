@@ -45,7 +45,8 @@ Template.choreItem.helpers
       'Monthly'
   assignFormat: (assigneeId) ->
     assignee = Meteor.users.findOne assigneeId
-    (assignee.profile.first_name.charAt 0) + (assignee.profile.last_name.charAt 0)
+    if assignee?
+      (assignee.profile.first_name.charAt 0) + (assignee.profile.last_name.charAt 0)
   completeColor: (completed, startDate) ->
     if completed
       "list-group-item-success"
