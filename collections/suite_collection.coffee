@@ -17,6 +17,9 @@ Meteor.methods
     Meteor.call 'initializePosts', suite_id, (error) ->
       if error
         return alert(error.reason)
+    Meteor.call 'addSweetyTheCat', suite_id, (error) ->
+      if error
+        return alert(error.reason)
   editSuite: (suite, id) ->
     suite.updatedAt = (new Date).getTime()
     Suite.update id, $set: suite
@@ -33,3 +36,15 @@ Meteor.methods
       Suites.update suite_id, $set: {uploads: [file_info]}
     else
       Suites.update suite_id, $push: {uploads: file_info}
+  addSweetyTheCat: (suite_id) ->
+    sweety = Meteor.users.findOne emails: $elemMatch: address: 'sweetysuitelife@gmail.com'
+    if !sweety?
+      sweety_id = Accounts.createUser
+        email: "sweetysuitelife@gmail.com"
+        password: "sweetythecat" 
+        profile:
+          first_name: "Sweety"
+          last_name: "The Cat"
+      Suites.update suite_id, $push: {users: sweety_id}
+    else
+      Suites.update suite_id, $push: {users: sweety._id}
