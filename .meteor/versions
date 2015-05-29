@@ -86,8 +86,6 @@ srp@1.0.3
 standard-app-packages@1.0.5
 stylus@1.0.7
 templating@1.1.1
-tomi:upload-jquery@2.1.5
-tomi:upload-server@1.2.3
 tracker@1.0.7
 twbs:bootstrap@3.3.4
 u2622:persistent-session@0.3.5
