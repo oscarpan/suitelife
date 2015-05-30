@@ -41,7 +41,7 @@ Template.invite.events
 
 Template.settings.events 'submit form': (e) ->
   e.preventDefault()
-  alert 'Settings Functionality currently not implemented'
+  sAlert.warning('Settings Functionality currently not implemented')
   $('#inviteModal').modal 'hide'
   return
 

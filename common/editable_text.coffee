@@ -13,7 +13,7 @@ EditableText.registerCallbacks
 		else
 			Meteor.call 'editIou', doc, { fieldName: "amount", newValue: this.newValue }, (error, id) ->
 		    	if error 
-		    		return alert(error.reason)
+		    		sAlert.error(error.reason)
 		    	else
 		    		return
 			## Ious.update doc._id, $set: { amount: this.newValue }
