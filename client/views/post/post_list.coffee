@@ -30,8 +30,13 @@ Template.postsList.helpers
 			posts
 
 Template.postsList.onRendered ->
+	$postsContainer = $('.postsPackery').packery(
+		columnWidth: 49
+		rowHeight: 15
+		gutter: 10)
+	#set up packery for posts
 	window.setInterval (->
-		#set up packery for posts
+		$postsContainer.packery 'destroy'
 		$postsContainer = $('.postsPackery').packery(
 			columnWidth: 49
 			rowHeight: 15
