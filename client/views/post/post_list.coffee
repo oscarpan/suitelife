@@ -30,12 +30,21 @@ Template.postsList.helpers
 			posts
 
 Template.postsList.onRendered ->
+	$postsContainer = $('.postsPackery').packery(
+		columnWidth: 49
+		rowHeight: 15
+		gutter: 10
+		transitionDuration: 0
+	)
+	#set up packery for posts
 	window.setInterval (->
-		#set up packery for posts
+		$postsContainer.packery 'destroy'
 		$postsContainer = $('.postsPackery').packery(
 			columnWidth: 49
 			rowHeight: 15
-			gutter: 10)
+			gutter: 10
+			transitionDuration: 0
+		)
 		# get item elements, jQuery-ify them
 		$postsItemElems = $postsContainer.find('.post-item')
 		# bind Draggable events to Packery
