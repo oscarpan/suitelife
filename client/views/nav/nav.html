@@ -1,8 +1,8 @@
 <template name="Nav">
     <nav class="navbar navbar-default navbar-static-top" role="navigation">
-        <div class="container">
+        <div class="row">
             <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
+            <div class="navbar-header col-md-2">
                 <button type="button" class="navbar-toggle collapsed"
                         data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                     <span class="sr-only">Toggle navigation</span>
@@ -22,17 +22,12 @@
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <div class="suite-name">
-                    {{ getSuiteName }}
-                </div>
-                {{#if Meteor.userId}}
-                    <ul class="nav navbar-nav">
-                        <li><a href="/posts/list">Posts</a></li>
-                        <li><a href="/chores/view">Chores</a></li>
-                        <li><a href="/ious/list">IOUs</a></li>
-                    </ul>
-                {{/if}}
+            <div class="nav navbar-nav suite-name col-md-7">
+                {{#with getSuite}}
+                    {{> editableText collection="suites" field="name" placeholder="My Suite" removeEmpty=false}}
+                {{/with}}
+            </div>
+            <div class="collapse navbar-collapse col-md-1" id="navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
 					{{> loginButtons}}
                 </ul>

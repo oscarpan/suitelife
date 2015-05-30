@@ -38,7 +38,7 @@ Meteor.methods
       lastEdited: moment().format 'h:mm on MM/DD'
       pinned: false
       imagePath: null
-      message: '<h1>Welcome to Suite Life!</h1>'
+      message: 'Welcome to Suite Life!'
     Meteor.call 'newPost', post, suite_id, (error) -> 
       if error
         return alert(error.reason)
