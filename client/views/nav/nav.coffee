@@ -1,4 +1,11 @@
 Template.Nav.helpers
+  getSuiteName: ->
+    ## Find and return suite name
+    suite = Suites.findOne users: Meteor.userId( )
+    if suite?
+      suite.name
+    else
+      ""
   getSuite: ->
     ## Find and return suite
     Suites.findOne users: Meteor.userId()
@@ -34,7 +41,7 @@ Template.invite.events
 
 Template.settings.events 'submit form': (e) ->
   e.preventDefault()
-  alert 'Settings Functionality currently not implemented'
+  sAlert.warning('Settings Functionality currently not implemented')
   $('#inviteModal').modal 'hide'
   return
 

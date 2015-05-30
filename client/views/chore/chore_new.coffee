@@ -11,11 +11,11 @@ Template.newChoreForm.events
     freqNum = $(e.target).find('[name=freqNum]').val()
      ## Ensure frequency is a number
     if isNaN freqNum
-      alert "Chore frequency must be an integer value."
+      sAlert.warning "Chore frequency must be an integer value."
       return false
     ## Ensure input is a positve integer
     else if ( Number freqNum < 0 ) || ( Number freqNum % 1 != 0 )
-      alert "Chore frequency must be a positive integer."
+      sAlert.warning "Chore frequency must be a positive integer."
       return false
     if frequency == 0
       freqNum = null
@@ -33,7 +33,7 @@ Template.newChoreForm.events
     ## to store the new chore in collection  
     Meteor.call 'newChore', chore, frequency, freqString, freqNum, (error, id) ->
       if error
-        return alert(error.reason)
+        sAlert.error(error.reason)
       $('#createChoreModal').modal 'hide'
       return
     return
