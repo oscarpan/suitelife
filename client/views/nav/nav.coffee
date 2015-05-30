@@ -1,3 +1,9 @@
+Template.Nav.helpers
+  getSuiteName: ->
+    ## Find and return suite name
+    suite = Suites.findOne users: Meteor.user()._id
+    suite.name
+
 Template._loginButtonsLoggedInDropdown.user_profile_picture = 'http://www.gravatar.com/avatar/'+CryptoJS.MD5(Meteor.user().email).toString()+'?d=retro'
 
 Template._loginButtonsAdditionalLoggedInDropdownActions.events 'click #login-buttons-send-invite': (e) ->

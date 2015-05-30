@@ -7,6 +7,14 @@ h3 {
     padding: 4px 15px;
 }
 
+.suite-name {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  float: left;
+  vertical-align: middle;
+}
+
 .my-btn{
     background: #9987ca;
     color: #ffffff;
