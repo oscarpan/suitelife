@@ -3,6 +3,11 @@ h3 {
   cursor: pointer; 
 }
 
+.navbar {
+
+  background-color: #9987ca;
+}
+
 .navbar-brand{
     padding: 4px 15px;
 }
@@ -12,6 +17,11 @@ h3 {
   text-align:center;
   margin-top: 5px;
   font-family: cursive;
+  color: #E0DBEF;
+}
+
+.dropdown-toggle {
+  color: #FFFFFF;
 }
 
 .suite-name > .wide-text-edit {
@@ -36,7 +46,7 @@ h3 {
 
 .panel-default > .panel-heading {
   color: #575757;
-  background-color: #94a6d3;
+  background-color: #fff;
 }
 
 .panel {
