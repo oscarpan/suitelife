@@ -18,9 +18,10 @@ Template.iouNew.events
       reason:     $(e.target).find('[name=reason]').val()
       amount:     $(e.target).find('[name=amount]').val()
       paid:       false
-      lastEdited: new Date( ).getTime( )
-      editLog:    [ Meteor.user( ).profile.first_name + " created the IOU for \"" + 
-      $(e.target).find('[name=reason]').val() + ".\"" ]
+      deleted:    false
+      editLog:    [ { "lastEdited": new Date( ).getTime( ),
+      "logMessage": Meteor.user( ).profile.first_name + " created the IOU for \"" + $( e.target ).find( '[name=reason]' ).val( ) + ".\"",
+      "editType":   "create" } ]
 
     Meteor.call 'newIou', iou, (error, id) ->
       if error

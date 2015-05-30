@@ -1,7 +1,9 @@
 Template.iousList.helpers
   ious: ->
-    Ious.find({
-    $or: [ { payerId: Meteor.userId() }, { payeeId: Meteor.userId() } ]
+    # Find IOUs where the current user is either the payer or the payee, if the
+    # IOU has not been deleted, and then return them
+    ious = Ious.find({
+    $and: [ { $or: [ { payerId: Meteor.userId() }, { payeeId: Meteor.userId() } ] }, { deleted: false } ]
     })
 
 ###
@@ -58,25 +60,5 @@ Template.iouItem.events
 
     return
 
-Template.iouLog.helpers
-  logMessages: ->
-    ious = Ious.find({
-    $or: [ { payerId: Meteor.userId() }, { payeeId: Meteor.userId() } ]
-    }).fetch( )
 
-    recentLogs = [ ]
-    maxHeap = new MaxHeap (a, b) -> return a - b
-
-    for iou in ious
-      logMessage = iou.editLog[ iou.editLog.length - 1 ]
-
-      maxHeap.set iou.lastEdited, logMessage 
-
-    for i in [0... 4] by 1
-      if !maxHeap.empty( )
-        recentLogs.push { "date": ( new Date maxHeap.maxElementId( ) ).toLocaleString( ), "message": maxHeap.get maxHeap.maxElementId( ) }
-
-        maxHeap.remove maxHeap.maxElementId( ) 
-
-    recentLogs
   
