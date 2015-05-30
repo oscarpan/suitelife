@@ -1,15 +1,22 @@
+# Returns true if input id is a user whose name is checked, false otherwise
 idInUsersList = (id) ->
   splitterUsersList = Session.get "splitterUsersList"
-  if splitterUsersList.indexOf(id) == -1
+  ###
+  if (typeof Session.get("splitterUsersList") == 'undefined')
+    Session.set "splitterUsersList", []
+  ###
+
+  if $.inArray(id, splitterUsersList) == -1
     return false
   return true
+
+Template.costSplitter.onRendered ->
+  Session.set "splitterUsersList", []
 
 #splitterUsersList : array of user IDs
 Template.costSplitter.helpers
   users: ->
-    if (typeof Session.get("splitterUsersList") == 'undefined')
-      Session.set "splitterUsersList", Suites.findOne({ users: Meteor.userId() }).users
-    Suites.findOne({ users: Meteor.userId() }).users
+    Suites.findOne(Session.get('suite')._id).users
 
   userName: (id) ->
     usr = Meteor.users.findOne id
@@ -44,10 +51,12 @@ Template.costSplitter.events
     Session.set "evenSplit", event.target.checked
     return
 
+  # Sets the evenSplitAmount for use in helpers
   'keyup #amount': (event, template) ->
     splitterUsersList = Session.get "splitterUsersList"
     amount = template.find("#amount").value
     Session.set "evenSplitAmount", amount / splitterUsersList.length
+    console.log("amount: " + amount + " evenSplitAmount: " + amount / splitterUsersList.length)
     return
 
   # Uncheck even-split checkbox when user enters input
@@ -62,18 +71,21 @@ Template.costSplitter.events
 
   # Disable/Enable input boxes
   'change input[name=split-user]': (e, t) ->
+    # Sets a session variable called 'split-user-id'
     Session.set(e.currentTarget.id, e.target.checked)
-    currentId = e.currentTarget.id.slice(11) #splitter-user-id
+    currentId = e.currentTarget.id.slice(11) #Gets only the userId
+
     splitterUsersList = Session.get "splitterUsersList"
 
-    # Remove user from splitterUsersList
+    # Uncheck user: remove user from splitterUsersList
     if e.target.checked == false
       splitterUsersList.splice(splitterUsersList.indexOf(currentId), 1)
 
-    # Add user to splitterUsersList only if box is checked and user is not
-    # currently in the array
+    # Check user: Add user to splitterUsersList only if box is checked
+    # and user is not currently in the array
     else if e.target.checked == true and idInUsersList(currentId) == false
       splitterUsersList.push(currentId)
 
+    console.log(splitterUsersList)
     Session.set "splitterUsersList", splitterUsersList
     return
