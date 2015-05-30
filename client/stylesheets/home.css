@@ -1,5 +1,9 @@
 body {
-	background: lavender;
+        background-image: url("http://s2.postimg.org/8k831mjfs/Backgroundpaws.jpg");
+        background-repeat: repeat;
+        background-position: bottom;
+        background-size: contain;
+        background-attachment: fixed;
 }
 
 .panel-title{
