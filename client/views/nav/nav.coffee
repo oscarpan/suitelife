@@ -15,6 +15,12 @@ Template._loginButtonsLoggedInDropdown.helpers
     if Meteor.user()
       'http://www.gravatar.com/avatar/' + CryptoJS.MD5(Meteor.user().emails[0].address).toString()+'?d=retro'
 
+Template._loginButtonsLoggedOutDropdown.helpers
+  forbidClientAccountCreation: true
+
+Template._loginButtonsLoggedOutPasswordService.helpers
+  showCreateAccountLink: false
+
 Template._loginButtonsAdditionalLoggedInDropdownActions.events 
   'click #login-buttons-send-invite': (e) ->
     e.preventDefault()
