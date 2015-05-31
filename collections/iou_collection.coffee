@@ -19,8 +19,11 @@ Meteor.methods
     lastEdited = new Date( ).getTime( )
     ## If the amount was changed, build a log message to convey the changes
     if editedField.fieldName == "amount"
-      logMessage = Meteor.user( ).profile.first_name + ' changed IOU "' + iou.reason + '"\'s amount from ' +
-      iou.amount + ' to ' + editedField.newValue + '.'
+      logMessage = Meteor.user( ).profile.first_name + ' changed IOU "' + iou.reason + '"\'s amount from $' +
+      iou.amount + ' to $' + editedField.newValue + '.'
+    else if editedField.fieldName == "reason"
+      logMessage = Meteor.user( ).profile.first_name + ' changed IOU "' + iou.reason + '" to "' +
+      editedField.newValue + '."'
 
     Ious.update iou._id, $push: { "editLog": { "lastEdited": lastEdited,
     "logMessage": logMessage,

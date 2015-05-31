@@ -1,3 +1,16 @@
+.iou-log-tbody {
+    height: 300px;       /* Just for the demo          */
+    overflow-y: auto;    /* Trigger vertical scroll    */
+    overflow-x: hidden;
+    font-size: 1.1em;
+}
+
+.iou-log-thead {
+  font-weight: bold;
+  font-size: 1.2em;
+  margin-bottom: 1em;
+}
+
 .date {
   color: gray;
   font-weight: bold;

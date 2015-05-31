@@ -103,7 +103,7 @@
             {{dateFormat date}}
         </div>
         <div class="col-md-8 reason">
-          {{> editableText collection="ious" field="reason" }}
+          {{> editableText collection="ious" field="reason" beforeUpdate="validateIOUReason" }}
         </div>
       </div>
       <div class="row">

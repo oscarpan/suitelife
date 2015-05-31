@@ -12,6 +12,12 @@ Template.iouNew.events
   'submit form': (e) ->
     e.preventDefault()
 
+    amount = $(e.target).find('[name=amount]').val()
+
+    if ( isNaN amount ) || ( amount < 0 )
+      alert "Invalid amount: the amount must be a valid dollar value."
+      return
+      
     iou =
       payerId:    Meteor.user()._id
       payeeId:    $(e.target).find('[name=payee]').val()
@@ -20,7 +26,9 @@ Template.iouNew.events
       paid:       false
       deleted:    false
       editLog:    [ { "lastEdited": new Date( ).getTime( ),
-      "logMessage": Meteor.user( ).profile.first_name + " created the IOU for \"" + $( e.target ).find( '[name=reason]' ).val( ) + ".\"",
+      "logMessage": Meteor.user( ).profile.first_name + " created the IOU \"" +
+      $( e.target ).find( '[name=reason]' ).val( ) + "\" for the amount of $" +
+      amount + ".",
       "editType":   "create" } ]
 
     Meteor.call 'newIou', iou, (error, id) ->
