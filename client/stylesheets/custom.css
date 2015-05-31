@@ -72,3 +72,7 @@ h3 {
 .img-circular{
     border-radius: 50%;
 }
+
+button.selectpicker{
+    color: black;
+}
