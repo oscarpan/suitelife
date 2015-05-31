@@ -16,7 +16,7 @@ Template.choreDetail.events
     ## edit function for collection managing
     Meteor.call 'editChore', choreEdits, currentId, (error, id) ->
       if error
-        return alert(error.reason)
+        sAlert.error(error.reason)
       $('#createChoreModal').modal 'hide'
       return
     return

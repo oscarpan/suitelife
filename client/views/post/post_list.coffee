@@ -12,7 +12,7 @@ Template.postsList.events
 			message: null
 		Meteor.call 'newPost', post, Session.get('suite')._id, (error, id) ->
 			if error
-				return alert(error.reason)
+				sAlert.error(error.reason)
 			#add the element to packery
 			packery = $('.postsPackery').data().packery
 			packery.appended($('.postsPackery').children().last())
@@ -20,7 +20,7 @@ Template.postsList.events
 		idNode = e.target.attributes.postId || e.target.parentNode.attributes.postId #might click on the icon vs the button
 		Meteor.call 'deletePost', idNode.value, (error) ->
 			if error
-				return alert(error.reason)	
+				sAlert.error(error.reason)	
 
 Template.postsList.helpers 
 	posts: ->
@@ -70,7 +70,7 @@ Template.Post.events 'click .clear': (e) ->
 	post.lastEdited = moment().format 'MMMM Do YYYY, h:mm:ss a'
 	Meteor.call 'setImagePath', post, post._id, (error) ->					#update the post's image path
 		if error
-			return alert(error.reason)
+			sAlert.error(error.reason)
 
 Template.uploader.helpers
 	myCallbacks: ->
@@ -80,7 +80,7 @@ Template.uploader.helpers
 																												#TODO remove old images
 			Meteor.call 'uploadToSuite', fileInfo, suite._id, (error) ->		#upload the new image from the suite
 				if error
-					return alert(error.reason)
+					sAlert.error(error.reason)
 			
 			post.imagePath = fileInfo
 			post.lastEditor = Meteor.userId()
@@ -88,4 +88,4 @@ Template.uploader.helpers
 
 			Meteor.call 'setImagePath', post, post._id, (error) ->					#update the post's image path
 				if error
-					return alert(error.reason)
+					sAlert.error(error.reason)

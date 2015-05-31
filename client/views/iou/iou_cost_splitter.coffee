@@ -19,7 +19,8 @@ Template.costSplitter.helpers
 
   userName: (id) ->
     usr = Meteor.users.findOne id
-    userName = usr.profile.first_name + " " + usr.profile.last_name
+    if usr?.profile?.first_name?
+      userName = usr.profile.first_name + " " + usr.profile.last_name
 
   splitPercent: (id) ->
     if idInUsersList(id) == false

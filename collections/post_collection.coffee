@@ -31,7 +31,7 @@ Meteor.methods
       message: '<font face="Lucida Grande" size="4">SUITE RULES: </font><div><ul><li><font size="2">use inside voices</font></li><li><font size="2">be respectful</font></li><li><font size="2">be helpful</font></li><li><font size="2">be appreciative - say thank you!</font></li><li><font size="2">look out for your family</font></li><li><font size="2">communicate - use your words</font></li></ul></div>'
     Meteor.call 'newPost', post, suite_id, (error) -> 
       if error
-        return alert(error.reason)  
+        sAlert.error(error.reason)  
     post = 
       authorId: "sweety"
       lastEditor: "Sweety The Cat"
@@ -41,4 +41,4 @@ Meteor.methods
       message: 'Welcome to Suite Life!'
     Meteor.call 'newPost', post, suite_id, (error) -> 
       if error
-        return alert(error.reason)
+        sAlert.error(error.reason)

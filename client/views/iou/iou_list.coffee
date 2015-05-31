@@ -46,13 +46,13 @@ Template.iouItem.events
     currentId = @_id
     Meteor.call 'payIou', currentId, (error, id) ->
       if error
-        return alert(error.reason)
+        sAlert.error(error.reason)
 
   'click .delete': (e) ->
     currentId = @_id
     Meteor.call 'deleteIou', currentId, (error, id) ->
       if error
-        return alert(error.reason)
+        sAlert.error(error.reason)
       $('#delete' + currentId + 'Modal').modal('hide')
       $('body').removeClass('modal-open')
       $('.modal-backdrop').remove()

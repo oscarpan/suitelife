@@ -8,6 +8,16 @@ h3 {
   background-color: #9987ca;
 }
 
+#login-dropdown-list > .dropdown-toggle {
+  background-color: #9987ca;
+  color: white;
+}
+
+@font-face {
+    font-family: customTitleFont;
+    src: url(fonts/helve-cursive.ttf);
+}
+
 .navbar-brand{
     padding: 4px 15px;
 }
@@ -16,7 +26,7 @@ h3 {
   font-size:34px;
   text-align:center;
   margin-top: 5px;
-  font-family: cursive;
+  font-family: customTitleFont;
   color: #E0DBEF;
 }
 

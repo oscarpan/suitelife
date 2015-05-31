@@ -46,22 +46,22 @@ Template.signup.events 'submit form': (e) ->
       last_name: last
     , (error) ->
       if error
-        return alert(error.reason)
+        sAlert.error(error.reason)
       else
 				#login
         Meteor.loginWithPassword email, password, (error) ->
           if error
-            return alert(error.reason)
+            sAlert.error(error.reason)
 
 				#associate with the invite suite
         if !(/invite\//.exec Router.current()?.url)?
           Meteor.call 'newSuite', {name: suite_name}, (error, id) ->
             if error
-              return alert(error.reason)
+              sAlert.error(error.reason)
 				#or create a new suite
         else
           Meteor.call 'addUserToSuite', suite._id, (error, id) ->
             if error
-              return alert(error.reason)
+              sAlert.error(error.reason)
 
         Router.go("/")

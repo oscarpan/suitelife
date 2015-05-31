@@ -12,16 +12,26 @@ Template.Nav.helpers
 
 Template._loginButtonsLoggedInDropdown.user_profile_picture = 'http://www.gravatar.com/avatar/' + CryptoJS.MD5(Meteor.user()?.email?).toString()+'?d=retro'
 
-Template._loginButtonsAdditionalLoggedInDropdownActions.events 'click #login-buttons-send-invite': (e) ->
-  e.preventDefault()
-  $('#inviteModal').modal 'show'
-  $('#invite-url').val(Meteor.absoluteUrl()+'invite/'+Session.get('suite')._id)
-  $('#invite-url:text').focus ->
-    $(this).select()
+Template._loginButtonsAdditionalLoggedInDropdownActions.events 
+  'click #login-buttons-send-invite': (e) ->
+    e.preventDefault()
+    $('#inviteModal').modal 'show'
+    $('#invite-url').val(Meteor.absoluteUrl()+'invite/'+Session.get('suite')._id)
+    $('#invite-url:text').focus ->
+      $(this).select()
+  'click #login-buttons-leave-suite': (e) ->
 
-Template._loginButtonsAdditionalLoggedInDropdownActions.events 'click #login-buttons-settings': (e) ->
-  e.preventDefault()
-  $('#settingsModal').modal 'show'
+Template._loginButtonsAdditionalLoggedInDropdownActions.events 
+  'click #login-buttons-settings': (e) ->
+    e.preventDefault()
+    $('#settingsModal').modal 'show'
+
+Template.Nav.events
+  'click #delete-my-account': (e) ->
+    Meteor.call 'deleteAccount', (error) ->
+      if error
+        console.log error
+        sAlert.error(error.reason)
 
 Template.Nav.rendered = ->
   $('[data-toggle="tooltip"]').tooltip placement:'bottom'

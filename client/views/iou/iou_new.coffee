@@ -5,7 +5,7 @@ Template.iouNew.helpers
 
   getUserName: (id) ->
     usr = Meteor.users.findOne id
-    if usr.profile?
+    if usr?.profile?.first_name?
       userName = usr.profile.first_name + " " + usr.profile.last_name
 
 Template.iouNew.events
@@ -25,7 +25,7 @@ Template.iouNew.events
 
     Meteor.call 'newIou', iou, (error, id) ->
       if error
-        return alert(error.reason)
+        sAlert.error(error.reason)
       $('#newIouModal').modal('toggle')
       $('#newIouModal').find('input:text').val('')
       Router.go '/'

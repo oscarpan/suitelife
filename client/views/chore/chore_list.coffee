@@ -19,7 +19,7 @@ Template.choreItem.events
       currentId = @_id
       Meteor.call 'deleteChore', currentId, (error, id) ->
         if error
-          return alert(error.reason)
+          sAlert.error(error.reason)
         return
     return
 
@@ -27,7 +27,7 @@ Template.choreItem.events
     currentId = @_id
     Meteor.call 'completeChore', currentId, (error, id) ->
       if error
-        return alert(error.reason)
+        sAlert.error(error.reason)
 
 Template.choreItem.helpers
   dateFormat: (date) ->
