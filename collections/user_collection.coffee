@@ -10,3 +10,5 @@ Meteor.methods
 			moduleSet[module].left = position.left
 			moduleSet[module].top = position.top
 		Meteor.users.update Meteor.userId(), $set: {modules: moduleSet} 
+	deleteAccount: ->
+		Meteor.users.remove Meteor.userId() #todo: remove userId from suite

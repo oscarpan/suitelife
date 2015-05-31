@@ -13,13 +13,13 @@ Meteor.methods
     suite_id = Suites.insert(suite)
     Meteor.call 'addUserToSuite', suite_id, (error) ->    #add the user to the new suite
       if error
-        return alert(error.reason)   
+        sAlert.error(error.reason)   
     Meteor.call 'initializePosts', suite_id, (error) ->
       if error
-        return alert(error.reason)
+        sAlert.error(error.reason)
     Meteor.call 'addSweetyTheCat', suite_id, (error) ->
       if error
-        return alert(error.reason)
+        sAlert.error(error.reason)
   editSuite: (suite, id) ->
     suite.updatedAt = (new Date).getTime()
     Suite.update id, $set: suite
@@ -48,3 +48,10 @@ Meteor.methods
       Suites.update suite_id, $push: {users: sweety_id}
     else
       Suites.update suite_id, $push: {users: sweety._id}
+  removeUserFromSuite: (suite_id, user_id) ->
+    suite = Suites.findOne suite_id
+    users = suite.users
+    index = users.indexOf user_id
+    if (index > -1)
+      users.splice(index, 1)
+    Suites.update suite_id, $set: {users: users}
