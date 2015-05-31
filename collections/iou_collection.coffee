@@ -22,9 +22,9 @@ Meteor.methods
       logMessage = Meteor.user( ).profile.first_name + ' changed IOU "' + iou.reason + '"\'s amount from ' +
       iou.amount + ' to ' + editedField.newValue + '.'
 
-    Ious.update iou._id, $push: { "editLog": { "lastEdited": lastEdited
-                                               "logMessage": logMessage
-                                               "editType":   "update" } }
+    Ious.update iou._id, $push: { "editLog": { "lastEdited": lastEdited,
+    "logMessage": logMessage,
+    "editType":   "update" } }
   payIou: (id) ->
     iou = Ious.findOne id
     Ious.update id, $set: {paid: true}
