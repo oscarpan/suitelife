@@ -12,9 +12,9 @@ Template.Home.rendered = ->
 	)
 
 	$container = $('#home').packery(
-		columnWidth: 40
-		rowHeight: 20
-		gutter: 20)
+		columnWidth: 20
+		rowHeight: 10
+		gutter: 30)
 	# get item elements, jQuery-ify them
 	$itemElems = $container.find('.packery-item')
 	# make item elements draggable
@@ -31,7 +31,7 @@ Template.Home.rendered = ->
 
 			moduleName = modules[i]
 			bodyName = bodies[i]
-			padding = 86
+			padding = 88
 
 			targetContainer = $('#' + moduleName)
 			target = $('#' + moduleName + ' > .panel')
@@ -55,10 +55,6 @@ Template.Home.rendered = ->
 					targetBody.height(target.height() - padding)
 					#move all objects to fit
 					$container.packery()	
-					if moduleName is 'postsModule'
-						$('.postsPackery').data().packery.layout()
-
-			$container.packery()	
 
 			#set the window size
 			Tracker.autorun ->
@@ -69,3 +65,5 @@ Template.Home.rendered = ->
 					if location.top?
 						targetContainer.css('top', location.top)
 						targetContainer.css('left', location.left)					
+			
+			$container.packery()	

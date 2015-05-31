@@ -28,16 +28,15 @@ body {
 }
 
 #iousModule > .panel {
-	min-width: 525px;
+	min-width: 550px;
 	min-height: 175px;
 	width: 525px;
 	height: 175px;
 }
 
 #choresModule > .panel {
-	min-width: 525px;
+	min-width: 550px;
 	min-height: 175px;
-	max-height: 1050px;
 	width: 525px;
 	height: 175px;
 }
@@ -45,6 +44,7 @@ body {
 #calModule > .panel {
 	min-width: 640px;
 	min-height: 300px;
+	max-height: 1050px;
 	width: 640px;
 	height: 300px;
 }
