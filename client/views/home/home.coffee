@@ -6,6 +6,11 @@ Template.Home.rendered = ->
 		grid: [ 40, 20 ]
 	)
 
+	$(".chores-panel").resizable(
+		grid: [ 40, 20 ]
+		alsoResize: ".choreCal"
+	)
+
 	$container = $('#home').packery(
 		columnWidth: 40
 		rowHeight: 20
@@ -36,7 +41,7 @@ Template.Home.rendered = ->
 			$container.packery 'on', 'layoutComplete', (laidOutItems) ->
 				Meteor.call 'updateModuleLocation', moduleName, null, $('#' + moduleName).position(), (error) ->
 					if error
-						return alert(error.reason)
+						sAlert.error(error.reason)
 				targetBody.height(target.height() - padding)
 					
 			#run update on resize
@@ -45,7 +50,7 @@ Template.Home.rendered = ->
 					#update sizes	
 					Meteor.call 'updateModuleLocation', moduleName, ui.size, null, (error) ->
 						if error
-							return alert(error.reason)
+							sAlert.error(error.reason)
 				resize: (event, ui) ->
 					targetBody.height(target.height() - padding)
 					#move all objects to fit

@@ -3,6 +3,6 @@ Template.suiteNew.events 'submit form': (e) ->
 	suite_name = name: $(e.target).find('[name=suiteName]').val()
 	Meteor.call 'newSuite', suite_name, (error, id) ->
 		if error
-			return alert(error.reason)		
+			sAlert.error(error.reason)		
 		else
 			Router.go("/")

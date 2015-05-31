@@ -3,6 +3,6 @@ Template.dropdown.events 'click .list_item': (e) ->
 	suite_id = e.target.id
 	Meteor.call 'addUserToSuite', suite_id, (error, id) ->
 		if error
-		  return alert(error.reason)
+		  sAlert.error(error.reason)
 		else
 			Router.go("/")

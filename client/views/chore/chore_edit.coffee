@@ -34,7 +34,7 @@ Template.editChoreForm.events
     ## edit function for collection managing
     Meteor.call 'editChore', choreEdits, currentId, (error, id) ->
       if error
-        return alert(error.reason)
+        sAlert.error(error.reason)
       $('#createChoreModal').modal 'hide'
       return
     return
@@ -46,7 +46,7 @@ Template.editChoreForm.events
       currentId = @_id
       Meteor.call 'deleteChore', currentId, (error, id) ->
         if error
-          return alert(error.reason)
+          sAlert.error(error.reason)
         $('#createChoreModal').modal 'hide'
         return
     return

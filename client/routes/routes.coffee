@@ -12,7 +12,7 @@ Router.map ->
   return
 
 Router.onBeforeAction ->
-  if !Session.get('suite')
+  if !Session.get('suite')      #are you logged in w/o a suite?
     Session.setAuth 'suite', (Suites.findOne users: Meteor.userId())
   @next()
   return

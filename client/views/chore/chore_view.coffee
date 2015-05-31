@@ -26,7 +26,6 @@ Template.choreCalendar.helpers
 	## Fullcalendar options and event handling
   options: ->
   	{
-      height: 300
       defaultView: 'basicWeek'
       header:
         center: 'basicWeek, month'

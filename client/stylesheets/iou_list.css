@@ -20,16 +20,20 @@
   color: gray;
 }
 
-.money {
+.underline-editable {
   border-bottom-color: gray;
   border-bottom-width: 1px;
   border-bottom-style: dashed;
 }
 
-.reason {
-  border-bottom-color: gray;
-  border-bottom-width: 1px;
-  border-bottom-style: dashed;
+.underline-editable:hover {
+  background-color: lightgray;
+}
+
+.iou-list-buttons {
+  position: absolute;
+  right: 30px;
+  top: 13px;
 }
 
 .money input{

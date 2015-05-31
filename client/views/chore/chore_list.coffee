@@ -45,15 +45,13 @@ Template.choresList.events
     console.log name
     Meteor.call 'updateChoreName', name, currentId, (error, id) ->
       if error
-        return alert(error.reason)
+        sAlert.error(error.reason)
       return
     return 
 
   'click #comments': (e) ->
   	currentId = @_id
   	$('.comments' + currentId).toggle()
-
-
 
 Template.choresList.onRendered ->
   Session.set 'activeList', 'choreItem'
@@ -91,7 +89,7 @@ Template.choreItem.events
       currentId = @_id
       Meteor.call 'deleteChore', currentId, (error, id) ->
         if error
-          return alert(error.reason)
+          sAlert.error(error.reason)
         return
     return
 
@@ -99,6 +97,6 @@ Template.choreItem.events
     currentId = @_id
     Meteor.call 'completeChore', currentId, (error, id) ->
       if error
-        return alert(error.reason)
+        sAlert.error(error.reason)
 
 

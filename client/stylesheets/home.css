@@ -1,9 +1,15 @@
 body {
-	background: lavender;
+        background-image: url("http://s2.postimg.org/8k831mjfs/Backgroundpaws.jpg");
+        background-repeat: repeat;
+        background-position: bottom;
+        background-size: contain;
+        background-attachment: fixed;
 }
 
 .panel-title{
 	font-size: 32px;
+	cursor:move;
+	/*color: #FFFFFF;*/
 }
 
 .home {
@@ -17,7 +23,7 @@ body {
 #postsModule > .panel {
 	min-width: 640px;
 	min-height: 300px;	
-	width: 1200px;
+	width: 1265px;
 	height: 300px;
 }
 
@@ -31,6 +37,7 @@ body {
 #choresModule > .panel {
 	min-width: 525px;
 	min-height: 175px;
+	max-height: 1050px;
 	width: 525px;
 	height: 175px;
 }
