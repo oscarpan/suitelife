@@ -11,6 +11,12 @@ Router.map ->
       { suite: Suites.findOne(@params._id) }
   return
 
+Router.onBeforeAction ->
+  if !Session.get('suite')
+    Session.setAuth 'suite', (Suites.findOne users: Meteor.userId())
+  @next()
+  return
+
 Router.onAfterAction ->
   if Router.current().route.getName() != 'invite'
     if !Meteor.userId()                #are you logged in?

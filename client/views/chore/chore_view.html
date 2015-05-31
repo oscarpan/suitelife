@@ -13,7 +13,6 @@
         </div>
         <div class="col-md-6 text-right">
           {{> tooltips title="Chores Calendar" content="Easily keep track of your assigned chores with Chores Calendar" }}
-          {{> syncCal}}
           <span class="btn btn-md btn-primary my-btn editable-text-trigger new">
             <i class="fa fa-plus"></i> New
           </span>
@@ -34,24 +33,6 @@
   <div id="choreCal">
     {{>fullcalendar options}}
   </div>
-
-</template>
-
-
-<!-- Sync Calendar button -->
-<template name="syncCal">
-<span class="dropdown">
-  <button class="btn btn-md btn-warning dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
-    <i class="fa fa-cog"></i> Sync
-  </button>
-  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Sync</a></li>
-    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
-  </ul>
-  <!-- Can we just have a tooltip on the button? This ruins the look of the panel.
-    {{> tooltips title="Sync Calendar" content="This button syncs the calendar"}}
-  -->
-</span>
 </template>
 
 <!-- template for the create modal -->
