@@ -19,7 +19,6 @@ Template.choresView.events
     Session.set 'activeModal', ''
 
   'shown.bs.modal #createChoreModal': (e) ->
-    console.log $('#choresModule')
     $('#choresModule').draggable(disabled:true)
     $('#choreName').focus()
 
@@ -27,7 +26,6 @@ Template.choreCalendar.helpers
 	## Fullcalendar options and event handling
   options: ->
   	{
-      height: 300
       defaultView: 'basicWeek'
       header:
         center: 'basicWeek, month'
@@ -35,10 +33,12 @@ Template.choreCalendar.helpers
       dayClick: (date, jsEvent, view) ->
         Session.set 'activeModal', 'newChoreForm'
 
-        clickDate = new Date
-        clickDate.setDate clickDate.getDate() - 1
+        # Get today's date - handle utc time issues
+        todayDate = new Date
+        todayDate.setDate todayDate.getDate() - 1
         
-        if moment(date).toDate() < clickDate
+        # Check if date clicked is before today - invalid date -> set to today
+        if moment(date).toDate() < todayDate
           Session.set 'startDay', 'today'
         else
           startDay = moment(date).format('YYYY/MM/DD')
@@ -51,6 +51,7 @@ Template.choreCalendar.helpers
         choreEvent = Chores.findOne(calEvent._id)
         Session.set 'choreEvent', choreEvent
 
+        ## Event date session data for the datepicker to access 
         eventDate = moment(choreEvent.startDate).format('YYYY/MM/DD')
         Session.set 'startDay', eventDate
         $('#createChoreModal').modal('show')
@@ -64,23 +65,9 @@ Template.choreCalendar.helpers
         choreEvents = Chores.find()
         ## For loop to pass each chore to events array
         choreEvents.forEach (evt) ->
+          #Get completed, regular or past due color
           eventColor = getColor evt
-          #if evt.frequency > 0
-           # repeating = 0
-            #incDay = 0
-            #while repeating < evt.freqNum
-             # events.push
-              #  id: evt._id
-               # title: evt.title
-                #start: moment(evt.startDate).add incDay, freq
-                #color: eventColor
-                #allDay: true
-              #if evt.frequency == 14
-               # incDay++
-              #repeating++
-              #incDay++
-            #return
-          #else
+          
           events.push
             id: evt._id
             title: evt.title

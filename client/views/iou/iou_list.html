@@ -102,10 +102,20 @@
         <div class="col-md-3 date">
             {{dateFormat date}}
         </div>
-        <div class="col-md-8 reason">
-          {{> editableText collection="ious" field="reason" beforeUpdate="validateIOUReason" }}
+        <div class="col-md-8">
+          <span class="underline-editable">
+            {{> editableText collection="ious" field="reason" beforeUpdate="validateIOUAmount" }}
+          </span>
+
+          <br>
+
+          {{{amountFormat amount payerId payeeId}}} 
+          <span class="underline-editable editable-text-trigger">
+            ${{> editableText collection="ious" field="amount" beforeUpdate="validateIOUAmount" }}
+          </span>
         </div>
       </div>
+      <!--
       <div class="row">
         <div class="col-md-8 col-md-offset-3">
           {{{amountFormat amount payerId payeeId}}} 
@@ -114,15 +124,14 @@
           </span>
         </div>
       </div>
-      <div class="row">
-        <div class="col-md-12 text-right">
-          <button class="btn btn-md btn-success paid">
-            <i class="fa fa-check"></i>
-          </button>
-          <button class="btn btn-md btn-danger" data-toggle="modal" data-target="#delete{{ _id }}Modal">
-            <i class="fa fa-times"></i>
-          </button>
-        </div>
+      -->
+      <div class="row iou-list-buttons">
+        <button class="btn btn-md btn-success paid">
+          <i class="fa fa-check"></i>
+        </button>
+        <button class="btn btn-md btn-danger" data-toggle="modal" data-target="#delete{{ _id }}Modal">
+          <i class="fa fa-times"></i>
+        </button>
       </div>
     </div>
 

@@ -1,3 +1,15 @@
+Template.editChoreForm.helpers
+  choreEvent: ->
+    # Get the data context for the edit
+    choreEvent = Session.get 'choreEvent'
+  users: ->
+    if Session.get('suite')?
+      Suites.findOne(Session.get('suite')._id).users
+  getUserName: (id) ->
+    usr = Meteor.users.findOne id
+    if usr.profile?
+      userName = usr.profile.first_name + " " + usr.profile.last_name
+
 Template.editChoreForm.events
   ## edit form submission
   'submit form': (e) ->
@@ -22,7 +34,7 @@ Template.editChoreForm.events
     ## edit function for collection managing
     Meteor.call 'editChore', choreEdits, currentId, (error, id) ->
       if error
-        return alert(error.reason)
+        sAlert.error(error.reason)
       $('#createChoreModal').modal 'hide'
       return
     return
@@ -34,7 +46,7 @@ Template.editChoreForm.events
       currentId = @_id
       Meteor.call 'deleteChore', currentId, (error, id) ->
         if error
-          return alert(error.reason)
+          sAlert.error(error.reason)
         $('#createChoreModal').modal 'hide'
         return
     return
@@ -42,14 +54,15 @@ Template.editChoreForm.events
   'change #repeat-freqs': (e) ->
     e.preventDefault()
     frequency = $('#repeat-freqs').val()
-    if frequency == 0
-      $('#freqNum').prop 'disabled', true
+    if frequency == '0'
+      $('#freqNum').attr 'disabled', true
     else
-      $('#freqNum').prop 'disabled', false  
+      $('#freqNum').attr 'disabled', false  
 
 Template.editChoreForm.onRendered ->
   startDay = Session.get 'startDay'
   $('#datepicker').datepicker 'setDate', startDay
+  $('.selectpicker').selectpicker()
 
 Template.editChoreForm.helpers
   choreEvent: ->

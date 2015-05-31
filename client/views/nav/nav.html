@@ -12,11 +12,11 @@
                 </button>
                 {{#if Meteor.userId}}
                     <a class="navbar-brand" href="/">
-                        <img src="/images/logo.png" alt="SuiteLife" class="img-responsive" />
+                        <img src="/images/logo-white.png" alt="SuiteLife" class="img-responsive" />
                     </a>
                 {{else}}
                     <div class="navbar-brand">
-                        <img src="/images/logo.png" alt="SuiteLife" class="img-responsive" />
+                        <img src="/images/logo-white.png" alt="SuiteLife" class="img-responsive" />
                     </div>
                 {{/if}}
             </div>
@@ -36,12 +36,33 @@
     </nav>
     {{> invite}}
     {{> settings}}
+
+    <div class="modal fade" id="deleteUserModal" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <h4 class="modal-title">Warning</h4>
+            </div>
+            <div class="modal-body">
+              <strong>Are you sure you want to leave your suite? This will delete your account.</strong>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" id="delete-my-account" class="btn btn-danger" data-dismiss="modal" >Confirm</button>
+            </div>
+          </div>
+        </div>
+    </div>
 </template>
 
 <template name="_loginButtonsAdditionalLoggedInDropdownActions">
-    <button class="btn btn-default btn-block" id="login-buttons-leave-suite">Leave Suite</button>
+    <button class="btn btn-default btn-block" id="login-buttons-leave-suite" data-toggle="modal" data-target="#deleteUserModal">Delete Account</button>
     <button class="btn btn-default btn-block" id="login-buttons-send-invite">Send Invite</button>
     <button class="btn btn-default btn-block" id="login-buttons-settings">Notifications Settings</button>
+
 </template>
 
 <!-- template for the invite modal -->
@@ -74,6 +95,7 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
+
 </template>
 
 

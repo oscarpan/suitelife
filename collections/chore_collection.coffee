@@ -5,27 +5,27 @@ Meteor.methods
   deleteChore: (id) ->
     Chores.remove id
     return
-  newChore: (chore, frequency, freqString, freqNum) ->
-    console.log chore.startDate
-    console.log "frequency " + frequency
-    console.log "freqString " + freqString
-    console.log "freqNum " + freqNum
+  newChore: (chore, frequency, freqString, freqNum, assignees) ->
     if frequency > 0
       repeating = 0
       incDay = 0
+      assignCount = assignees.length
+      assignIndex = Math.floor(Math.random() * assignCount);
       
       while repeating < freqNum
         startDay = moment(chore.startDate).add incDay, freqString
         chore.startDate = moment(startDay).toDate()
 
+        chore.assignee = assignees[assignIndex]
+
         chore.createdAt = (new Date).getTime()
-        console.log chore
         id = Chores.insert(chore)
         
         incDay = 1
         if frequency == 14
           incDay = 2
-          
+        
+        assignIndex = (assignIndex + 1) % assignCount
         repeating++
       return
     else
@@ -47,4 +47,8 @@ Meteor.methods
       Chores.update id, $set:
         completed: true
         completedOn: new Date()
+    id
+  updateChoreName: (name, id) ->
+    Chores.update id, $set:
+      title: name
     id

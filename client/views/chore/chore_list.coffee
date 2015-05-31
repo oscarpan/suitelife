@@ -1,48 +1,67 @@
-Template.choresList.helpers 
-  chores: ->
-    ## display chores in descending order
-    Chores.find {}, sort: 
-      startDate: 1
-      createdAt: 1
+Template.choresList.helpers
+  activeList: ->
+    Session.get 'activeList'
+  listData: ->
+    list = Session.get 'listData'
+    if list == 'upcoming'
+      date = moment(moment(new Date).startOf 'day').toDate()
+      Chores.find({
+        startDate: {$gt: date}
+      })
+    else if list == 'all'
+      Chores.find {}, sort: 
+        startDate: 1
+        createdAt: 1
+    else if list == 'today'
+      date = moment(moment(new Date).startOf 'day').toDate()
+      Chores.find({
+        $or: [ {startDate: date}, {$and: [ {startDate: {$lt: date}}, {completed: false} ]} ]
+      },
+        sort:
+          startDate: 1
+          createdAt: 1
+      )
 
-Template.choreItem.events
-  'click .listDetail': (e) ->
+Template.choresList.events
+  'click #todayChores': (e) ->
     e.preventDefault()
-    choreEvent = Chores.findOne(@_id)
-    Session.set 'activeModal', 'choreDetail'
-    Session.set 'choreEvent', choreEvent
-    $('#createChoreModal').modal('show').find('.modal-title').html('Chore Detail')
+    Session.set 'activeList', 'choreItem'
+    Session.set 'listData', 'today'
 
-  'click .listDelete': (e) ->
+  'click #upcomingChores': (e) ->
     e.preventDefault()
-    if confirm('Delete this Chore?')
-      currentId = @_id
-      Meteor.call 'deleteChore', currentId, (error, id) ->
-        if error
-          return alert(error.reason)
-        return
-    return
+    Session.set 'activeList', 'choreItem'
+    Session.set 'listData', 'upcoming'
 
-  'click .completed': (e) ->
+  'click #allChores': (e) ->
+    e.preventDefault()
+    Session.set 'activeList', 'choreItem'
+    Session.set 'listData', 'all'
+
+  'change #listName': (e) ->
+    e.preventDefault()
     currentId = @_id
-    Meteor.call 'completeChore', currentId, (error, id) ->
+    name = $('.listName' + currentId).val()
+    console.log name
+    Meteor.call 'updateChoreName', name, currentId, (error, id) ->
       if error
-        return alert(error.reason)
+        sAlert.error(error.reason)
+      return
+    return 
+
+  'click #comments': (e) ->
+  	currentId = @_id
+  	$('.comments' + currentId).toggle()
+
+Template.choresList.onRendered ->
+  Session.set 'activeList', 'choreItem'
+  Session.set 'listData', 'today'
+
+
 
 Template.choreItem.helpers
   dateFormat: (date) ->
     moment(date).format('MM/DD/YY')
-  freqString: (freq) ->
-    if freq == 0
-      'Once'
-    else if freq == 1
-      'Daily'
-    else if freq == 7
-      'Weekly'
-    else if freq == 14
-      'Bi-Weekly'
-    else if freq == 30
-      'Monthly'
   assignFormat: (assigneeId) ->
     assignee = Meteor.users.findOne assigneeId
     if assignee?
@@ -56,3 +75,28 @@ Template.choreItem.helpers
 
       if startDate < date and not completed
         "list-group-item-danger"
+  pastDue: (startDate) ->
+    date = new Date
+    date.setDate date.getDate() - 1
+
+    if startDate < date
+      "Past Due!"
+
+Template.choreItem.events
+  'click .listDelete': (e) ->
+    e.preventDefault()
+    if confirm('Delete this Chore?')
+      currentId = @_id
+      Meteor.call 'deleteChore', currentId, (error, id) ->
+        if error
+          sAlert.error(error.reason)
+        return
+    return
+
+  'click .completed': (e) ->
+    currentId = @_id
+    Meteor.call 'completeChore', currentId, (error, id) ->
+      if error
+        sAlert.error(error.reason)
+
+

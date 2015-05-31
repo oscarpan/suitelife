@@ -4,90 +4,86 @@
   <div class="panel panel-default">
     <div class="panel-heading">
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-5">
         	<h3 class="panel-title">
                 <i class="fa fa-list-alt"></i> Chores List
         	</h3>
         </div>
-        <div class="col-md-6 text-right">
+        <div class="col-md-5">
+          <div class="btn-group" data-toggle="buttons">
+            <label class="btn btn-primary active choreBtns" id="todayChores">
+              <input type="radio" name="options" id="todayText" autocomplete="off" checked> Today
+            </label>
+            <label class="btn btn-primary choreBtns" id="upcomingChores">
+              <input type="radio" name="options" id="upcomingText" autocomplete="off"> Upcoming 
+            </label>
+            <label class="btn btn-primary choreBtns" id="allChores">
+              <input type="radio" name="options" id="allText" autocomplete="off"> All
+            </label>
+          </div>
+        </div>
+        <div class="col-md-2 text-right">
           {{> tooltips title="Chores" content="Split-up and schedule chores with your Suitemates." }}
         </div>
       </div>
     </div>
 
     <div class="panel-body container-fluid" id="choresList">
-      <ul class="list-group">
-        {{#if chores.count}}
-          {{#each chores}}
-            {{> choreItem}}
-          {{/each}}
-        {{else}}
-          <li class="list-group-item empty-note text-center disabled">
-            There are no chores! Add a chore by clicking a specific date or the New button on the calendar.
-          </li>
-      {{/if}}
-      </ul>
-
-      <!--<table class="table table-striped" id="listTable">
-    		{{#if chores.count}}
-    		<thead>
-      		<tr>
-      			<th>Date</th>
-       			<th>Name</th>
-            <th>Description</th>
-        		<th>Assigned</th>
-            <th>Completed On</th>
-            <th></th>
-      		</tr>
-    		</thead>
-    		<tbody>
-          {{#each chores}}
-       			{{> choreItem}}
-      		{{/each}}
-      	</tbody>
-      	{{else}}
-      		<tr>
-      			<td class="empty-note text-center"> No Chores</td>
-      		</tr>
-      	{{/if}}
-    	</table>-->
+      <ul class="list-group choreLists">
+	      	{{#if listData.count}}
+	          {{#each listData}}
+	            {{> Template.dynamic template=activeList}}
+	          {{/each}}
+	        {{else}}
+	          <li class="list-group-item empty-note text-center disabled">
+	            No chores!
+	          </li>
+	        {{/if}}
+    	</ul>
     </div>
   </div>
 </template>
 
 <!-- chore details in a row, each part in a different column -->
 <template name="choreItem">
-  <li class="list-group-item {{completeColor completed startDate}}">
+	<li class="list-group-item {{completeColor completed startDate}}">
     <div class="container-fluid">
-      <div class="row">
+    	<div class="row">
         <div class="col-md-12" id="dateHeader">
           {{dateFormat startDate}}
         </div>
+        <button class="btn btn-xs btn-danger listDelete">
+    			<i class="fa fa-times"></i>
+  			</button>
       </div>
       <div class="row">
         <div class="col-md-1" id ="initials" align="left">
-          {{assignFormat assignee}}
+          <span id="initialsBox">{{assignFormat assignee}}</span>
         </div>
         <div class="col-md-9" id="editTitle">
-          {{> editableText collection="chores" field="title"}}
+          <input id="listName" name="choreName" type="text" placeholder="Name Your Chore" class="form-control input-md listName{{_id}}" required="" value="{{title}}">
         </div>
         <div class="col-md-2">
-          <i class="fa fa-comment"></i>
+          <i class="fa fa-comment" id="comments"></i>
+        </div>
+        <div id="commentsPop" class="comments{{_id}}">
+        	<textarea id="choreDesc" name="choreDesc" placeholder="Add comments here" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Add comments here'" maxlength="500" rows="4">{{description}}</textarea>
         </div>
       </div>
       <div class="row">
         <div class="col-md-8">
           {{#if completed}}
-            <span class="text-success">{{dateFormat completedOn}}</span>
+            <span class="text-success">Completed: {{dateFormat completedOn}}</span>
+          {{else}}
+            <span class="text-danger">{{pastDue startDate}}</span>
           {{/if}}
+
         </div>
         <div class="col-md-4" align="right">
           <button class="btn btn-md btn-success completed">
             <i class="fa fa-check"></i>
           </button>
-          <button class="btn btn-md btn-danger listDelete">
-            <i class="fa fa-times"></i>
-          </button>
+          
         </div>
       </div>
 
@@ -95,5 +91,4 @@
     </div>
   </li>
     <!--<td><span id="editDesc">{{> editableText collection="chores" field="description" acceptEmpty="true" substitute="N/A"}}</span></td>-->
-      
 </template>

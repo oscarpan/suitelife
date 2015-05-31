@@ -32,8 +32,8 @@ Meteor.methods
     iou = Ious.findOne id
     Ious.update id, $set: {paid: true}
     lastEdited = new Date( ).getTime( )
-    logMessage = Meteor.user( ).profile.first_name + " payed IOU \"" + iou.reason + ".\""
-    Ious.update id, $push: { "editLog": { "lastEdited": lastEdited
-                                          "logMessage": logMessage
-                                          "editType": "update" } }
+    logMessage = Meteor.user( ).profile.first_name + " paid IOU \"" + iou.reason + ".\""
+    Ious.update id, $push: { "editLog": { "lastEdited": lastEdited,
+    "logMessage": logMessage,
+    "editType": "update" } }
     id

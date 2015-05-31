@@ -26,14 +26,14 @@ Template.iouItem.helpers
   amountFormat: (amount, payerId, payeeId) ->
     if payerId == Meteor.userId()
       payee = Meteor.users.findOne payeeId
-      if payee?.profile?.first_name?
+      if payee.profile.first_name
         "<span class='text-success'>" +
           "You owe " + payee.profile.first_name + " " +
           payee.profile.last_name +
           "</span>"
     else if payeeId == Meteor.userId()
       payer = Meteor.users.findOne payerId
-      if payer?.profile?.first_name?
+      if payer.profile.first_name
         "<span class='text-danger'>" +
           payer.profile.first_name + " " + payer.profile.last_name +
           " owes you " + #$" + # $" + amount +
@@ -46,13 +46,13 @@ Template.iouItem.events
     currentId = @_id
     Meteor.call 'payIou', currentId, (error, id) ->
       if error
-        return alert(error.reason)
+        sAlert.error(error.reason)
 
   'click .delete': (e) ->
     currentId = @_id
     Meteor.call 'deleteIou', currentId, (error, id) ->
       if error
-        return alert(error.reason)
+        sAlert.error(error.reason)
       $('#delete' + currentId + 'Modal').modal('hide')
       $('body').removeClass('modal-open')
       $('.modal-backdrop').remove()
