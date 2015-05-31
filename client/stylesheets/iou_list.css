@@ -26,6 +26,10 @@
   border-bottom-style: dashed;
 }
 
+.underline-editable:hover {
+  background-color: lightgray;
+}
+
 .iou-list-buttons {
   position: absolute;
   right: 30px;
