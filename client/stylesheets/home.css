@@ -28,16 +28,16 @@ body {
 }
 
 #iousModule > .panel {
-	min-width: 550px;
+	min-width: 565px;
 	min-height: 175px;
-	width: 525px;
+	width: 565px;
 	height: 175px;
 }
 
 #choresModule > .panel {
-	min-width: 550px;
+	min-width: 565px;
 	min-height: 175px;
-	width: 525px;
+	width: 565px;
 	height: 175px;
 }
 
