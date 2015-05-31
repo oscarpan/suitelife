@@ -8,6 +8,8 @@ idInUsersList = (id) ->
 
 Template.costSplitter.onRendered ->
   Session.set "checkedUsers", []
+  Session.set "splitAmount", 0
+  Session.set "evenSplit", true
 
 #checkedUsers : array of user IDs
 Template.costSplitter.helpers
@@ -23,23 +25,17 @@ Template.costSplitter.helpers
     if idInUsersList(id) == false
       return 0
     checkedUsers = Session.get "checkedUsers"
-    100 / checkedUsers.length
+    numeral(100 / checkedUsers.length).format('00')
 
   splitCost: (id) ->
     amount = Session.get "splitAmount"
     checkedUsers = Session.get "checkedUsers"
     if idInUsersList(id) == false or checkedUsers.length == 0 or not amount
       return 0.00
-    #Session.get "evenSplitAmount"
-    amount / checkedUsers.length
+    numeral(amount / checkedUsers.length).format('0,0.00')
 
   evenSplitChecked: ->
-    # Disable the input boxes
-    if (typeof Session.get("evenSplit") == "undefined")
-      Session.set "evenSplit", true
-      return true
-    else
-      return Session.get "evenSplit"
+    return Session.get "evenSplit"
 
 Template.costSplitter.events
   'change #even-split-checkbox': (event, template) ->
@@ -47,11 +43,11 @@ Template.costSplitter.events
     if event.target.checked == true
       $('input[name=split-cost]').prop('disabled', true)
       $('input[name=amount]').prop('disabled', false)
-      $('div[name=split-percent]').removeClass('hidden')
+      #$('div[name=split-percent]').removeClass('hidden')
     else
       $('input[name=split-cost]').prop('disabled', false)
       $('input[name=amount]').prop('disabled', true)
-      $('div[name=split-percent]').addClass('hidden')
+      #$('div[name=split-percent]').addClass('hidden')
     return
 
   # Sets the evenSplitAmount for use in helpers
@@ -74,7 +70,6 @@ Template.costSplitter.events
   'change input[name=split-user]': (e, t) ->
     # Sets a session variable called 'split-user-id'
     currentId = e.currentTarget.id.slice(11) #Gets only the userId
-    #Session.set('disable-' + currentId, e.target.checked)
 
     checkedUsers = Session.get "checkedUsers"
 
@@ -112,29 +107,33 @@ Template.costSplitter.events
       console.log("payerId: " + payerId)
       if checkedUsers[i] == payerId
         console.log("Skipping this user: " + payerId)
+        i = i + 1
+        continue
 
-      ###
+
       iou =
-        payerId:    $(e.target).find('[name=payer]').val()
-        payeeId:    checkedUsers[i]
+        payerId:    checkedUsers[i]
+        payeeId:    $(e.target).find('[name=payer]').val()
         reason:     $(e.target).find('[name=reason]').val()
-        amount:     $(e.target).find('[name=amount]').val()
+        amount:     numeral($(e.target).find('#split-cost-' + checkedUsers[i]).val()).format('0,0.00')
         paid:       false
         deleted:    false
         editLog:    [ { "lastEdited": new Date( ).getTime( ),
         "logMessage": Meteor.user( ).profile.first_name + " created the IOU for \"" + $( e.target ).find( '[name=reason]' ).val( ) + ".\"",
         "editType":   "create" } ]
 
+      console.log("Creating an IOU: " + JSON.stringify(iou))
+
       Meteor.call 'newIou', iou, (error, id) ->
         if error
           return alert(error.reason)
-        $('#newIouModal').modal('toggle')
-        $('#newIouModal').find('input:text').val('')
+        $('#costSplitterModal').find('input:text').val('')
+        $('#costSplitterModal').modal('hide')
+        $('body').removeClass('modal-open')
+        $('.modal-backdrop').remove()
         Router.go '/'
         return
 
-      # Everybody owes the payer: input[name=payer]
-      ###
       i = i + 1
 
 

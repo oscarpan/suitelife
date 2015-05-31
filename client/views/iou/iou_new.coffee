@@ -16,7 +16,7 @@ Template.iouNew.events
       payerId:    Meteor.user()._id
       payeeId:    $(e.target).find('[name=payee]').val()
       reason:     $(e.target).find('[name=reason]').val()
-      amount:     $(e.target).find('[name=amount]').val()
+      amount:     numeral($(e.target).find('[name=amount]').val()).format('0,0.00')
       paid:       false
       deleted:    false
       editLog:    [ { "lastEdited": new Date( ).getTime( ),
