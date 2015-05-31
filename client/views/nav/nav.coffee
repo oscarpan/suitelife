@@ -10,7 +10,10 @@ Template.Nav.helpers
     ## Find and return suite
     Suites.findOne users: Meteor.userId()
 
-Template._loginButtonsLoggedInDropdown.user_profile_picture = 'http://www.gravatar.com/avatar/' + CryptoJS.MD5(Meteor.user()?.email?).toString()+'?d=retro'
+Template._loginButtonsLoggedInDropdown.helpers
+  user_profile_picture: ->
+    if Meteor.user()
+      'http://www.gravatar.com/avatar/' + CryptoJS.MD5(Meteor.user().emails[0].address).toString()+'?d=retro'
 
 Template._loginButtonsAdditionalLoggedInDropdownActions.events 
   'click #login-buttons-send-invite': (e) ->
@@ -54,6 +57,3 @@ Template.settings.events 'submit form': (e) ->
   sAlert.warning('Settings Functionality currently not implemented')
   $('#inviteModal').modal 'hide'
   return
-
-Accounts.config
-  forbidClientAccountCreation : true
