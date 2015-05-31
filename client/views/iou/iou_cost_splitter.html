@@ -4,15 +4,24 @@
 
 	    <form class="form-horizontal">
 
-		    <!-- Text input-->
 		    <div class="form-group">
 		      <label class="col-md-3 control-label" for="reason">Reason</label>  
 		      <div class="col-md-8">
-		        <input id="reason" name="reason" type="text" placeholder="What cost are you splitting?" class="form-control" required="">
+		        <input id="reason" name="reason" type="text" placeholder=" What cost are you splitting?" class="form-control" required="">
 		      </div>
 		    </div>
 
-		    <!-- Text input-->
+		    <div class="form-group">
+		      <label class="col-md-3 control-label" for="payee">Who paid?</label>
+		      <div class="col-md-8">
+		        <select id="payer" name="payer" class="form-control">
+		          {{#each users}}
+		            <option value="{{this}}">{{userName this}}</option>
+		          {{/each}}
+		        </select>
+		      </div>
+		    </div>
+
 		    <div class="form-group">
 		      <label class="col-md-3 control-label" for="amount">Amount</label>
 		      <div class="col-md-8">
@@ -27,8 +36,8 @@
 
 		    <div class="form-group container-fluid">
 			    <div class="row">
-				    <label class="col-md-3 control-label" for="cost-splitter">Cost Splitter</label>
-				    <div class="col-md-8 control-label checkbox text-right">
+				    <label class="col-md-3 col-sm-3 col-xs-3 control-label" for="cost-splitter">Cost Splitter</label>
+				    <div class="col-md-8 col-sm-8 col-xs-8 control-label checkbox text-right">
 					    <input type="checkbox" id="even-split-checkbox" checked="{{evenSplitChecked}}">
 				    	Split Evenly
 				    </div>

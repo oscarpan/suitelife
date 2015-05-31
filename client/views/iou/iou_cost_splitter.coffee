@@ -74,7 +74,7 @@ Template.costSplitter.events
   'change input[name=split-user]': (e, t) ->
     # Sets a session variable called 'split-user-id'
     currentId = e.currentTarget.id.slice(11) #Gets only the userId
-    Session.set('disable-' + currentId, e.target.checked)
+    #Session.set('disable-' + currentId, e.target.checked)
 
     checkedUsers = Session.get "checkedUsers"
 
@@ -97,3 +97,46 @@ Template.costSplitter.events
     Session.set "checkedUsers", checkedUsers
 
     return
+
+  'submit form': (e) ->
+    e.preventDefault()
+    # Get all the users with a split-cost of > 0
+    checkedUsers = Session.get "checkedUsers"
+    console.log("checkedUsers.length: " + checkedUsers.length)
+
+    i = 0
+    while i < checkedUsers.length
+      # Create an IOU for each of these users
+      # We can grab their split-cost by using: #split-cost-theirid
+      payerId = $(e.target).find('[name=payer]').val()
+      console.log("payerId: " + payerId)
+      if checkedUsers[i] == payerId
+        console.log("Skipping this user: " + payerId)
+
+      ###
+      iou =
+        payerId:    $(e.target).find('[name=payer]').val()
+        payeeId:    checkedUsers[i]
+        reason:     $(e.target).find('[name=reason]').val()
+        amount:     $(e.target).find('[name=amount]').val()
+        paid:       false
+        deleted:    false
+        editLog:    [ { "lastEdited": new Date( ).getTime( ),
+        "logMessage": Meteor.user( ).profile.first_name + " created the IOU for \"" + $( e.target ).find( '[name=reason]' ).val( ) + ".\"",
+        "editType":   "create" } ]
+
+      Meteor.call 'newIou', iou, (error, id) ->
+        if error
+          return alert(error.reason)
+        $('#newIouModal').modal('toggle')
+        $('#newIouModal').find('input:text').val('')
+        Router.go '/'
+        return
+
+      # Everybody owes the payer: input[name=payer]
+      ###
+      i = i + 1
+
+
+
+     
