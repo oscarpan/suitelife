@@ -41,15 +41,15 @@
 					    {{userName this}}
 				    </div>
 					<div class="col-md-3 col-md-offset-1 col-sm-3 col-sm-offset-1 col-xs-4 text-right">
-						<div class="input-group">
+						<div class="input-group" name="split-percent">
 					      <div class="input-group-addon">%</div>
-					      <input type="text" class="form-control" name="split-percent" id="split-percent-{{this}}" value="{{splitPercent this}}" {{disabled this}}>
+					      <input type="text" class="form-control" name="split-percent" id="split-percent-{{this}}" value="{{splitPercent this}}" disabled="true">
 					    </div>
 					</div>
 					<div class="col-md-3 col-sm-3 col-xs-4 text-right">
 						<div class="input-group">
 					      <div class="input-group-addon">$</div>
-					      <input type="text" class="form-control" name="split-cost" id="split-cost-{{this}}" placeholder="0.00" value="{{splitCost this}}" {{disabled this}}>
+					      <input type="text" class="form-control" name="split-cost" id="split-cost-{{this}}" placeholder="0.00" value="{{splitCost this}}" disabled="true">
 					    </div>
 					</div>
 			    </div>

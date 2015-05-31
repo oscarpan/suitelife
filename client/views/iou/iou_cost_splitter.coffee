@@ -1,21 +1,18 @@
 # Returns true if input id is a user whose name is checked, false otherwise
 idInUsersList = (id) ->
-  splitterUsersList = Session.get "splitterUsersList"
-  ###
-  if (typeof Session.get("splitterUsersList") == 'undefined')
-    Session.set "splitterUsersList", []
-  ###
+  checkedUsers = Session.get "checkedUsers"
 
-  if $.inArray(id, splitterUsersList) == -1
+  if $.inArray(id, checkedUsers) == -1
     return false
   return true
 
 Template.costSplitter.onRendered ->
-  Session.set "splitterUsersList", []
+  Session.set "checkedUsers", []
 
-#splitterUsersList : array of user IDs
+#checkedUsers : array of user IDs
 Template.costSplitter.helpers
   users: ->
+    Session.set "checkedUsers", Suites.findOne(Session.get('suite')._id).users
     Suites.findOne(Session.get('suite')._id).users
 
   userName: (id) ->
@@ -25,38 +22,42 @@ Template.costSplitter.helpers
   splitPercent: (id) ->
     if idInUsersList(id) == false
       return 0
-    splitterUsersList = Session.get "splitterUsersList"
-    100 / splitterUsersList.length
+    checkedUsers = Session.get "checkedUsers"
+    100 / checkedUsers.length
 
   splitCost: (id) ->
-    if idInUsersList(id) == false
+    amount = Session.get "splitAmount"
+    checkedUsers = Session.get "checkedUsers"
+    if idInUsersList(id) == false or checkedUsers.length == 0 or not amount
       return 0.00
-    Session.get "evenSplitAmount"
+    #Session.get "evenSplitAmount"
+    amount / checkedUsers.length
 
   evenSplitChecked: ->
+    # Disable the input boxes
     if (typeof Session.get("evenSplit") == "undefined")
       Session.set "evenSplit", true
       return true
     else
       return Session.get "evenSplit"
 
-  disabled: (id) ->
-    if (Session.get("split-user-" + id) == true)
-      return ""
-    else
-      return "disabled"
-
 Template.costSplitter.events
   'change #even-split-checkbox': (event, template) ->
     Session.set "evenSplit", event.target.checked
+    if event.target.checked == true
+      $('input[name=split-cost]').prop('disabled', true)
+      $('input[name=amount]').prop('disabled', false)
+      $('div[name=split-percent]').removeClass('hidden')
+    else
+      $('input[name=split-cost]').prop('disabled', false)
+      $('input[name=amount]').prop('disabled', true)
+      $('div[name=split-percent]').addClass('hidden')
     return
 
   # Sets the evenSplitAmount for use in helpers
   'keyup #amount': (event, template) ->
-    splitterUsersList = Session.get "splitterUsersList"
-    amount = template.find("#amount").value
-    Session.set "evenSplitAmount", amount / splitterUsersList.length
-    console.log("amount: " + amount + " evenSplitAmount: " + amount / splitterUsersList.length)
+    checkedUsers = Session.get "checkedUsers"
+    Session.set "splitAmount", template.find("#amount").value
     return
 
   # Uncheck even-split checkbox when user enters input
@@ -72,20 +73,27 @@ Template.costSplitter.events
   # Disable/Enable input boxes
   'change input[name=split-user]': (e, t) ->
     # Sets a session variable called 'split-user-id'
-    Session.set(e.currentTarget.id, e.target.checked)
     currentId = e.currentTarget.id.slice(11) #Gets only the userId
+    Session.set('disable-' + currentId, e.target.checked)
 
-    splitterUsersList = Session.get "splitterUsersList"
+    checkedUsers = Session.get "checkedUsers"
 
-    # Uncheck user: remove user from splitterUsersList
+    console.log("e.currentTarget.id: " + e.currentTarget.id)
+    # Uncheck user: remove user from checkedUsers
     if e.target.checked == false
-      splitterUsersList.splice(splitterUsersList.indexOf(currentId), 1)
+      checkedUsers.splice(checkedUsers.indexOf(currentId), 1)
+      $('#' + e.currentTarget.id).prop('checked', false)
+      if not Session.get "evenSplit"
+        console.log("cat")
+        $('#split-cost-' + currentId).prop('disabled', true)
 
-    # Check user: Add user to splitterUsersList only if box is checked
+    # Check user: Add user to checkedUsers only if box is checked
     # and user is not currently in the array
     else if e.target.checked == true and idInUsersList(currentId) == false
-      splitterUsersList.push(currentId)
+      checkedUsers.push(currentId)
+      $('#' + e.currentTarget.id).prop('checked', true)
 
-    console.log(splitterUsersList)
-    Session.set "splitterUsersList", splitterUsersList
+    console.log(checkedUsers)
+    Session.set "checkedUsers", checkedUsers
+
     return
