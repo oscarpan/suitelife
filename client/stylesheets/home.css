@@ -37,6 +37,7 @@ body {
 #choresModule > .panel {
 	min-width: 525px;
 	min-height: 175px;
+	max-height: 1050px;
 	width: 525px;
 	height: 175px;
 }
