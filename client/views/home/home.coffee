@@ -6,6 +6,11 @@ Template.Home.rendered = ->
 		grid: [ 40, 20 ]
 	)
 
+	$(".chores-panel").resizable(
+		grid: [ 40, 20 ]
+		alsoResize: ".choreCal"
+	)
+
 	$container = $('#home').packery(
 		columnWidth: 40
 		rowHeight: 20
