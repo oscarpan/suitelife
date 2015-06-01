@@ -4,6 +4,7 @@ root.Posts = new (Meteor.Collection)('posts')
 Meteor.methods
   deletePost: (id) ->
     Posts.remove id
+    Meteor.call 'updatePostSubscription'
   newPost: (post, suite_id) ->
     post.createdAt = moment().format 'h:mm on MM/DD'
     post_id = Posts.insert post
@@ -12,6 +13,7 @@ Meteor.methods
       Suites.update suite_id, $set: {post_ids: [post_id]}
     else
       Suites.update suite_id, $push: {post_ids: post_id}
+    Meteor.call 'updatePostSubscription'
     post_id
   setImagePath: (post, id) ->
     post.updatedAt = moment().format 'h:mm on MM/DD'
@@ -42,3 +44,7 @@ Meteor.methods
     Meteor.call 'newPost', post, suite_id, (error) -> 
       if error
         sAlert.error(error.reason)
+  updatePostSubscription: ->
+    if Meteor.isClient
+      suite = Suites.findOne users: Meteor.userId()
+      Meteor.subscribe 'posts', suite.post_ids
