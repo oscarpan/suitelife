@@ -1,5 +1,6 @@
 #postsList{
 	box-shadow: 0px -2px 2px #888888;
+	overflow-y: hidden;
 }
 
 #postsModule > .panel > .panel-heading{

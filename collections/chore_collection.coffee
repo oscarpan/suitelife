@@ -6,6 +6,7 @@ Meteor.methods
     Chores.remove id
     return
   newChore: (chore, frequency, freqString, freqNum, assignees) ->
+    suite = (Suites.findOne users: Meteor.userId())
     if frequency > 0
       repeating = 0
       incDay = 0
@@ -27,12 +28,22 @@ Meteor.methods
         
         assignIndex = (assignIndex + 1) % assignCount
         repeating++
-      return
+
+        #insert into suite
+        if !(suite.chore_ids?)                                            
+          Suites.update suite._id, $set: {chore_ids: [id]}
+        else
+          Suites.update suite._id, $push: {chore_ids: id}
     else
       chore.createdAt = (new Date).getTime()
       id = Chores.insert(chore)
-      return
-
+      
+      #insert into suite
+      if !(suite.chore_ids?)                                            
+        Suites.update suite._id, $set: {chore_ids: [id]}
+      else
+        Suites.update suite._id, $push: {chore_ids: id}
+    
   editChore: (chore, id) ->
     chore.updatedAt = (new Date).getTime()
     Chores.update id, $set: chore

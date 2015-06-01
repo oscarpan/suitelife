@@ -24,11 +24,8 @@ Template.postsList.events
 
 Template.postsList.helpers 
 	posts: ->
-		if Session.get('suite')?
-			suite = Suites.findOne Session.get('suite')._id
-			posts = (Posts.find _id: $in: suite.post_ids).fetch()
-			posts
-
+		Posts.find().fetch()
+		
 Template.postsList.onRendered ->
 	$postsContainer = $('.postsPackery').packery(
 		columnWidth: 49
