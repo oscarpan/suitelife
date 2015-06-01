@@ -1,7 +1,6 @@
 Template.newChoreForm.helpers
   users: ->
     if Session.get('suite')?
-      #Suites.findOne("zhJuKodnEuqZ268JF").users
       Suites.findOne(Session.get('suite')._id).users
   getUserName: (id) ->
     usr = Meteor.users.findOne id
@@ -15,11 +14,7 @@ Template.newChoreForm.events
 
     assignees = []
     assignees = $('#assignee').val()
-    #$("input[name='assignee[]']:checked").each ->
-      #assignees.push $(this).val()
-      #return
 
-    console.log assignees[0]
     ## Find which reptition value is checked
     startDay = $('#datepicker').datepicker 'getDate'
     frequency = $(e.target).find('[name=repeat-freqs]').val()
@@ -34,7 +29,13 @@ Template.newChoreForm.events
     else if ( Number freqNum < 0 ) || ( Number freqNum % 1 != 0 )
       sAlert.warning "Chore frequency must be a positive integer."
       return false
+    else if assignees == null
+    	sAlert.warning "A person must be assigned to the chore."
+    	return false
     if frequency == 0
+    	if assignees.length > 1
+    		sAlert.warning "A one-time event can only allow 1 person to be assigned."
+    		return false
       freqNum = null
 
     ## object to send to new chore func
@@ -59,9 +60,9 @@ Template.newChoreForm.events
     e.preventDefault()
     frequency = $('#repeat-freqs').val()
     if frequency == '0'
-      $('#freqNum').prop 'disabled', true
-    else
-      $('#freqNum').prop 'disabled', false    
+      $('#freqNum').attr 'disabled', true
+     else
+      $('#freqNum').attr 'disabled', false
 
 Template.newChoreForm.onRendered ->
   startDay = Session.get 'startDay'
