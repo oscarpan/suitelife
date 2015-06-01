@@ -11,6 +11,10 @@
 	background-image: url(cork.jpg);
 }
 
+.btn-group > .dropdown-toggle{
+	color: black;
+}
+
 .post-item{
 	width:400px; 
 	border: 1px solid #AEA341;

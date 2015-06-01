@@ -3,6 +3,10 @@ h3 {
   cursor: pointer; 
 }
 
+.modal-body > .container {
+  width: inherit;
+}
+
 .popover {
   min-width: 200px;
 }
