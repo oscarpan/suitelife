@@ -35,7 +35,7 @@ Template.Home.rendered = ->
 			padding = 88
 
 			targetContainer = $('#' + moduleName)
-			target = $('#' + moduleName + ' > .panel')
+			target = $('#' + moduleName)
 			targetBody = $('#' + bodyName)
 
 			#run update when targets move
@@ -55,7 +55,6 @@ Template.Home.rendered = ->
 					resizing = false
 				resize: (event, ui) ->
 					resizing = true
-					targetBody.height(target.height() - padding)
 					#move all objects to fit
 					$container.packery()	
 

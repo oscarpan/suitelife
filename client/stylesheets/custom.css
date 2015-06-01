@@ -3,8 +3,11 @@ h3 {
   cursor: pointer; 
 }
 
-.navbar {
+.popover {
+  min-width: 200px;
+}
 
+.navbar {
   background-color: #9987ca;
 }
 

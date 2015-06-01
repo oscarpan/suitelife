@@ -9,7 +9,8 @@
                 <i class="fa fa-list-alt"></i> Chores List
         	</h3>
         </div>
-        <div class="col-md-5">
+        <div class="col-md-7 text-right">
+          {{> tooltips title="Chores" content="View everyone's chores. Edit chores and mark them as complete." }}
           <div class="btn-group" data-toggle="buttons">
             <label class="btn btn-primary active choreBtns" id="todayChores">
               <input type="radio" name="options" id="todayText" autocomplete="off" checked> Today
@@ -21,9 +22,6 @@
               <input type="radio" name="options" id="allText" autocomplete="off"> All
             </label>
           </div>
-        </div>
-        <div class="col-md-2 text-right">
-          {{> tooltips title="Chores" content="View everyone's chores. Edit chores and mark them as complete." }}
         </div>
       </div>
     </div>

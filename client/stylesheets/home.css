@@ -22,9 +22,6 @@ body {
 
 #postsModule{
 	width: 97.5%;
-}
-
-#postsModule > .panel {
 	min-width: 640px;
 	min-height: 300px;	
 	height: 300px;
@@ -32,9 +29,6 @@ body {
 
 #iousModule{
 	width: 48%;
-}
-
-#iousModule > .panel {
 	min-width: 565px;
 	min-height: 175px;
 	height: 175px;
@@ -42,23 +36,16 @@ body {
 
 #choresModule{
 	width: 48%;
-}
-
-#choresModule > .panel {
 	min-width: 565px;
 	min-height: 175px;
 	height: 175px;
 }
 
 #calModule{
-	width: 48%;
-}
-
-#calModule > .panel {
 	min-width: 640px;
 	min-height: 300px;
 	max-height: 1050px;
 	height: 300px;
+	width: 48%;
 }
-
 
