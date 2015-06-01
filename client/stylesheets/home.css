@@ -20,32 +20,44 @@ body {
 	overflow-y: scroll;
 }
 
+#postsModule{
+	width: 97.5%;
+}
+
 #postsModule > .panel {
 	min-width: 640px;
 	min-height: 300px;	
-	width: 1265px;
 	height: 300px;
+}
+
+#iousModule{
+	width: 48%;
 }
 
 #iousModule > .panel {
 	min-width: 565px;
 	min-height: 175px;
-	width: 565px;
 	height: 175px;
+}
+
+#choresModule{
+	width: 48%;
 }
 
 #choresModule > .panel {
 	min-width: 565px;
 	min-height: 175px;
-	width: 565px;
 	height: 175px;
+}
+
+#calModule{
+	width: 48%;
 }
 
 #calModule > .panel {
 	min-width: 640px;
 	min-height: 300px;
 	max-height: 1050px;
-	width: 640px;
 	height: 300px;
 }
 

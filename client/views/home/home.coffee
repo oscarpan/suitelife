@@ -1,6 +1,7 @@
 Template.Home.rendered = ->
 	modules = ['postsModule', 'iousModule', 'calModule', 'choresModule']
 	bodies = ['postsList', 'iousList', 'choreCal', 'choresList']	
+	resizing = false
 
 	$( ".panel").resizable(
 		grid: [ 40, 20 ]
@@ -51,14 +52,16 @@ Template.Home.rendered = ->
 					Meteor.call 'updateModuleLocation', moduleName, ui.size, null, (error) ->
 						if error
 							sAlert.error(error.reason)
+					resizing = false
 				resize: (event, ui) ->
+					resizing = true
 					targetBody.height(target.height() - padding)
 					#move all objects to fit
 					$container.packery()	
 
 			#set the window size
 			Tracker.autorun ->
-				if Meteor.user()?.modules?[moduleName]?
+				if !resizing and Meteor.user()?.modules?[moduleName]?
 					location = Meteor.user().modules[moduleName]
 					target.width(location.width)
 					target.height(location.height)
@@ -66,4 +69,4 @@ Template.Home.rendered = ->
 						targetContainer.css('top', location.top)
 						targetContainer.css('left', location.left)					
 			
-			$container.packery()	
+	$container.packery()	
