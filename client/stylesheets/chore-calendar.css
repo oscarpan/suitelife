@@ -48,6 +48,11 @@
   color: #fff;
 }
 
+.choreBtns.active .badge{
+	color: #3D3651;
+	background-color: #D6CFEA;
+}
+
 .choreBtns{
   padding: 8px 10px;
   background: #9987ca;
@@ -175,3 +180,4 @@
 	-moz-box-shadow: -1px 1px 3px 0px rgba(0,0,0,0.67);
 	box-shadow: -1px 1px 3px 0px rgba(0,0,0,0.67);
 }
+

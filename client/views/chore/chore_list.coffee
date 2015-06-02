@@ -25,7 +25,18 @@ Template.choresList.helpers
           startDate: 1
           createdAt: 1
       )
-
+  todayCount: ->
+  	date = moment(moment(new Date).startOf 'day').toDate()
+  	Chores.find({ 
+  		$or: [ {startDate: date}, {$and: [ {startDate: {$lt: date}}, {completed: false} ]} ]
+  	}).count()
+  upcomingCount: ->
+  	date = moment(moment(new Date).startOf 'day').toDate()
+  	Chores.find({
+  		startDate: {$gt: date} 
+  		}).count()
+  allCount: ->
+  	Chores.find({}).count()
 
 Template.choresList.events
   'click #todayChores': (e) ->
