@@ -1,5 +1,5 @@
 #choreCal {
-  overflow-y: hidden;
+  overflow-y: scroll;
   border-bottom-width: 1px;
   border-bottom-style: solid;
   border-bottom-color: rgb(211, 211, 211);
