@@ -35,7 +35,7 @@ Template.Home.rendered = ->
 					
 			#run update on resize
 			target.resizable 
-				alsoResize: bodyName + '> .panel'
+				alsoResize: bodyName
 				stop: (event, ui) ->
 					#update sizes	
 					Meteor.call 'updateModuleLocation', moduleName, ui.size, null, (error) ->
@@ -44,6 +44,7 @@ Template.Home.rendered = ->
 					resizing = false
 				resize: (event, ui) ->
 					resizing = true
+					targetBody.height(target.height() - padding)
 					#move all objects to fit
 					$container.packery()	
 
