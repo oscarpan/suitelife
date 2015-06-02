@@ -15,10 +15,11 @@ h3 {
   background-color: #9987ca;
 }
 
-#login-dropdown-list .dropdown-menu{
-  position: absolute;
-  left: -90px;
+.navbar-nav > li > .dropdown-menu {
+ margin-left: -140px;
+ position: absolute;
 }
+
 
 #login-dropdown-list > .dropdown-toggle {
   background-color: #9987ca;
