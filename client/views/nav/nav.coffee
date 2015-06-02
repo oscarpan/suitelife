@@ -10,6 +10,58 @@ Template.Nav.helpers
     ## Find and return suite
     Suites.findOne users: Meteor.userId()
 
+half_width = $(window).width() *.45
+full_width = $(window).width() *.95
+half_width2 = $(window).width() *.47
+posts_min_width= 640
+posts_min_height= 300
+ious_min_width= 565
+ious_min_height= 175
+cal_min_width= 640
+cal_min_height= 300
+cal_max_height= 610
+chores_min_width= 565
+chores_min_height= 175
+modules = ['postsModule', 'iousModule', 'calModule', 'choresModule']
+
+Template.Nav.events
+  'click .postMode': (e) ->
+    sizes = [
+      {width: full_width, height: posts_min_height + 200, left: 0, top: 0}, 
+      {width: full_width - half_width2, height: ious_min_height, left: half_width2, top: posts_min_height + 230},
+      {width: half_width, height: cal_min_height, left: 0, top: posts_min_height + 230},
+      {width: full_width - half_width2, height: chores_min_height, left: half_width2, top: posts_min_height + ious_min_height + 260}
+    ]
+    updateModules(sizes, e)
+  'click .choreMode': (e) ->
+    sizes = [
+      {width: half_width, height: posts_min_height, left: 0, top: cal_max_height + chores_min_height + 260}, 
+      {width: full_width - half_width2, height: ious_min_height, left: half_width2, top: cal_max_height + chores_min_height + 260},
+      {width: full_width, height: cal_max_height, left: 0, top: chores_min_height + 230},
+      {width: full_width, height: chores_min_height + 200, left: 0, top: 0}
+    ]
+    updateModules(sizes, e)    
+  'click .iouMode': (e) ->
+    sizes = [
+      {width: full_width - half_width2, height: posts_min_height, left: half_width2, top: ious_min_height + 230}, 
+      {width: full_width, height: ious_min_height + 200, left: 0, top: 0},
+      {width: half_width, height: cal_min_height, left: 0, top: ious_min_height + 230},
+      {width: half_width, height: chores_min_height, left: 0, top: ious_min_height + posts_min_height + 260}
+    ]
+    updateModules(sizes, e)
+
+updateModules = (sizes, e) ->
+  for i in [0...modules.length]
+    do (i) ->
+      moduleName = modules[i]
+      target = $('#' + moduleName)
+      Meteor.call 'updateModuleLocation', moduleName, sizes[i], sizes[i], ->
+        location = Meteor.user().modules[moduleName]
+        target.width(location.width)
+        target.height(location.height)
+        target.css('top', location.top)
+        target.css('left', location.left)  
+
 Template._loginButtonsLoggedInDropdown.helpers
   user_profile_picture: ->
     if Meteor.user()

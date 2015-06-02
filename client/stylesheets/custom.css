@@ -15,6 +15,11 @@ h3 {
   background-color: #9987ca;
 }
 
+#login-dropdown-list .dropdown-menu{
+  position: absolute;
+  left: -90px;
+}
+
 #login-dropdown-list > .dropdown-toggle {
   background-color: #9987ca;
   color: white;
@@ -39,6 +44,8 @@ h3 {
   margin-top: 5px;
   font-family: customTitleFont;
   color: #E0DBEF;
+  text-align: center;
+  width: 100%;
 }
 
 .dropdown-toggle {
@@ -52,6 +59,12 @@ h3 {
 
 .navbar-header {
   margin-left:20px;
+}
+
+.menu-item{
+  color: #E0DBEF !important;
+  font-size: 26px;
+  margin-top: 5px;
 }
 
 .my-btn{

@@ -3,19 +3,9 @@ Template.Home.rendered = ->
 	bodies = ['postsList', 'iousList', 'choreCal', 'choresList']	
 	resizing = false
 
-	$( ".panel").resizable(
-		grid: [ 40, 20 ]
-	)
-
-	$(".chores-panel").resizable(
-		grid: [ 40, 20 ]
-		alsoResize: ".choreCal"
-	)
-
 	$container = $('#home').packery(
-		columnWidth: 20
-		rowHeight: 10
-		gutter: 30)
+		gutter: 30
+		)
 	# get item elements, jQuery-ify them
 	$itemElems = $container.find('.packery-item')
 	# make item elements draggable
@@ -25,7 +15,6 @@ Template.Home.rendered = ->
 	# bind Draggable events to Packery
 	$container.packery 'bindUIDraggableEvents', $itemElems
 
-
 	#save the window size to the user
 	for i in [0...modules.length]
 		do (i) ->
@@ -34,7 +23,6 @@ Template.Home.rendered = ->
 			bodyName = bodies[i]
 			padding = 88
 
-			targetContainer = $('#' + moduleName)
 			target = $('#' + moduleName)
 			targetBody = $('#' + bodyName)
 
@@ -47,6 +35,7 @@ Template.Home.rendered = ->
 					
 			#run update on resize
 			target.resizable 
+				alsoResize: bodyName + '> .panel'
 				stop: (event, ui) ->
 					#update sizes	
 					Meteor.call 'updateModuleLocation', moduleName, ui.size, null, (error) ->
@@ -64,8 +53,9 @@ Template.Home.rendered = ->
 					location = Meteor.user().modules[moduleName]
 					target.width(location.width)
 					target.height(location.height)
+					targetBody.height(target.height() - padding)
 					if location.top?
-						targetContainer.css('top', location.top)
-						targetContainer.css('left', location.left)					
+						target.css('top', location.top)
+						target.css('left', location.left)					
 			
 	$container.packery()	
