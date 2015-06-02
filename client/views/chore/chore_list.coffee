@@ -42,16 +42,11 @@ Template.choresList.events
     e.preventDefault()
     currentId = @_id
     name = $('.listName' + currentId).val()
-    console.log name
     Meteor.call 'updateChoreName', name, currentId, (error, id) ->
       if error
         sAlert.error(error.reason)
       return
-    return 
-
-  'click #comments': (e) ->
-  	currentId = @_id
-  	$('.comments' + currentId).toggle()
+    return
 
 Template.choresList.onRendered ->
   Session.set 'activeList', 'choreItem'
@@ -81,6 +76,9 @@ Template.choreItem.helpers
 
     if startDate < date
       "Past Due!"
+  completedCheck: (completed) ->
+    if completed
+      checked
 
 Template.choreItem.events
   'click .listDelete': (e) ->
