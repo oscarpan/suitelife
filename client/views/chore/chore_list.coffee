@@ -38,11 +38,34 @@ Template.choresList.events
     Session.set 'activeList', 'choreItem'
     Session.set 'listData', 'all'
 
+  'focus #listName': (e) ->
+  	e.preventDefault()
+  	currentId = @_id
+  	name = $('.listName-' + currentId).val()
+  	Session.set 'listName', name
+
   'change #listName': (e) ->
     e.preventDefault()
     currentId = @_id
-    name = $('.listName' + currentId).val()
+    name = $('.listName-' + currentId).val()
+
+    if name == ''
+    	sAlert.error("Chores must have a title.")
+    	$('.listName-' + currentId).val(Session.get 'listName')
+    	return false
+
     Meteor.call 'updateChoreName', name, currentId, (error, id) ->
+      if error
+        sAlert.error(error.reason)
+      return
+    return
+
+  'change #listDesc': (e) ->
+    e.preventDefault()
+    currentId = @_id
+    desc = $('.listDesc-' + currentId).val()
+    console.log
+    Meteor.call 'updateChoreDesc', desc, currentId, (error, id) ->
       if error
         sAlert.error(error.reason)
       return
@@ -76,9 +99,8 @@ Template.choreItem.helpers
 
     if startDate < date
       "Past Due!"
-  completedCheck: (completed) ->
-    if completed
-      checked
+    else
+      moment(startDate).format('MM/DD/YY')
 
 Template.choreItem.events
   'click .listDelete': (e) ->

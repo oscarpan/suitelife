@@ -5,19 +5,13 @@
   border-bottom-color: rgb(211, 211, 211);
 }
 
-#choreDesc {
+#editChoreDesc, #newChoreDesc {
   resize: none;
   width: 100%;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  border-color: Transparent;
   overflow: auto;       
-}
-
-#choreDesc:hover{
-	border: 1px solid #ccc;
-	border-radius: 4px;
 }
 
 #choreEditName {
@@ -30,21 +24,19 @@
   border-radius: 4px;
 }
 
-#editDesc:hover{
-  border: 1px solid #ccc;
-  border-radius: 1px;
-}
-
-#editFreqNum:hover{
-  border: 1px solid #ccc;
-  border-radius: 1px;
-  margin: -1px;
-}
-
 #initialsBox {
   padding: 2px;
   border: 1px solid black;
   border-radius: 3px;
+  color: #fff;
+  -webkit-box-shadow: -1px 1px 3px 0px rgba(0,0,0,0.67);
+	-moz-box-shadow: -1px 1px 3px 0px rgba(0,0,0,0.67);
+	box-shadow: -1px 1px 3px 0px rgba(0,0,0,0.67);
+	background-color: #EB6E44
+}
+
+#initials{
+	margin-top: 5px;
 }
 
 .choreLists{
@@ -67,49 +59,120 @@
 }
 
 #listName{
+	color: black;
 	height: 25px;
-}
-.editText{
-  /*border: none;
-  overflow: auto;*/
-  background-color: transparent;
-  /*padding: 1px !important;*/
-}
-
-/*
-.editText:hover{
-  border: 1px solid #ccc;
+	font-weight: bold;
+	border: 1px solid #ccc;
+	border-color: transparent;
+	background-color: transparent;
+	-webkit-box-shadow: none;
+  box-shadow: none
 }
 
-.editText:focus{
-	background-color: #fff;
-}*/
+#listName:focus{
+	outline: 0;
+	border: 1px solid;
+	border-color: rgba(82, 168, 236, 0.8) !important;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
+	box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
+}
 
-.listDelete{
-	position: absolute;
-  left: 97%;
-  top: -1px;
+#listName:hover{
+	border: 1px solid black;
 }
 
 #listDesc{
+	color: black;
   resize: none;
   width: 100%;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  overflow: auto;       
+  overflow: auto;
+  border: 1px solid #ccc;
+  border-color: transparent;
+	background-color: transparent;
+	-webkit-box-shadow: none;
+  box-shadow: none 
+}
+
+#listDesc:focus{
+	outline: 0;
+	border: 1px solid;
+	border-color: rgba(82, 168, 236, 0.8) !important;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
+	box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
+}
+
+#listDesc:hover{
+	border: 1px solid black;
 }
 
 #doneCol{
 	padding-left: 1px;
 }
 
-.statusText {
-	position: absolute;
-	top: 30px;
-	left: 82%;
+#statusText{
+	left: 1%;
+	padding-right: 0px;
+	margin-top: 7px;
+	font-weight: 600;
 }
 
 #comments{
-	margin-top: 20px;
+	margin-top: 10px;
+	width: 80%;
+}
+
+.oneChore{
+	padding: 0px;
+	margin-bottom: 5px;
+	border: 2px solid black;
+	background-color: rgba(255, 255, 255, 0.8);
+	box-shadow: 1px 1px 2px #888888;
+}
+
+.list-group-item-success{
+	background-color: rgba(201, 231, 201, 0.8);
+}
+
+.list-group-item-danger{
+	background-color: rgba(242, 197, 196, 0.8);
+}
+
+#choresList{
+	position: relative;
+}
+
+#choresList:before {
+  content: ' ';
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  opacity: 0.3;
+  background-image: url('notebook.png');
+  background-position: 50% 0;
+  -ms-background-size: auto;
+  -o-background-size: auto;
+  -moz-background-size: auto;
+  -webkit-background-size: auto;
+  background-size: auto;
+}
+
+#listEditTitle{
+	margin-top: 5px;
+}
+
+.listDelete{
+	-webkit-box-shadow: -1px 1px 3px 0px rgba(0,0,0,0.67);
+	-moz-box-shadow: -1px 1px 3px 0px rgba(0,0,0,0.67);
+	box-shadow: -1px 1px 3px 0px rgba(0,0,0,0.67);
+}
+
+#choresPanel{
+
 }

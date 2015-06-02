@@ -1,6 +1,6 @@
 <!-- view chores in a list -->
 <template name="choresList">
-  <div class="panel panel-default">
+  <div class="panel panel-default" id="choresPanel">
     <div class="panel-heading">
       <div class="row">
         <div class="col-md-5">
@@ -26,6 +26,7 @@
     </div>
 
     <div class="panel-body container-fluid" id="choresList">
+      
       <ul class="list-group choreLists">
 	      	{{#if listData.count}}
 	          {{#each listData}}
@@ -44,53 +45,41 @@
 
 <!-- chore details in a row, each part in a different column -->
 <template name="choreItem">
-	<li class="list-group-item {{completeColor completed startDate}}">
-    <div class="container-fluid">
-    	<!--<div class="row">
-        <div class="col-md-12" id="dateHeader">
-          {{dateFormat startDate}}
-        </div>
-        <button class="btn btn-xs btn-danger listDelete">
-    			<i class="fa fa-times"></i>
-  			</button>
-      </div>-->
-
-      <button class="btn btn-xs btn-danger listDelete">
-        <i class="fa fa-times"></i>
-      </button>
-      {{#if completed}}
-        <span class="text-success statusText">{{dateFormat completedOn}}</span>
-      {{else}}
-        <span class="text-danger statusText">{{pastDue startDate}}</span>
-      {{/if}}
-      <div class="row">
-        <div class="col-md-1" id ="initials" align="left">
-          <span id="initialsBox">{{assignFormat assignee}}</span>
-        </div>
-        <div class="col-md-9" id="editTitle">
-          <input class="editText form-control input-md listName{{_id}}" id="listName" name="choreName" type="text" placeholder="Name Your Chore"  required="" value="{{title}}">
-        </div>
-        <div class="col-md-2" id="doneCol-{{_id}}">
-        	<style scoped>
-        		{{> completedCss}}
-        	</style>
-        	{{#if completed}}
-						<input type="checkbox" name="completedCheck" id="completedCheck-{{_id}}" checked />
-					{{else}}
-						<input type="checkbox" name="completedCheck" id="completedCheck-{{_id}}"/>
-					{{/if}}
-					<label class="completed completed{{_id}}" for="completedCheck-{{_id}}">Done</label>
-       	</div>
+	<li class="list-group-item {{completeColor completed startDate}} oneChore">
+  	<div class="row">
+    	<div class="col-md-1" id="doneCol-{{_id}}">
+      	<style scoped>
+      		{{> completedCss}}
+      	</style>
+      	{{#if completed}}
+					<input type="checkbox" name="completedCheck" id="completedCheck-{{_id}}" checked />
+				{{else}}
+					<input type="checkbox" name="completedCheck" id="completedCheck-{{_id}}"/>
+				{{/if}}
+				<label class="completed completedLabel-{{_id}}" for="completedCheck-{{_id}}"></label>
+     	</div>
+     	<div class="col-md-1" id ="initials" align="left">
+        <span id="initialsBox">{{assignFormat assignee}}</span>
       </div>
-      <div class="row">
-        <div class="comments" id="comments">
-        	<textarea class="editText" id="listDesc" name="choreDesc" placeholder="Add comments here" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Add comments here'" maxlength="500">{{description}}</textarea>
-        </div>
+      <div class="col-md-8" id="listEditTitle">
+        <input class="form-control input-md listName-{{_id}}" id="listName" name="choreName" type="text" placeholder="Name Your Chore"  required="" value="{{title}}">
       </div>
-      <div class="row">
-        <div class="col-md-8">
-          
-        </div>
+      <div class="col-md-2" id="listDeleteDiv" align="right">
+      	<button class="btn btn-xs btn-danger listDelete">
+	        <i class="fa fa-times"></i>
+	      </button>
+	    </div>
+    </div>
+    <div class="row">
+    	<div class="col-md-2" id="statusText" align="left">
+    		{{#if completed}}
+	        <span class="text-success statusText">{{dateFormat completedOn}}</span>
+	      {{else}}
+	        <span class="text-danger statusText">{{pastDue startDate}}</span>
+	      {{/if}}
+    	</div>
+      <div class="col-md-10 comments" id="comments">
+      	<textarea id="listDesc" class="listDesc-{{_id}}" name="choreDesc" placeholder="Add comments here" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Add comments here'" maxlength="500">{{description}}</textarea>
       </div>
     </div>
   </li>
@@ -98,7 +87,7 @@
 
 
 <template name="completedCss">
-	.completed{{_id}} {
+	.completedLabel-{{_id}} {
 		position: relative;
 		padding-left: 20px;
 		font-size: 14px;
@@ -106,19 +95,19 @@
 		margin-bottom: 0px;
 	}
 
-	.completed{{_id}}:before, .completed{{_id}}:after {
+	.completedLabel-{{_id}}:before, .completedLabel-{{_id}}:after {
 		font-family: FontAwesome;
 		font-size: 20px;
 		position: absolute;
-		top: -4px;
-		left: 0;
+		top: -15px;
+		left: 5px;
 	}
 
-	.completed{{_id}}:before {
+	.completedLabel-{{_id}}:before {
 		content: '\f096';
 	}
 
-	.completed{{_id}}:after {
+	.completedLabel-{{_id}}:after {
 		content: '\f046';
 		max-width: 0;
 		overflow: hidden;
