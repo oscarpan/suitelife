@@ -14,7 +14,6 @@ Template.iouLog.helpers
         log.lastEdited
 
     while not maxHeap.empty( )
-      console.log maxHeap.maxElementId( ).logMessage
       recentLogs.push { "date": ( new Date maxHeap.get maxHeap.maxElementId( ) ).toLocaleString( ),
       "message": maxHeap.maxElementId( ).logMessage, "editType": maxHeap.maxElementId( ).editType }
 
@@ -30,3 +29,7 @@ Template.iouLog.helpers
       "bg-warning"
     else if this.editType == "payed"
       "bg-success"
+  getDate: ->
+    new Date( ).toLocaleString( )
+  getDefaultMessage: ->
+    "There are no IOU log messages yet."

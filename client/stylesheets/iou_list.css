@@ -1,10 +1,14 @@
 .iou-log-table {
   border-radius: 6px;
-  border: solid lightgray 2px;
+  border: solid #9987CA 2px;
   padding: 0;
   background: lightgray;
   max-height: 250px;
   overflow-y: scroll;
+}
+
+.fa-usd {
+  color: green;
 }
 .iou-log-tbody {
     height: 300px;       /* Just for the demo          */
@@ -17,7 +21,7 @@
   margin-left: 0;
   margin-right: 0;
   padding: 0.2em 0;
-  border-top: solid lightgray 2px;
+  border-bottom: solid #9987CA 2px;
 }
 
 .iou-log-thead .row {
@@ -30,6 +34,7 @@
 }
 .iou-log-thead {
   background-color: lavender;
+  border-bottom: solid #9987CA 2px;
 }
 
 .date {
