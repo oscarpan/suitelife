@@ -42,16 +42,24 @@ Template.choreCalendar.helpers
         choreEvents.forEach (evt) ->
           #Get completed, regular or past due color
           eventColor = getColor evt
-          
+                    
           events.push
             id: evt._id
             title: evt.title
             start: evt.startDate
             color: eventColor
             allDay: true
+            assignee: evt.assignee
 
         ## Callback to pass events to the calendar
         callback events
+        return
+      eventRender: (event, element) ->
+        console.log event
+        assignee = Meteor.users.findOne event.assignee
+        if assignee?
+          assigneeName = (assignee.profile.first_name)
+        element.find('.fc-title').append '<br/><br/><div align="right">' + assigneeName + '</div>'
         return
     }
 

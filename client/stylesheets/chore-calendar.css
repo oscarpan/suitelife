@@ -5,6 +5,10 @@
   border-bottom-color: rgb(211, 211, 211);
 }
 
+.fc-day-grid-event > .fc-content{
+	white-space: normal;
+}
+
 #editChoreDesc, #newChoreDesc {
   resize: none;
   width: 100%;
@@ -180,4 +184,6 @@
 	-moz-box-shadow: -1px 1px 3px 0px rgba(0,0,0,0.67);
 	box-shadow: -1px 1px 3px 0px rgba(0,0,0,0.67);
 }
+
+
 
