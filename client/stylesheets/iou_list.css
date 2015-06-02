@@ -2,6 +2,9 @@
   border-radius: 6px;
   border: solid lightgray 2px;
   padding: 0;
+  background: lightgray;
+  max-height: 250px;
+  overflow-y: scroll;
 }
 .iou-log-tbody {
     height: 300px;       /* Just for the demo          */
@@ -14,6 +17,7 @@
   margin-left: 0;
   margin-right: 0;
   padding: 0.2em 0;
+  border-top: solid lightgray 2px;
 }
 
 .iou-log-thead .row {
@@ -25,10 +29,7 @@
   margin-right: 0;
 }
 .iou-log-thead {
-  border-bottom: solid lightgray 2px;
   background-color: lavender;
-  border-top-left-radius: 3px;
-  border-top-right-radius: 3px;
 }
 
 .date {
