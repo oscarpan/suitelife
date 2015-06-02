@@ -132,6 +132,9 @@
 	box-shadow: 1px 1px 2px #888888;
 }
 
+.list-group-item{
+	border-radius: 4px;
+}
 .list-group-item-success{
 	background-color: rgba(201, 231, 201, 0.8);
 }
@@ -167,12 +170,8 @@
 	margin-top: 5px;
 }
 
-.listDelete{
+.listDeleteBtn{
 	-webkit-box-shadow: -1px 1px 3px 0px rgba(0,0,0,0.67);
 	-moz-box-shadow: -1px 1px 3px 0px rgba(0,0,0,0.67);
 	box-shadow: -1px 1px 3px 0px rgba(0,0,0,0.67);
-}
-
-#choresPanel{
-
 }

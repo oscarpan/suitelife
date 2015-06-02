@@ -1,31 +1,7 @@
-## for going to different pages
-Template.choresView.events 
-  'click .new': (e) ->
-    e.preventDefault()
-    Session.set 'activeModal', 'newChoreForm'
-    Session.set 'startDay', 'today'
-    $('#createChoreModal').modal('show')
-    return
-
-  'click .list': (e) ->
-    e.preventDefault()
-    Router.go 'choresList'
-    return
-
-  'hidden.bs.modal #createChoreModal': (e) ->
-    $('#choreName').val('')
-    $('#choreDesc').val('') 
-    $('#choresModule').draggable(disabled:false)    
-    Session.set 'activeModal', ''
-
-  'shown.bs.modal #createChoreModal': (e) ->
-    $('#choresModule').draggable(disabled:true)
-    $('#choreName').focus()
-
 Template.choreCalendar.helpers 
-	## Fullcalendar options and event handling
+  ## Fullcalendar options and event handling
   options: ->
-  	{
+    {
       defaultView: 'basicWeek'
       header:
         center: 'basicWeek, month'
@@ -56,7 +32,6 @@ Template.choreCalendar.helpers
         Session.set 'startDay', eventDate
         $('#createChoreModal').modal('show')
         
-
       ## Let's get the chores!
       events: (start, end, timezone, callback) ->
         ## Create empty array to store events
@@ -79,7 +54,8 @@ Template.choreCalendar.helpers
         callback events
         return
     }
-    
+
+
 # Reactive calendar updates -- oooh aaaah
 Template.choreCalendar.onRendered ->
   fc = @$('.fc')
@@ -90,6 +66,34 @@ Template.choreCalendar.onRendered ->
     fc.fullCalendar 'refetchEvents'
     return
   return
+
+
+
+## for going to different pages
+Template.choresView.events 
+  'click .new': (e) ->
+    e.preventDefault()
+    Session.set 'activeModal', 'newChoreForm'
+    Session.set 'startDay', 'today'
+    $('#createChoreModal').modal('show')
+    return
+
+  'click .list': (e) ->
+    e.preventDefault()
+    Router.go 'choresList'
+    return
+
+  'hidden.bs.modal #createChoreModal': (e) ->
+    $('#choreName').val('')
+    $('#choreDesc').val('') 
+    $('#choresModule').draggable(disabled:false)    
+    Session.set 'activeModal', ''
+
+  'shown.bs.modal #createChoreModal': (e) ->
+    $('#choresModule').draggable(disabled:true)
+    $('#choreName').focus()
+    
+
 
 Template.createChore.helpers 
   # getter for creating state

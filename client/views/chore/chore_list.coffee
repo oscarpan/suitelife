@@ -7,7 +7,11 @@ Template.choresList.helpers
       date = moment(moment(new Date).startOf 'day').toDate()
       Chores.find({
         startDate: {$gt: date}
-      })
+      },
+      	sort:
+      		startDate: 1
+      		createdAt: 1
+      )
     else if list == 'all'
       Chores.find {}, sort: 
         startDate: 1
@@ -21,6 +25,7 @@ Template.choresList.helpers
           startDate: 1
           createdAt: 1
       )
+
 
 Template.choresList.events
   'click #todayChores': (e) ->
@@ -37,6 +42,13 @@ Template.choresList.events
     e.preventDefault()
     Session.set 'activeList', 'choreItem'
     Session.set 'listData', 'all'
+
+  'click #listDeleteDiv .btn': (e) ->
+  	e.preventDefault()
+  	deleteChore = Chores.findOne(@_id)
+  	Session.set 'deleteChore', deleteChore
+  	Tracker.flush()   # Force an update or the modal won't find the data correctly
+  	$('#deletedChoreModal').modal 'show'
 
   'focus #listName': (e) ->
   	e.preventDefault()
@@ -64,12 +76,12 @@ Template.choresList.events
     e.preventDefault()
     currentId = @_id
     desc = $('.listDesc-' + currentId).val()
-    console.log
     Meteor.call 'updateChoreDesc', desc, currentId, (error, id) ->
       if error
         sAlert.error(error.reason)
       return
     return
+
 
 Template.choresList.onRendered ->
   Session.set 'activeList', 'choreItem'
@@ -102,17 +114,8 @@ Template.choreItem.helpers
     else
       moment(startDate).format('MM/DD/YY')
 
-Template.choreItem.events
-  'click .listDelete': (e) ->
-    e.preventDefault()
-    if confirm('Delete this Chore?')
-      currentId = @_id
-      Meteor.call 'deleteChore', currentId, (error, id) ->
-        if error
-          sAlert.error(error.reason)
-        return
-    return
 
+Template.choreItem.events
   'click .completed': (e) ->
     currentId = @_id
     Meteor.call 'completeChore', currentId, (error, id) ->
@@ -120,3 +123,20 @@ Template.choreItem.events
         sAlert.error(error.reason)
 
 
+
+Template.deleteChoreModal.helpers
+	deletedChore: ->
+		deleted = Session.get 'deleteChore'
+
+
+Template.deleteChoreModal.events	
+  'click .listDelete': (e) ->
+    e.preventDefault()
+    currentId = @_id
+    Meteor.call 'deleteChore', currentId, (error, id) ->
+    	if error
+    		sAlert.error(error.reason)
+    	$('#deletedChoreModal').modal 'hide'
+    	$('#createChoreModal').modal 'hide'
+    	return
+    return

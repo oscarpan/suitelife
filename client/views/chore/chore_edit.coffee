@@ -42,14 +42,10 @@ Template.editChoreForm.events
    ## delete the function from collection 
   'click .delete': (e) ->
     e.preventDefault()
-    if confirm('Delete this Chore?')
-      currentId = @_id
-      Meteor.call 'deleteChore', currentId, (error, id) ->
-        if error
-          sAlert.error(error.reason)
-        $('#createChoreModal').modal 'hide'
-        return
-    return
+    deleteChore = Chores.findOne(@_id)
+    Session.set 'deleteChore', deleteChore
+    Tracker.flush()   # Force an update or the modal won't find the data correctly
+    $('#deletedChoreModal').modal 'show'
 
   'change #repeat-freqs': (e) ->
     e.preventDefault()

@@ -1,5 +1,7 @@
 <!-- view chores in a list -->
 <template name="choresList">
+	{{> deleteChoreModal}}
+
   <div class="panel panel-default" id="choresPanel">
     <div class="panel-heading">
       <div class="row">
@@ -26,17 +28,16 @@
     </div>
 
     <div class="panel-body container-fluid" id="choresList">
-      
       <ul class="list-group choreLists">
-	      	{{#if listData.count}}
-	          {{#each listData}}
-	            {{> Template.dynamic template=activeList}}
-	          {{/each}}
-	        {{else}}
-	          <li class="list-group-item empty-note text-center disabled">
-	            No chores!
-	          </li>
-	        {{/if}}
+      	{{#if listData.count}}
+          {{#each listData}}
+            {{> Template.dynamic template=activeList}}
+          {{/each}}
+        {{else}}
+          <li class="list-group-item empty-note text-center disabled">
+            No chores!
+          </li>
+        {{/if}}
     	</ul>
     </div>
   </div>
@@ -46,7 +47,7 @@
 <!-- chore details in a row, each part in a different column -->
 <template name="choreItem">
 	<li class="list-group-item {{completeColor completed startDate}} oneChore">
-  	<div class="row">
+		<div class="row">
     	<div class="col-md-1" id="doneCol-{{_id}}">
       	<style scoped>
       		{{> completedCss}}
@@ -65,7 +66,7 @@
         <input class="form-control input-md listName-{{_id}}" id="listName" name="choreName" type="text" placeholder="Name Your Chore"  required="" value="{{title}}">
       </div>
       <div class="col-md-2" id="listDeleteDiv" align="right">
-      	<button class="btn btn-xs btn-danger listDelete">
+      	<button class="btn btn-xs btn-danger listDeleteBtn">
 	        <i class="fa fa-times"></i>
 	      </button>
 	    </div>
@@ -84,6 +85,35 @@
     </div>
   </li>
 </template>
+
+
+
+<template name="deleteChoreModal">
+	{{#with deletedChore}}
+	<div class="modal fade" id="deletedChoreModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title">Warning</h4>
+        </div>
+        <div class="modal-body">
+          Are you sure you want to delete the chore:<br>
+          <br>
+          <strong>{{title}}</strong>?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-danger listDelete">Confirm</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  {{/with}}
+</template>
+
 
 
 <template name="completedCss">
