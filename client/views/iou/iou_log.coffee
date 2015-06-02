@@ -10,13 +10,23 @@ Template.iouLog.helpers
     for iou in ious
       logs = iou.editLog
       for log in logs
-        maxHeap.set log.logMessage, log.lastEdited
+        maxHeap.set { "logMessage": log.logMessage, "editType": log.editType },
+        log.lastEdited
 
     while not maxHeap.empty( )
-      console.log maxHeap.maxElementId( )
+      console.log maxHeap.maxElementId( ).logMessage
       recentLogs.push { "date": ( new Date maxHeap.get maxHeap.maxElementId( ) ).toLocaleString( ),
-      "message": maxHeap.maxElementId( ) }
+      "message": maxHeap.maxElementId( ).logMessage, "editType": maxHeap.maxElementId( ).editType }
 
       maxHeap.remove maxHeap.maxElementId( ) 
 
     recentLogs
+  getStyling: ->
+    if this.editType == "delete"
+      "bg-danger"
+    else if this.editType == "create"
+      "bg-info"
+    else if this.editType == "update"
+      "bg-warning"
+    else if this.editType == "payed"
+      "bg-success"

@@ -1,3 +1,8 @@
+.iou-log-table {
+  border-radius: 6px;
+  border: solid lightgray 2px;
+  padding: 0;
+}
 .iou-log-tbody {
     height: 300px;       /* Just for the demo          */
     overflow-y: auto;    /* Trigger vertical scroll    */
@@ -5,10 +10,25 @@
     font-size: 1.1em;
 }
 
-.iou-log-thead {
+.iou-log-tbody .row {
+  margin-left: 0;
+  margin-right: 0;
+  padding: 0.2em 0;
+}
+
+.iou-log-thead .row {
   font-weight: bold;
   font-size: 1.2em;
-  margin-bottom: 1em;
+  padding-bottom: .5em;
+  padding-top: .5em;
+  margin-left: 0;
+  margin-right: 0;
+}
+.iou-log-thead {
+  border-bottom: solid lightgray 2px;
+  background-color: lavender;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
 }
 
 .date {

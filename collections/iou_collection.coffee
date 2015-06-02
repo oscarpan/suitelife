@@ -35,5 +35,5 @@ Meteor.methods
     logMessage = Meteor.user( ).profile.first_name + " paid IOU \"" + iou.reason + ".\""
     Ious.update id, $push: { "editLog": { "lastEdited": lastEdited,
     "logMessage": logMessage,
-    "editType": "update" } }
+    "editType": "payed" } }
     id

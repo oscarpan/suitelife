@@ -1,18 +1,18 @@
 <template name="iouLog">
 
-  <div class="container">
+  <div class="container iou-log-table">
     <div class="iou-log-thead">
       <div class="row">
-        <div class ="col-sm-2">Date</div>
-        <div class ="col-sm-10">Log Message</div>
+        <div class ="col-sm-4 iou-log-data">Date</div>
+        <div class ="col-sm-8 iou-log-data">Log Message</div>
       </div>
     </div>
     <div class="iou-log-tbody">
       {{#if logMessages}}
         {{#each logMessages}}
-          <div class="row">
-            <div class="col-sm-2">{{ this.date }}</div>
-            <div class="col-sm-10">{{ this.message }}</div>
+          <div class="row {{getStyling}}">
+            <div class="col-sm-4 iou-log-data">{{ this.date }}</div>
+            <div class="col-sm-8 iou-log-data">{{ this.message }}</div>
           </div>
         {{/each}}
       {{else}}
