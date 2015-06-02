@@ -23,6 +23,7 @@ cal_max_height= 610
 chores_min_width= 565
 chores_min_height= 175
 modules = ['postsModule', 'iousModule', 'calModule', 'choresModule']
+bodies = ['postsList', 'iousList', 'choreCal', 'choresList'] 
 
 Template.Nav.events
   'click .postMode': (e) ->
@@ -55,12 +56,14 @@ updateModules = (sizes, e) ->
     do (i) ->
       moduleName = modules[i]
       target = $('#' + moduleName)
+      targetBody = $('#' + bodies[i])
       Meteor.call 'updateModuleLocation', moduleName, sizes[i], sizes[i], ->
         location = Meteor.user().modules[moduleName]
         target.width(location.width)
         target.height(location.height)
         target.css('top', location.top)
-        target.css('left', location.left)  
+        target.css('left', location.left)
+        targetBody.height(target.height() - 88)
 
 Template._loginButtonsLoggedInDropdown.helpers
   user_profile_picture: ->
