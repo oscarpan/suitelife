@@ -84,3 +84,26 @@
 }
 
 .modal-large { width: 800px; }
+
+#iousListDiv{
+  position: relative;
+}
+
+#iousListDiv:before{
+  content: ' ';
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  opacity: 0.3;
+  background-image: url('notebook.png');
+  background-position: 50% 0;
+  -ms-background-size: auto;
+  -o-background-size: auto;
+  -moz-background-size: auto;
+  -webkit-background-size: auto;
+  background-size: auto;
+}

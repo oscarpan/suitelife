@@ -28,19 +28,19 @@
       </div>
 
     </div>
-
-    <ul class="list-group panel-body" id="iousList">
-      {{#if ious.count}}
-        {{#each ious}}
-            {{> iouItem}}
-        {{/each}}
-      {{else}}
-        <li class="list-group-item empty-note text-center disabled">
-          No IOUs
-        </li>
-      {{/if}}
-    </ul>
-
+    <div class="panel-body container-fluid" id="iousListDiv">
+      <ul class="list-group" id="iousList">
+        {{#if ious.count}}
+          {{#each ious}}
+              {{> iouItem}}
+          {{/each}}
+        {{else}}
+          <li class="list-group-item empty-note text-center disabled">
+            No IOUs
+          </li>
+        {{/if}}
+      </ul>
+    </div>
   </div>
 
   <div class="modal fade" id="newIouModal" tabindex="-1" role="dialog" aria-labelledby="New IOU" aria-hidden="true">
