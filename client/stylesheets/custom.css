@@ -95,3 +95,22 @@ h3 {
 button.selectpicker{
     color: black;
 }
+
+
+footer{
+    text-align: center;
+}
+
+footer p {
+    padding-top: 30px;
+    vertical-align: center;
+    margin-bottom: -5px !important;
+}
+
+footer p a {
+    color: #333;
+}
+
+footer p a:hover {
+    color: #0000FF;
+}
