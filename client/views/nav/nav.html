@@ -14,11 +14,14 @@
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="navbar-header col-md-9" id="navbar-collapse">
-                <ul class="nav navbar-nav">
-                    <li><a class="menu-item postMode" href="">Posts</a></li>
-                    <li><a class="menu-item choreMode" href="">Chores</a></li>
-                    <li><a class="menu-item iouMode" href="">IOUs</a></li>
-                </ul>
+                
+                {{#if currentUser}}
+                  <ul class="nav navbar-nav">
+                      <li><a class="menu-item postMode" href="">Posts</a></li>
+                      <li><a class="menu-item choreMode" href="">Chores</a></li>
+                      <li><a class="menu-item iouMode" href="">IOUs</a></li>
+                  </ul>
+                {{/if}}
                 <ul class="nav navbar-nav" style="width: 50%;">
                   <li class="suite-name">
                     {{#with getSuite}}
@@ -26,7 +29,7 @@
                     {{/with}}
                   </li>
                 </ul>
-                <ul class="nav navbar-nav" style="float: right">
+                <ul class="nav navbar-nav pull-right"> 
                   <li class="nav navbar-nav pull-right">
                     {{> loginButtons}}
                   </li>
