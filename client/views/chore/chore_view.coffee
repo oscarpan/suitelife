@@ -55,7 +55,6 @@ Template.choreCalendar.helpers
         callback events
         return
       eventRender: (event, element) ->
-        console.log event
         assignee = Meteor.users.findOne event.assignee
         if assignee?
           assigneeName = (assignee.profile.first_name)
