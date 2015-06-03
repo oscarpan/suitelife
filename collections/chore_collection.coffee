@@ -69,6 +69,10 @@ Meteor.methods
     Chores.update id, $set:
       description: desc
     id  
+  updateChoreAssignee: (assigneeId, id) ->
+    Chores.update id, $set:
+      assignee: assigneeId
+    id
   updateChoresSubscription: ->
     if Meteor.isClient
       suite = Suites.findOne users: Meteor.userId()

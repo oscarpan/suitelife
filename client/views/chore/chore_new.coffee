@@ -29,6 +29,9 @@ Template.newChoreForm.events
     else if ( Number freqNum < 0 ) || ( Number freqNum % 1 != 0 )
       sAlert.warning "Chore frequency must be a positive integer."
       return false
+    else if (Number freqNum > 31)
+      sAlert.warning "31 is the maximum number of times for a repeat at once"
+      return false
     else if assignees == null
     	sAlert.warning "A person must be assigned to the chore."
     	return false

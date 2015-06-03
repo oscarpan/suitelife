@@ -150,6 +150,15 @@ Template.choreItem.helpers
       "Past Due!"
     else
       moment(startDate).format('MM/DD/YY')
+  users: ->
+    if Suites.findOne(users: Meteor.userId())?
+      Suites.findOne(users: Meteor.userId()).users
+  getUserName: (id) ->
+    usr = Meteor.users.findOne id
+    if usr.profile?
+      userName = usr.profile.first_name + " " + usr.profile.last_name
+  selected: (assignee, current) ->
+    return assignee == current
 
 
 Template.choreItem.events
@@ -158,9 +167,31 @@ Template.choreItem.events
     Meteor.call 'completeChore', currentId, (error, id) ->
       if error
         sAlert.error(error.reason)
+  'click #initials': (e) ->
+    currentId = @_id
+    $('#listEditAssigneeDiv' + currentId).show()
+    $('.listEditAssignee .dropdown-menu').show()
+
+   'blur .listEditAssignee': (e) ->
+    e.preventDefault()
+    currentId = @_id
+    assignee = $('#listEditAssignee' + currentId).val()
+    
+    $('.listEditAssignee').hide()
+    Meteor.call 'updateChoreAssignee', assignee, currentId, (error, id) ->
+      if error
+        sAlert.error(error.reason)
+      return
+    return
+
+  #'click .statusText': (e) ->
+   # currentId = @_id
+    #$('#listEditDateDiv' + currentId).show()
+
 
 Template.choreItem.onRendered ->
   Template.instance().parent().parent().parent().chore_ids.set((Suites.findOne users: Meteor.userId()).chore_ids)
+  $('.selectpicker').selectpicker()
 
 Template.choreItem.onDestroyed ->
   Template.instance().parent().parent().parent().chore_ids.set((Suites.findOne users: Meteor.userId()).chore_ids)

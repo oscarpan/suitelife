@@ -63,6 +63,13 @@
      	<div class="col-md-1" id ="initials" align="left">
         <span id="initialsBox" style="background-color: {{highlight assignee}}">{{assignFormat assignee}}</span>
       </div>
+      <div id="listEditAssigneeDiv{{_id}}" class="listEditAssignee">
+        <select class="selectpicker form-control" id="listEditAssignee{{_id}}" name="assignee">
+          {{#each users}}
+              <option value="{{this}}" selected="{{selected ../assignee this}}">{{getUserName this}}</option>
+          {{/each}}
+        </select>
+      </div>
       <div class="col-md-8" id="listEditTitle">
         <input class="form-control input-md listName-{{_id}}" id="listName" name="choreName" type="text" placeholder="Name Your Chore"  required="" value="{{title}}" maxlength="60">
       </div>
@@ -81,6 +88,9 @@
 	        <span class="text-danger statusText">{{pastDue startDate}}</span>
 	      {{/if}}
     	</div>
+      <!--<div id="listEditDateDiv{{_id}}" class="listEditDate">
+        <span>"Test"</span>
+      </div>-->
       <div class="col-md-10 comments" id="comments">
       	<textarea id="listDesc" class="listDesc-{{_id}}" name="choreDesc" placeholder="Add comments here" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Add comments here'" maxlength="140">{{description}}</textarea>
       </div>
