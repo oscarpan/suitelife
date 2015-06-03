@@ -17,7 +17,7 @@
       		<label class="row control-label" for="choreName">Chore Name</label>  
       		<div class="row">
 						<div class="col-md-10">
-        			<input id="choreEditName" name="choreName" type="text" placeholder="Name Your Chore" class="form-control input-md" required="" value="{{title}}">
+        			<input id="choreEditName" name="choreName" type="text" placeholder="Name Your Chore" class="form-control input-md" required="" value="{{title}}" maxlength="60">
       			</div>
       		</div>
     		</div>
@@ -29,7 +29,7 @@
       				<div class="col-md-10">
         				<select class="form-control" id="editAssignee" name="assignee">
                   {{#each users}}
-                      <option value="{{this}}">{{getUserName this}}</option>
+                      <option value="{{this}}" selected="{{selected ../assignee this}}">{{getUserName this}}</option>
                   {{/each}}
                 </select>
         			</div>

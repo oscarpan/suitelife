@@ -104,6 +104,11 @@ Template.choreItem.helpers
     assignee = Meteor.users.findOne assigneeId
     if assignee?
       (assignee.profile.first_name.charAt(0).toUpperCase()) + (assignee.profile.last_name.charAt(0).toUpperCase())
+  highlight: (assigneeId) ->
+  	if assigneeId == Meteor.userId()
+  		'#F98914'
+  	else
+  		'#0A7676'
   completeColor: (completed, startDate) ->
     if completed
       "list-group-item-success"

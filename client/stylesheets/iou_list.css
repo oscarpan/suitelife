@@ -59,6 +59,8 @@
 .empty-note {
   font-style: italic;
   color: gray;
+  background-color: rgba(238, 238, 238, 0.8) !important;
+  padding: 20px;
 }
 
 .underline-editable {

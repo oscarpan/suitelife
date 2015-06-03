@@ -9,6 +9,8 @@ Template.editChoreForm.helpers
     usr = Meteor.users.findOne id
     if usr.profile?
       userName = usr.profile.first_name + " " + usr.profile.last_name
+  selected: (assignee, current) ->
+    return assignee == current
 
 Template.editChoreForm.events
   ## edit form submission
@@ -52,16 +54,4 @@ Template.editChoreForm.onRendered ->
   startDay = Session.get 'startDay'
   $('#datepicker').datepicker 'setDate', startDay
   $('.selectpicker').selectpicker()
-
-Template.editChoreForm.helpers
-  choreEvent: ->
-    # Get the data context for the edit
-    choreEvent = Session.get 'choreEvent'
-  users: ->
-    if Suites.findOne(users: Meteor.userId())?
-      Suites.findOne(users: Meteor.userId()).users
-  getUserName: (id) ->
-    usr = Meteor.users.findOne id
-    if usr.profile?
-      userName = usr.profile.first_name + " " + usr.profile.last_name
 

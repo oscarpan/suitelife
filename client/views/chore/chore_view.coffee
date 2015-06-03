@@ -4,7 +4,8 @@ Template.choreCalendar.helpers
     {
       defaultView: 'basicWeek'
       header:
-        center: 'basicWeek, month'
+        left: 'basicWeek, month'
+        center: 'title'
       ## Opens up modal with infomation on the date clicked
       dayClick: (date, jsEvent, view) ->
         Session.set 'activeModal', 'newChoreForm'
@@ -27,9 +28,17 @@ Template.choreCalendar.helpers
         choreEvent = Chores.findOne(calEvent._id)
         Session.set 'choreEvent', choreEvent
 
-        ## Event date session data for the datepicker to access 
-        eventDate = moment(choreEvent.startDate).format('YYYY/MM/DD')
-        Session.set 'startDay', eventDate
+        # Get today's date - handle utc time issues
+        todayDate = new Date
+        todayDate.setDate todayDate.getDate() - 1
+        
+        # Check if date clicked is before today - invalid date -> set to today
+        if choreEvent.startDate < todayDate
+          Session.set 'startDay', 'today'
+        else
+          ## Event date session data for the datepicker to access 
+          eventDate = moment(choreEvent.startDate).format('YYYY/MM/DD')
+          Session.set 'startDay', eventDate
         $('#createChoreModal').modal('show')
         
       ## Let's get the chores!

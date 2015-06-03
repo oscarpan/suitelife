@@ -22,7 +22,6 @@
   -webkit-box-shadow: -1px 1px 3px 0px rgba(0,0,0,0.67);
 	-moz-box-shadow: -1px 1px 3px 0px rgba(0,0,0,0.67);
 	box-shadow: -1px 1px 3px 0px rgba(0,0,0,0.67);
-	background-color: #F98914;
 	font-weight: bold;
 }
 
@@ -267,6 +266,55 @@
 
 .fc-day-grid-event > .fc-content{
 	white-space: normal;
+}
+
+.fc-state-active {
+	background-color: #053B3B !important;
+	border: 1px solid black !important;
+	border-top-right-radius: 4px !important;
+  border-bottom-right-radius: 4px !important;
+  border-top-left-radius: 4px !important;
+  border-bottom-left-radius: 4px !important;
+}
+
+.fc-state-default {
+	text-shadow: none;
+	background-color: #0A7676;
+	color: white;
+	border: 2px solid white;
+	border-radius: 2px;
+}
+
+.fc-state-default:focus {
+	outline: none;
+}
+
+.fc-state-default.fc-corner-right {
+	border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+
+.fc-state-default.fc-corner-left {
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+}
+
+.fc-state-hover {
+	background-color: #085E5E !important;
+}
+
+.fc-next-button {
+	border-top-right-radius: 14px !important;
+  border-bottom-right-radius: 13px !important;
+}
+
+.fc-prev-button {
+  border-top-left-radius: 14px !important;
+  border-bottom-left-radius: 13px !important;
+}
+
+.fc-center h2{
+	color: #053B3B;
 }
 
 #assignDiv{

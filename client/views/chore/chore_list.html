@@ -34,7 +34,7 @@
             {{> Template.dynamic template=activeList}}
           {{/each}}
         {{else}}
-          <li class="list-group-item empty-note text-center disabled">
+          <li class="list-group-item empty-note text-center disabled oneChore">
             No chores!
           </li>
         {{/if}}
@@ -60,10 +60,10 @@
 				<label class="completed completedLabel-{{_id}}" for="completedCheck-{{_id}}"></label>
      	</div>
      	<div class="col-md-1" id ="initials" align="left">
-        <span id="initialsBox">{{assignFormat assignee}}</span>
+        <span id="initialsBox" style="background-color: {{highlight assignee}}">{{assignFormat assignee}}</span>
       </div>
       <div class="col-md-8" id="listEditTitle">
-        <input class="form-control input-md listName-{{_id}}" id="listName" name="choreName" type="text" placeholder="Name Your Chore"  required="" value="{{title}}">
+        <input class="form-control input-md listName-{{_id}}" id="listName" name="choreName" type="text" placeholder="Name Your Chore"  required="" value="{{title}}" maxlength="60">
       </div>
       <div class="col-md-2" id="listDeleteDiv" align="right">
       	<button class="btn btn-xs btn-danger listDeleteBtn">
@@ -80,7 +80,7 @@
 	      {{/if}}
     	</div>
       <div class="col-md-10 comments" id="comments">
-      	<textarea id="listDesc" class="listDesc-{{_id}}" name="choreDesc" placeholder="Add comments here" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Add comments here'" maxlength="500">{{description}}</textarea>
+      	<textarea id="listDesc" class="listDesc-{{_id}}" name="choreDesc" placeholder="Add comments here" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Add comments here'" maxlength="140">{{description}}</textarea>
       </div>
     </div>
   </li>
