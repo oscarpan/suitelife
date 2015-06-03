@@ -14,9 +14,9 @@ Template.costSplitter.onRendered ->
 #checkedUsers : array of user IDs
 Template.costSplitter.helpers
   users: ->
-    if(Session.get('suite'))
-      Session.set "checkedUsers", Suites.findOne(Session.get('suite')._id).users
-      Suites.findOne(Session.get('suite')._id).users
+    if(Suites.findOne(users: Meteor.userId()))
+      Session.set "checkedUsers", Suites.findOne(users: Meteor.userId()).users
+      Suites.findOne(users: Meteor.userId()).users
 
   userName: (id) ->
     usr = Meteor.users.findOne id

@@ -11,19 +11,10 @@ Router.map ->
       { suite: Suites.findOne(@params._id) }
   return
 
-Router.onBeforeAction ->
-  if !Session.get('suite')      #are you logged in w/o a suite?
-    Session.setAuth 'suite', (Suites.findOne users: Meteor.userId())
-  @next()
-  return
-
 Router.onAfterAction ->
   if Router.current().route.getName() != 'invite'
     if !Meteor.userId()                #are you logged in?
       @redirect '/splash'
-    else if !Session.get('suite')      #are you logged in w/o a suite?
-      Session.setAuth 'suite', (Suites.findOne users: Meteor.userId())
-      @redirect '/'
     else if Router.current().path == Router.path('splash')    #are you on the wrong page?
       @redirect '/'
   else

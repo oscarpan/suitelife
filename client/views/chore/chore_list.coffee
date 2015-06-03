@@ -93,12 +93,9 @@ Template.choresList.events
       return
     return
 
-
 Template.choresList.onRendered ->
   Session.set 'activeList', 'choreItem'
   Session.set 'listData', 'today'
-
-
 
 Template.choreItem.helpers
   dateFormat: (date) ->

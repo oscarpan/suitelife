@@ -16,17 +16,17 @@
 }
 
 .post-item{
-	width:400px; 
+	width:inherit; 
 	border: 1px solid #AEA341;
 	background: #FFF7B2;
 	padding: 0 10px 5px;
 	box-shadow: 1px 1px 2px #888888;
 }
 .post-item > .editable-text > .wysiwyg-content {
-	margin-top: -15px;
+	margin-top: -5px;
 }
 .post-item > .editable-text > .wysiwyg-container {
-	margin-top: -15px;
+	margin-top: -5px;
 	border: 1px dashed #AEA341;
 	background: #FFFDED;
 }

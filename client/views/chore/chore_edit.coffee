@@ -3,8 +3,8 @@ Template.editChoreForm.helpers
     # Get the data context for the edit
     choreEvent = Session.get 'choreEvent'
   users: ->
-    if Session.get('suite')?
-      Suites.findOne(Session.get('suite')._id).users
+    if Suites.findOne(users: Meteor.userId())?
+      Suites.findOne(users: Meteor.userId()).users
   getUserName: (id) ->
     usr = Meteor.users.findOne id
     if usr.profile?
@@ -58,8 +58,8 @@ Template.editChoreForm.helpers
     # Get the data context for the edit
     choreEvent = Session.get 'choreEvent'
   users: ->
-    if Session.get('suite')?
-      Suites.findOne(Session.get('suite')._id).users
+    if Suites.findOne(users: Meteor.userId())?
+      Suites.findOne(users: Meteor.userId()).users
   getUserName: (id) ->
     usr = Meteor.users.findOne id
     if usr.profile?

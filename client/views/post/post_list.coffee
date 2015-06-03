@@ -10,7 +10,7 @@ Template.postsList.events
 			pinned: false
 			imagePath: null
 			message: null
-		Meteor.call 'newPost', post, Session.get('suite')._id, (error, id) ->
+		Meteor.call 'newPost', post, Suites.findOne(users: Meteor.userId())._id, (error, id) ->
 			if error
 				sAlert.error(error.reason)
 			#add the element to packery
@@ -25,28 +25,6 @@ Template.postsList.events
 Template.postsList.helpers 
 	posts: ->
 		Posts.find().fetch()
-		
-Template.postsList.onRendered ->
-	$postsContainer = $('.postsPackery').packery(
-		columnWidth: 49
-		rowHeight: 15
-		gutter: 10
-		transitionDuration: 0
-	)
-	#set up packery for posts
-	window.setInterval (->
-		$postsContainer.packery 'destroy'
-		$postsContainer = $('.postsPackery').packery(
-			columnWidth: 49
-			rowHeight: 15
-			gutter: 10
-			transitionDuration: 0
-		)
-		# get item elements, jQuery-ify them
-		$postsItemElems = $postsContainer.find('.post-item')
-		# bind Draggable events to Packery
-		$postsContainer.packery 'bindUIDraggableEvents', $postsItemElems
-	), 250
 
 Template.Post.helpers
 	getEmail: (id) ->
