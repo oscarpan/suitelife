@@ -103,7 +103,7 @@ Template.choreItem.helpers
   assignFormat: (assigneeId) ->
     assignee = Meteor.users.findOne assigneeId
     if assignee?
-      (assignee.profile.first_name.charAt 0) + (assignee.profile.last_name.charAt 0)
+      (assignee.profile.first_name.charAt(0).toUpperCase()) + (assignee.profile.last_name.charAt(0).toUpperCase())
   completeColor: (completed, startDate) ->
     if completed
       "list-group-item-success"

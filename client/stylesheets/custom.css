@@ -65,24 +65,32 @@ h3 {
 }
 
 .my-btn{
-    background: #12769c;
+    background-color: #0d9393;
     color: #ffffff;
 }
 
 .my-btn:hover{
-    background-color: #065C7D;
+    background-color: #0A7676;
     color: #ffffff;
 }
 
 .costsplit-btn{
-    background-color: #0d9393;
+    background-color: #F98914;
     color: #ffffff;
+    border-color: #C76E10;
     }
 
 .costsplit-btn:hover{
-    background-color: #037676;
+    background-color: #E07B12;
     color: #ffffff;
-    }
+    border-color: #C76E10;
+}
+
+.costsplit-btn:focus{
+    background-color: #E07B12;
+    color: #ffffff;
+    border-color: #C76E10;
+}
 
 .q-btn{
     background-color: #5bc0de;
@@ -92,24 +100,7 @@ h3 {
 .q-btn:hover{
     background-color: #b3dded;
     }
-
-.chore-btn{
-    background-color: #12769c; 
-    }
-
-.chore-btn:hover{
-    background-color: #065c7d;
-    }
-
-.chore2-btn{
-    background-color: #034863;
-    }
-
-.chore2-btn:hover{
-    background-color: #065c7d;
-    }
-
-
+    
 .panel-default > .panel-heading {
     color: #575757;
     background-color: #dff3fb;

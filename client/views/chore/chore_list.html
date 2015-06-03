@@ -13,13 +13,13 @@
         <div class="col-md-7 text-right">
           {{> tooltips title="Chores" content="View everyone's chores. Edit chores and mark them as complete." }}
           <div class="btn-group" data-toggle="buttons">
-            <label class="btn btn-primary chore2-btn" id="todayChores">
+            <label class="btn btn-primary active choreBtns" id="todayChores">
               <input type="radio" name="options" id="todayText" autocomplete="off" checked>Today <span class="badge">{{todayCount}}</span>
             </label>
-            <label class="btn btn-primary chore-btn" id="upcomingChores">
+            <label class="btn btn-primary choreBtns" id="upcomingChores">
               <input type="radio" name="options" id="upcomingText" autocomplete="off">Upcoming <span class="badge">{{upcomingCount}}</span>
             </label>
-            <label class="btn btn-primary chore-btn" id="allChores">
+            <label class="btn btn-primary choreBtns" id="allChores">
               <input type="radio" name="options" id="allText" autocomplete="off">All  <span class="badge">{{allCount}}</span>
             </label>
           </div>

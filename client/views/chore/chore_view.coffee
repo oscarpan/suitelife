@@ -117,7 +117,7 @@ getColor = (evt) ->
   date = new Date
   date.setDate date.getDate() - 1
 
-  color = '#9987ca'
+  color = '#3B9191'
   if evt.startDate < date and not evt.completed
     color = '#d9534f'
   else if evt.completed

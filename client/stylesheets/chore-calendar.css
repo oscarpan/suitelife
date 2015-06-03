@@ -5,10 +5,6 @@
   border-bottom-color: rgb(211, 211, 211);
 }
 
-.fc-day-grid-event > .fc-content{
-	white-space: normal;
-}
-
 #newChoreDesc {
   resize: none;
   width: 100%;
@@ -19,14 +15,15 @@
 }
 
 #initialsBox {
-  padding: 2px;
+  padding: 1px 3px 1px 3px;
   border: 1px solid black;
   border-radius: 3px;
   color: #fff;
   -webkit-box-shadow: -1px 1px 3px 0px rgba(0,0,0,0.67);
 	-moz-box-shadow: -1px 1px 3px 0px rgba(0,0,0,0.67);
 	box-shadow: -1px 1px 3px 0px rgba(0,0,0,0.67);
-	background-color: #EB6E44
+	background-color: #F98914;
+	font-weight: bold;
 }
 
 #initials{
@@ -38,23 +35,27 @@
 }
 
 .choreBtns.active{
-  background-color: #3D3651;
+  background-color: #053B3B;
   color: #fff;
 }
 
 .choreBtns.active .badge{
-	color: #3D3651;
-	background-color: #D6CFEA;
+	color: #093B4E;
+	background-color: #dff3fb;
+}
+
+.choreBtns .badge{
+	background-color: #053B3B;
 }
 
 .choreBtns{
   padding: 8px 10px;
-  background: #9987ca;
-  border-color: #7A6CA2;
+  background: #0A7676;
+  border-color: #093B4E;
 }
 
 .choreBtns:hover{
-  background-color: #7a6ca1
+  background-color: #085E5E;
 }
 
 #listName{
@@ -177,11 +178,6 @@
 	box-shadow: -1px 1px 3px 0px rgba(0,0,0,0.67);
 }
 
-#assignDiv{
-	background-color: #3D3651;
-	border-top: 1px solid white;
-}
-
 .editChoreDescDiv{
 	padding: 0px;
 }
@@ -258,4 +254,23 @@
 
 #editAssignee:hover{
 	border: 1px solid black;
+}
+
+.fc-day-header{
+	background-color: #085E5E;
+	color: #fff;
+}
+
+.fc-view .fc-widget-header{
+	border: 2px solid black;
+}
+
+.fc-day-grid-event > .fc-content{
+	white-space: normal;
+}
+
+#assignDiv{
+	background-color: #053B3B;
+	border-top: 1px solid white;
+	padding: 1px;
 }
