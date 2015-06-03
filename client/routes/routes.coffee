@@ -12,13 +12,9 @@ Router.map ->
   return
 
 Router.onAfterAction ->
-  if Router.current().route.getName() != 'invite'
-    if !Meteor.userId()                #are you logged in?
-      @redirect '/splash'
-    else if Router.current().path == Router.path('splash')    #are you on the wrong page?
-      @redirect '/'
-  else
-    if Meteor.userId() # check for suite in the future or associate suite
-      @redirect '/'
+  if Meteor.userId() # check for suite in the future or associate suite
+    @redirect '/'
+  else if Router.current().route.getName() != 'invite'
+    @redirect '/splash'
   @next
   return
