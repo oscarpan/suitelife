@@ -12,11 +12,11 @@ h3 {
 }
 
 .navbar {
-    background-color: #9987ca;
+    background-color: #34819e;
 }
 
 #login-dropdown-list > .dropdown-toggle {
-    background-color: #9987ca;
+    background-color: #34819e;
     color: white;
 }
 
@@ -65,19 +65,53 @@ h3 {
 }
 
 .my-btn{
-    background: #9987ca;
+    background: #12769c;
     color: #ffffff;
 }
 
 .my-btn:hover{
-    border-color: #ffffff;
-    background-color: #7a6ca1;
+    background-color: #065C7D;
     color: #ffffff;
 }
 
+.costsplit-btn{
+    background-color: #0d9393;
+    color: #ffffff;
+    }
+
+.costsplit-btn:hover{
+    background-color: #037676;
+    color: #ffffff;
+    }
+
+.q-btn{
+    background-color: #dff3fb;
+    }
+
+.q-btn:hover{
+    background-color: #b3dded;
+    }
+
+.chore-btn{
+    background-color: #12769c; 
+    }
+
+.chore-btn:hover{
+    background-color: #065c7d;
+    }
+
+.chore2-btn{
+    background-color: #034863;
+    }
+
+.chore2-btn:hover{
+    background-color: #065c7d;
+    }
+
+
 .panel-default > .panel-heading {
     color: #575757;
-    background-color: #fff;
+    background-color: #dff3fb;
 }
 
 .panel {
@@ -97,6 +131,7 @@ h3 {
 button.selectpicker{
     color: black;
 }
+<<<<<<< Updated upstream
 
 
 footer{
@@ -116,3 +151,5 @@ footer p a {
 footer p a:hover {
     color: #0000FF;
 }
+=======
+>>>>>>> Stashed changes
