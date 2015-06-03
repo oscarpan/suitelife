@@ -67,6 +67,7 @@ mrt:bootstrap-select@1.5.4
 mrt:jquery-ui@1.9.2
 mrt:jquery-ui-bootstrap@1.8.16
 msavin:mongol@1.0.60
+mystor:device-detection@0.2.0
 natestrauser:jquery-scrollto@1.4.7
 npm-bcrypt@0.7.8_2
 numeral:numeral@1.5.3

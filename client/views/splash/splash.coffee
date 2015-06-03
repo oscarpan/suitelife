@@ -2,6 +2,10 @@ Template.splash.helpers
   inviteRoute: ->
     Router.current().route.getName() == 'invite'
 
+Template.uhoh.helpers
+  isPhone: ->
+    Meteor.Device.isPhone()
+
 Template.signup.helpers
   suites: ->
     Suites.find {}, sort: createdAt: -1

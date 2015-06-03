@@ -1,6 +1,8 @@
 Router.route '/', ->
   @render 'Home'
 
+Router.route '/uhoh'
+
 Router.route '/splash'
 
 Router.map ->
@@ -12,7 +14,9 @@ Router.map ->
   return
 
 Router.onAfterAction ->
-  if Meteor.userId() # check for suite in the future or associate suite
+  if Meteor.Device.isPhone()
+    @redirect '/uhoh'
+  else if Meteor.userId() # check for suite in the future or associate suite
     @redirect '/'
   else if Router.current().route.getName() != 'invite'
     @redirect '/splash'
