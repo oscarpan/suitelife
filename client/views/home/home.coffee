@@ -1,4 +1,4 @@
-Template.Home.rendered = ->
+Template.Home.onRendered ->
 	modules = ['postsModule', 'iousModule', 'calModule', 'choresModule']
 	bodies = ['postsList', 'iousList', 'choreCal', 'choresList']	
 	resizing = false
@@ -32,7 +32,9 @@ Template.Home.rendered = ->
 					if error
 						sAlert.error(error.reason)
 				targetBody.height(target.height() - padding)
-					
+				if moduleName == 'postsModule' and $('.postsPackery').data().packery
+					$('.postsPackery').data().packery.layout()
+
 			#run update on resize
 			target.resizable 
 				alsoResize: bodyName
@@ -42,11 +44,11 @@ Template.Home.rendered = ->
 						if error
 							sAlert.error(error.reason)
 					resizing = false
+					$container.packery()	
 				resize: (event, ui) ->
 					resizing = true
 					targetBody.height(target.height() - padding)
 					#move all objects to fit
-					$container.packery()	
 
 			#set the window size
 			Tracker.autorun ->
@@ -57,6 +59,6 @@ Template.Home.rendered = ->
 					targetBody.height(target.height() - padding)
 					if location.top?
 						target.css('top', location.top)
-						target.css('left', location.left)					
+						target.css('left', location.left)			
 			
 	$container.packery()	

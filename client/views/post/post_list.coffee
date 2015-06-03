@@ -1,5 +1,42 @@
 ##### POSTS #####
 
+Template.postsList.onCreated ->
+	# 1. Initialization
+	instance = this
+	# initialize the reactive variables
+	suite = (Suites.findOne users: Meteor.userId())
+	instance.post_ids = new ReactiveVar([])
+	instance.postsContainer = $('.postsPackery').packery(
+		columnWidth: 60
+		gutter: 15
+		transitionDuration: 0
+	)		
+	# 2. Autorun
+	# will re-run when the reactive variables changes
+	instance.autorun ->
+		# get the limit
+		suite = (Suites.findOne users: Meteor.userId())
+		if suite
+			instance.post_ids.set(suite.post_ids)
+			# subscribe to the posts publication
+		subscription = instance.subscribe('posts', instance.post_ids.get())
+		# if subscription is ready, set limit to newLimit
+		if subscription.ready()
+			instance.postsContainer.packery('destroy')
+			instance.postsContainer = $('.postsPackery').packery(
+				columnWidth: 60
+				gutter: 15
+				transitionDuration: 0
+			)
+
+	# 3. Cursor
+	instance.posts = ->
+		suite = (Suites.findOne users: Meteor.userId())
+		if suite
+			return Posts.find {_id: $in: suite.post_ids}
+		else
+			Posts.find {_id: $in: instance.post_ids.get()}
+
 Template.postsList.events 
 	'click .new': (e) ->
 		e.preventDefault()
@@ -18,6 +55,7 @@ Template.postsList.events
 			packery.appended($('.postsPackery').children().last())
 	'click .delete' : (e) ->
 		idNode = e.target.attributes.postId || e.target.parentNode.attributes.postId #might click on the icon vs the button
+		instance = Template.instance()
 		Meteor.call 'deletePost', idNode.value, (error) ->
 			if error
 				sAlert.error(error.reason)	
@@ -34,6 +72,13 @@ Template.Post.helpers
 		else
 			return id
 
+Template.Post.onRendered ->
+	Template.instance().parent().post_ids.set((Suites.findOne users: Meteor.userId()).post_ids)
+	
+Template.Post.onDestroyed ->
+	Template.instance().parent().post_ids.set((Suites.findOne users: Meteor.userId()).post_ids)
+
+
 ##### UPLOADER #####
 
 Template.Post.events 'click .clear': (e) ->
@@ -45,7 +90,8 @@ Template.Post.events 'click .clear': (e) ->
 	post.lastEdited = moment().format 'MMMM Do YYYY, h:mm:ss a'
 	Meteor.call 'setImagePath', post, post._id, (error) ->					#update the post's image path
 		if error
-			sAlert.error(error.reason)
+			sAlert.error(error.reason)	
+
 
 Template.uploader.helpers
 	myCallbacks: ->

@@ -17,9 +17,6 @@ Meteor.methods
     Meteor.call 'initializePosts', suite_id, (error) ->
       if error
         sAlert.error(error.reason)
-    Meteor.call 'addSweetyTheCat', suite_id, (error) ->
-      if error
-        sAlert.error(error.reason)
   editSuite: (suite, id) ->
     suite.updatedAt = (new Date).getTime()
     Suite.update id, $set: suite

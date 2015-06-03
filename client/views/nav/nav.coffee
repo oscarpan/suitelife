@@ -33,7 +33,8 @@ Template.Nav.events
       {width: half_width, height: cal_min_height, left: 0, top: posts_min_height + 230},
       {width: full_width - half_width2, height: chores_min_height, left: half_width2, top: posts_min_height + ious_min_height + 260}
     ]
-    updateModules(sizes, e)
+    stamp = [true, false, false, false]
+    updateModules(sizes, e, stamp)
   'click .choreMode': (e) ->
     sizes = [
       {width: half_width, height: posts_min_height, left: 0, top: cal_max_height + chores_min_height + 260}, 
@@ -41,7 +42,8 @@ Template.Nav.events
       {width: full_width, height: cal_max_height, left: 0, top: chores_min_height + 230},
       {width: full_width, height: chores_min_height + 200, left: 0, top: 0}
     ]
-    updateModules(sizes, e)    
+    stamp = [false, false, true, true]
+    updateModules(sizes, e, stamp) 
   'click .iouMode': (e) ->
     sizes = [
       {width: full_width - half_width2, height: posts_min_height, left: half_width2, top: ious_min_height + 230}, 
@@ -49,14 +51,19 @@ Template.Nav.events
       {width: half_width, height: cal_min_height, left: 0, top: ious_min_height + 230},
       {width: half_width, height: chores_min_height, left: 0, top: ious_min_height + posts_min_height + 260}
     ]
-    updateModules(sizes, e)
+    stamp = [false, true, false, false]
+    updateModules(sizes, e, stamp)
 
-updateModules = (sizes, e) ->
+updateModules = (sizes, e, stamp) ->
   for i in [0...modules.length]
     do (i) ->
       moduleName = modules[i]
       target = $('#' + moduleName)
       targetBody = $('#' + bodies[i])
+      if stamp[i]
+        $('#home').data().packery.stamp(target)
+      else
+        $('#home').data().packery.unstamp(target)
       Meteor.call 'updateModuleLocation', moduleName, sizes[i], sizes[i], ->
         location = Meteor.user().modules[moduleName]
         target.width(location.width)

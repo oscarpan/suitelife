@@ -1,3 +1,27 @@
+Template.choresList.onCreated ->
+  # 1. Initialization
+  instance = this
+  # initialize the reactive variables
+  suite = (Suites.findOne users: Meteor.userId())
+  instance.chore_ids = new ReactiveVar([])
+  # 2. Autorun
+  # will re-run when the reactive variables changes
+  instance.autorun ->
+    # get the limit
+    suite = (Suites.findOne users: Meteor.userId())
+    if suite
+      instance.chore_ids.set(suite.chore_ids)
+    
+    subscription = instance.subscribe('chores', instance.chore_ids.get())
+    
+# 3. Cursor
+  instance.chores = ->
+    suite = (Suites.findOne users: Meteor.userId())
+    if suite
+      return Chores.find {_id: $in: suite.chore_ids}
+    else
+      return Chores.find {_id: $in: instance.chore_ids.get()}
+
 Template.choresList.helpers
   activeList: ->
     Session.get 'activeList'
@@ -135,6 +159,12 @@ Template.choreItem.events
       if error
         sAlert.error(error.reason)
 
+Template.choreItem.onRendered ->
+  console.log Template.instance().parent().parent().parent()
+  Template.instance().parent().parent().parent().chore_ids.set((Suites.findOne users: Meteor.userId()).chore_ids)
+
+Template.choreItem.onDestroyed ->
+  Template.instance().parent().parent().parent().chore_ids.set((Suites.findOne users: Meteor.userId()).chore_ids)
 
 
 Template.deleteChoreModal.helpers
