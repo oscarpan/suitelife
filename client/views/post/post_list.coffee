@@ -1,16 +1,25 @@
 ##### POSTS #####
 
 Template.postsList.onCreated ->
+
 	# 1. Initialization
 	instance = this
 	# initialize the reactive variables
-	suite = (Suites.findOne users: Meteor.userId())
 	instance.post_ids = new ReactiveVar([])
 	instance.postsContainer = $('.postsPackery').packery(
 		columnWidth: 60
 		gutter: 15
 		transitionDuration: 0
 	)		
+
+	window.setInterval((->
+		instance.postsContainer.packery('destroy')
+		instance.postsContainer = $('.postsPackery').packery(
+			columnWidth: 60
+			gutter: 15
+			transitionDuration: 0
+		)), 250)
+
 	# 2. Autorun
 	# will re-run when the reactive variables changes
 	instance.autorun ->
@@ -21,19 +30,12 @@ Template.postsList.onCreated ->
 			# subscribe to the posts publication
 		subscription = instance.subscribe('posts', instance.post_ids.get())
 		# if subscription is ready, set limit to newLimit
-		if subscription.ready()
-			instance.postsContainer.packery('destroy')
-			instance.postsContainer = $('.postsPackery').packery(
-				columnWidth: 60
-				gutter: 15
-				transitionDuration: 0
-			)
 
 	# 3. Cursor
 	instance.posts = ->
 		suite = (Suites.findOne users: Meteor.userId())
 		if suite
-			return Posts.find {_id: $in: suite.post_ids}
+			Posts.find {_id: $in: suite.post_ids}
 		else
 			Posts.find {_id: $in: instance.post_ids.get()}
 
