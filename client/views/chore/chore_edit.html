@@ -22,53 +22,28 @@
       		</div>
     		</div>
 
-    		<div class="form-group" align="left">
-      		<label class="row control-label" for="freqNum">Repeat this chore:</label>
-      		<div class="row">
-      			<div class="col-md-10">    		
-        			<select id="repeat-freqs" name="repeat-freqs" class="form-control">
-           			<option value="0">Once</option>
-           			<option value="1">Daily</option>
-           			<option value="7">Weekly</option>
-           			<option value="14">Bi-weekly</option>
-           			<option value="30">Monthly</option>        
-        			</select>
-        		</div>
-        	</div>
-    		</div>
-
-      	<div class="form-group">  
-      		<div class="row">
-      			<div class="col-md-10">
-        			<div class="input-group">
-          			<input id="freqNum" name="freqNum" class="form-control" placeholder="1" onfocus="this.placeholder = ''" onblur="this.placeholder = '1'" type="text" disabled required>
-          			<span class="input-group-addon">times</span>
-        			</div>
-      			</div>
-      		</div>
-      	</div>
-      
       <!-- List for assign -->
     		<div class="form-group" align="left">
       		<label class="row control-label" for="assignee">Assign to roommate:</label>
       			<div class="row">
       				<div class="col-md-10">
-        				<select class="selectpicker" id="assignee" name="assignee" multiple>
+        				<select class="form-control" id="editAssignee" name="assignee">
                   {{#each users}}
-                    <option value="{{this}}">{{getUserName this}}</option>
+                      <option value="{{this}}">{{getUserName this}}</option>
                   {{/each}}
                 </select>
         			</div>
         		</div>
       	</div>
-    	</div>
-    </div>
 
-    <div class="form-group">
-      <label class="control-label" for="choreDesc">Comments (optional)</label>
-      <div class="controls col-md-12">                     
-        <textarea id="editChoreDesc" name="choreDesc" placeholder="Add comments here" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Add comments here'" maxlength="500" rows="4">{{description}}</textarea>
-      </div>
+        <div class="form-group" align="left">
+          <label class="control-label" for="choreDesc">Comments (optional)</label>
+          <div class="controls col-md-10 editChoreDescDiv">                     
+            <textarea id="editChoreDesc" name="choreDesc" placeholder="Add comments here" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Add comments here'" maxlength="140" rows="4">{{description}}</textarea>
+          </div>
+        </div>
+
+    	</div>
     </div>
 
     <div class="form-group">

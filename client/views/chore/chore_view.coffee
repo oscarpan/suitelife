@@ -58,7 +58,7 @@ Template.choreCalendar.helpers
         assignee = Meteor.users.findOne event.assignee
         if assignee?
           assigneeName = (assignee.profile.first_name)
-        element.find('.fc-title').append '<br/><br/><div align="right">' + assigneeName + '</div>'
+        element.find('.fc-title').append '<br/><br/><div id="assignDiv" align="right">' + assigneeName + '</div>'
         return
     }
 

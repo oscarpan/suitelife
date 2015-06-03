@@ -16,19 +16,12 @@ Template.editChoreForm.events
     e.preventDefault()
     currentId = @_id
     startDay = $('#datepicker').datepicker 'getDate'
-    frequencyInput = $(e.target).find('[name=repeat-freqs]').val()
-    freqNumInput = $(e.target).find('[name=freqNum]').val()
-    frequencyInput = parseInt(frequencyInput)
-    if frequencyInput == 0
-      freqNumInput = null
 
     ## edit object
     choreEdits =
       assignee: $(e.target).find('[name=assignee]').val()
       title: $(e.target).find('[name=choreName]').val()
       startDate: startDay
-      frequency: frequencyInput
-      freqNum: freqNumInput
       description: $(e.target).find('[name=choreDesc]').val()
 
     ## edit function for collection managing

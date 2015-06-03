@@ -9,23 +9,13 @@
 	white-space: normal;
 }
 
-#editChoreDesc, #newChoreDesc {
+#newChoreDesc {
   resize: none;
   width: 100%;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   overflow: auto;       
-}
-
-#choreEditName {
-  border-color: Transparent; 
-  overflow: auto;       
-}
-
-#choreEditName:hover{
-  border: 1px solid #ccc;
-  border-radius: 4px;
 }
 
 #initialsBox {
@@ -69,6 +59,8 @@
 
 #listName{
 	color: black;
+	resize: none;
+  width: 100%;
 	height: 25px;
 	font-weight: bold;
 	border: 1px solid #ccc;
@@ -185,5 +177,85 @@
 	box-shadow: -1px 1px 3px 0px rgba(0,0,0,0.67);
 }
 
+#assignDiv{
+	background-color: #3D3651;
+	border-top: 1px solid white;
+}
 
+.editChoreDescDiv{
+	padding: 0px;
+}
 
+#choreEditName{
+	color: black;
+	resize: none;
+  width: 100%;
+	height: 25px;
+	border: 1px solid #ccc;
+	border-color: transparent;
+	background-color: transparent;
+	-webkit-box-shadow: none;
+  box-shadow: none
+}
+
+#choreEditName:focus{
+	outline: 0;
+	border: 1px solid;
+	border-color: rgba(82, 168, 236, 0.8) !important;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
+	box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
+}
+
+#choreEditName:hover{
+	border: 1px solid black;
+}
+
+#editChoreDesc{
+	color: black;
+  resize: none;
+  width: 100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  overflow: auto;
+  border: 1px solid #ccc;
+  border-color: transparent;
+	background-color: transparent;
+	-webkit-box-shadow: none;
+  box-shadow: none 
+}
+
+#editChoreDesc:focus{
+	outline: 0;
+	border: 1px solid;
+	border-color: rgba(82, 168, 236, 0.8) !important;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
+	box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
+}
+
+#editChoreDesc:hover{
+	border: 1px solid black;
+}
+
+#editAssignee{
+	color: black;
+	resize: none;
+  width: 100%;
+	border: 1px solid #ccc;
+	border-color: transparent;
+	background-color: transparent;
+	-webkit-box-shadow: none;
+  box-shadow: none
+}
+
+#editAssignee:focus{
+	outline: 0;
+	border: 1px solid;
+	border-color: rgba(82, 168, 236, 0.8) !important;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
+	box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
+}
+
+#editAssignee:hover{
+	border: 1px solid black;
+}
