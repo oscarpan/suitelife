@@ -160,7 +160,6 @@ Template.choreItem.events
         sAlert.error(error.reason)
 
 Template.choreItem.onRendered ->
-  console.log Template.instance().parent().parent().parent()
   Template.instance().parent().parent().parent().chore_ids.set((Suites.findOne users: Meteor.userId()).chore_ids)
 
 Template.choreItem.onDestroyed ->

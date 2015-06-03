@@ -30,10 +30,14 @@ Meteor.methods
     "editType":   "update" } }
   payIou: (id) ->
     iou = Ious.findOne id
-    Ious.update id, $set: {paid: true}
-    lastEdited = new Date( ).getTime( )
-    logMessage = Meteor.user( ).profile.first_name + " paid IOU \"" + iou.reason + ".\""
-    Ious.update id, $push: { "editLog": { "lastEdited": lastEdited,
-    "logMessage": logMessage,
-    "editType": "payed" } }
+    isPaid = iou.paid
+    if isPaid
+      Ious.update id, $set: {paid: false}
+    else
+      Ious.update id, $set: {paid: true}
+      lastEdited = new Date( ).getTime( )
+      logMessage = Meteor.user( ).profile.first_name + " paid IOU \"" + iou.reason + ".\""
+      Ious.update id, $push: { "editLog": { "lastEdited": lastEdited,
+      "logMessage": logMessage,
+      "editType": "payed" } }
     id

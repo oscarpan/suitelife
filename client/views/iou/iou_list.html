@@ -95,14 +95,26 @@
 
 <template name="iouItem">
 
-  <li class="list-group-item {{paidColor paid}}">
+  <li class="list-group-item {{paidColor paid}} oneChore">
 
-    <div class="container-fluid">
       <div class="row">
-        <div class="col-md-3 date">
-            {{dateFormat date}}
+        <div class="col-md-1">
+          <style scoped>
+            {{> completedCss}}
+          </style>
+          {{#if paid}}
+            <input type="checkbox" name="completedCheck" id="completedCheck-{{_id}}" checked />
+          {{else}}
+            <input type="checkbox" name="completedCheck" id="completedCheck-{{_id}}"/>
+          {{/if}}
+          <label class="paid completedLabel-{{_id}}" for="completedCheck-{{_id}}"></label>
         </div>
-        <div class="col-md-8">
+
+        <div class="col-md-3 date">
+            <span class="{{textColor paid}}">{{dateFormat date paid}}</span>
+        </div>
+
+        <div class="col-md-6 iou-info">
           <span class="underline-editable">
             {{> editableText collection="ious" field="reason" beforeUpdate="validateIOUReason" }}
           </span>
@@ -114,6 +126,12 @@
             ${{> editableText collection="ious" field="amount" beforeUpdate="validateIOUAmount" }}
           </span>
         </div>
+
+        <div class="col-md-2 iou-list-buttons" align="right">
+          <button class="btn btn-xs btn-danger listDeleteBtn" data-toggle="modal" data-target="#delete{{ _id }}Modal">
+            <i class="fa fa-times"></i>
+          </button>
+      </div>
       </div>
       <!--
       <div class="row">
@@ -125,15 +143,7 @@
         </div>
       </div>
       -->
-      <div class="row iou-list-buttons">
-        <button class="btn btn-md btn-success paid">
-          <i class="fa fa-check"></i>
-        </button>
-        <button class="btn btn-md btn-danger" data-toggle="modal" data-target="#delete{{ _id }}Modal">
-          <i class="fa fa-times"></i>
-        </button>
-      </div>
-    </div>
+      
 
   </li>
 

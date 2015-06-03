@@ -21,8 +21,11 @@ Template.iouItem.helpers
   userName: (id) ->
     usr = Meteor.users.findOne id
     userName = usr.profile.first_name + " " + usr.profile.last_name
-  dateFormat: (date) ->
-    moment(date).format('MMM Do')
+  dateFormat: (date, paid) ->
+    if paid
+      'Paid'
+    else
+      moment(date).format('MMM Do')
   amountFormat: (amount, payerId, payeeId) ->
     if payerId == Meteor.userId()
       payee = Meteor.users.findOne payeeId
@@ -40,6 +43,8 @@ Template.iouItem.helpers
           "</span>"
   paidColor: (paid) ->
     "list-group-item-success" if paid
+  textColor: (paid) ->
+    "text-success" if paid
 
 Template.iouItem.events
   'click .paid': (e) ->

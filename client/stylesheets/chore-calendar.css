@@ -109,10 +109,6 @@
 	border: 1px solid black;
 }
 
-#doneCol{
-	padding-left: 1px;
-}
-
 #statusText{
 	left: 1%;
 	padding-right: 0px;
@@ -136,6 +132,7 @@
 .list-group-item{
 	border-radius: 4px;
 }
+
 .list-group-item-success{
 	background-color: rgba(201, 231, 201, 0.8);
 }

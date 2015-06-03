@@ -47,8 +47,9 @@
 <!-- chore details in a row, each part in a different column -->
 <template name="choreItem">
 	<li class="list-group-item {{completeColor completed startDate}} oneChore">
-		<div class="row">
-    	<div class="col-md-1" id="doneCol-{{_id}}">
+		
+    <div class="row">
+    	<div class="col-md-1">
       	<style scoped>
       		{{> completedCss}}
       	</style>
@@ -71,6 +72,7 @@
 	      </button>
 	    </div>
     </div>
+
     <div class="row">
     	<div class="col-md-2" id="statusText" align="left">
     		{{#if completed}}
