@@ -30,7 +30,7 @@ body {
 
 .jumbotron h1 {
 
-  color: #9987CA;
+  color: #83BDD3;
   text-align: center;
   font-size: 170px;  
   font-family: 'Shift', sans-serif;
@@ -41,6 +41,7 @@ body {
 .jumbotron h2 {
 	text-align: center;
 	font-size: 50px;
+	text-shadow: 1px 1px 2px rgba(0,0,0, .7);
 }
 
 .jumbotron .wrapper {
@@ -70,7 +71,7 @@ body {
 
 .features {
 	margin-bottom: 30px;
-	background-color: #9987CA;
+	background-color: #34819e;
 	color: white;
 	padding: 20px;
 }
@@ -84,11 +85,11 @@ body {
 }
 
 .features .fa-calendar {
-	color: lightblue;
+	/*color: lightblue;*/
 }
 
 .features .fa-usd {
-	color: green;
+	/*color: green;*/
 }
 
 .features.fa-comment {
