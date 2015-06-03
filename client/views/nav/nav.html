@@ -1,40 +1,39 @@
 <template name="Nav">
     <nav class="navbar navbar-default navbar-static-top" role="navigation">
-        <div class="row">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header col-md-2">
-                <button type="button" class="navbar-toggle collapsed"
-                        data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                </button>
-                <div class="navbar-brand">
+        <div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<div class="navbar-brand">
                     <img src="/images/logo-white.svg" alt="SuiteLife" class="img-responsive dashMode"/>
                 </div>
-            </div>
-
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="navbar-header col-md-9" id="navbar-collapse">
-                
+			</div>
+			<div id="navbar" class="navbar-collapse collapse">
                 {{#if currentUser}}
-                  <ul class="nav navbar-nav">
-                      <li><a class="menu-item postMode" href="">Posts</a></li>
-                      <li><a class="menu-item choreMode" href="">Chores</a></li>
-                      <li><a class="menu-item iouMode" href="">IOUs</a></li>
-                  </ul>
+					<ul class="nav navbar-nav">
+						<li><a class="menu-item postMode" href="">Posts</a></li>
+						<li><a class="menu-item choreMode" href="">Chores</a></li>
+						<li><a class="menu-item iouMode" href="">IOUs</a></li>
+					</ul>
                 {{/if}}
-                <ul class="nav navbar-nav" style="width: 50%;">
-                  <li class="suite-name">
-                    {{#with getSuite}}
-                      {{> editableText collection="suites" field="name" placeholder="My Suite" removeEmpty=false}}
-                    {{/with}}
-                  </li>
-                </ul>
-                <ul class="nav navbar-nav pull-right"> 
-                  <li class="nav navbar-nav pull-right">
+
+				<ul class="nav navbar-nav navbar-right">
                     {{> loginButtons}}
-                  </li>
-                </ul>
-            </div><!-- /.navbar-collapse -->
+				</ul>
+
+				<ul class="nav" style="overflow:hidden;">
+					<li class="suite-name">
+                        {{#with getSuite}}
+                            {{> editableText collection="suites" field="name" placeholder="My Suite" removeEmpty=false}}
+                        {{/with}}
+					</li>
+				</ul>
+			</div><!--/.nav-collapse -->
+
         </div><!-- /.container-fluid -->
     </nav>
     {{> invite}}

@@ -10,9 +10,10 @@
 .fa-usd {
   color: green;
 }
+
 .iou-log-tbody {
-    height: 300px;       /* Just for the demo          */
-    overflow-y: auto;    /* Trigger vertical scroll    */
+    height: 300px;
+    overflow-y: auto;
     overflow-x: hidden;
     font-size: 1.1em;
 }
@@ -20,7 +21,7 @@
 .iou-log-tbody .row {
   margin-left: 0;
   margin-right: 0;
-  padding: 0.2em 0;
+  padding: 0;
   border-bottom: solid #9987CA 2px;
 }
 
@@ -32,6 +33,7 @@
   margin-left: 0;
   margin-right: 0;
 }
+
 .iou-log-thead {
   background-color: lavender;
   border-bottom: solid #9987CA 2px;

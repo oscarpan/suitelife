@@ -1,29 +1,23 @@
-h3 { 
-  cursor: hand; 
-  cursor: pointer; 
+h3 {
+    cursor: hand;
+    cursor: pointer;
 }
 
 .modal-body > .container {
-  width: inherit;
+    width: inherit;
 }
 
 .popover {
-  min-width: 200px;
+    min-width: 200px;
 }
 
 .navbar {
-  background-color: #9987ca;
+    background-color: #9987ca;
 }
-
-.navbar-nav > li > .dropdown-menu {
- margin-left: -140px;
- position: absolute;
-}
-
 
 #login-dropdown-list > .dropdown-toggle {
-  background-color: #9987ca;
-  color: white;
+    background-color: #9987ca;
+    color: white;
 }
 
 @font-face {
@@ -40,32 +34,34 @@ h3 {
 }
 
 .suite-name {
-  font-size:34px;
-  text-align:center;
-  margin-top: 5px;
-  font-family: customTitleFont;
-  color: #E0DBEF;
-  text-align: center;
-  width: 100%;
+    font-size:34px;
+    text-align:center;
+    margin-top: 12px;
+    font-family: customTitleFont;
+    color: #E0DBEF;
+    text-align: center;
+    width: 100%;
 }
 
 .dropdown-toggle {
-  color: #FFFFFF;
+    color: #FFFFFF;
 }
 
 .suite-name > .wide-text-edit {
-  font-size: 28px;
-  text-align: center;
+    font-size: 28px;
+    text-align: center;
 }
 
 .navbar-header {
-  margin-left:20px;
+    margin-left:20px;
 }
 
 .menu-item{
-  color: #E0DBEF !important;
-  font-size: 26px;
-  margin-top: 5px;
+    color: #E0DBEF !important;
+    font-size: 25px;
+    margin-top: 5px;
+    padding: 23px 10px 10px 10px !important;
+    font-weight: 400;
 }
 
 .my-btn{
@@ -74,18 +70,18 @@ h3 {
 }
 
 .my-btn:hover{
-  border-color: #ffffff; 
-  background-color: #7a6ca1; 
-  color: #ffffff;
+    border-color: #ffffff;
+    background-color: #7a6ca1;
+    color: #ffffff;
 }
 
 .panel-default > .panel-heading {
-  color: #575757;
-  background-color: #fff;
+    color: #575757;
+    background-color: #fff;
 }
 
 .panel {
-	box-shadow: 0px 3px 3px rgba(0, 0, 0, .15);
+    box-shadow: 0px 3px 3px rgba(0, 0, 0, .15);
 }
 
 .settings-form label{
