@@ -20,7 +20,7 @@ Template.postsList.onRendered ->
 				suite = Suites.findOne users: Meteor.userId()
 				if suite?
 					Meteor.subscribe 'posts', suite.post_ids
-					Meteor.subscribe 'chores', suite.post_ids
+					Meteor.subscribe 'chores', suite.chore_ids
 			######subscriptions######
 
 			if $postsContainer?
