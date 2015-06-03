@@ -15,12 +15,6 @@ h3 {
   background-color: #9987ca;
 }
 
-.navbar-nav > li > .dropdown-menu {
- margin-left: -140px;
- position: absolute;
-}
-
-
 #login-dropdown-list > .dropdown-toggle {
   background-color: #9987ca;
   color: white;
@@ -64,7 +58,7 @@ h3 {
 
 .menu-item{
   color: #E0DBEF !important;
-  font-size: 26px;
+  font-size: 18px;
   margin-top: 5px;
 }
 
