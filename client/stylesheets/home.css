@@ -1,9 +1,10 @@
 body {
-        background-image: url("http://s2.postimg.org/8k831mjfs/Backgroundpaws.jpg");
+        background-image: url('BackgroundPaws.png');
         background-repeat: repeat;
         background-position: bottom;
         background-size: contain;
         background-attachment: fixed;
+        background-color: #f6fbfc;
 }
 
 .panel-title{
