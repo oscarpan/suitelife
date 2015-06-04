@@ -21,18 +21,15 @@ Template.choresList.onCreated ->
     #if suite
      # return Chores.find {_id: $in: suite.chore_ids}
     #else
-    return Chores.find({
-    	_id: $in: instance.chore_ids.get()
-  	},
-  		sort:
+    return Chores.find {}, sort:
     		startDate: 1
     		createdAt: 1
-    )
+    
 
   instance.upcoming = ->
   	date = moment(moment(new Date).startOf 'day').toDate()
   	return Chores.find({
-  		$and: [ {_id: $in: instance.chore_ids.get()}, { startDate: {$gt: date}} ]
+  		startDate: {$gt: date}
   	},
     	sort:
     		startDate: 1
@@ -42,7 +39,7 @@ Template.choresList.onCreated ->
   instance.today = ->
   	date = moment(moment(new Date).startOf 'day').toDate()
   	return Chores.find({
-  		$and: [ {_id: $in: instance.chore_ids.get()}, { $or: [ {startDate: date}, {$and: [ {startDate: {$lt: date}}, {completed: false} ]} ]} ]      
+  		$or: [ {startDate: date}, {$and: [ {startDate: {$lt: date}}, {completed: false} ]} ]      
      },
       sort:
         startDate: 1

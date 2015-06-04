@@ -33,11 +33,7 @@ Template.postsList.onCreated ->
 
 	# 3. Cursor
 	instance.posts = ->
-		suite = (Suites.findOne users: Meteor.userId())
-		if suite
-			Posts.find {_id: $in: suite.post_ids}
-		else
-			Posts.find {_id: $in: instance.post_ids.get()}
+		return Posts.find {}
 
 Template.postsList.events 
 	'click .new': (e) ->
