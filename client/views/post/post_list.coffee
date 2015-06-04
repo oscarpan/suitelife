@@ -22,7 +22,7 @@ Template.postsList.onCreated ->
 
 	# 2. Autorun
 	# will re-run when the reactive variables changes
-	instance.autorun ->
+	@autorun ->
 		# get the limit
 		suite = (Suites.findOne users: Meteor.userId())
 		if suite
@@ -64,7 +64,7 @@ Template.postsList.events
 
 Template.postsList.helpers 
 	posts: ->
-		Posts.find().fetch()
+		Template.instance().posts()
 
 Template.Post.helpers
 	getEmail: (id) ->
@@ -74,11 +74,11 @@ Template.Post.helpers
 		else
 			return id
 
-Template.Post.onRendered ->
-	Template.instance().parent().post_ids.set((Suites.findOne users: Meteor.userId()).post_ids)
+#Template.Post.onRendered ->
+#	Template.instance().parent().post_ids.set((Suites.findOne users: Meteor.userId()).post_ids)
 	
-Template.Post.onDestroyed ->
-	Template.instance().parent().post_ids.set((Suites.findOne users: Meteor.userId()).post_ids)
+#Template.Post.onDestroyed ->
+#	Template.instance().parent().post_ids.set((Suites.findOne users: Meteor.userId()).post_ids)
 
 
 ##### UPLOADER #####
