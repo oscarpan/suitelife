@@ -4,7 +4,7 @@ root.Chores = new (Meteor.Collection)('chores')
 Meteor.methods
   deleteChore: (id) ->
     Chores.remove id
-    Meteor.call 'updateChoresSubscription'
+    #Meteor.call 'updateChoresSubscription'
     return
   newChore: (chore, frequency, freqString, freqNum, assignees) ->
     suite = (Suites.findOne users: Meteor.userId())
@@ -45,7 +45,7 @@ Meteor.methods
       else
         Suites.update suite._id, $push: {chore_ids: id}
     
-    Meteor.call 'updateChoresSubscription'
+    #Meteor.call 'updateChoresSubscription'
   editChore: (chore, id) ->
     chore.updatedAt = (new Date).getTime()
     Chores.update id, $set: chore
@@ -73,7 +73,7 @@ Meteor.methods
     Chores.update id, $set:
       assignee: assigneeId
     id
-  updateChoresSubscription: ->
-    if Meteor.isClient
-      suite = Suites.findOne users: Meteor.userId()
-      Meteor.subscribe 'chores', suite.chore_ids
+  #updateChoresSubscription: ->
+  #  if Meteor.isClient
+  #    suite = Suites.findOne users: Meteor.userId()
+  #    Meteor.subscribe 'chores', suite.chore_ids

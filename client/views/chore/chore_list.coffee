@@ -2,25 +2,52 @@ Template.choresList.onCreated ->
   # 1. Initialization
   instance = this
   # initialize the reactive variables
-  suite = (Suites.findOne users: Meteor.userId())
+  #suite = (Suites.findOne users: Meteor.userId())
   instance.chore_ids = new ReactiveVar([])
   # 2. Autorun
   # will re-run when the reactive variables changes
-  instance.autorun ->
+  @autorun ->
     # get the limit
     suite = (Suites.findOne users: Meteor.userId())
     if suite
       instance.chore_ids.set(suite.chore_ids)
-    
+
     subscription = instance.subscribe('chores', instance.chore_ids.get())
     
 # 3. Cursor
-  instance.chores = ->
-    suite = (Suites.findOne users: Meteor.userId())
-    if suite
-      return Chores.find {_id: $in: suite.chore_ids}
-    else
-      return Chores.find {_id: $in: instance.chore_ids.get()}
+  instance.all = ->
+    #suite = (Suites.findOne users: Meteor.userId())
+    
+    #if suite
+     # return Chores.find {_id: $in: suite.chore_ids}
+    #else
+    return Chores.find({
+    	_id: $in: instance.chore_ids.get()
+  	},
+  		sort:
+    		startDate: 1
+    		createdAt: 1
+    )
+
+  instance.upcoming = ->
+  	date = moment(moment(new Date).startOf 'day').toDate()
+  	return Chores.find({
+  		$and: [ {_id: $in: instance.chore_ids.get()}, { startDate: {$gt: date}} ]
+  	},
+    	sort:
+    		startDate: 1
+    		createdAt: 1
+    )
+
+  instance.today = ->
+  	date = moment(moment(new Date).startOf 'day').toDate()
+  	return Chores.find({
+  		$and: [ {_id: $in: instance.chore_ids.get()}, { $or: [ {startDate: date}, {$and: [ {startDate: {$lt: date}}, {completed: false} ]} ]} ]      
+     },
+      sort:
+        startDate: 1
+        createdAt: 1
+    )
 
 Template.choresList.helpers
   activeList: ->
@@ -28,39 +55,47 @@ Template.choresList.helpers
   listData: ->
     list = Session.get 'listData'
     if list == 'upcoming'
-      date = moment(moment(new Date).startOf 'day').toDate()
-      Chores.find({
-        startDate: {$gt: date}
-      },
-      	sort:
-      		startDate: 1
-      		createdAt: 1
-      )
+    	Template.instance().upcoming()
+      #Chores.find({
+      #  startDate: {$gt: date}
+      #},
+      #	sort:
+      #		startDate: 1
+      #		createdAt: 1
+      #)
+			
     else if list == 'all'
-      Chores.find {}, sort: 
-        startDate: 1
-        createdAt: 1
+      Template.instance().all()
+      #Chores.find {}, sort: 
+       # startDate: 1
+        #createdAt: 1
     else if list == 'today'
-      date = moment(moment(new Date).startOf 'day').toDate()
-      Chores.find({
-        $or: [ {startDate: date}, {$and: [ {startDate: {$lt: date}}, {completed: false} ]} ]
-      },
-        sort:
-          startDate: 1
-          createdAt: 1
-      )
+      Template.instance().today()
+      #date = moment(moment(new Date).startOf 'day').toDate()
+      #Chores.find({
+       # $or: [ {startDate: date}, {$and: [ {startDate: {$lt: date}}, {completed: false} ]} ]
+      #},
+       # sort:
+        #  startDate: 1
+         # createdAt: 1
+      #)
   todayCount: ->
-  	date = moment(moment(new Date).startOf 'day').toDate()
-  	Chores.find({ 
-  		$or: [ {startDate: date}, {$and: [ {startDate: {$lt: date}}, {completed: false} ]} ]
-  	}).count()
+  	return Template.instance().today().count()
+  	#date = moment(moment(new Date).startOf 'day').toDate()
+  	#Chores.find({ 
+  		#$or: [ {startDate: date}, {$and: [ {startDate: {$lt: date}}, {completed: false} ]} ]
+  	#}).count()
   upcomingCount: ->
-  	date = moment(moment(new Date).startOf 'day').toDate()
-  	Chores.find({
-  		startDate: {$gt: date} 
-  		}).count()
+  	return Template.instance().upcoming().count()
+  	#date = moment(moment(new Date).startOf 'day').toDate()
+  	#Chores.find({
+  		#startDate: {$gt: date} 
+  		#}).count()
+  	
   allCount: ->
-  	Chores.find({}).count()
+  	return Template.instance().all().count()
+  	#Chores.find({}).count()
+
 
 Template.choresList.events
   'click #todayChores': (e) ->
@@ -161,6 +196,7 @@ Template.choreItem.helpers
     return assignee == current
 
 
+
 Template.choreItem.events
   'click .completed': (e) ->
     currentId = @_id
@@ -190,11 +226,11 @@ Template.choreItem.events
 
 
 Template.choreItem.onRendered ->
-  Template.instance().parent().parent().parent().chore_ids.set((Suites.findOne users: Meteor.userId()).chore_ids)
+  #Template.instance().parent().parent().parent().chore_ids.set((Suites.findOne users: Meteor.userId()).chore_ids)
   $('.selectpicker').selectpicker()
 
-Template.choreItem.onDestroyed ->
-  Template.instance().parent().parent().parent().chore_ids.set((Suites.findOne users: Meteor.userId()).chore_ids)
+#Template.choreItem.onDestroyed ->
+  #Template.instance().parent().parent().parent().chore_ids.set((Suites.findOne users: Meteor.userId()).chore_ids)
 
 
 Template.deleteChoreModal.helpers
