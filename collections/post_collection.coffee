@@ -4,6 +4,12 @@ root.Posts = new (Meteor.Collection)('posts')
 Meteor.methods
   deletePost: (id) ->
     Posts.remove id
+    #remove id from suite
+    suite = (Suites.findOne users: Meteor.userId())
+    index = suite.post_ids.indexOf(id)
+    if (index > -1) 
+      suite.post_ids.splice(index, 1);
+      Suites.update suite._id, $set: {post_ids: suite.post_ids}
   newPost: (post, suite_id) ->
     post.createdAt = moment().format 'h:mm on MM/DD'
     post_id = Posts.insert post
