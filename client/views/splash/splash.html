@@ -7,13 +7,12 @@
 </template>
 
 <template name="splash">
+<!-- If the user is on the /splash route and is logged in,
+    the uhoh template is displayed -->
   {{#if currentUser}}
-    {{> uhoh}}
+    {{> toDashboard}}
   {{else}}
 
-      {{#if inviteRoute }}
-          <h3>you are here on an invite</h3>
-      {{/if}}
 	{{> jumbotron}}
   {{> mission}}
   {{> features}}

@@ -1,6 +1,8 @@
 Template.splash.helpers
   inviteRoute: ->
     Router.current().route.getName() == 'invite'
+  toDashboard: ->
+    Router.go "/"
 
 Template.uhoh.helpers
   isPhone: ->
