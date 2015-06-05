@@ -124,9 +124,11 @@
 .oneChore{
 	padding: 0px;
 	margin-bottom: 5px;
-	border: 2px solid black;
+	border: none;
 	background-color: rgba(255, 255, 255, 0.6);
-	box-shadow: 1px 1px 2px #888888;
+	-webkit-box-shadow: 2px 2px 10px 0px rgba(0,0,0,0.75);
+	-moz-box-shadow: 2px 2px 10px 0px rgba(0,0,0,0.75);
+	box-shadow: 2px 2px 10px 0px rgba(0,0,0,0.75);
 }
 
 .list-group-item{
@@ -312,6 +314,7 @@
 
 .fc-center h2{
 	color: #053B3B;
+	font-size: 25px;
 }
 
 #assignDiv{
@@ -336,8 +339,12 @@
 .listEditDate{
   display: none;
   position: absolute;
-  z-index: 2;
-  border-color: black;
-  top: 1%;
-  left: 8.2%;
+  z-index: 10;
+  border: 1px solid black;
+  top: -1%;
+  left: 1.1%;
+  background-color: white;
+  -webkit-box-shadow: 2px 2px 10px 0px rgba(0,0,0,0.75);
+	-moz-box-shadow: 2px 2px 10px 0px rgba(0,0,0,0.75);
+	box-shadow: 2px 2px 10px 0px rgba(0,0,0,0.75);
 }

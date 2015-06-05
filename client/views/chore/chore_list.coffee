@@ -16,14 +16,9 @@ Template.choresList.onCreated ->
     
 # 3. Cursor
   instance.all = ->
-    #suite = (Suites.findOne users: Meteor.userId())
-    
-    #if suite
-     # return Chores.find {_id: $in: suite.chore_ids}
-    #else
-    return Chores.find {}, sort:
-    		startDate: 1
-    		createdAt: 1
+  	return Chores.find {}, sort:
+    	startDate: 1
+    	createdAt: 1
     
 
   instance.upcoming = ->
@@ -53,46 +48,16 @@ Template.choresList.helpers
     list = Session.get 'listData'
     if list == 'upcoming'
     	Template.instance().upcoming()
-      #Chores.find({
-      #  startDate: {$gt: date}
-      #},
-      #	sort:
-      #		startDate: 1
-      #		createdAt: 1
-      #)
-			
     else if list == 'all'
       Template.instance().all()
-      #Chores.find {}, sort: 
-       # startDate: 1
-        #createdAt: 1
     else if list == 'today'
       Template.instance().today()
-      #date = moment(moment(new Date).startOf 'day').toDate()
-      #Chores.find({
-       # $or: [ {startDate: date}, {$and: [ {startDate: {$lt: date}}, {completed: false} ]} ]
-      #},
-       # sort:
-        #  startDate: 1
-         # createdAt: 1
-      #)
   todayCount: ->
   	return Template.instance().today().count()
-  	#date = moment(moment(new Date).startOf 'day').toDate()
-  	#Chores.find({ 
-  		#$or: [ {startDate: date}, {$and: [ {startDate: {$lt: date}}, {completed: false} ]} ]
-  	#}).count()
   upcomingCount: ->
   	return Template.instance().upcoming().count()
-  	#date = moment(moment(new Date).startOf 'day').toDate()
-  	#Chores.find({
-  		#startDate: {$gt: date} 
-  		#}).count()
-  	
   allCount: ->
   	return Template.instance().all().count()
-  	#Chores.find({}).count()
-
 
 Template.choresList.events
   'click #todayChores': (e) ->
@@ -217,17 +182,23 @@ Template.choreItem.events
       return
     return
 
-  #'click .statusText': (e) ->
-   # currentId = @_id
-    #$('#listEditDateDiv' + currentId).show()
+  'click #dateStatus': (e) ->
+  	currentId = @_id
+  	choreEdit = Chores.findOne currentId
+  	# Get today's date - handle utc time issues
+  	todayDate = new Date
+  	todayDate.setDate todayDate.getDate() - 1
+  	if choreEdit.startDate < todayDate
+  		$('#datepicker').datepicker 'setDate', 'today'
+  	else
+  	## Event date session data for the datepicker to access
+  		startDay = moment(choreEdit.startDate).format('YYYY/MM/DD')
+  		$('#datepicker').datepicker 'setDate', startDay
+  	$('#listEditDateDiv' + currentId).show()
 
 
-Template.choreItem.onRendered ->
-  #Template.instance().parent().parent().parent().chore_ids.set((Suites.findOne users: Meteor.userId()).chore_ids)
-  $('.selectpicker').selectpicker()
-
-#Template.choreItem.onDestroyed ->
-  #Template.instance().parent().parent().parent().chore_ids.set((Suites.findOne users: Meteor.userId()).chore_ids)
+Template.choreItem.onRendered ->	
+	$('.selectpicker').selectpicker()
 
 
 Template.deleteChoreModal.helpers

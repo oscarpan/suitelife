@@ -64,7 +64,7 @@
         <span id="initialsBox" style="background-color: {{highlight assignee}}">{{assignFormat assignee}}</span>
       </div>
       <div id="listEditAssigneeDiv{{_id}}" class="listEditAssignee">
-        <select class="selectpicker form-control" id="listEditAssignee{{_id}}" name="assignee">
+        <select class="selectpicker form-control" id="listEditAssignee{{_id}}" name="assignee" data-size='5'>
           {{#each users}}
               <option value="{{this}}" selected="{{selected ../assignee this}}">{{getUserName this}}</option>
           {{/each}}
@@ -81,16 +81,16 @@
     </div>
 
     <div class="row">
+    	<div id="listEditDateDiv{{_id}}" class="listEditDate">
+        {{> dates}}
+      </div>
     	<div class="col-md-2" id="statusText" align="left">
     		{{#if completed}}
-	        <span class="text-success statusText">{{dateFormat completedOn}}</span>
+	        <span class="text-success statusText" id="dateStatus">{{dateFormat completedOn}}</span>
 	      {{else}}
-	        <span class="text-danger statusText">{{pastDue startDate}}</span>
+	        <span class="text-danger statusText" id="dateStatus">{{pastDue startDate}}</span>
 	      {{/if}}
     	</div>
-      <!--<div id="listEditDateDiv{{_id}}" class="listEditDate">
-        <span>"Test"</span>
-      </div>-->
       <div class="col-md-10 comments" id="comments">
       	<textarea id="listDesc" class="listDesc-{{_id}}" name="choreDesc" placeholder="Add comments here" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Add comments here'" maxlength="140">{{description}}</textarea>
       </div>
