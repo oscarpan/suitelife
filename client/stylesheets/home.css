@@ -11,6 +11,12 @@ body {
 	font-size: 24px;
 	cursor:move;
 	/*color: #FFFFFF;*/
+    float: left;
+    padding-left: 15px;
+}
+
+.panel-heading > .row > .pull-right{
+    padding-right: 10px;
 }
 
 .home {
