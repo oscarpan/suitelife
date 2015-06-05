@@ -4,13 +4,13 @@
     <div class="panel-heading">
 
       <div class="row">
-        <div class="col-md-3">
+        <div class="">
           <h3 class="panel-title">
             <i class="fa fa-usd"></i> IOUs
           </h3>
         </div>
         
-        <div class="col-md-9">
+        <div class="pull-right">
           <div class="text-right">
             {{> tooltips title="IOUs" content="With the cost splitter you can easily split shared expenses. How you pay is up to you." }}
             <button class="btn btn-md btn-info log my-btn" data-toggle="modal" data-target="#iouLogModal">
@@ -28,7 +28,7 @@
       </div>
 
     </div>
-    <div class="panel-body container-fluid" id="iousListDiv">
+    <div class="panel-body" id="iousListDiv">
       <ul class="list-group" id="iousList">
         {{#if ious.count}}
           {{#each ious}}
