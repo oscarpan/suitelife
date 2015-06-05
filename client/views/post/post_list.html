@@ -43,25 +43,6 @@
 	<div class="last-edited"> 
 	last edited at {{lastEdited}} by {{getEmail authorId}} 
 	</div>
-	<!--{{#if imagePath.url}}
-		<img class="bulletin-image" src={{imagePath.url}}>
-	{{#else}}
-		{{> uploader}}	 #TODO: conditional on editing text
-	{{/if}}
-	-->
-</template>
-
-<template name="uploader">
-	<div class="row">
-		<div class="col-md-8">	{{> upload_bootstrap fileTypes='.jpg'
-		multiple=false callbacks=myCallbacks}}
-		</div>
-		{{#if imagePath.url}}
-			<div class="col-md-4">
-					<span class="btn btn-warning clear" post="{{_id}}">Remove Image</span>
-			</div>
-		{{/if}}
-	</div>
 </template>
 
 <template name="newPost">
