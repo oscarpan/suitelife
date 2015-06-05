@@ -31,7 +31,7 @@ Template.Home.onRendered ->
 				Meteor.call 'updateModuleLocation', moduleName, null, $('#' + moduleName).position(), (error) ->
 					if error
 						sAlert.error(error.reason)
-				targetBody.height(target.height() - padding)
+				#repack the posts inside the bulletin board
 				if moduleName == 'postsModule' and $('.postsPackery').data().packery
 					$('.postsPackery').data().packery.layout()
 
@@ -52,6 +52,7 @@ Template.Home.onRendered ->
 
 			#set the window size
 			Tracker.autorun ->
+				#resize based on set values
 				if !resizing and Meteor.user()?.modules?[moduleName]?
 					location = Meteor.user().modules[moduleName]
 					target.width(location.width)
@@ -59,6 +60,27 @@ Template.Home.onRendered ->
 					targetBody.height(target.height() - padding)
 					if location.top?
 						target.css('top', location.top)
-						target.css('left', location.left)			
-			
-	$container.packery()	
+						target.css('left', location.left)
+				#check for collision
+				for j in [0...i]
+					do (j) -> 	
+						target1 = $('#' +modules[j])
+						if collision(target,target1)
+							$container.packery()
+
+collision = ($el1, $el2) ->
+  x1 = $el1.offset().left
+  y1 = $el1.offset().top
+  h1 = $el1.outerHeight(true)
+  w1 = $el1.outerWidth(true)
+  b1 = y1 + h1
+  r1 = x1 + w1
+  x2 = $el2.offset().left
+  y2 = $el2.offset().top
+  h2 = $el2.outerHeight(true)
+  w2 = $el2.outerWidth(true)
+  b2 = y2 + h2
+  r2 = x2 + w2
+  if b1 < y2 or y1 > b2 or r1 < x2 or x1 > r2
+    return false
+  true
