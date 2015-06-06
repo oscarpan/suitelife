@@ -1,10 +1,3 @@
-#choreCal {
-  overflow-y: scroll;
-  border-bottom-width: 1px;
-  border-bottom-style: solid;
-  border-bottom-color: rgb(211, 211, 211);
-}
-
 #newChoreDesc {
   resize: none;
   width: 100%;
@@ -317,6 +310,14 @@
 .fc-center h2{
 	color: #053B3B;
 	font-size: 25px;
+}
+
+.fc-day-grid-container{
+	overflow-y: hidden;
+}
+
+.fc {
+	padding-bottom: 10px;
 }
 
 #assignDiv{

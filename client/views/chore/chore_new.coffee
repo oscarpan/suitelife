@@ -23,21 +23,21 @@ Template.newChoreForm.events
     freqNum = $(e.target).find('[name=freqNum]').val()
      ## Ensure frequency is a number
     if isNaN freqNum
-      sAlert.warning "Chore frequency must be an integer value."
+      sAlert.error "Chore frequency must be an integer value."
       return false
     ## Ensure input is a positve integer
     else if ( Number freqNum < 0 ) || ( Number freqNum % 1 != 0 )
-      sAlert.warning "Chore frequency must be a positive integer."
+      sAlert.error "Chore frequency must be a positive integer."
       return false
     else if (Number freqNum > 31)
-      sAlert.warning "31 is the maximum number of times for a repeat at once"
+      sAlert.error "31 is the maximum number of times for a repeat at once"
       return false
     else if assignees == null
-    	sAlert.warning "A person must be assigned to the chore."
+    	sAlert.error "A person must be assigned to the chore."
     	return false
     if frequency == 0
     	if assignees.length > 1
-    		sAlert.warning "A one-time event can only allow 1 person to be assigned."
+    		sAlert.error "A one-time event can only allow 1 person to be assigned."
     		return false
       freqNum = null
 

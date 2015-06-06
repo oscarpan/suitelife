@@ -91,7 +91,6 @@ Template.choresView.events
   'shown.bs.modal #createChoreModal': (e) ->
     $('#choresModule').draggable(disabled:true)
     $('#choreName').focus()
-    
 
 
 Template.createChore.helpers 
@@ -115,4 +114,3 @@ getColor = (evt) ->
   else if evt.completed
     color = '#5cb85c'
   color
-

@@ -64,7 +64,7 @@
         <span id="initialsBox" style="background-color: {{highlight assignee}}">{{assignFormat assignee}}</span>
       </div>
       <div id="listEditAssigneeDiv{{_id}}" class="listEditAssignee"  tabindex="-1">
-        <select class="selectpicker form-control" id="listEditAssignee{{_id}}" name="assignee" data-size='5'>
+        <select class="selectpicker form-control" data-size="4" id="listEditAssignee{{_id}}" name="assignee">
           {{#each users}}
               <option value="{{this}}" selected="{{selected ../assignee this}}">{{getUserName this}}</option>
           {{/each}}
