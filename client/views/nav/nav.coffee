@@ -116,7 +116,7 @@ Template.invite.events
     usr = Meteor.user()
     suite = Suites.findOne(users: Meteor.userId())._id
     emails = $(e.target).find('[name=email]').val()
-    Meteor.call 'sendEmail', emails, 'SuiteLife <suitelife@suitelife.com>', '[SuiteLife] Invitation', usr.profile['first_name']+' '+usr.profile['last_name']+' invited you to join '+suite.name+' on SuiteLife.'+"\n\r"+'Please click on the following link to signup: '+Meteor.absoluteUrl()+'invite/'+suite._id
+    Meteor.call 'sendEmail', emails, 'SuiteLife Sweety <sweety@suitelife.tk>', '[SuiteLife] Invitation', usr.profile['first_name']+' '+usr.profile['last_name']+' invited you to join '+suite.name+' on SuiteLife.'+"\n\r"+'Please click on the following link to signup: '+Meteor.absoluteUrl()+'invite/'+suite
     $('#inviteModal').modal 'hide'
     return
 
