@@ -18,6 +18,12 @@ body {
 .video {
 	margin-bottom: 30px;
 }
+
+.video h1 {
+	font-size: 30px;
+	text-align: center;
+	color: black;
+}
 .jumbotron {
   background-image:url('http://www.citrusinteria.com/wp-content/uploads/2015/04/living-room-mesmerizing-living-room-colors-captivating-living-room-interior-design-mesmerizing-blue-living-room.jpg');
   height: 700px;
