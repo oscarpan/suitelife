@@ -132,7 +132,7 @@ Template.costSplitter.events
 
       Meteor.call 'newIou', iou, (error, id) ->
         if error
-          return alert(error.reason)
+          sAlert.error(error.reason)
         $('#costSplitterModal').find('input:text').val('')
         $('#costSplitterModal').modal('hide')
         $('body').removeClass('modal-open')
