@@ -101,6 +101,10 @@ Template.costSplitter.events
     checkedUsers = Session.get "checkedUsers"
     console.log("checkedUsers.length: " + checkedUsers.length)
 
+    if Suites.findOne(users: Meteor.userId()).users.length == 1
+      sAlert.error("Suitemates are required to split a cost")
+      return false
+
     i = 0
     while i < checkedUsers.length
       # Create an IOU for each of these users
