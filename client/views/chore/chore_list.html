@@ -63,7 +63,7 @@
      	<div class="col-md-1" id ="initials" align="left">
         <span id="initialsBox" style="background-color: {{highlight assignee}}">{{assignFormat assignee}}</span>
       </div>
-      <div id="listEditAssigneeDiv{{_id}}" class="listEditAssignee">
+      <div id="listEditAssigneeDiv{{_id}}" class="listEditAssignee"  tabindex="-1">
         <select class="selectpicker form-control" id="listEditAssignee{{_id}}" name="assignee" data-size='5'>
           {{#each users}}
               <option value="{{this}}" selected="{{selected ../assignee this}}">{{getUserName this}}</option>
@@ -81,8 +81,8 @@
     </div>
 
     <div class="row">
-    	<div id="listEditDateDiv{{_id}}" class="listEditDate">
-        {{> dates}}
+    	<div id="listEditDateDiv{{_id}}" class="listEditDate"  tabindex="-1">
+        <div class="list-datepicker datepicker{{_id}}" id="list-datepicker"></div>
       </div>
     	<div class="col-md-2" id="statusText" align="left">
     		{{#if completed}}

@@ -1,4 +1,5 @@
 Template.choresList.onCreated ->
+
   # 1. Initialization
   instance = this
   # initialize the reactive variables
@@ -116,7 +117,7 @@ Template.choresList.events
 
 Template.choresList.onRendered ->
   Session.set 'activeList', 'choreItem'
-  Session.set 'listData', 'today'
+ 	Session.set 'listData', 'today'
 
 Template.choreItem.helpers
   dateFormat: (date) ->
@@ -165,46 +166,54 @@ Template.choreItem.events
     Meteor.call 'completeChore', currentId, (error, id) ->
       if error
         sAlert.error(error.reason)
+
   'click #initials': (e) ->
     currentId = @_id
     $('#listEditAssigneeDiv' + currentId).show()
     $('.listEditAssignee .dropdown-menu').show()
 
-   'blur .listEditAssignee': (e) ->
-    e.preventDefault()
+  'blur .listEditAssignee': (e) ->
     currentId = @_id
     assignee = $('#listEditAssignee' + currentId).val()
     
-    $('.listEditAssignee').hide()
     Meteor.call 'updateChoreAssignee', assignee, currentId, (error, id) ->
       if error
         sAlert.error(error.reason)
       return
+    $('.listEditAssignee').hide()
     return
 
   'click #dateStatus': (e) ->
-  	currentId = @_id
-  	choreEdit = Chores.findOne currentId
-  	# Get today's date - handle utc time issues
-  	todayDate = new Date
-  	todayDate.setDate todayDate.getDate() - 1
-  	if choreEdit.startDate < todayDate
-  		$('#datepicker').datepicker 'setDate', 'today'
-  	else
-  	## Event date session data for the datepicker to access
-  		startDay = moment(choreEdit.startDate).format('YYYY/MM/DD')
-  		$('#datepicker').datepicker 'setDate', startDay
-  	$('#listEditDateDiv' + currentId).show()
+    currentId = @_id
+    choreEdit = Chores.findOne currentId
+    startDay = moment(choreEdit.startDate).format('YYYY/MM/DD')
+    $('.datepicker' + currentId).datepicker 'setDate', startDay
 
+    $('#listEditDateDiv' + currentId).show()
+    $('#listEditDateDiv' + currentId).focus()
 
+    $('.list-datepicker').on 'changeDate', (event) ->
+      newDate = $('.datepicker' + currentId).datepicker 'getDate'
+      Meteor.call 'updateChoreDate', newDate, currentId, (error, id) ->
+        if error
+          sAlert.error(error.reason)
+        return
+      $('#listEditDateDiv' + currentId).hide()
+      return
+
+  'blur .listEditDate': (e) ->
+    currentId = @_id
+    $('.listEditDate').hide()
+  	
 Template.choreItem.onRendered ->	
 	$('.selectpicker').selectpicker()
+	$('.list-datepicker').datepicker
+    format: 'yyyy/mm/dd'
 
 
 Template.deleteChoreModal.helpers
 	deletedChore: ->
 		deleted = Session.get 'deleteChore'
-
 
 Template.deleteChoreModal.events	
   'click .listDelete': (e) ->

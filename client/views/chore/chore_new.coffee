@@ -72,12 +72,9 @@ Template.newChoreForm.onRendered ->
   $('#datepicker').datepicker 'setDate', startDay
   $('.selectpicker').selectpicker()
 
-
-
 Template.dates.onRendered ->
   ## Loading options for the datepicker
   $('#datepicker').datepicker
-    startDate: 'today'
     format: 'yyyy/mm/dd'
 
 freqToString = (freq) ->

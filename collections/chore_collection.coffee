@@ -49,7 +49,7 @@ Meteor.methods
         Suites.update suite._id, $set: {chore_ids: [id]}
       else
         Suites.update suite._id, $push: {chore_ids: id}
-    
+
   editChore: (chore, id) ->
     chore.updatedAt = (new Date).getTime()
     Chores.update id, $set: chore
@@ -76,4 +76,8 @@ Meteor.methods
   updateChoreAssignee: (assigneeId, id) ->
     Chores.update id, $set:
       assignee: assigneeId
+    id
+  updateChoreDate: (startDay, id) ->
+    Chores.update id, $set:
+      startDate: startDay
     id
