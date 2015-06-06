@@ -5,6 +5,7 @@ Template.Home.onRendered ->
 
 	$container = $('#home').packery(
 		gutter: 30
+		transitionDuration: "0.2s"
 		)
 	# get item elements, jQuery-ify them
 	$itemElems = $container.find('.packery-item')
@@ -66,6 +67,8 @@ Template.Home.onRendered ->
 					do (j) -> 	
 						target1 = $('#' +modules[j])
 						if collision(target,target1)
+							$container.packery("unstamp", target)
+							$container.packery("unstamp", target1)
 							$container.packery()
 
 collision = ($el1, $el2) ->

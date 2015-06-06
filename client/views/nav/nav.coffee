@@ -42,7 +42,7 @@ Template.Nav.events
       {width: full_width, height: cal_max_height, left: 0, top: chores_min_height + 230},
       {width: full_width, height: chores_min_height + 200, left: 0, top: 0}
     ]
-    stamp = [false, false, true, true]
+    stamp = [false, false, false, true]
     updateModules(sizes, e, stamp) 
   'click .iouMode': (e) ->
     sizes = [
