@@ -26,6 +26,7 @@ Template.Home.onRendered ->
 
 			target = $('#' + moduleName)
 			targetBody = $('#' + bodyName)
+			targetBody.height(target.height() - padding)
 
 			#run update when targets move
 			$container.packery 'on', 'layoutComplete', (laidOutItems) ->
