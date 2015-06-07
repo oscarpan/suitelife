@@ -38,15 +38,10 @@ Template.postsList.onCreated ->
 Template.postsList.events 
 	'click .new': (e) ->
 		e.preventDefault()
-    # Server time is in GMT so subtract 8 hours for local California time
-		if(Meteor.isClient)
-			localtime = moment().format 'MMMM Do YYYY, h:mm:ss a'
-		else
-			localtime = moment().subtract(8,'hours').format 'MMMM Do YYYY, h:mm:ss a'
 		post = 														
 			authorId: Meteor.userId()
 			lastEditor: Meteor.userId()
-			lastEdited: localtime
+			lastEdited: moment().format 'MMMM Do YYYY, h:mm:ss a'
 			pinned: false
 			imagePath: null
 			message: null
