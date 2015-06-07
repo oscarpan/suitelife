@@ -133,6 +133,13 @@ Template.costSplitter.events
       Meteor.call 'newIou', iou, (error, id) ->
         if error
           sAlert.error(error.reason)
+
+        # Reset everything
+        Session.set "splitAmount", 0
+        Session.set "evenSplit", true
+        $('input[name=split-cost]').prop('disabled', true)
+        $('input[name=amount]').prop('disabled', false)
+        
         $('#costSplitterModal').find('input:text').val('')
         $('#costSplitterModal').modal('hide')
         $('body').removeClass('modal-open')
