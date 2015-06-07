@@ -42,32 +42,45 @@ Template.signup.events 'submit form': (e) ->
   #or record the new suites name
   suite_name = $(e.target).find('[name=suiteName]').val()
 
-  #create an account
-  Accounts.createUser
-    #the user object {email:... password:... profile:....}
-    email: email
-    password: password 	#accounts will encrypt this for us
-    profile:
-      first_name: first
-      last_name: last
-    , (error) ->
-      if error
-        sAlert.error(error.reason)
+  re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i
+  if !re.test(email)
+    sAlert.error "Please fill in a valid email"
+    false
+  else
+    if !first or 0 == first.length or !last or 0 == last.length
+      sAlert.error "Please fill in first & last name"
+      false
+    else
+      if !suite_name or 0 == suite_name.length
+        sAlert.error "Please fill in a Suite name"
+        false
       else
-				#login
-        Meteor.loginWithPassword email, password, (error) ->
-          if error
-            sAlert.error(error.reason)
-
-				#associate with the invite suite
-        if !(/invite\//.exec Router.current()?.url)?
-          Meteor.call 'newSuite', {name: suite_name}, (error, id) ->
+        #create an account
+        Accounts.createUser
+          #the user object {email:... password:... profile:....}
+          email: email
+          password: password 	#accounts will encrypt this for us
+          profile:
+            first_name: first
+            last_name: last
+          , (error) ->
             if error
               sAlert.error(error.reason)
-				#or create a new suite
-        else
-          Meteor.call 'addUserToSuite', suite._id, (error, id) ->
-            if error
-              sAlert.error(error.reason)
+            else
+              #login
+              Meteor.loginWithPassword email, password, (error) ->
+                if error
+                  sAlert.error(error.reason)
 
-        Router.go("/")
+              #associate with the invite suite
+              if !(/invite\//.exec Router.current()?.url)?
+                Meteor.call 'newSuite', {name: suite_name}, (error, id) ->
+                  if error
+                    sAlert.error(error.reason)
+              #or create a new suite
+              else
+                Meteor.call 'addUserToSuite', suite._id, (error, id) ->
+                  if error
+                    sAlert.error(error.reason)
+
+              Router.go("/")
