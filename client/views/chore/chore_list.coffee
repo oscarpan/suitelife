@@ -3,25 +3,23 @@ Template.choresList.onCreated ->
   # 1. Initialization
   instance = this
   # initialize the reactive variables
-  #suite = (Suites.findOne users: Meteor.userId())
   instance.chore_ids = new ReactiveVar([])
   # 2. Autorun
   # will re-run when the reactive variables changes
   @autorun ->
-    # get the limit
     suite = (Suites.findOne users: Meteor.userId())
     if suite
       instance.chore_ids.set(suite.chore_ids)
 
     subscription = instance.subscribe('chores', instance.chore_ids.get())
     
-# 3. Cursor
+  # Cursor for all chores
   instance.all = ->
   	return Chores.find {}, sort:
     	startDate: 1
     	createdAt: 1
     
-
+  #Cursor for chores past today
   instance.upcoming = ->
   	date = moment(moment(new Date).startOf 'day').toDate()
   	return Chores.find({
@@ -32,6 +30,7 @@ Template.choresList.onCreated ->
     		createdAt: 1
     )
 
+  # Cursor for chores only on today
   instance.today = ->
   	date = moment(moment(new Date).startOf 'day').toDate()
   	return Chores.find({
@@ -42,9 +41,9 @@ Template.choresList.onCreated ->
         createdAt: 1
     )
 
+
 Template.choresList.helpers
-  activeList: ->
-    Session.get 'activeList'
+	# Returns the cursors for the filters
   listData: ->
     list = Session.get 'listData'
     if list == 'upcoming'
@@ -53,6 +52,7 @@ Template.choresList.helpers
       Template.instance().all()
     else if list == 'today'
       Template.instance().today()
+  # Returns the counts on the cursors
   todayCount: ->
   	return Template.instance().today().count()
   upcomingCount: ->
@@ -61,21 +61,20 @@ Template.choresList.helpers
   	return Template.instance().all().count()
 
 Template.choresList.events
+	# Each click sets a Session for the listData helper to manage	
   'click #todayChores': (e) ->
     e.preventDefault()
-    Session.set 'activeList', 'choreItem'
     Session.set 'listData', 'today'
 
   'click #upcomingChores': (e) ->
     e.preventDefault()
-    Session.set 'activeList', 'choreItem'
     Session.set 'listData', 'upcoming'
 
   'click #allChores': (e) ->
     e.preventDefault()
-    Session.set 'activeList', 'choreItem'
     Session.set 'listData', 'all'
 
+  # To bring up the delete modal when the red 'X' is clicked
   'click #listDeleteDiv .btn': (e) ->
   	e.preventDefault()
   	deleteChore = Chores.findOne(@_id)
@@ -83,17 +82,20 @@ Template.choresList.events
   	Tracker.flush()   # Force an update or the modal won't find the data correctly
   	$('#deletedChoreModal').modal 'show'
 
+  # Save the name that was in the chore in case of invalid input
   'focus #listName': (e) ->
   	e.preventDefault()
   	currentId = @_id
   	name = $('.listName-' + currentId).val()
   	Session.set 'listName', name
 
+  # When the chore name changes through a list edit
   'change #listName': (e) ->
     e.preventDefault()
     currentId = @_id
     name = $('.listName-' + currentId).val()
 
+    # If the user tries to empty an empty title, throw an error and put the previous title back in
     if name == ''
     	sAlert.error("Chores must have a title.")
     	$('.listName-' + currentId).val(Session.get 'listName')
@@ -105,6 +107,7 @@ Template.choresList.events
       return
     return
 
+  # When the chore desc changes through a list edit
   'change #listDesc': (e) ->
     e.preventDefault()
     currentId = @_id
@@ -116,21 +119,24 @@ Template.choresList.events
     return
 
 Template.choresList.onRendered ->
-  Session.set 'activeList', 'choreItem'
  	Session.set 'listData', 'today'
 
+
 Template.choreItem.helpers
+	# various formatting for dates and user names
   dateFormat: (date) ->
     moment(date).format('MM/DD/YY')
   assignFormat: (assigneeId) ->
     assignee = Meteor.users.findOne assigneeId
     if assignee?
       (assignee.profile.first_name.charAt(0).toUpperCase()) + (assignee.profile.last_name.charAt(0).toUpperCase())
+  # Initials coloration for if a chore is assigned to the current user
   highlight: (assigneeId) ->
   	if assigneeId == Meteor.userId()
   		'#F98914'
   	else
   		'#0A7676'
+  # Color for the list background
   completeColor: (completed, startDate) ->
     if completed
       "list-group-item-success"
@@ -140,6 +146,7 @@ Template.choreItem.helpers
 
       if startDate < date and not completed
         "list-group-item-danger"
+  # Text to show for the date due/completed or past due
   pastDue: (startDate) ->
     date = new Date
     date.setDate date.getDate() - 1
@@ -148,30 +155,35 @@ Template.choreItem.helpers
       "Past Due!"
     else
       moment(startDate).format('MM/DD/YY')
+  # List of the users
   users: ->
     if Suites.findOne(users: Meteor.userId())?
       Suites.findOne(users: Meteor.userId()).users
+  # A string of the users name
   getUserName: (id) ->
     usr = Meteor.users.findOne id
     if usr.profile?
       userName = usr.profile.first_name + " " + usr.profile.last_name
+  # For showing the assigned user during inline edit
   selected: (assignee, current) ->
     return assignee == current
 
 
-
 Template.choreItem.events
+	# Updates the chore as compelted
   'click .completed': (e) ->
     currentId = @_id
     Meteor.call 'completeChore', currentId, (error, id) ->
       if error
         sAlert.error(error.reason)
 
+  # Brings up the select input for inline edit
   'click #initials': (e) ->
     currentId = @_id
     $('#listEditAssigneeDiv' + currentId).show()
     $('.listEditAssignee .dropdown-menu').show()
 
+  # Updates the chore assignee
   'blur .listEditAssignee': (e) ->
     currentId = @_id
     assignee = $('#listEditAssignee' + currentId).val()
@@ -183,6 +195,7 @@ Template.choreItem.events
     $('.listEditAssignee').hide()
     return
 
+  # Brings up the datepicker for inline edit
   'click #dateStatus': (e) ->
     currentId = @_id
     choreEdit = Chores.findOne currentId
@@ -192,6 +205,7 @@ Template.choreItem.events
     $('#listEditDateDiv' + currentId).show()
     $('#listEditDateDiv' + currentId).focus()
 
+    # When a date is picked, it is updated and the datepicker is hidden
     $('.list-datepicker').on 'changeDate', (event) ->
       newDate = $('.datepicker' + currentId).datepicker 'getDate'
       Meteor.call 'updateChoreDate', newDate, currentId, (error, id) ->
@@ -201,10 +215,12 @@ Template.choreItem.events
       $('#listEditDateDiv' + currentId).hide()
       return
 
+  #  Hides the datepicker if no date is chosen but someone clicks outside of the datepicker
   'blur .listEditDate': (e) ->
     currentId = @_id
     $('.listEditDate').hide()
   	
+# Set up multi select and datepicker
 Template.choreItem.onRendered ->	
 	$('.selectpicker').selectpicker()
 	$('.list-datepicker').datepicker
@@ -212,10 +228,12 @@ Template.choreItem.onRendered ->
 
 
 Template.deleteChoreModal.helpers
+	# Data context for delete modal
 	deletedChore: ->
 		deleted = Session.get 'deleteChore'
 
 Template.deleteChoreModal.events	
+	# Deletes the chore
   'click .listDelete': (e) ->
     e.preventDefault()
     currentId = @_id

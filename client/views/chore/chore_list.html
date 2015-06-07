@@ -1,8 +1,11 @@
+<!-- View for the chore list -->
+
 <!-- view chores in a list -->
 <template name="choresList">
 	{{> deleteChoreModal}}
 
   <div class="panel panel-default" id="choresPanel">
+    <!-- Panel header for the chores list -->
     <div class="panel-heading">
       <div class="row">
         <div class="">
@@ -12,6 +15,8 @@
         </div>
         <div class="pull-right">
           {{> tooltips title="Chores" content="View everyone's chores. Edit chores and mark them as complete." }}
+          
+          <!-- Filter buttons -->
           <div class="btn-group" data-toggle="buttons">
             <label class="btn btn-primary active choreBtns" id="todayChores">
               <input type="radio" name="options" id="todayText" autocomplete="off" checked>Today <span class="badge">{{todayCount}}</span>
@@ -27,13 +32,15 @@
       </div>
     </div>
 
+    <!-- The container for the list -->
     <div class="panel-body container-fluid" id="choresList">
       <ul class="list-group choreLists">
       	{{#if listData.count}}
           {{#each listData}}
-            {{> Template.dynamic template=activeList}}
+            {{> choreItem}}
           {{/each}}
         {{else}}
+        	<!-- There are no chores for this filter -->
           <li class="list-group-item empty-note text-center disabled oneChore">
             No chores!
           </li>
@@ -46,10 +53,12 @@
 
 <!-- chore details in a row, each part in a different column -->
 <template name="choreItem">
+
+	<!-- Red color = past due/ Green color = completed for completeColor helper-->
 	<li class="list-group-item {{completeColor completed startDate}} oneChore">
-		
     <div class="row">
     	<div class="col-md-1">
+    		<!-- Hacky way to implement css for id based items - I am ashamed -->
       	<style scoped>
       		{{> completedCss}}
       	</style>
@@ -60,9 +69,11 @@
 				{{/if}}
 				<label class="completed completedLabel-{{_id}}" for="completedCheck-{{_id}}"></label>
      	</div>
+     	<!-- Small box that shows initials to show who the chore is assigned to -->
      	<div class="col-md-1" id ="initials" align="left">
         <span id="initialsBox" style="background-color: {{highlight assignee}}">{{assignFormat assignee}}</span>
       </div>
+      <!-- Select for editing the assignee -->
       <div id="listEditAssigneeDiv{{_id}}" class="listEditAssignee"  tabindex="-1">
         <select class="selectpicker form-control" data-size="4" id="listEditAssignee{{_id}}" name="assignee">
           {{#each users}}
@@ -70,9 +81,11 @@
           {{/each}}
         </select>
       </div>
+      <!-- Chore title -->
       <div class="col-md-8" id="listEditTitle">
         <input class="form-control input-md listName-{{_id}}" id="listName" name="choreName" type="text" placeholder="Name Your Chore"  required="" value="{{title}}" maxlength="60">
       </div>
+      <!-- Red 'X' to delete the chore -->
       <div class="col-md-2" id="listDeleteDiv" align="right">
       	<button class="btn btn-xs btn-danger listDeleteBtn">
 	        <i class="fa fa-times"></i>
@@ -81,6 +94,7 @@
     </div>
 
     <div class="row">
+    	<!-- The date the chore is due, or ocmpleted on. If past due, states as such -->
     	<div id="listEditDateDiv{{_id}}" class="listEditDate"  tabindex="-1">
         <div class="list-datepicker datepicker{{_id}}" id="list-datepicker"></div>
       </div>
@@ -91,6 +105,7 @@
 	        <span class="text-danger statusText" id="dateStatus">{{pastDue startDate}}</span>
 	      {{/if}}
     	</div>
+    	<!-- The comments/description left by whoever made/edited a chore -->
       <div class="col-md-10 comments" id="comments">
       	<textarea id="listDesc" class="listDesc-{{_id}}" name="choreDesc" placeholder="Add comments here" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Add comments here'" maxlength="140">{{description}}</textarea>
       </div>
@@ -98,8 +113,7 @@
   </li>
 </template>
 
-
-
+<!-- Modal for confirming a delete action by the user -->
 <template name="deleteChoreModal">
 	{{#with deletedChore}}
 	<div class="modal fade" id="deletedChoreModal" tabindex="-1" role="dialog">
@@ -127,7 +141,7 @@
 </template>
 
 
-
+<!-- My hacky attempt at using css on objects that have an id - without this, only the first object is ever "checked" -->
 <template name="completedCss">
 	.completedLabel-{{_id}} {
 		position: relative;

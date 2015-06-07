@@ -1,7 +1,9 @@
 Template.newChoreForm.helpers
+  # List of the users
   users: ->
     if Suites.findOne(users: Meteor.userId())?
       Suites.findOne(users: Meteor.userId()).users
+  # A string of the users name
   getUserName: (id) ->
     usr = Meteor.users.findOne id
     if usr.profile?
@@ -12,6 +14,7 @@ Template.newChoreForm.events
   'submit form': (e) ->
     e.preventDefault()
 
+    # Array of all possibly selected assignees
     assignees = []
     assignees = $('#assignee').val()
 
@@ -21,7 +24,7 @@ Template.newChoreForm.events
     frequency = parseInt(frequency)
     
     freqNum = $(e.target).find('[name=freqNum]').val()
-     ## Ensure frequency is a number
+    ## Ensure frequency is a number
     if isNaN freqNum
       sAlert.error "Chore frequency must be an integer value."
       return false
@@ -29,12 +32,15 @@ Template.newChoreForm.events
     else if ( Number freqNum < 0 ) || ( Number freqNum % 1 != 0 )
       sAlert.error "Chore frequency must be a positive integer."
       return false
+    ## Ensure input is not greater than 31
     else if (Number freqNum > 31)
       sAlert.error "31 is the maximum number of times for a repeat at once"
       return false
-    else if assignees == null
+    ## Ensure that an assignee has been selected
+    if assignees == null
     	sAlert.error "A person must be assigned to the chore."
     	return false
+    ## If once is selected, than only one person can be assigned to that chore
     if frequency == 0
     	if assignees.length > 1
     		sAlert.error "A one-time event can only allow 1 person to be assigned."
@@ -49,6 +55,7 @@ Template.newChoreForm.events
       description: $(e.target).find('[name=choreDesc]').val()
       completed: false
 
+    # Turn the frequency into a string that moment can understand
     freqString = freqToString frequency
 
     ## to store the new chore in collection  
@@ -59,6 +66,7 @@ Template.newChoreForm.events
       return
     return
 
+  # Disables the number of times repeating when once is selected
   'change #repeat-freqs': (e) ->
     e.preventDefault()
     frequency = $('#repeat-freqs').val()
@@ -68,6 +76,7 @@ Template.newChoreForm.events
       $('#freqNum').attr 'disabled', false
 
 Template.newChoreForm.onRendered ->
+  # Set up datepicker and multiselect
   startDay = Session.get 'startDay'
   $('#datepicker').datepicker 'setDate', startDay
   $('.selectpicker').selectpicker()
@@ -77,6 +86,7 @@ Template.dates.onRendered ->
   $('#datepicker').datepicker
     format: 'yyyy/mm/dd'
 
+# Moment needs these chars for adding to a date
 freqToString = (freq) ->
   if freq <= 1
     'd'

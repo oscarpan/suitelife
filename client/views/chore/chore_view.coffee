@@ -34,7 +34,8 @@ Template.choreCalendar.helpers
         choreEvents.forEach (evt) ->
           #Get completed, regular or past due color
           eventColor = getColor evt
-                    
+
+          # Each event is pushed into the array   
           events.push
             id: evt._id
             title: evt.title
@@ -46,6 +47,7 @@ Template.choreCalendar.helpers
         ## Callback to pass events to the calendar
         callback events
         return
+      # Adds the lower "boxed" section to the event that shows the assignee
       eventRender: (event, element) ->
         assignee = Meteor.users.findOne event.assignee
         if assignee?
@@ -67,9 +69,8 @@ Template.choreCalendar.onRendered ->
   return
 
 
-
-## for going to different pages
-Template.choresView.events 
+Template.choresView.events
+  # Opens up the modal for creating a new chore
   'click .new': (e) ->
     e.preventDefault()
     Session.set 'activeModal', 'newChoreForm'
@@ -77,26 +78,24 @@ Template.choresView.events
     $('#createChoreModal').modal('show')
     return
 
-  'click .list': (e) ->
-    e.preventDefault()
-    Router.go 'choresList'
-    return
-
+  # Clears the modal forms when the modal is dismissed/disables dragging
   'hidden.bs.modal #createChoreModal': (e) ->
     $('#choreName').val('')
     $('#choreDesc').val('') 
     $('#choresModule').draggable(disabled:false)    
     Session.set 'activeModal', ''
 
+  # Focuses the chore name and allows dragging again
   'shown.bs.modal #createChoreModal': (e) ->
     $('#choresModule').draggable(disabled:true)
     $('#choreName').focus()
 
 
 Template.createChore.helpers 
-  # getter for creating state
+  # getter for whether we create or edit
   activeModal: ->
     Session.get 'activeModal'
+  # Dynamically sets the title on the modal based on edit or new
   modalTitle: ->
     active = Session.get 'activeModal'
     if active == 'newChoreForm'
@@ -104,6 +103,7 @@ Template.createChore.helpers
     else if active == 'editChoreForm'
       'Edit a Chore'
 
+# Sets the colors for the events - red = past due, green = complete, blue = the rest
 getColor = (evt) ->
   date = new Date
   date.setDate date.getDate() - 1

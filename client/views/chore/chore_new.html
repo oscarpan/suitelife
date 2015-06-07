@@ -1,11 +1,12 @@
+<!-- View for creating new chores -->
 <template name="newChoreForm">
   <div class="container-fluid">
     <form class="form-horizontal">
     <fieldset>
 
-      <!--<input type="text" class="form-control" id="datepicker">-->
     <div class="row" align="center">
-    	<div class="col-md-6">
+    	<!-- Date picker -->
+      <div class="col-md-6">
       	{{> dates}}
       </div>
     
@@ -20,6 +21,7 @@
       		</div>
     		</div>
 
+        <!-- Frequency option -->
     		<div class="form-group" align="left">
       		<label class="row control-label" for="repeat-freqs">Repeat this chore:</label>
       		<div class="row">
@@ -35,6 +37,7 @@
         	</div>
     		</div>
 
+        <!-- Number of repeats -->
       	<div class="form-group">  
       		<div class="row">
       			<div class="col-md-10">
@@ -62,6 +65,7 @@
     	</div>
     </div>
 
+    <!-- Comments/description input -->
     <div class="form-group">
       <label class="control-label" for="choreDesc">Comments (optional)</label>
       <div class="controls col-md-12">                     
@@ -69,7 +73,7 @@
       </div>
     </div>
     
-
+    <!-- Options buttons -->
     <div class="form-group">
         <div class="text-right">
           <button type="submit" class="btn btn-default" data-dismiss="modal">Cancel</button>
@@ -82,6 +86,7 @@
   </div>
 </template>
 
+<!-- Template to input the date -->
 <template name="dates">
   <div id="datepicker"></div>
 </template>

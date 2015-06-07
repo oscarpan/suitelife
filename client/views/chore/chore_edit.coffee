@@ -2,13 +2,16 @@ Template.editChoreForm.helpers
   choreEvent: ->
     # Get the data context for the edit
     choreEvent = Session.get 'choreEvent'
+  # List of the users
   users: ->
     if Suites.findOne(users: Meteor.userId())?
       Suites.findOne(users: Meteor.userId()).users
+  # A string of the users name
   getUserName: (id) ->
     usr = Meteor.users.findOne id
     if usr.profile?
       userName = usr.profile.first_name + " " + usr.profile.last_name
+  # For showing the assigned user on modal edit
   selected: (assignee, current) ->
     return assignee == current
 
@@ -42,6 +45,7 @@ Template.editChoreForm.events
     Tracker.flush()   # Force an update or the modal won't find the data correctly
     $('#deletedChoreModal').modal 'show'
 
+  # Disable the repeat times if Once is selected
   'change #repeat-freqs': (e) ->
     e.preventDefault()
     frequency = $('#repeat-freqs').val()
@@ -51,6 +55,7 @@ Template.editChoreForm.events
       $('#freqNum').attr 'disabled', false  
 
 Template.editChoreForm.onRendered ->
+  # Set up datepicker and multiselect
   startDay = Session.get 'startDay'
   $('#datepicker').datepicker 'setDate', startDay
   $('.selectpicker').selectpicker()
