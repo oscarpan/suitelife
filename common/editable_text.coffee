@@ -1,8 +1,13 @@
 EditableText.registerCallbacks 
 	whoDunnitPosts: (doc, collection) ->
-		Posts.update doc._id, $set: 
-			lastEditor: Meteor.userId()
-			lastEdited: moment().subtract(7,'hours').format 'MMMM Do YYYY, h:mm:ss a'
+		if Meteor.isClient
+			Posts.update doc._id, $set:
+				lastEditor: Meteor.userId()
+				lastEdited: moment().format 'MMMM Do YYYY, h:mm:ss a'
+		if Meteor.isServer
+			Posts.update doc._id, $set:
+				lastEditor: Meteor.userId()
+				lastEdited: moment().subtract(7,'hours').format 'MMMM Do YYYY, h:mm:ss a'
 	validateIOUAmount: ( doc, collection ) ->
 		## Ensure new amount is not negative
 		if Number this.newValue < 0
