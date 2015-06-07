@@ -38,10 +38,15 @@ Template.postsList.onCreated ->
 Template.postsList.events 
 	'click .new': (e) ->
 		e.preventDefault()
+    # Server time is in GMT so subtract 8 hours for local California time
+		if(Meteor.isClient)
+			localtime = moment().format 'MMMM Do YYYY, h:mm:ss a'
+		else
+			localtime = moment().subtract(8,'hours').format 'MMMM Do YYYY, h:mm:ss a'
 		post = 														
 			authorId: Meteor.userId()
 			lastEditor: Meteor.userId()
-			lastEdited: moment().format 'MMMM Do YYYY, h:mm:ss a'
+      lastEdited: localtime
 			pinned: false
 			imagePath: null
 			message: null
@@ -63,9 +68,9 @@ Template.postsList.helpers
 		Template.instance().posts()
 
 Template.Post.helpers
-	getEmail: (id) ->
+	getName: (id) ->
 		usr = Meteor.users.findOne id
 		if usr?
-			return usr.emails[0].address
+			return usr.profile['first_name']+' '+usr.profile['last_name']
 		else
 			return id

@@ -41,7 +41,7 @@
 		{{> editableText collection="posts" field="message" placeholder="Post message" removeEmpty=true wysiwyg=true beforeUpdate="whoDunnitPosts" onStartEditing="postsPackery" onStopEditing="postsPackery" substitute='<i class="fa fa-pencil"></i>'}}
 	</span>
 	<div class="last-edited"> 
-	last edited at {{lastEdited}} by {{getEmail authorId}} 
+	last edited at {{lastEdited}} by {{getName lastEditor}}
 	</div>
 </template>
 
