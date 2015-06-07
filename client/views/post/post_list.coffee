@@ -46,7 +46,7 @@ Template.postsList.events
 		post = 														
 			authorId: Meteor.userId()
 			lastEditor: Meteor.userId()
-      lastEdited: localtime
+			lastEdited: localtime
 			pinned: false
 			imagePath: null
 			message: null
